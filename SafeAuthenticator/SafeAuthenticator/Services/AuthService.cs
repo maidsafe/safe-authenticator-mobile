@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
@@ -12,7 +13,7 @@ using SafeAuthenticator.Native;
 using SafeAuthenticator.Services;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(AuthService))]
+[assembly: Xamarin.Forms.Dependency(typeof(AuthService))]
 
 namespace SafeAuthenticator.Services {
   public class AuthService : ObservableObject, IDisposable {

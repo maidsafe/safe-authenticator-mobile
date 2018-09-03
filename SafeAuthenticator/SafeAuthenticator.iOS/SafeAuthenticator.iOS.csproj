@@ -29,8 +29,6 @@
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <MtouchTlsProvider>Default</MtouchTlsProvider>
     <PlatformTarget>x86</PlatformTarget>
-    <MtouchSdkVersion>
-    </MtouchSdkVersion>
     <MtouchProfiling>False</MtouchProfiling>
     <MtouchUseLlvm>False</MtouchUseLlvm>
     <MtouchUseThumb>False</MtouchUseThumb>
@@ -40,6 +38,8 @@
     <MtouchExtraArgs>
     </MtouchExtraArgs>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>
+    </CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>pdbonly</DebugType>
@@ -59,6 +59,7 @@
     <MtouchExtraArgs>
     </MtouchExtraArgs>
     <SignAssembly>true</SignAssembly>
+    <CodesignProvision />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>pdbonly</DebugType>
@@ -74,6 +75,10 @@
     <PlatformTarget>x86</PlatformTarget>
     <MtouchExtraArgs>
     </MtouchExtraArgs>
+    <CodesignProvision>
+    </CodesignProvision>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchDebug>true</MtouchDebug>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -99,6 +104,9 @@
     <CodesignProvision>
     </CodesignProvision>
     <MtouchNoSymbolStrip>false</MtouchNoSymbolStrip>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <AppExtensionDebugBundleId />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Acr.Support.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -243,17 +251,6 @@
       <Frameworks>Security</Frameworks>
     </NativeReference>
   </ItemGroup>
-  <Target Name="CheckNativeLibs" BeforeTargets="PrepareForBuild">
-    <ItemGroup>
-      <NativeSafeAuthLibs Include="Native References\*.a" />
-    </ItemGroup>
-    <Exec ConsoleToMSBuild="true" Condition="'@(NativeSafeAuthLibs-&gt;Count())' == '0' AND '$(OS)' == 'Windows_NT'" Command="cd.. &amp; powershell -ExecutionPolicy ByPass -File .\build.ps1 -Configuration Release -target UnZip-Libs">
-      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
-    </Exec>
-    <Exec ConsoleToMSBuild="true" Condition="'@(NativeSafeAuthLibs-&gt;Count())' == '0' AND '$(OS)' == 'UNIX'" Command="cd .. &amp;&amp; bash build.sh --Configuration=Release --target=Unzip-Libs">
-      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
-    </Exec>
-  </Target>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -263,4 +260,15 @@
     <Error Condition="!Exists('..\..\packages\Xamarin.Forms.2.5.0.280555\build\netstandard1.0\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Forms.2.5.0.280555\build\netstandard1.0\Xamarin.Forms.targets'))" />
   </Target>
   <Import Project="..\..\packages\Xamarin.Forms.2.5.0.280555\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.5.0.280555\build\netstandard1.0\Xamarin.Forms.targets')" />
+  <Target Name="CheckNativeLibs" BeforeTargets="PrepareForBuild">
+    <ItemGroup>
+      <NativeSafeAuthLibs Include="Native References\*.a" />
+    </ItemGroup>
+    <Exec ConsoleToMSBuild="true" Condition="'@(NativeSafeAuthLibs-&gt;Count())' &lt; '1' AND '$(OS)' == 'Windows_NT'" Command="cd..\CakeScripts\ &amp; powershell -ExecutionPolicy ByPass -File .\build.ps1 --settings_skipverification=true -Configuration Release -target UnZip-Libs">
+      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
+    </Exec>
+    <Exec ConsoleToMSBuild="true" Condition="'@(NativeSafeAuthLibs-&gt;Count())' &lt; '1' AND '$(OS)' == 'UNIX'" Command="cd ..\CakeScripts\ &amp;&amp; bash build.sh --settings_skipverification=true --Configuration=Release --target=Unzip-Libs">
+      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
+    </Exec>
+  </Target>
 </Project>

@@ -77,7 +77,7 @@ namespace SafeAuthenticator.Native {
     }
 
     [PublicAPI]
-    public Task AuthRevokeAppAsync(string appId) {
+    public Task<string> AuthRevokeAppAsync(string appId) {
       return AuthBindings.AuthRevokeAppAsync(_authPtr, appId);
     }
 

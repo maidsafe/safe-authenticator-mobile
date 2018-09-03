@@ -181,9 +181,7 @@
     <None Include="app.config" />
     <AndroidNativeLibrary Include="lib\x86\libsafe_authenticator.so" />
     <None Include="packages.config" />
-    <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
-    <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
@@ -192,9 +190,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\strings.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidEnvironment Include="environment.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
@@ -271,10 +266,10 @@
     <ItemGroup>
       <NativeSafeAuthLibs Include="lib\**\*.so" />
     </ItemGroup>
-    <Exec ConsoleToMSBuild="true" Condition="'@(NativeSafeAuthLibs-&gt;Count())' == '0' AND '$(OS)' == 'Windows_NT'" Command="cd.. &amp; powershell -ExecutionPolicy ByPass -File .\build.ps1 -Configuration Release -target UnZip-Libs">
+    <Exec ConsoleToMSBuild="true" Condition="'@(NativeSafeAuthLibs-&gt;Count())' &lt; '2' AND '$(OS)' == 'Windows_NT'" Command="cd..\CakeScripts\ &amp; powershell -ExecutionPolicy ByPass -File .\build.ps1 --settings_skipverification=true -Configuration Release -target UnZip-Libs">
       <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
     </Exec>
-    <Exec ConsoleToMSBuild="true" Condition="'@(NativeSafeAuthLibs-&gt;Count())' == '0' AND '$(OS)' == 'UNIX'" Command="cd .. &amp;&amp; bash build.sh --Configuration=Release --target=Unzip-Libs">
+    <Exec ConsoleToMSBuild="true" Condition="'@(NativeSafeAuthLibs-&gt;Count())' &lt; '2' AND '$(OS)' == 'UNIX'" Command="cd ..\CakeScripts\ &amp;&amp; bash build.sh --settings_skipverification=true --Configuration=Release --target=Unzip-Libs">
       <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
     </Exec>
   </Target>
