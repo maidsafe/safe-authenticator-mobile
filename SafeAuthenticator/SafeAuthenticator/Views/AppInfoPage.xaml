@@ -6,6 +6,7 @@
              mc:Ignorable="d"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:authViewModels="clr-namespace:SafeAuthenticator.ViewModels;assembly=SafeAuthenticator"
+             xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
              d:DataContext="{d:DesignInstance Type=authViewModels:AppInfoViewModel, IsDesignTimeCreatable=False}"
              x:Class="SafeAuthenticator.Views.AppInfoPage" Title="{Binding AppModelInfo.AppName}">
     <ContentPage.ToolbarItems>
@@ -30,7 +31,7 @@
                       Margin="5,0,5,0"
                       CachingStrategy="RecycleElement">
                 <ListView.Behaviors>
-                    <commonUtils:ListViewNoSelectionBehavior />
+                    <controls:ListViewNoSelectionBehavior />
                 </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>

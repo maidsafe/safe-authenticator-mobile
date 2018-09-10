@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using CommonUtils;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.ViewModels;
 using Xamarin.Forms;

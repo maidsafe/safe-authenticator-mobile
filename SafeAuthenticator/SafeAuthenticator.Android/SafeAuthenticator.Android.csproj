@@ -154,18 +154,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\CommonUtils\CommonUtils\FileOps.cs">
-      <Link>Helpers\FileOps.cs</Link>
-    </Compile>
-    <Compile Include="..\..\CommonUtils\CommonUtils\PaddedEntryRenderer.cs">
-      <Link>Helpers\PaddedEntryRenderer.cs</Link>
-    </Compile>
     <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.cs">
       <Link>Helpers\AuthBindings.cs</Link>
     </Compile>
     <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.Manual.cs">
       <Link>Helpers\AuthBindings.Manual.cs</Link>
     </Compile>
+    <Compile Include="Helpers\FileOps.cs" />
+    <Compile Include="Helpers\PaddedEntryRenderer.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -175,7 +171,7 @@
     <AndroidAsset Include="..\SafeAuthenticator\crust.config">
       <Link>Assets\crust.config</Link>
     </AndroidAsset>
-    <AndroidAsset Include="..\..\CommonUtils\CommonUtils\log.toml">
+    <AndroidAsset Include="..\SafeAuthenticator\Helpers\log.toml">
       <Link>Assets\log.toml</Link>
     </AndroidAsset>
     <None Include="app.config" />
@@ -191,9 +187,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\values\strings.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\drawable\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\app_icon.png" />
   </ItemGroup>
@@ -210,14 +204,19 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\app_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CommonUtils\CommonUtils\CommonUtils.csproj">
-      <Project>{f5e9ab34-a1be-4085-b971-cb14710878ee}</Project>
-      <Name>CommonUtils</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SafeAuthenticator\SafeAuthenticator.csproj">
       <Project>{2477dbaf-96ee-4ea4-8ddc-0150da13991f}</Project>
       <Name>SafeAuthenticator</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\show_pass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\auth_start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\hide_pass.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

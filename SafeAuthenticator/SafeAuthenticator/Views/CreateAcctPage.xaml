@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels;assembly=SafeAuthenticator"
              xmlns:commonUtils="clr-namespace:CommonUtils;assembly=CommonUtils"
+             xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
              x:Class="SafeAuthenticator.Views.CreateAcctPage" Title="Create Account" IsEnabled="{Binding IsUiEnabled}">
     <ContentPage.BindingContext>
         <viewModels:CreateAcctViewModel />
@@ -30,7 +31,7 @@
                         <ColumnDefinition Width="1" />
                         <ColumnDefinition Width="{StaticResource PasswordEntryColDefinition3}" />
                     </Grid.ColumnDefinitions>
-                    <commonUtils:PaddedEntry x:Name="SecretEntry" Placeholder="Secret"
+                    <controls:PaddedEntry x:Name="SecretEntry" Placeholder="Secret"
                                              Grid.Column="0"
                                              Grid.ColumnSpan="{StaticResource PasswordEntryColumnSpan}"
                                              Text="{Binding AcctSecret}" IsEnabled="{Binding IsUiEnabled}" />
@@ -38,7 +39,7 @@
                            Aspect="AspectFit"
                            Margin="{StaticResource PasswordEntryImageMargin}" HeightRequest="25">
                         <Image.Behaviors>
-                            <commonUtils:PasswordImageBehavior InputEntry="{x:Reference SecretEntry}" />
+                            <controls:PasswordImageBehavior InputEntry="{x:Reference SecretEntry}" />
                         </Image.Behaviors>
                     </Image>
                     <StackLayout Grid.Column="1" BackgroundColor="{StaticResource PasswordEntrySeperatorColor}"
@@ -50,7 +51,7 @@
                         <ColumnDefinition Width="1" />
                         <ColumnDefinition Width="{StaticResource PasswordEntryColDefinition3}" />
                     </Grid.ColumnDefinitions>
-                    <commonUtils:PaddedEntry x:Name="PasswordEntry" Placeholder="Password"
+                    <controls:PaddedEntry x:Name="PasswordEntry" Placeholder="Password"
                                              Grid.Column="0"
                                              Grid.ColumnSpan="{StaticResource PasswordEntryColumnSpan}"
                                              Text="{Binding AcctPassword}" IsEnabled="{Binding IsUiEnabled}" />
@@ -58,7 +59,7 @@
                            Aspect="AspectFit"
                            Margin="{StaticResource PasswordEntryImageMargin}" HeightRequest="25">
                         <Image.Behaviors>
-                            <commonUtils:PasswordImageBehavior InputEntry="{x:Reference PasswordEntry}" />
+                            <controls:PasswordImageBehavior InputEntry="{x:Reference PasswordEntry}" />
                         </Image.Behaviors>
                     </Image>
                     <StackLayout Grid.Column="1" BackgroundColor="{StaticResource PasswordEntrySeperatorColor}"

@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace CommonUtils {
+namespace SafeAuthenticator.Controls {
   public class PasswordShowHideBehavior : Behavior<Entry> {
     private Entry _entry;
     private TapGestureRecognizer _tap;

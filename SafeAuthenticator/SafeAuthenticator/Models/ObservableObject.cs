@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace CommonUtils {
+namespace SafeAuthenticator.Models
+{
   /// <summary>
   ///   Observable object with INotifyPropertyChanged implemented
   /// </summary>

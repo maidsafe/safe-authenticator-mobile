@@ -170,27 +170,26 @@
     <Content Include="..\SafeAuthenticator\crust.config">
       <Link>crust.config</Link>
     </Content>
-    <Content Include="..\..\CommonUtils\CommonUtils\log.toml">
+    <Content Include="..\SafeAuthenticator\Helpers\log.toml">
       <Link>log.toml</Link>
     </Content>
+    <BundleResource Include="Resources\hide_pass.png" />
+    <BundleResource Include="Resources\auth_start.png" />
+    <BundleResource Include="Resources\show_pass.png" />
     <None Include="app.config" />
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\CommonUtils\CommonUtils\FileOps.cs">
-      <Link>Helpers\FileOps.cs</Link>
-    </Compile>
-    <Compile Include="..\..\CommonUtils\CommonUtils\PaddedEntryRenderer.cs">
-      <Link>Helpers\PaddedEntryRenderer.cs</Link>
-    </Compile>
     <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.cs">
       <Link>Helpers\AuthBindings.cs</Link>
     </Compile>
     <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.Manual.cs">
       <Link>Helpers\AuthBindings.Manual.cs</Link>
     </Compile>
+    <Compile Include="Helpers\FileOps.cs" />
+    <Compile Include="Helpers\PaddedEntryRenderer.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
   </ItemGroup>
@@ -208,10 +207,6 @@
     <BundleResource Include="Resources\tab_feed%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CommonUtils\CommonUtils\CommonUtils.csproj">
-      <Project>{f5e9ab34-a1be-4085-b971-cb14710878ee}</Project>
-      <Name>CommonUtils</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SafeAuthenticator\SafeAuthenticator.csproj">
       <Project>{2477dbaf-96ee-4ea4-8ddc-0150da13991f}</Project>
       <Name>SafeAuthenticator</Name>

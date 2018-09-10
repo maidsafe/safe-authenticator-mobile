@@ -2,7 +2,8 @@
 using System.Globalization;
 using Xamarin.Forms;
 
-namespace CommonUtils {
+namespace SafeAuthenticator.Helpers
+{
   public class IsCollectionEmptyConverter : IValueConverter {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
       return int.Parse(value.ToString()) == 0;

@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using CommonUtils;
 using JetBrains.Annotations;
+using SafeAuthenticator.Helpers;
 
 namespace SafeAuthenticator.Native {
   [PublicAPI]

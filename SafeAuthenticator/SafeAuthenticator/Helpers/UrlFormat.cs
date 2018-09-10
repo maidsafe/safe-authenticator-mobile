@@ -1,6 +1,7 @@
 ﻿using System;
 
-namespace CommonUtils {
+namespace SafeAuthenticator.Helpers
+{
   public static class UrlFormat {
     public static string Format(string appId, string encodedString, bool toAuthenticator) {
       var scheme = toAuthenticator ? "safe-auth" : $"{appId}";

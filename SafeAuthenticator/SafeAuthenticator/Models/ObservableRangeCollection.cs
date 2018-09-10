@@ -5,7 +5,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 
-namespace CommonUtils {
+namespace SafeAuthenticator.Models {
   /// <summary>
   ///   Represents a dynamic data collection that provides notifications when items get added, removed, or when the whole
   ///   list is refreshed.

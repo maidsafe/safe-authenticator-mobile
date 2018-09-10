@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
-using CommonUtils;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;

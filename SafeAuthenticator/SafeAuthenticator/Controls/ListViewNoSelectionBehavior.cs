@@ -1,6 +1,7 @@
 ﻿using Xamarin.Forms;
 
-namespace CommonUtils {
+namespace SafeAuthenticator.Controls
+{
   public class ListViewNoSelectionBehavior : Behavior<ListView> {
     protected override void OnAttachedTo(ListView listview) {
       listview.ItemSelected += OnItemSelected;

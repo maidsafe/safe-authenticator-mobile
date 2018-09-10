@@ -184,10 +184,6 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\CommonUtils\CommonUtils\CommonUtils.csproj">
-      <Project>{f5e9ab34-a1be-4085-b971-cb14710878ee}</Project>
-      <Name>CommonUtils</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\SafeAuthenticator\SafeAuthenticator.csproj">
       <Project>{2477dbaf-96ee-4ea4-8ddc-0150da13991f}</Project>
       <Name>SafeAuthenticator</Name>
@@ -237,7 +233,7 @@
   <Import Project="..\..\..\packages\Xamarin.Android.Support.v7.MediaRouter.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v7.MediaRouter.targets" Condition="Exists('..\..\..\packages\Xamarin.Android.Support.v7.MediaRouter.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v7.MediaRouter.targets')" />
   <Import Project="..\..\..\packages\Xamarin.Forms.2.5.0.280555\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\..\..\packages\Xamarin.Forms.2.5.0.280555\build\netstandard1.0\Xamarin.Forms.targets')" />
   <Import Project="..\..\..\packages\Xamarin.Android.Support.CustomTabs.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.CustomTabs.targets" Condition="Exists('..\..\..\packages\Xamarin.Android.Support.CustomTabs.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.CustomTabs.targets')" />
-<Target Name="CheckNativeLibs" BeforeTargets="PrepareForBuild">
+  <Target Name="CheckNativeLibs" BeforeTargets="PrepareForBuild">
     <ItemGroup>
       <NativeSafeAuthLibs Include="lib\**\*.so" />
     </ItemGroup>

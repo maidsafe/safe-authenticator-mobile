@@ -7,7 +7,7 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
-using CommonUtils;
+using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;

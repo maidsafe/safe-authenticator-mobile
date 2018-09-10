@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Input;
-using CommonUtils;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using Xamarin.Forms;

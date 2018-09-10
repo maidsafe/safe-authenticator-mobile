@@ -2,7 +2,8 @@
 using System.Globalization;
 using Xamarin.Forms;
 
-namespace CommonUtils {
+namespace SafeAuthenticator.Helpers
+{
   public class InverseBooleanConverter : IValueConverter {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
       if (targetType != typeof(bool)) {

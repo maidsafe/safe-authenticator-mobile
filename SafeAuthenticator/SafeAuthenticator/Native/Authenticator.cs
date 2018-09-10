@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using CommonUtils;
 using JetBrains.Annotations;
+using SafeAuthenticator.Helpers;
 using Xamarin.Forms;
 
 namespace SafeAuthenticator.Native {

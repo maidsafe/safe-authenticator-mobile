@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels;assembly=SafeAuthenticator"
-             xmlns:commonUtils="clr-namespace:CommonUtils;assembly=CommonUtils"
+             xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
              Title="Home"
              x:Class="SafeAuthenticator.Views.HomePage">
   <ContentPage.BindingContext>
@@ -37,7 +37,7 @@
                 RefreshCommand="{Binding RefreshAccountsCommand}"
                 IsPullToRefreshEnabled="True"
                 IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
-                commonUtils:ItemTappedAttached.Command="{Binding AccountSelectedCommand}"
+                controls:ItemTappedAttached.Command="{Binding AccountSelectedCommand}"
                 CachingStrategy="RecycleElement">
         <ListView.ItemTemplate>
           <DataTemplate>

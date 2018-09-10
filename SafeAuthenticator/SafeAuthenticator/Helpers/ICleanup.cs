@@ -1,4 +1,5 @@
-﻿namespace CommonUtils {
+﻿namespace SafeAuthenticator.Helpers
+{
   public interface ICleanup {
     void MessageCenterUnsubscribe();
   }

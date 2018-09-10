@@ -2,7 +2,8 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace CommonUtils {
+namespace SafeAuthenticator.Controls
+{
   [ContentProperty("Source")]
   public class ImageResourceExtension : IMarkupExtension {
     public string Source { get; set; }

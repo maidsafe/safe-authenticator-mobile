@@ -1,5 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace CommonUtils {
+namespace SafeAuthenticator.Controls
+{
   public class PaddedEntry : Entry { }
 }

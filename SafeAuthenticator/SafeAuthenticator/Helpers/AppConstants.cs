@@ -1,6 +1,7 @@
 ﻿using JetBrains.Annotations;
 
-namespace CommonUtils {
+namespace SafeAuthenticator.Helpers
+{
   [PublicAPI]
   public static class AppConstants {
     public const ulong AsymNonceLen = 24;

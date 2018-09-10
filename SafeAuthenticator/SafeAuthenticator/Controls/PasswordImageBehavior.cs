@@ -1,7 +1,8 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace CommonUtils {
+namespace SafeAuthenticator.Controls
+{
   public class PasswordImageBehavior : Behavior<Image> {
     public static readonly BindableProperty EntryProperty =
       BindableProperty.Create("InputEntry", typeof(PaddedEntry), typeof(PasswordImageBehavior));
@@ -17,7 +18,8 @@ namespace CommonUtils {
       _tap = new TapGestureRecognizer {NumberOfTapsRequired = 1};
       _tap.Tapped += OnTapped;
       _image.GestureRecognizers.Insert(0, _tap);
-      _image.Source = ImageSource.FromResource("CommonUtils.Images.show_pass.png");
+      //_image.Source = ImageSource.FromResource("CommonUtils.Images.show_pass.png");
+      _image.Source = ImageSource.FromFile("show_pass.png");
       InputEntry.IsPassword = _isTextMasked;
       base.OnAttachedTo(image);
     }
@@ -31,10 +33,12 @@ namespace CommonUtils {
     private void OnTapped(object sender, EventArgs eventArgs) {
       _isTextMasked = !_isTextMasked;
       if (_isTextMasked) {
-        _image.Source = ImageSource.FromResource("CommonUtils.Images.show_pass.png");
+        //_image.Source = ImageSource.FromResource("CommonUtils.Images.show_pass.png");
+        _image.Source = ImageSource.FromFile("show_pass.png");
         InputEntry.IsPassword = true;
       } else {
-        _image.Source = ImageSource.FromResource("CommonUtils.Images.hide_pass.png");
+        //_image.Source = ImageSource.FromResource("CommonUtils.Images.hide_pass.png");
+        _image.Source = ImageSource.FromFile("hide_pass.png");
         InputEntry.IsPassword = false;
       }
     }

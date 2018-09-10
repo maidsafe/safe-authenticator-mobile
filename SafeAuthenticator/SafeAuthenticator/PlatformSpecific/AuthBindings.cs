@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using CommonUtils;
+using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Native;
 using Xamarin.Forms;
 

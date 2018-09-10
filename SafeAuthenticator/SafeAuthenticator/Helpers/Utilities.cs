@@ -1,8 +1,8 @@
-﻿using System;
+﻿using SafeAuthenticator.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CommonUtils;
 
 namespace SafeAuthenticator.Helpers {
   internal static class Helpers {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:commonUtils="clr-namespace:CommonUtils;assembly=CommonUtils"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:helpers="clr-namespace:SafeAuthenticator.Helpers"
              x:Class="SafeAuthenticator.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -83,8 +83,8 @@
                     <On Platform="Android" Value="Transparent" />
                 </OnPlatform.Platforms>
             </OnPlatform>
-            <commonUtils:IsCollectionEmptyConverter x:Key="IsCollectionEmptyConverter" />
-            <commonUtils:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+            <helpers:IsCollectionEmptyConverter x:Key="IsCollectionEmptyConverter" />
+            <helpers:InverseBooleanConverter x:Key="InverseBooleanConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

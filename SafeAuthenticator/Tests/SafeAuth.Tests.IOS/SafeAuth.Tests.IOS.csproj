@@ -197,10 +197,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\CommonUtils\CommonUtils\CommonUtils.csproj">
-      <Project>{f5e9ab34-a1be-4085-b971-cb14710878ee}</Project>
-      <Name>CommonUtils</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\SafeAuthenticator\SafeAuthenticator.csproj">
       <Project>{2477dbaf-96ee-4ea4-8ddc-0150da13991f}</Project>
       <Name>SafeAuthenticator</Name>

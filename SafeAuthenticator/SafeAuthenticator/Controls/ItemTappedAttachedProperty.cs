@@ -1,7 +1,8 @@
 ﻿using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace CommonUtils {
+namespace SafeAuthenticator.Controls
+{
   public static class ItemTappedAttached {
     public static readonly BindableProperty CommandProperty = BindableProperty.CreateAttached(
       "Command",

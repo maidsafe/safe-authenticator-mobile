@@ -2,8 +2,8 @@
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using CommonUtils;
 using Foundation;
+using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Services;
 using UIKit;
 using Xamarin.Forms;
