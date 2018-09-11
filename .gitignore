@@ -5,7 +5,6 @@
 *.suo
 *.user
 *.sln.docstates
-*.userprefs
 .vs/
 
 # ignore Xamarin.Android Resource.Designer.cs files
@@ -39,14 +38,6 @@ bld/
 *.VisualState.xml
 TestResult.xml
 
-# Build Results of an ATL Project
-[Dd]ebugPS/
-[Rr]eleasePS/
-dlldata.c
-
-*_i.c
-*_p.c
-*_i.h
 *.ilk
 *.meta
 *.obj
@@ -92,7 +83,6 @@ $tf/
 *.gpState
 
 # ReSharper is a .NET coding add-in
-_ReSharper*/
 *.[Rr]e[Ss]harper
 *.DotSettings.user
 
