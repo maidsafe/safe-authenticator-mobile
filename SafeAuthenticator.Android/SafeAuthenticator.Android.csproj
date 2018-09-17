@@ -171,7 +171,7 @@
     <AndroidAsset Include="..\SafeAuthenticator\crust.config">
       <Link>Assets\crust.config</Link>
     </AndroidAsset>
-    <AndroidAsset Include="..\SafeAuthenticator\Helpers\log.toml">
+    <AndroidAsset Include="..\SafeAuthenticator\log.toml">
       <Link>Assets\log.toml</Link>
     </AndroidAsset>
     <None Include="app.config" />

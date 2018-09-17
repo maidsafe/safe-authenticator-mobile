@@ -170,7 +170,7 @@
     <Content Include="..\SafeAuthenticator\crust.config">
       <Link>crust.config</Link>
     </Content>
-    <Content Include="..\SafeAuthenticator\Helpers\log.toml">
+    <Content Include="..\SafeAuthenticator\log.toml">
       <Link>log.toml</Link>
     </Content>
     <BundleResource Include="Resources\hide_pass.png" />
