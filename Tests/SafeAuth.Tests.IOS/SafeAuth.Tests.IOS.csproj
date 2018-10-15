@@ -121,7 +121,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork@2x" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h@2x.png" />
@@ -142,59 +141,17 @@
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\NUnit.3.6.1\lib\Xamarin.iOS10\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.runner.iOS, Version=3.6.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\nunit.xamarin.3.6.1\lib\Xamarin.iOS\nunit.runner.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="PCLStorage, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\PCLStorage.1.0.2\lib\portable-Xamarin.iOS+Xamarin.Mac\PCLStorage.dll</HintPath>
-    </Reference>
-    <Reference Include="PCLStorage.Abstractions, Version=1.0.2.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\PCLStorage.1.0.2\lib\portable-Xamarin.iOS+Xamarin.Mac\PCLStorage.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="SafeApp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MaidSafe.SafeApp.0.1.1\lib\Xamarin.iOS10\SafeApp.dll</HintPath>
-    </Reference>
-    <Reference Include="SafeApp.AppBindings, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MaidSafe.SafeApp.0.1.1\lib\Xamarin.iOS10\SafeApp.AppBindings.dll</HintPath>
-    </Reference>
     <Reference Include="SafeApp.MockAuthBindings">
       <HintPath>C:\Users\Ashwin\.nuget\packages\maidsafe.safeapp\0.1.1\build\Xamarin.iOS10\SafeApp.MockAuthBindings.dll</HintPath>
-    </Reference>
-    <Reference Include="SafeApp.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MaidSafe.SafeApp.0.1.1\lib\Xamarin.iOS10\SafeApp.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-    <Reference Include="Xamarin.Auth">
-      <HintPath>..\..\..\packages\Xamarin.Auth.1.6.0.2\lib\Xamarin.iOS10\Xamarin.Auth.dll</HintPath>
-    </Reference>
     <Reference Include="System.Json" />
-    <Reference Include="BTProgressHUD">
-      <HintPath>..\..\..\packages\BTProgressHUD.1.2.0.6\lib\Xamarin.iOS10\BTProgressHUD.dll</HintPath>
-    </Reference>
-    <Reference Include="Acr.UserDialogs">
-      <HintPath>..\..\..\packages\Acr.UserDialogs.7.0.1\lib\xamarinios10\Acr.UserDialogs.dll</HintPath>
-    </Reference>
     <Reference Include="OpenTK-1.0" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Xamarin.Forms.Core">
-      <HintPath>..\..\..\packages\Xamarin.Forms.2.5.0.280555\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Platform">
-      <HintPath>..\..\..\packages\Xamarin.Forms.2.5.0.280555\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Platform.iOS">
-      <HintPath>..\..\..\packages\Xamarin.Forms.2.5.0.280555\lib\Xamarin.iOS10\Xamarin.Forms.Platform.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Xaml">
-      <HintPath>..\..\..\packages\Xamarin.Forms.2.5.0.280555\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SafeAuthenticator\SafeAuthenticator.csproj">
@@ -207,15 +164,28 @@
       <Kind>Static</Kind>
     </NativeReference>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs">
+      <Version>7.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="MaidSafe.SafeApp">
+      <Version>0.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="NUnit">
+      <Version>3.6.1</Version>
+    </PackageReference>
+    <PackageReference Include="nunit.xamarin">
+      <Version>3.6.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Auth">
+      <Version>1.6.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>2.5.0.280555</Version>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="..\SafeAuth.Tests\SafeAuth.Tests.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\..\packages\MaidSafe.SafeApp.0.1.1\build\Xamarin.iOS10\MaidSafe.SafeApp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\MaidSafe.SafeApp.0.1.1\build\Xamarin.iOS10\MaidSafe.SafeApp.targets'))" />
-  </Target>
-  <Import Project="..\..\..\packages\MaidSafe.SafeApp.0.1.1\build\Xamarin.iOS10\MaidSafe.SafeApp.targets" Condition="Exists('..\..\..\packages\MaidSafe.SafeApp.0.1.1\build\Xamarin.iOS10\MaidSafe.SafeApp.targets')" />
   <Target Name="CheckNativeLibs" BeforeTargets="PrepareForBuild">
     <ItemGroup>
       <NativeSafeAuthLibs Include="Native References\*.a" />
@@ -227,5 +197,4 @@
       <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
     </Exec>
   </Target>
-  <Import Project="..\..\..\packages\Xamarin.Forms.2.5.0.280555\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\..\..\packages\Xamarin.Forms.2.5.0.280555\build\netstandard1.0\Xamarin.Forms.targets')" />
 </Project>
