@@ -160,7 +160,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="Native References/libsafe_authenticator.a">
+    <NativeReference Include="..\..\SafeAuthenticator.iOS\lib\mock\libsafe_authenticator.a">
       <Kind>Static</Kind>
     </NativeReference>
   </ItemGroup>

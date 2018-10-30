@@ -28,7 +28,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
@@ -52,6 +52,8 @@
     <AotAssemblies>false</AotAssemblies>
     <EnableLLVM>false</EnableLLVM>
     <BundleAssemblies>false</BundleAssemblies>
+    <DefineConstants>
+    </DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Java.Interop" />
@@ -82,16 +84,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidNativeLibrary Include="lib\armeabi-v7a\libsafe_authenticator.so" />
-    <AndroidAsset Include="..\SafeAuthenticator\crust.config">
-      <Link>Assets\crust.config</Link>
-    </AndroidAsset>
+    <None Include="app.config" />
+    <None Include="NativeLibrary.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\AndroidManifest.xml" />
     <AndroidAsset Include="..\SafeAuthenticator\log.toml">
       <Link>Assets\log.toml</Link>
     </AndroidAsset>
-    <None Include="app.config" />
-    <AndroidNativeLibrary Include="lib\x86\libsafe_authenticator.so" />
-    <None Include="Properties\AndroidManifest.xml" />
+    <AndroidAsset Include="..\SafeAuthenticator\crust.config">
+      <Link>Assets\crust.config</Link>
+    </AndroidAsset>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
@@ -214,4 +217,5 @@
       <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
     </Exec>
   </Target>
+  <Import Project="NativeLibrary.targets" />
 </Project>

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" 
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
@@ -145,6 +146,7 @@
     <Compile Include="Helpers\PaddedEntryRenderer.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <None Include="NativeLibrary.targets" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\profile_generic.png" />
@@ -192,14 +194,6 @@
     </ImageAsset>
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="Native References/libsafe_authenticator.a">
-      <Kind>Static</Kind>
-      <ForceLoad>True</ForceLoad>
-      <LinkerFlags>-lresolv</LinkerFlags>
-      <Frameworks>Security</Frameworks>
-    </NativeReference>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Acr.Support">
       <Version>2.1.0</Version>
     </PackageReference>
@@ -237,4 +231,5 @@
       <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
     </Exec>
   </Target>
+  <Import Project="NativeLibrary.targets"/>
 </Project>

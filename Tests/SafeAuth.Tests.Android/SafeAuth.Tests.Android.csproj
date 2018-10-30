@@ -81,8 +81,12 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidNativeLibrary Include="lib\armeabi-v7a\libsafe_authenticator.so" />
-    <AndroidNativeLibrary Include="lib\x86\libsafe_authenticator.so" />
+    <AndroidNativeLibrary Include="..\..\SafeAuthenticator.Android\lib\mock\armeabi-v7a\libsafe_authenticator.so">
+      <Link>lib\armeabi-v7a\libsafe_authenticator.so</Link>
+    </AndroidNativeLibrary>
+    <AndroidNativeLibrary Include="..\..\SafeAuthenticator.Android\lib\mock\x86\libsafe_authenticator.so">
+      <Link>lib\x86\libsafe_authenticator.so</Link>
+    </AndroidNativeLibrary>
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>

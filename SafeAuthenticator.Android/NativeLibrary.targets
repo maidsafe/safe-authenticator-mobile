@@ -1,0 +1,18 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Choose>
+        <When Condition="$(DefineConstants.Contains(SAFE_AUTH_MOCK))">
+            <PropertyGroup>
+                <NativeLibType>mock</NativeLibType>
+            </PropertyGroup>
+        </When>
+        <Otherwise>
+            <PropertyGroup>
+                <NativeLibType>non-mock</NativeLibType>
+            </PropertyGroup>
+        </Otherwise>
+    </Choose>
+    <ItemGroup>
+        <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)lib\$(NativeLibType)\armeabi-v7a\libsafe_authenticator.so" />
+        <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)lib\$(NativeLibType)\x86\libsafe_authenticator.so" />
+    </ItemGroup>
+</Project>
