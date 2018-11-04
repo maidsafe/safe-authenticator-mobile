@@ -82,7 +82,7 @@ namespace SafeAuthenticator.Models {
     /// <summary>
     ///   Clears the current collection and replaces it with the specified collection.
     /// </summary>
-    private void ReplaceRange(IEnumerable<T> collection) {
+    public void ReplaceRange(IEnumerable<T> collection) {
       if (collection == null) {
         throw new ArgumentNullException(nameof(collection));
       }

@@ -22,8 +22,11 @@ namespace SafeAuthenticator.ViewModels {
       RefreshAccountsCommand = new Command(OnRefreshAccounts);
       AccountSelectedCommand = new Command<RegisteredAppModel>(OnAccountSelected);
       LogoutCommand = new Command(OnLogout);
-
       Device.BeginInvokeOnMainThread(OnRefreshAccounts);
+
+      MessagingCenter.Subscribe<AppInfoViewModel>(this, MessengerConstants.RefreshHomePage,(sender) => {
+        OnRefreshAccounts();
+      });
     }
 
     private void OnAccountSelected(RegisteredAppModel appModelInfo) {
@@ -39,7 +42,7 @@ namespace SafeAuthenticator.ViewModels {
       try {
         IsRefreshing = true;
         var registeredApps = await Authenticator.GetRegisteredAppsAsync();
-        Apps.AddRange(registeredApps.Except(Apps));
+        Apps.ReplaceRange(registeredApps);
         Apps.Sort();
         var acctStorageTuple = await Authenticator.GetAccountInfoAsync();
         AccountStorageInfo = $"{acctStorageTuple.Item1} / {acctStorageTuple.Item2}";

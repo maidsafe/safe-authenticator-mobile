@@ -93,6 +93,9 @@ namespace SafeAuthenticator.Services {
         await CredentialCache.Store(location, password);
       }
     }
+	  internal async Task<string> RevokeAppAsync(string appId) {
+      return await _authenticator.AuthRevokeAppAsync(appId);
+    }
 
     ~AuthService() {
       FreeState();

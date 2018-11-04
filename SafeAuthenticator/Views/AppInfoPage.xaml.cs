@@ -15,8 +15,21 @@ namespace SafeAuthenticator.Views {
     public AppInfoPage(RegisteredAppModel appModelInfo) {
       InitializeComponent();
       BindingContext = new AppInfoViewModel(appModelInfo);
+
+      MessagingCenter.Subscribe<AppInfoViewModel>(
+      this,
+      MessengerConstants.NavHomePage,
+        async _ => {
+          MessageCenterUnsubscribe();
+          if (!App.IsPageValid(this)) {
+            return;
+          }
+          await Navigation.PopAsync();
+        });
     }
 
-    public void MessageCenterUnsubscribe() { }
+    public void MessageCenterUnsubscribe() {
+      MessagingCenter.Unsubscribe<AppInfoViewModel>(this, MessengerConstants.NavHomePage);
+    }
   }
 }

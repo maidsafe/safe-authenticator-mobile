@@ -1,5 +1,8 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
+using Acr.UserDialogs;
 using JetBrains.Annotations;
+using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using Xamarin.Forms;
 
@@ -17,7 +20,16 @@ namespace SafeAuthenticator.ViewModels {
     }
 
     private async void OnRevokeAppCommand() {
-      await Application.Current.MainPage.DisplayAlert("Not Supported", "Not yet implemented.", "OK");
+      try {
+        using (UserDialogs.Instance.Loading("Revoking permission")) {
+          await Authenticator.RevokeAppAsync(_appModelInfo.AppId);
+          MessagingCenter.Send(this, MessengerConstants.NavHomePage);
+          MessagingCenter.Send(this, MessengerConstants.RefreshHomePage);
+        }
+      }
+      catch (Exception ex) {
+        await Application.Current.MainPage.DisplayAlert("Error", $"Revoke app Failed: {ex.Message}", "OK");
+      }    
     }
   }
 }
