@@ -64,7 +64,17 @@ namespace SafeAuth.Tests
             return await Authenticator.LoginAsync(secret, password);
         }
 
-        public static SafeApp.Utilities.AuthReq CreateContainerAuthRequest()
+        public static async Task<string> RevokeAppAsync(Authenticator auth, string appId)
+        {
+            return await auth.AuthRevokeAppAsync(appId);
+        }
+
+        public static async Task<List<RegisteredApp>> GetRegisteredAppsAsync(Authenticator auth)
+        {
+            return await auth.AuthRegisteredAppsAsync();
+        }
+
+        public static SafeApp.Utilities.AuthReq CreateAuthRequest()
         {
             var authReq = new SafeApp.Utilities.AuthReq
             {
@@ -82,10 +92,17 @@ namespace SafeAuth.Tests
                 App = authReq.App,
                 Containers = new List<SafeApp.Utilities.ContainerPermissions>
                 {
-                    new SafeApp.Utilities.ContainerPermissions  { ContName = containerType, Access = new SafeApp.Utilities.PermissionSet { Read = true } }
+                    new SafeApp.Utilities.ContainerPermissions  { ContName = containerType, Access = new SafeApp.Utilities.PermissionSet { Read = true, Insert = true, Delete = true, ManagePermissions = true, Update = true } }
                 }
             };
             return containerRequest;
+        }
+
+        public static byte[] GetRandomData(int length)
+        {
+            var data = new byte[length];
+            Random.NextBytes(data);
+            return data;
         }
 
         public static string GetRandomString(int length)
