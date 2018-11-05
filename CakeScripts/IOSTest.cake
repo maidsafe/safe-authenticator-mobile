@@ -5,7 +5,7 @@
 #addin "Cake.Powershell"
 
 var IOS_SIM_NAME = EnvironmentVariable("IOS_SIM_NAME") ?? "iPhone X";
-var IOS_SIM_RUNTIME = EnvironmentVariable("IOS_SIM_RUNTIME") ?? "iOS 11.4";
+var IOS_SIM_RUNTIME = EnvironmentVariable("IOS_SIM_RUNTIME") ?? "iOS 12.0";
 var IOS_TEST_PROJ = "../Tests/SafeAuth.Tests.IOS/SafeAuth.Tests.IOS.csproj";
 var IOS_BUNDLE_ID = "net.maidsafe.SafeAuthenticatorTests";
 var IOS_IPA_PATH = "../Tests/SafeAuth.Tests.IOS/bin/iPhoneSimulator/Release/NunitTests.app";
@@ -31,10 +31,9 @@ Task("Build-IOS")
 Task("Test-IOS-Emu")
     .IsDependentOn("Build-IOS")
     .Does(() => {
-    // Look for a matching simulator on the system
-    var sim = ListAppleSimulators()
-        .First(s => (s.Availability.Contains("available") || s.Availability.Contains("booted")) &&
-           !s.Availability.Contains("unavailable") &&
+    // Look for a matching simulator on the system    
+    var sim = ListAppleSimulators().First(s => (s.Availability.Contains("available") || s.Availability.Contains("booted")) &&
+           !s.Availability.Contains("unavailable") && 
            s.Name == IOS_SIM_NAME && s.Runtime == IOS_SIM_RUNTIME);
 
     // Boot the simulator
