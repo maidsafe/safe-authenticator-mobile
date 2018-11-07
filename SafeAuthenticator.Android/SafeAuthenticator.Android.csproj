@@ -195,8 +195,8 @@
     <PackageReference Include="Xamarin.Android.Support.Vector.Drawable">
       <Version>25.4.0.2</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Auth">
-      <Version>1.6.0-alpha04</Version>
+    <PackageReference Include="Xamarin.Essentials">
+      <Version>0.11.0-preview</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
       <Version>2.5.0.280555</Version>

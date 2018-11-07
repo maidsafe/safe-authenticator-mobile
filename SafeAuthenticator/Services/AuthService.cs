@@ -69,7 +69,7 @@ namespace SafeAuthenticator.Services {
           }
 
           using (UserDialogs.Instance.Loading("Reconnecting to Network")) {
-            var (location, password) = CredentialCache.Retrieve();
+            var (location, password) = await CredentialCache.Retrieve();
             await LoginAsync(location, password);
           }
 
@@ -88,10 +88,9 @@ namespace SafeAuthenticator.Services {
     }
 
     internal async Task CreateAccountAsync(string location, string password, string invitation) {
-      Debug.WriteLine($"CreateAccountAsync {location} - {password} - {invitation.Substring(0, 5)}");
       _authenticator = await Authenticator.CreateAccountAsync(location, password, invitation);
       if (AuthReconnect) {
-        CredentialCache.Store(location, password);
+        await CredentialCache.Store(location, password);
       }
     }
 
@@ -159,10 +158,9 @@ namespace SafeAuthenticator.Services {
     }
 
     internal async Task LoginAsync(string location, string password) {
-      Debug.WriteLine($"LoginAsync {location} - {password}");
       _authenticator = await Authenticator.LoginAsync(location, password);
       if (AuthReconnect) {
-        CredentialCache.Store(location, password);
+        await CredentialCache.Store(location, password);
       }
     }
 

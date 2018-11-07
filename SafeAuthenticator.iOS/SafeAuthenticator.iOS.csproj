@@ -218,8 +218,8 @@
     <PackageReference Include="Validation">
       <Version>2.4.15</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Auth">
-      <Version>1.6.0-alpha04</Version>
+    <PackageReference Include="Xamarin.Essentials">
+      <Version>0.11.0-preview</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
       <Version>2.5.0.280555</Version>
