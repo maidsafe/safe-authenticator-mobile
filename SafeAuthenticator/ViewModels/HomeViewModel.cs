@@ -48,5 +48,14 @@ namespace SafeAuthenticator.ViewModels {
         await Application.Current.MainPage.DisplayAlert("Error", $"Refresh Accounts Failed: {ex.Message}", "OK");
       }
     }
+
+    public async void HandleAuthenticationReq()
+    {
+      if (string.IsNullOrEmpty(Authenticator.AuthenticationReq)) {
+        return;
+      }
+      await Authenticator.HandleUrlActivationAsync(Authenticator.AuthenticationReq);
+      Authenticator.AuthenticationReq = null;
+    }
   }
 }

@@ -20,6 +20,7 @@ namespace SafeAuthenticator.Services {
     private readonly SemaphoreSlim _reconnectSemaphore = new SemaphoreSlim(1, 1);
     private Authenticator _authenticator;
     private bool _isLogInitialised;
+    public string AuthenticationReq;
     internal bool IsLogInitialised { get => _isLogInitialised; private set => SetProperty(ref _isLogInitialised, value); }
 
     private CredentialCacheService CredentialCache { get; }
@@ -46,7 +47,7 @@ namespace SafeAuthenticator.Services {
       _isLogInitialised = false;
       CredentialCache = new CredentialCacheService();
       Authenticator.Disconnected += OnNetworkDisconnected;
-      InitLoggingAsync();
+      Task.Run(async() => await InitLoggingAsync());
     }
 
     public void Dispose() {
@@ -57,12 +58,23 @@ namespace SafeAuthenticator.Services {
     }
 
     internal async Task CheckAndReconnect() {
+      await _reconnectSemaphore.WaitAsync();
+      try {
       if (_authenticator == null) {
+        try {
+          var (location, password) = await CredentialCache.Retrieve();
+          using (UserDialogs.Instance.Loading("Reconnecting to Network")) {
+            await LoginAsync(location, password);
+            MessagingCenter.Send(this, MessengerConstants.NavHomePage);              
+          }
+        }
+        catch (NullReferenceException) { }
+        catch (Exception ex) {
+          await Application.Current.MainPage.DisplayAlert("Error", $"Failed to reconnect: {ex.Message}", "OK");
+        }
         return;
       }
 
-      await _reconnectSemaphore.WaitAsync();
-      try {
         if (_authenticator.IsDisconnected) {
           if (!AuthReconnect) {
             throw new Exception("Reconnect Disabled");
@@ -99,7 +111,10 @@ namespace SafeAuthenticator.Services {
     }
 
     public void FreeState() {
-      _authenticator?.Dispose();
+      if (_authenticator != null) {
+        _authenticator.Dispose();
+        _authenticator = null;
+      }
     }
 
     internal async Task<(int, int)> GetAccountInfoAsync() {
@@ -115,6 +130,11 @@ namespace SafeAuthenticator.Services {
     public async Task HandleUrlActivationAsync(string encodedUri) {
       try {
         if (_authenticator == null) {
+          AuthenticationReq = encodedUri;
+          try { var (location, password) = await CredentialCache.Retrieve(); }
+          catch(NullReferenceException) {
+            await Application.Current.MainPage.DisplayAlert("Error", "Need to be logged in to accept app requests", "OK");
+          }
           return;
         }
 
@@ -150,7 +170,7 @@ namespace SafeAuthenticator.Services {
       }
     }
 
-    private async void InitLoggingAsync() {
+    private async Task InitLoggingAsync() {
       await Authenticator.AuthInitLoggingAsync(null);
 
       Debug.WriteLine("Rust Logging Initialised.");
@@ -165,7 +185,10 @@ namespace SafeAuthenticator.Services {
     }
 
     internal async Task LogoutAsync() {
-      await Task.Run(() => { _authenticator.Dispose(); });
+      await Task.Run(() => {
+        FreeState();
+        CredentialCache.Delete();
+       });
     }
 
     private void OnNetworkDisconnected(object obj, EventArgs args) {

@@ -34,9 +34,14 @@ namespace SafeAuthenticator {
       return new LoginPage();
     }
 
+    protected override async void OnStart()
+    {
+      base.OnStart();
+      await DependencyService.Get<AuthService>().CheckAndReconnect();      
+    }
+
     protected override async void OnResume() {
       base.OnResume();
-
       IsBackgrounded = false;
       await DependencyService.Get<AuthService>().CheckAndReconnect();
     }
