@@ -122,28 +122,85 @@ namespace SafeAuthenticator.Services {
         }
 
         await CheckAndReconnect();
-        var encodedReq = UrlFormat.GetRequestData(encodedUri);
-        var decodeResult = await _authenticator.DecodeIpcMessageAsync(encodedReq);
-        var decodedType = decodeResult.GetType();
-        if (decodedType == typeof(AuthIpcReq)) {
-          var authReq = decodeResult as AuthIpcReq;
-          Debug.WriteLine($"Decoded Req From {authReq?.AuthReq.App.Name}");
-          var isGranted = await Application.Current.MainPage.DisplayAlert(
-            "Auth Request",
-            $"{authReq?.AuthReq.App.Name} is requesting access",
-            "Allow",
-            "Deny");
-          var encodedRsp = await _authenticator.EncodeAuthRespAsync(authReq, isGranted);
-          var formattedRsp = UrlFormat.Format(authReq?.AuthReq.App.Id, encodedRsp, false);
-          Debug.WriteLine($"Encoded Rsp to app: {formattedRsp}");
-          Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
-        } else if (decodedType == typeof(IpcReqError)) {
-          var error = decodeResult as IpcReqError;
-          await Application.Current.MainPage.DisplayAlert("Auth Request", $"Error: {error?.Description}", "Ok");
+        if (encodedUri.Contains("/unregistered")) {
+          var unregisteredRemoved = encodedUri.Replace("/unregistered", "");
+          var uencodedReq = UrlFormat.GetRequestData(unregisteredRemoved);
+          var udecodeResult = await Authenticator.UnRegisteredDecodeIpcMsgAsync(uencodedReq);
+          var udecodedType = udecodeResult.GetType();
+          if (udecodedType == typeof(UnregisteredIpcReq))
+          {
+            var uauthReq = udecodeResult as UnregisteredIpcReq;
+            var isGranted = await Application.Current.MainPage.DisplayAlert(
+                    "Unregistered auth request",
+                    $"An app is requesting access.",
+                    "Allow",
+                    "Deny");
+            var encodedRsp = await Authenticator.EncodeUnregisteredRespAsync(uauthReq.ReqId, isGranted);
+            var appIdFromUrl = UrlFormat.GetAppId(encodedUri);
+            var formattedRsp = UrlFormat.Format(appIdFromUrl, encodedRsp, false);
+            Debug.WriteLine($"Encoded Rsp to app: {formattedRsp}");
+            Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
+          }
         } else {
-          Debug.WriteLine("Decoded Req is not Auth Req");
-        }
-      } catch (Exception ex) {
+          var encodedReq = UrlFormat.GetRequestData(encodedUri);
+          var decodeResult = await _authenticator.DecodeIpcMessageAsync(encodedReq);
+          var decodedType = decodeResult.GetType();
+          if (decodedType == typeof(AuthIpcReq)) {
+                var authReq = decodeResult as AuthIpcReq;
+                Debug.WriteLine($"Decoded Req From {authReq?.AuthReq.App.Name}");
+                foreach (var item in authReq.AuthReq.Containers) {
+                    Debug.WriteLine($"Container Name {item.ContName}");
+                    Debug.WriteLine($"Container Permissions {item.Access.Insert}, {item.Access.Read},{item.Access.Update},{item.Access.Delete},{item.Access.ManagePermissions}");
+                }
+                var isGranted = await Application.Current.MainPage.DisplayAlert(
+                    "Auth Request",
+                    $"{authReq?.AuthReq.App.Name} is requesting access",
+                    "Allow",
+                    "Deny");
+                var encodedRsp = await _authenticator.EncodeAuthRespAsync(authReq, isGranted);
+                var formattedRsp = UrlFormat.Format(authReq?.AuthReq.App.Id, encodedRsp, false);
+                Debug.WriteLine($"Encoded Rsp to app: {formattedRsp}");
+                Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
+           } else if (decodedType == typeof(ContainersIpcReq)) {
+                var containerReq = decodeResult as ContainersIpcReq;
+                Debug.WriteLine($"Decoded Req From {containerReq?.ContainersReq.App.Name}");
+                foreach (var item in containerReq.ContainersReq.Containers) {
+                    Debug.WriteLine($"Container Name {item.ContName}");
+                    Debug.WriteLine($"Container Permissions {item.Access.Insert}, {item.Access.Read},{item.Access.Update},{item.Access.Delete},{item.Access.ManagePermissions}");
+                }
+                var isGranted = await Application.Current.MainPage.DisplayAlert(
+                "Container Request",
+                $"{containerReq?.ContainersReq.App.Name} is requesting access",
+                "Allow",
+                "Deny");
+                var encodedRsp = await _authenticator.EncodeContainersRespAsync(containerReq, isGranted);
+                var formattedRsp = UrlFormat.Format(containerReq?.ContainersReq.App.Id, encodedRsp, false);
+                Debug.WriteLine($"Encoded container response to app: {formattedRsp}");
+                Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
+            } else if (decodedType == typeof(ShareMDataReq)) {
+                var shareMdReq = decodeResult as ShareMDataIpcReq;
+                Debug.WriteLine($"Decoded Req From {shareMdReq?.ShareMDataReq.App.Name}");
+                foreach (var item in shareMdReq.ShareMDataReq.MData) {
+                    Debug.WriteLine($"Container Name {item.Name}, {item.TypeTag}");
+                    Debug.WriteLine($"Container Permissions {item.Perms.Insert}, {item.Perms.Read},{item.Perms.Update},{item.Perms.Delete},{item.Perms.ManagePermissions}");
+                }
+                var isGranted = await Application.Current.MainPage.DisplayAlert(
+                "Mutable Data Share Request",
+                $"{shareMdReq?.ShareMDataReq.App.Name} is requesting access",
+                "Allow",
+                "Deny");
+                var encodedRsp = await _authenticator.EncodeShareMdataRespAsync(shareMdReq, isGranted);
+                var formattedRsp = UrlFormat.Format(shareMdReq?.ShareMDataReq.App.Id, encodedRsp, false);
+                Debug.WriteLine($"Encoded MData response to app: {formattedRsp}");
+                Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
+            } else if (decodedType == typeof(IpcReqError)) {
+              var error = decodeResult as IpcReqError;
+              await Application.Current.MainPage.DisplayAlert("Auth Request", $"Error: {error?.Description}", "Ok");
+          } else {
+              Debug.WriteLine("Not a valid request");
+            }
+          }
+        } catch (Exception ex) {
         var errorMsg = ex.Message;
         if (ex is ArgumentNullException) {
           errorMsg = "Ignoring Auth Request: Need to be logged in to accept app requests.";

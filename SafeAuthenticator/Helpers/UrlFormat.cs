@@ -11,5 +11,10 @@ namespace SafeAuthenticator.Helpers
     public static string GetRequestData(string url) {
       return new Uri(url).PathAndQuery.Replace("/", "");
     }
+
+    public static string GetAppId(string url)
+    {
+      return new Uri(url).Host;
+    }
   }
 }
