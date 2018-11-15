@@ -8,12 +8,12 @@ namespace SafeAuthenticator.ViewModels
     public class RequestDetailViewModel : ObservableObject
     {
         public AppExchangeInfo AppInfo { get; set; }
-
         public string AppName => AppInfo.Name;
         public string AppVendor => AppInfo.Vendor;
         public string AppId => AppInfo.Id;
-
+        public bool AppContainerRequest { get; set; } = false;
         public string PageTitle { get; set; }
+        public bool IsMDataRequest { get; } = false;
 
         public ObservableRangeCollection<ContainerPermissionsModel> Containers { get; set; }
         public ObservableRangeCollection<MDataModel> MData { get; set; }
@@ -29,26 +29,46 @@ namespace SafeAuthenticator.ViewModels
             {
                 _authReq = req as AuthIpcReq;
                 PageTitle = "Authentication Request";
-                ProcessRequestData();
+                ProcessAuthRequestData();
             }
             else if (requestType == typeof(ContainersIpcReq))
             {
                 _containerReq = req as ContainersIpcReq;
                 PageTitle = "Container Request";
-                ProcessRequestData();
+                ProcessContainerRequestData();
             }
             else if (requestType == typeof(ShareMDataIpcReq))
             {
                 _shareMdReq = req as ShareMDataIpcReq;
                 PageTitle = "Share MData Request";
+                IsMDataRequest = true;
                 ProcessMDataRequestData();
             }
         }
 
-        private void ProcessRequestData()
+        private void ProcessAuthRequestData()
         {
             AppInfo = _authReq.AuthReq.App;
             Containers = _authReq.AuthReq.Containers.Select(
+              x => new ContainerPermissionsModel
+              {
+                  Access = new PermissionSetModel
+                  {
+                      Read = x.Access.Read,
+                      Insert = x.Access.Insert,
+                      Update = x.Access.Update,
+                      Delete = x.Access.Delete,
+                      ManagePermissions = x.Access.ManagePermissions
+                  },
+                  ContainerName = x.ContName
+              }).ToObservableRangeCollection();
+            AppContainerRequest = _authReq.AuthReq.AppContainer;
+        }
+
+        private void ProcessContainerRequestData()
+        {
+            AppInfo = _containerReq.ContainersReq.App;
+            Containers = _containerReq.ContainersReq.Containers.Select(
               x => new ContainerPermissionsModel
               {
                   Access = new PermissionSetModel

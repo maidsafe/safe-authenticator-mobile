@@ -1,4 +1,5 @@
-﻿using SafeAuthenticator.Native;
+﻿using SafeAuthenticator.Models;
+using SafeAuthenticator.Native;
 using SafeAuthenticator.ViewModels;
 using System;
 using System.Threading.Tasks;
@@ -11,9 +12,7 @@ namespace SafeAuthenticator.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RequestDetailPage : ContentPage
     {
-        public event EventHandler AllowRequest;
-
-        public event EventHandler DenyRequest;
+        public event EventHandler CompleteRequest;
 
         RequestDetailViewModel _viewModel;
 
@@ -29,16 +28,20 @@ namespace SafeAuthenticator.Views
             BindingContext = _viewModel;
         }
 
-        private async Task Allow_Request(object sender, EventArgs e)
+        private async void Send_Response(object sender, EventArgs e)
         {
-            AllowRequest?.Invoke(this, EventArgs.Empty);
+            if(sender == AllowButton)
+                CompleteRequest?.Invoke(this, new ResponseEventArgs(true));
+            else if(sender == DenyButton)
+                CompleteRequest?.Invoke(this, new ResponseEventArgs(false));
             await Navigation.PopModalAsync();
         }
 
-        private async Task Deny_Request(object sender, EventArgs e)
+        private void Unselect_Item(object sender, ItemTappedEventArgs e)
         {
-            DenyRequest?.Invoke(this, EventArgs.Empty);
-            await Navigation.PopModalAsync();
+            if (e.Item == null) return;
+            if (sender is ListView lv)
+                lv.SelectedItem = null;
         }
     }
 }
