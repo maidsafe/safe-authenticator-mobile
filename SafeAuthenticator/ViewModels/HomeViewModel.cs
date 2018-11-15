@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Input;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.ViewModels {
-  internal class HomeViewModel : BaseViewModel {
+namespace SafeAuthenticator.ViewModels
+{
+    internal class HomeViewModel : BaseViewModel {
     private string _accountStorageInfo;
     private bool _isRefreshing;
     public ICommand LogoutCommand { get; }

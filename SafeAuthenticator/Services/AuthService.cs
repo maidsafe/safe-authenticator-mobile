@@ -10,6 +10,7 @@ using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
 using SafeAuthenticator.Services;
+using SafeAuthenticator.Views;
 using Xamarin.Forms;
 
 [assembly: Xamarin.Forms.Dependency(typeof(AuthService))]
@@ -144,61 +145,53 @@ namespace SafeAuthenticator.Services {
         } else {
           var encodedReq = UrlFormat.GetRequestData(encodedUri);
           var decodeResult = await _authenticator.DecodeIpcMessageAsync(encodedReq);
-          var decodedType = decodeResult.GetType();
-          if (decodedType == typeof(AuthIpcReq)) {
-                var authReq = decodeResult as AuthIpcReq;
-                Debug.WriteLine($"Decoded Req From {authReq?.AuthReq.App.Name}");
-                foreach (var item in authReq.AuthReq.Containers) {
-                    Debug.WriteLine($"Container Name {item.ContName}");
-                    Debug.WriteLine($"Container Permissions {item.Access.Insert}, {item.Access.Read},{item.Access.Update},{item.Access.Delete},{item.Access.ManagePermissions}");
-                }
-                var isGranted = await Application.Current.MainPage.DisplayAlert(
-                    "Auth Request",
-                    $"{authReq?.AuthReq.App.Name} is requesting access",
-                    "Allow",
-                    "Deny");
-                var encodedRsp = await _authenticator.EncodeAuthRespAsync(authReq, isGranted);
-                var formattedRsp = UrlFormat.Format(authReq?.AuthReq.App.Id, encodedRsp, false);
-                Debug.WriteLine($"Encoded Rsp to app: {formattedRsp}");
-                Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
-           } else if (decodedType == typeof(ContainersIpcReq)) {
-                var containerReq = decodeResult as ContainersIpcReq;
-                Debug.WriteLine($"Decoded Req From {containerReq?.ContainersReq.App.Name}");
-                foreach (var item in containerReq.ContainersReq.Containers) {
-                    Debug.WriteLine($"Container Name {item.ContName}");
-                    Debug.WriteLine($"Container Permissions {item.Access.Insert}, {item.Access.Read},{item.Access.Update},{item.Access.Delete},{item.Access.ManagePermissions}");
-                }
-                var isGranted = await Application.Current.MainPage.DisplayAlert(
-                "Container Request",
-                $"{containerReq?.ContainersReq.App.Name} is requesting access",
-                "Allow",
-                "Deny");
-                var encodedRsp = await _authenticator.EncodeContainersRespAsync(containerReq, isGranted);
-                var formattedRsp = UrlFormat.Format(containerReq?.ContainersReq.App.Id, encodedRsp, false);
-                Debug.WriteLine($"Encoded container response to app: {formattedRsp}");
-                Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
-            } else if (decodedType == typeof(ShareMDataReq)) {
-                var shareMdReq = decodeResult as ShareMDataIpcReq;
-                Debug.WriteLine($"Decoded Req From {shareMdReq?.ShareMDataReq.App.Name}");
-                foreach (var item in shareMdReq.ShareMDataReq.MData) {
-                    Debug.WriteLine($"Container Name {item.Name}, {item.TypeTag}");
-                    Debug.WriteLine($"Container Permissions {item.Perms.Insert}, {item.Perms.Read},{item.Perms.Update},{item.Perms.Delete},{item.Perms.ManagePermissions}");
-                }
-                var isGranted = await Application.Current.MainPage.DisplayAlert(
-                "Mutable Data Share Request",
-                $"{shareMdReq?.ShareMDataReq.App.Name} is requesting access",
-                "Allow",
-                "Deny");
-                var encodedRsp = await _authenticator.EncodeShareMdataRespAsync(shareMdReq, isGranted);
-                var formattedRsp = UrlFormat.Format(shareMdReq?.ShareMDataReq.App.Id, encodedRsp, false);
-                Debug.WriteLine($"Encoded MData response to app: {formattedRsp}");
-                Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
-            } else if (decodedType == typeof(IpcReqError)) {
-              var error = decodeResult as IpcReqError;
-              await Application.Current.MainPage.DisplayAlert("Auth Request", $"Error: {error?.Description}", "Ok");
-          } else {
-              Debug.WriteLine("Not a valid request");
-            }
+          //var decodedType = decodeResult.GetType();
+          //if (decodedType == typeof(AuthIpcReq)) {
+          //      var authReq = decodeResult as AuthIpcReq;
+          //      Debug.WriteLine($"Decoded Req From {authReq?.AuthReq.App.Name}");
+                var requestPage = new RequestDetailPage(decodeResult);
+                requestPage.AllowRequest += async (s,e) =>
+                {
+                    await SendResponseBack(decodeResult, true);
+                };
+                requestPage.DenyRequest +=  async (s, e) =>
+                {
+                    await SendResponseBack(decodeResult, false);
+                };
+                await Application.Current.MainPage.Navigation.PushModalAsync(requestPage);
+           //} else if (decodedType == typeof(ContainersIpcReq)) {
+           //     var containerReq = decodeResult as ContainersIpcReq;
+           //     Debug.WriteLine($"Decoded Req From {containerReq?.ContainersReq.App.Name}");
+           //     foreach (var item in containerReq.ContainersReq.Containers) {
+           //         Debug.WriteLine($"Container Name {item.ContName}");
+           //         Debug.WriteLine($"Container Permissions {item.Access.Insert}, {item.Access.Read},{item.Access.Update},{item.Access.Delete},{item.Access.ManagePermissions}");
+           //     }
+           //     var isGranted = await Application.Current.MainPage.DisplayAlert(
+           //     "Container Request",
+           //     $"{containerReq?.ContainersReq.App.Name} is requesting access",
+           //     "Allow",
+           //     "Deny");
+                
+           // } else if (decodedType == typeof(ShareMDataReq)) {
+           //     var shareMdReq = decodeResult as ShareMDataIpcReq;
+           //     Debug.WriteLine($"Decoded Req From {shareMdReq?.ShareMDataReq.App.Name}");
+           //     foreach (var item in shareMdReq.ShareMDataReq.MData) {
+           //         Debug.WriteLine($"Container Name {item.Name}, {item.TypeTag}");
+           //         Debug.WriteLine($"Container Permissions {item.Perms.Insert}, {item.Perms.Read},{item.Perms.Update},{item.Perms.Delete},{item.Perms.ManagePermissions}");
+           //     }
+           //     var isGranted = await Application.Current.MainPage.DisplayAlert(
+           //     "Mutable Data Share Request",
+           //     $"{shareMdReq?.ShareMDataReq.App.Name} is requesting access",
+           //     "Allow",
+           //     "Deny");
+                
+             
+        //else if (decodedType == typeof(IpcReqError)) {
+        //      var error = decodeResult as IpcReqError;
+        //      await Application.Current.MainPage.DisplayAlert("Auth Request", $"Error: {error?.Description}", "Ok");
+        //  } else {
+        //      Debug.WriteLine("Not a valid request");
+        //    }
           }
         } catch (Exception ex) {
         var errorMsg = ex.Message;
@@ -208,6 +201,33 @@ namespace SafeAuthenticator.Services {
 
         await Application.Current.MainPage.DisplayAlert("Error", errorMsg, "OK");
       }
+    }
+
+    private async Task SendResponseBack(IpcReq req, bool isGranted) {
+            var encodedRsp = string.Empty;
+            var formattedRsp = string.Empty;
+            var requestType = req.GetType();
+            if(requestType == typeof(AuthIpcReq))
+            {
+                var authReq = req as AuthIpcReq;
+                encodedRsp = await _authenticator.EncodeAuthRespAsync(authReq, isGranted);
+                formattedRsp = UrlFormat.Format(authReq?.AuthReq.App.Id, encodedRsp, false);
+            }
+            else if (requestType == typeof(ContainersIpcReq))
+            {
+                var containerReq = req as ContainersIpcReq;
+                encodedRsp = await _authenticator.EncodeContainersRespAsync(containerReq, isGranted);
+                formattedRsp = UrlFormat.Format(containerReq?.ContainersReq.App.Id, encodedRsp, false);
+            }
+            else if (requestType == typeof(ShareMDataIpcReq))
+            {
+                var mDataShareReq = req as ShareMDataIpcReq;
+                encodedRsp = await _authenticator.EncodeShareMdataRespAsync(mDataShareReq, isGranted);
+                formattedRsp = UrlFormat.Format(mDataShareReq?.ShareMDataReq.App.Id, encodedRsp, false);
+            }
+
+            Debug.WriteLine($"Encoded Rsp to app: {formattedRsp}");
+            Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
     }
 
     private async void InitLoggingAsync() {
