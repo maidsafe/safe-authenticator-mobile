@@ -22,4 +22,10 @@
     <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Hexasoft.Zxcvbn">
+      <HintPath>C:\Users\Ashwin\Desktop\ToDel\Hexasoft.Zxcvbn\Hexasoft.Zxcvbn\Hexasoft.Zxcvbn\bin\Release\Hexasoft.Zxcvbn.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

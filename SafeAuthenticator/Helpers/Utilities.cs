@@ -1,11 +1,18 @@
-﻿using SafeAuthenticator.Models;
+﻿using Hexasoft.Zxcvbn;
+using SafeAuthenticator.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace SafeAuthenticator.Helpers {
-  internal static class Helpers {
+  internal static class Utilities {
+    static ZxcvbnEstimator estimator;
+    static Utilities()
+    {
+      estimator = new ZxcvbnEstimator();
+    }
+
     internal static ObservableRangeCollection<T> ToObservableRangeCollection<T>(this IEnumerable<T> source) {
       var result = new ObservableRangeCollection<T>();
       foreach (var item in source) {
@@ -14,9 +21,22 @@ namespace SafeAuthenticator.Helpers {
       return result;
     }
 
-    #region Encoding Extensions
+    internal static (double, string) StrengthChecker(string data)
+    {
+      if (string.IsNullOrEmpty(data)) return (0, "");
+      string Strength = null;
+      var result = estimator.EstimateStrength(data);
+      var calc = Math.Log(result.Guesses) / Math.Log(10);
+      if (calc <= 4) Strength = "VERY_WEAK";
+      else if (calc <= 8) Strength = "WEAK";
+      else if (calc <= 10) Strength = "SOMEWHAT_SECURE";
+      else if (calc > 10) Strength = "SECURE";
+      double percentage = Math.Round(Math.Min((calc / 16) * 100, 100), 2);
+      return (percentage, Strength);
+    }
+        #region Encoding Extensions
 
-    public static string ToUtfString(this List<byte> input) {
+        public static string ToUtfString(this List<byte> input) {
       var ba = input.ToArray();
       return Encoding.UTF8.GetString(ba, 0, ba.Length);
     }
