@@ -177,11 +177,8 @@
     <PackageReference Include="nunit.xamarin">
       <Version>3.6.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Auth">
-      <Version>1.6.0.2</Version>
-    </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>2.5.0.280555</Version>
+      <Version>3.3.0.967583</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="..\SafeAuth.Tests\SafeAuth.Tests.projitems" Label="Shared" />
