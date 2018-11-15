@@ -8,10 +8,6 @@ using System.Text;
 namespace SafeAuthenticator.Helpers {
   internal static class Utilities {
     static ZxcvbnEstimator estimator;
-    static Utilities()
-    {
-      estimator = new ZxcvbnEstimator();
-    }
 
     internal static ObservableRangeCollection<T> ToObservableRangeCollection<T>(this IEnumerable<T> source) {
       var result = new ObservableRangeCollection<T>();
@@ -23,6 +19,7 @@ namespace SafeAuthenticator.Helpers {
 
     internal static (double, string) StrengthChecker(string data)
     {
+      if (estimator == null) estimator = new ZxcvbnEstimator();
       if (string.IsNullOrEmpty(data)) return (0, "");
       string Strength = null;
       var result = estimator.EstimateStrength(data);
@@ -36,7 +33,7 @@ namespace SafeAuthenticator.Helpers {
     }
         #region Encoding Extensions
 
-        public static string ToUtfString(this List<byte> input) {
+    public static string ToUtfString(this List<byte> input) {
       var ba = input.ToArray();
       return Encoding.UTF8.GetString(ba, 0, ba.Length);
     }

@@ -57,14 +57,11 @@ namespace SafeAuthenticator.ViewModels {
           {
             LocationStrength = Utilities.StrengthChecker (AcctSecret);
             PasswordStrength = Utilities.StrengthChecker(AcctPassword);
-            if (LocationStrength.Item1 < 50)
-            {
+            if (LocationStrength.Item1 < 50)            
               throw new Exception("Secret needs to be stronger");
-            }
+
             if (PasswordStrength.Item1 < 62.5)
-            {
               throw new Exception("Password needs to be stronger");
-            }
             });
         await Authenticator.CreateAccountAsync(AcctSecret, AcctPassword, Invitation);
         MessagingCenter.Send(this, MessengerConstants.NavHomePage);
