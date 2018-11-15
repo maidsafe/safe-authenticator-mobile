@@ -10,10 +10,25 @@ namespace SafeAuthenticator.ViewModels {
     private string _invitation;
     private bool _isUiEnabled;
 
-    public string AcctPassword { get => _acctPassword; set => SetProperty(ref _acctPassword, value); }
+    public string AcctPassword { get => _acctPassword; set
+            {
+                SetProperty(ref _acctPassword, value);
+                ((Command)CreateAcctCommand).ChangeCanExecute();
+            }
+        }
 
-    public string AcctSecret { get => _acctSecret; set => SetProperty(ref _acctSecret, value); }
-    public string Invitation { get => _invitation; set => SetProperty(ref _invitation, value); }
+    public string AcctSecret { get => _acctSecret; set {
+                SetProperty(ref _acctSecret, value);
+                ((Command)CreateAcctCommand).ChangeCanExecute();
+            }
+        }
+
+    public string Invitation { get => _invitation; set
+            {
+                SetProperty(ref _invitation, value);
+                ((Command)CreateAcctCommand).ChangeCanExecute();
+            }
+       }
 
     public ICommand CreateAcctCommand { get; }
 
@@ -39,14 +54,19 @@ namespace SafeAuthenticator.ViewModels {
 
       IsUiEnabled = Authenticator.IsLogInitialised;
 
-      CreateAcctCommand = new Command(OnCreateAcct);
+      CreateAcctCommand = new Command(OnCreateAcct, CanExecute);
 
       AcctSecret = string.Empty;
       AcctPassword = string.Empty;
       Invitation = string.Empty;
     }
 
-    private async void OnCreateAcct() {
+    private bool CanExecute()
+    {
+        return !string.IsNullOrWhiteSpace(AcctPassword) && !string.IsNullOrWhiteSpace(AcctSecret) && !string.IsNullOrWhiteSpace(Invitation);
+    }
+
+      private async void OnCreateAcct() {
       IsUiEnabled = false;
       try {
         await Authenticator.CreateAccountAsync(AcctSecret, AcctPassword, Invitation);

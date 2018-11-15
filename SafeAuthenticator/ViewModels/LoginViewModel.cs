@@ -9,9 +9,17 @@ namespace SafeAuthenticator.ViewModels {
     private string _acctSecret;
     private bool _isUiEnabled;
 
-    public string AcctPassword { get => _acctPassword; set => SetProperty(ref _acctPassword, value); }
+    public string AcctPassword { get => _acctPassword; set {
+                SetProperty(ref _acctPassword, value);
+                ((Command)LoginCommand).ChangeCanExecute();
+            }
+        }
 
-    public string AcctSecret { get => _acctSecret; set => SetProperty(ref _acctSecret, value); }
+    public string AcctSecret { get => _acctSecret; set {
+                SetProperty(ref _acctSecret, value);
+                ((Command)LoginCommand).ChangeCanExecute();
+            }
+       }
 
     public ICommand CreateAcctCommand { get; }
 
@@ -41,13 +49,18 @@ namespace SafeAuthenticator.ViewModels {
 
       CreateAcctCommand = new Command(OnCreateAcct);
 
-      LoginCommand = new Command(OnLogin);
+      LoginCommand = new Command(OnLogin, CanExecute);
 
       AcctSecret = string.Empty;
       AcctPassword = string.Empty;
     }
 
-    private void OnCreateAcct() {
+    private bool CanExecute()
+    {
+        return !string.IsNullOrWhiteSpace(AcctPassword) && !string.IsNullOrWhiteSpace(AcctSecret);
+    }
+
+     private void OnCreateAcct() {
       MessagingCenter.Send(this, MessengerConstants.NavCreateAcctPage);
     }
 
