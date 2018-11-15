@@ -27,7 +27,7 @@ namespace SafeAuthenticator.Helpers {
       if (calc < AppConstants.AccStrengthVeryWeak) Strength = "VERY_WEAK";
       else if (calc < AppConstants.AccStrengthWeak) Strength = "WEAK";
       else if (calc < AppConstants.AccStrengthSomeWhatSecure) Strength = "SOMEWHAT_SECURE";
-      else if (calc > AppConstants.AccStrengthSomeWhatSecure) Strength = "SECURE";
+      else if (calc >= AppConstants.AccStrengthSomeWhatSecure) Strength = "SECURE";
       double percentage = Math.Round(Math.Min((calc / 16) * 100, 100));
       return (calc, percentage, Strength);
     }
