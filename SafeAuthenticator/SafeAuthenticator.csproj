@@ -30,6 +30,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Views\RequestDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  
+  <ItemGroup>
     <None Update="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
@@ -43,6 +49,9 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Views\LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\RequestDetailPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>

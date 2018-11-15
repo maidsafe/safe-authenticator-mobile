@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
@@ -10,16 +9,19 @@ using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
 using SafeAuthenticator.Services;
+using SafeAuthenticator.Views;
 using Xamarin.Forms;
 
-[assembly: Xamarin.Forms.Dependency(typeof(AuthService))]
+[assembly: Dependency(typeof(AuthService))]
 
-namespace SafeAuthenticator.Services {
-  public class AuthService : ObservableObject, IDisposable {
+namespace SafeAuthenticator.Services
+{
+    public class AuthService : ObservableObject, IDisposable {
     private const string AuthReconnectPropKey = nameof(AuthReconnect);
     private readonly SemaphoreSlim _reconnectSemaphore = new SemaphoreSlim(1, 1);
     private Authenticator _authenticator;
     private bool _isLogInitialised;
+    public string AuthenticationReq;
     internal bool IsLogInitialised { get => _isLogInitialised; private set => SetProperty(ref _isLogInitialised, value); }
 
     private CredentialCacheService CredentialCache { get; }
@@ -46,7 +48,7 @@ namespace SafeAuthenticator.Services {
       _isLogInitialised = false;
       CredentialCache = new CredentialCacheService();
       Authenticator.Disconnected += OnNetworkDisconnected;
-      InitLoggingAsync();
+      Task.Run(async() => await InitLoggingAsync());
     }
 
     public void Dispose() {
@@ -57,12 +59,23 @@ namespace SafeAuthenticator.Services {
     }
 
     internal async Task CheckAndReconnect() {
+      await _reconnectSemaphore.WaitAsync();
+      try {
       if (_authenticator == null) {
+        try {
+          var (location, password) = await CredentialCache.Retrieve();
+          using (UserDialogs.Instance.Loading("Reconnecting to Network")) {
+            await LoginAsync(location, password);
+            MessagingCenter.Send(this, MessengerConstants.NavHomePage);              
+          }
+        }
+        catch (NullReferenceException) { }
+        catch (Exception ex) {
+          await Application.Current.MainPage.DisplayAlert("Error", $"Failed to reconnect: {ex.Message}", "OK");
+        }
         return;
       }
 
-      await _reconnectSemaphore.WaitAsync();
-      try {
         if (_authenticator.IsDisconnected) {
           if (!AuthReconnect) {
             throw new Exception("Reconnect Disabled");
@@ -102,7 +115,10 @@ namespace SafeAuthenticator.Services {
     }
 
     public void FreeState() {
-      _authenticator?.Dispose();
+      if (_authenticator != null) {
+        _authenticator.Dispose();
+        _authenticator = null;
+      }
     }
 
     internal async Task<(int, int)> GetAccountInfoAsync() {
@@ -118,32 +134,55 @@ namespace SafeAuthenticator.Services {
     public async Task HandleUrlActivationAsync(string encodedUri) {
       try {
         if (_authenticator == null) {
+          AuthenticationReq = encodedUri;
+          try { var (location, password) = await CredentialCache.Retrieve(); }
+          catch(NullReferenceException) {
+            await Application.Current.MainPage.DisplayAlert("Error", "Need to be logged in to accept app requests", "OK");
+          }
           return;
         }
 
         await CheckAndReconnect();
-        var encodedReq = UrlFormat.GetRequestData(encodedUri);
-        var decodeResult = await _authenticator.DecodeIpcMessageAsync(encodedReq);
-        var decodedType = decodeResult.GetType();
-        if (decodedType == typeof(AuthIpcReq)) {
-          var authReq = decodeResult as AuthIpcReq;
-          Debug.WriteLine($"Decoded Req From {authReq?.AuthReq.App.Name}");
-          var isGranted = await Application.Current.MainPage.DisplayAlert(
-            "Auth Request",
-            $"{authReq?.AuthReq.App.Name} is requesting access",
-            "Allow",
-            "Deny");
-          var encodedRsp = await _authenticator.EncodeAuthRespAsync(authReq, isGranted);
-          var formattedRsp = UrlFormat.Format(authReq?.AuthReq.App.Id, encodedRsp, false);
-          Debug.WriteLine($"Encoded Rsp to app: {formattedRsp}");
-          Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
-        } else if (decodedType == typeof(IpcReqError)) {
-          var error = decodeResult as IpcReqError;
-          await Application.Current.MainPage.DisplayAlert("Auth Request", $"Error: {error?.Description}", "Ok");
+        if (encodedUri.Contains("/unregistered")) {
+          var unregisteredRemoved = encodedUri.Replace("/unregistered", "");
+          var uencodedReq = UrlFormat.GetRequestData(unregisteredRemoved);
+          var udecodeResult = await Authenticator.UnRegisteredDecodeIpcMsgAsync(uencodedReq);
+          var udecodedType = udecodeResult.GetType();
+          if (udecodedType == typeof(UnregisteredIpcReq))
+          {
+            var uauthReq = udecodeResult as UnregisteredIpcReq;
+            var isGranted = await Application.Current.MainPage.DisplayAlert(
+                    "Unregistered auth request",
+                    $"An app is requesting access.",
+                    "Allow",
+                    "Deny");
+            var encodedRsp = await Authenticator.EncodeUnregisteredRespAsync(uauthReq.ReqId, isGranted);
+            var appIdFromUrl = UrlFormat.GetAppId(encodedUri);
+            var formattedRsp = UrlFormat.Format(appIdFromUrl, encodedRsp, false);
+            Debug.WriteLine($"Encoded Rsp to app: {formattedRsp}");
+            Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
+          }
         } else {
-          Debug.WriteLine("Decoded Req is not Auth Req");
-        }
-      } catch (Exception ex) {
+          var encodedReq = UrlFormat.GetRequestData(encodedUri);
+          var decodeResult = await _authenticator.DecodeIpcMessageAsync(encodedReq);
+            var decodedType = decodeResult.GetType();
+            if (decodedType == typeof(IpcReqError))
+            {
+                var error = decodeResult as IpcReqError;
+                await Application.Current.MainPage.DisplayAlert("Auth Request", $"Error: {error?.Description}", "Ok");
+            }
+            else
+            {
+                var requestPage = new RequestDetailPage(decodeResult);
+                requestPage.CompleteRequest += async (s, e) =>
+                {
+                    var args = e as ResponseEventArgs;
+                    await SendResponseBack(decodeResult, args.Response );
+                };
+                await Application.Current.MainPage.Navigation.PushModalAsync(requestPage);
+            }
+          }
+        } catch (Exception ex) {
         var errorMsg = ex.Message;
         if (ex is ArgumentNullException) {
           errorMsg = "Ignoring Auth Request: Need to be logged in to accept app requests.";
@@ -153,7 +192,34 @@ namespace SafeAuthenticator.Services {
       }
     }
 
-    private async void InitLoggingAsync() {
+    private async Task SendResponseBack(IpcReq req, bool isGranted) {
+        var encodedRsp = string.Empty;
+        var formattedRsp = string.Empty;
+        var requestType = req.GetType();
+        if(requestType == typeof(AuthIpcReq))
+        {
+            var authReq = req as AuthIpcReq;
+            encodedRsp = await _authenticator.EncodeAuthRespAsync(authReq, isGranted);
+            formattedRsp = UrlFormat.Format(authReq?.AuthReq.App.Id, encodedRsp, false);
+        }
+        else if (requestType == typeof(ContainersIpcReq))
+        {
+            var containerReq = req as ContainersIpcReq;
+            encodedRsp = await _authenticator.EncodeContainersRespAsync(containerReq, isGranted);
+            formattedRsp = UrlFormat.Format(containerReq?.ContainersReq.App.Id, encodedRsp, false);
+        }
+        else if (requestType == typeof(ShareMDataIpcReq))
+        {
+            var mDataShareReq = req as ShareMDataIpcReq;
+            encodedRsp = await _authenticator.EncodeShareMdataRespAsync(mDataShareReq, isGranted);
+            formattedRsp = UrlFormat.Format(mDataShareReq?.ShareMDataReq.App.Id, encodedRsp, false);
+        }
+
+        Debug.WriteLine($"Encoded Rsp to app: {formattedRsp}");
+        Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
+    }
+
+    private async Task InitLoggingAsync() {
       await Authenticator.AuthInitLoggingAsync(null);
 
       Debug.WriteLine("Rust Logging Initialised.");
@@ -168,7 +234,10 @@ namespace SafeAuthenticator.Services {
     }
 
     internal async Task LogoutAsync() {
-      await Task.Run(() => { _authenticator.Dispose(); });
+      await Task.Run(() => {
+        FreeState();
+        CredentialCache.Delete();
+       });
     }
 
     private void OnNetworkDisconnected(object obj, EventArgs args) {

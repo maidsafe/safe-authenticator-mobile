@@ -20,4 +20,13 @@ namespace SafeAuthenticator.Models {
     [PublicAPI]
     public PermissionSetModel Access { get; set; }
   }
+
+    public class MDataModel
+    {
+        public ulong TypeTag { get; set; }
+        public byte[] Name { get; set; }
+
+        [PublicAPI]
+        public PermissionSetModel Access { get; set; }
+    }
 }

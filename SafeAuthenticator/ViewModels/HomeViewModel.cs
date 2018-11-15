@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Input;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.ViewModels {
-  internal class HomeViewModel : BaseViewModel {
+namespace SafeAuthenticator.ViewModels
+{
+    internal class HomeViewModel : BaseViewModel {
     private string _accountStorageInfo;
     private bool _isRefreshing;
     public ICommand LogoutCommand { get; }
@@ -50,6 +50,15 @@ namespace SafeAuthenticator.ViewModels {
       } catch (Exception ex) {
         await Application.Current.MainPage.DisplayAlert("Error", $"Refresh Accounts Failed: {ex.Message}", "OK");
       }
+    }
+
+    public async void HandleAuthenticationReq()
+    {
+      if (string.IsNullOrEmpty(Authenticator.AuthenticationReq)) {
+        return;
+      }
+      await Authenticator.HandleUrlActivationAsync(Authenticator.AuthenticationReq);
+      Authenticator.AuthenticationReq = null;
     }
   }
 }

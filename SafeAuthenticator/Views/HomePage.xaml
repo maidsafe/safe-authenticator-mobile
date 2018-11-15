@@ -5,9 +5,6 @@
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
              Title="Home"
              x:Class="SafeAuthenticator.Views.HomePage">
-  <ContentPage.BindingContext>
-    <viewModels:HomeViewModel />
-  </ContentPage.BindingContext>
   <ContentPage.ToolbarItems>
     <ToolbarItem Text="Logout" Command="{Binding LogoutCommand}" />
   </ContentPage.ToolbarItems>

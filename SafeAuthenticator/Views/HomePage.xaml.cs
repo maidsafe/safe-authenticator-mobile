@@ -8,8 +8,17 @@ using Xamarin.Forms.Xaml;
 namespace SafeAuthenticator.Views {
   [XamlCompilation(XamlCompilationOptions.Compile)]
   public partial class HomePage : ContentPage, ICleanup {
+    HomeViewModel homeViewModel;
+
+    protected override void OnAppearing() {
+      base.OnAppearing();
+      homeViewModel.HandleAuthenticationReq();
+    }
+
     public HomePage() {
       InitializeComponent();
+      homeViewModel = new HomeViewModel();
+      BindingContext = homeViewModel;
       MessagingCenter.Subscribe<HomeViewModel>(
         this,
         MessengerConstants.NavLoginPage,

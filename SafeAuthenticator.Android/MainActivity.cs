@@ -7,6 +7,7 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Android.Widget;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Services;
 using Xamarin.Forms;
@@ -24,6 +25,7 @@ namespace SafeAuthenticator.Droid {
   public class MainActivity : FormsAppCompatActivity {
     private AuthService Authenticator => DependencyService.Get<AuthService>();
     private static string LogFolderPath => DependencyService.Get<IFileOps>().ConfigFilesPath;
+    private bool KillApp = false;
 
     private void HandleAppLaunch(string uri) {
       System.Diagnostics.Debug.WriteLine($"Launched via: {uri}");
@@ -40,10 +42,23 @@ namespace SafeAuthenticator.Droid {
 
     public override void OnBackPressed() {
       if (Xamarin.Forms.Application.Current.MainPage is NavigationPage currentNav && currentNav.Navigation.NavigationStack.Count == 1) {
-        Authenticator.FreeState();
-      }
+        if(KillApp) {
+          Authenticator.FreeState();
+          Finish();
+        }            
+        else {
+          Toast.MakeText(this, "Press Back again to Exit.", ToastLength.Short).Show();
+          KillApp = true;
 
+          Action myAction = () => {
+            KillApp = false;
+          };
+          new Handler().PostDelayed(myAction, 3000); 
+        }      
+      }
+      else {
       base.OnBackPressed();
+      }
     }
 
     protected override void OnCreate(Bundle bundle) {
