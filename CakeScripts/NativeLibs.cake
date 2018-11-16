@@ -87,16 +87,7 @@ Task("Download-Libs")
 
                 if (!FileExists(zipSavePath))
                 {
-                    CurlDownloadFiles(
-                        new[] {
-                                new Uri (zipDownloadUrl)
-                        },
-                        new CurlDownloadSettings
-                        {
-                            OutputPaths = new FilePath[] {
-                                    zipSavePath
-                            }
-                        });
+                    DownloadFile(zipDownloadUrl, File(zipSavePath));
                 }
                 else
                 {
