@@ -1,4 +1,3 @@
-#addin Cake.Curl
 using System.Linq;
 
 var ANDROID_X86 = "android-x86";
