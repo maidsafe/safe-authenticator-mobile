@@ -34,15 +34,16 @@ using Xamarin.Forms.Platform.Android;
 
 namespace SafeAuth.Tests.Android
 {
-    [Activity(Name = "com.safe.auth.tests.MainActivity", Label = "NUnit", Icon = "@drawable/icon", Theme = "@android:style/Theme.Holo.Light", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Name = "com.safe.auth.tests.MainActivity", Label = "NUnit", Icon = "@drawable/icon",
+        Theme = "@android:style/Theme.Holo.Light", MainLauncher = true,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : FormsApplicationActivity
     {
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Forms.Init(this, savedInstanceState);
-            
+
             // This will load all tests within the current project
             //var nunit = new NUnit.Runner.App();
             var nunit = new App
@@ -65,7 +66,7 @@ namespace SafeAuth.Tests.Android
                     // Information about the tcp listener host and port.
                     // For now, send result as XML to the listening server.
                     TcpWriterParameters = new TcpWriterInfo("10.0.2.2", 10500),
-                    
+
                     // Creates a NUnit Xml result file on the host file system using PCLStorage library.
                     //CreateXmlResultFile = true,
 
@@ -77,4 +78,3 @@ namespace SafeAuth.Tests.Android
         }
     }
 }
-

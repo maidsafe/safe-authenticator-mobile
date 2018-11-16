@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels;assembly=SafeAuthenticator"
@@ -35,9 +36,9 @@
                         <ColumnDefinition Width="{StaticResource PasswordEntryColDefinition3}" />
                     </Grid.ColumnDefinitions>
                     <controls:PaddedEntry x:Name="SecretEntry" Placeholder="Secret"
-                                             Grid.Column="0"
-                                             Grid.ColumnSpan="{StaticResource PasswordEntryColumnSpan}"
-                                             Text="{Binding AcctSecret}" IsEnabled="{Binding IsUiEnabled}" />
+                                          Grid.Column="0"
+                                          Grid.ColumnSpan="{StaticResource PasswordEntryColumnSpan}"
+                                          Text="{Binding AcctSecret}" IsEnabled="{Binding IsUiEnabled}" />
                     <Image VerticalOptions="Center" Grid.Column="{StaticResource PasswordEntryImageColumn}"
                            Aspect="AspectFit"
                            Margin="{StaticResource PasswordEntryImageMargin}" HeightRequest="25">
@@ -55,9 +56,9 @@
                         <ColumnDefinition Width="{StaticResource PasswordEntryColDefinition3}" />
                     </Grid.ColumnDefinitions>
                     <controls:PaddedEntry x:Name="PasswordEntry" Placeholder="Password"
-                                             Grid.Column="0"
-                                             Grid.ColumnSpan="{StaticResource PasswordEntryColumnSpan}"
-                                             Text="{Binding AcctPassword}" IsEnabled="{Binding IsUiEnabled}" />
+                                          Grid.Column="0"
+                                          Grid.ColumnSpan="{StaticResource PasswordEntryColumnSpan}"
+                                          Text="{Binding AcctPassword}" IsEnabled="{Binding IsUiEnabled}" />
                     <Image VerticalOptions="Center" Grid.Column="{StaticResource PasswordEntryImageColumn}"
                            Aspect="AspectFit"
                            Margin="{StaticResource PasswordEntryImageMargin}" HeightRequest="25">

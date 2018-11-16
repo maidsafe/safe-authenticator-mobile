@@ -10,7 +10,7 @@ namespace SafeAuthenticator.Controls.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return BitConverter.ToString((byte[])value).Replace("-", "").Substring(0,6);
+            return BitConverter.ToString((byte[]) value).Replace("-", "").Substring(0, 6);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

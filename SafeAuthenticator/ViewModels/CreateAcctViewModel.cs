@@ -5,90 +5,118 @@ using Acr.UserDialogs;
 using SafeAuthenticator.Helpers;
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.ViewModels {
-  internal class CreateAcctViewModel : BaseViewModel {
-    private string _acctPassword;
-    private string _acctSecret;
-    private string _invitation;
-    private bool _isUiEnabled;
-    private (double, double, string) LocationStrength;
-    private (double, double, string) PasswordStrength;
+namespace SafeAuthenticator.ViewModels
+{
+    internal class CreateAcctViewModel : BaseViewModel
+    {
+        private string _acctPassword;
+        private string _acctSecret;
+        private string _invitation;
+        private bool _isUiEnabled;
+        private (double, double, string) LocationStrength;
+        private (double, double, string) PasswordStrength;
 
-    public string AcctPassword { get => _acctPassword; set
+        public string AcctPassword
+        {
+            get => _acctPassword;
+            set
             {
                 SetProperty(ref _acctPassword, value);
-                ((Command)CreateAcctCommand).ChangeCanExecute();
+                ((Command) CreateAcctCommand).ChangeCanExecute();
             }
         }
 
-    public string AcctSecret { get => _acctSecret; set {
+        public string AcctSecret
+        {
+            get => _acctSecret;
+            set
+            {
                 SetProperty(ref _acctSecret, value);
-                ((Command)CreateAcctCommand).ChangeCanExecute();
+                ((Command) CreateAcctCommand).ChangeCanExecute();
             }
         }
 
-    public string Invitation { get => _invitation; set
+        public string Invitation
+        {
+            get => _invitation;
+            set
             {
                 SetProperty(ref _invitation, value);
-                ((Command)CreateAcctCommand).ChangeCanExecute();
+                ((Command) CreateAcctCommand).ChangeCanExecute();
             }
-       }
-
-    public ICommand CreateAcctCommand { get; }
-
-    public bool IsUiEnabled { get => _isUiEnabled; set => SetProperty(ref _isUiEnabled, value); }
-
-    public bool AuthReconnect {
-      get => Authenticator.AuthReconnect;
-      set {
-        if (Authenticator.AuthReconnect != value) {
-          Authenticator.AuthReconnect = value;
         }
 
-        OnPropertyChanged();
-      }
-    }
+        public ICommand CreateAcctCommand { get; }
 
-    public CreateAcctViewModel() {
-      Authenticator.PropertyChanged += (s, e) => {
-        if (e.PropertyName == nameof(Authenticator.IsLogInitialised)) {
-          IsUiEnabled = Authenticator.IsLogInitialised;
+        public bool IsUiEnabled
+        {
+            get => _isUiEnabled;
+            set => SetProperty(ref _isUiEnabled, value);
         }
-      };
 
-      IsUiEnabled = Authenticator.IsLogInitialised;
+        public bool AuthReconnect
+        {
+            get => Authenticator.AuthReconnect;
+            set
+            {
+                if (Authenticator.AuthReconnect != value)
+                {
+                    Authenticator.AuthReconnect = value;
+                }
 
-      CreateAcctCommand = new Command(OnCreateAcct, CanExecute);
-
-      AcctSecret = string.Empty;
-      AcctPassword = string.Empty;
-      Invitation = string.Empty;
-    }
-
-    private bool CanExecute()
-    {
-        return !string.IsNullOrWhiteSpace(AcctPassword) && !string.IsNullOrWhiteSpace(AcctSecret) && !string.IsNullOrWhiteSpace(Invitation);
-    }
-
-      private async void OnCreateAcct() {
-      try {
-        using (UserDialogs.Instance.Loading("Loading")){
-          await Task.Run(() =>
-          {
-            LocationStrength = Utilities.StrengthChecker (AcctSecret);
-            PasswordStrength = Utilities.StrengthChecker(AcctPassword);
-            if (LocationStrength.Item1 < AppConstants.AccStrengthWeak )            
-              throw new Exception("Secret needs to be stronger");
-
-            if (PasswordStrength.Item1 < AppConstants.AccStrengthSomeWhatSecure)
-              throw new Exception("Password needs to be stronger");
-            });
-        await Authenticator.CreateAccountAsync(AcctSecret, AcctPassword, Invitation);
-        MessagingCenter.Send(this, MessengerConstants.NavHomePage);
+                OnPropertyChanged();
+            }
         }
-      } catch (Exception ex) {
-        await Application.Current.MainPage.DisplayAlert("Error", $"Create Acct Failed: {ex.Message}", "OK");
-      }
+
+        public CreateAcctViewModel()
+        {
+            Authenticator.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(Authenticator.IsLogInitialised))
+                {
+                    IsUiEnabled = Authenticator.IsLogInitialised;
+                }
+            };
+
+            IsUiEnabled = Authenticator.IsLogInitialised;
+
+            CreateAcctCommand = new Command(OnCreateAcct, CanExecute);
+
+            AcctSecret = string.Empty;
+            AcctPassword = string.Empty;
+            Invitation = string.Empty;
+        }
+
+        private bool CanExecute()
+        {
+            return !string.IsNullOrWhiteSpace(AcctPassword) && !string.IsNullOrWhiteSpace(AcctSecret) &&
+                   !string.IsNullOrWhiteSpace(Invitation);
+        }
+
+        private async void OnCreateAcct()
+        {
+            try
+            {
+                using (UserDialogs.Instance.Loading("Loading"))
+                {
+                    await Task.Run(() =>
+                    {
+                        LocationStrength = Utilities.StrengthChecker(AcctSecret);
+                        PasswordStrength = Utilities.StrengthChecker(AcctPassword);
+                        if (LocationStrength.Item1 < AppConstants.AccStrengthWeak)
+                            throw new Exception("Secret needs to be stronger");
+
+                        if (PasswordStrength.Item1 < AppConstants.AccStrengthSomeWhatSecure)
+                            throw new Exception("Password needs to be stronger");
+                    });
+                    await Authenticator.CreateAccountAsync(AcctSecret, AcctPassword, Invitation);
+                    MessagingCenter.Send(this, MessengerConstants.NavHomePage);
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", $"Create Acct Failed: {ex.Message}", "OK");
+            }
+        }
     }
-  }
 }

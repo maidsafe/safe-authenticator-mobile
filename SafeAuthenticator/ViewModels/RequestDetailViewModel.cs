@@ -50,18 +50,18 @@ namespace SafeAuthenticator.ViewModels
         {
             AppInfo = _authReq.AuthReq.App;
             Containers = _authReq.AuthReq.Containers.Select(
-              x => new ContainerPermissionsModel
-              {
-                  Access = new PermissionSetModel
-                  {
-                      Read = x.Access.Read,
-                      Insert = x.Access.Insert,
-                      Update = x.Access.Update,
-                      Delete = x.Access.Delete,
-                      ManagePermissions = x.Access.ManagePermissions
-                  },
-                  ContainerName = x.ContName
-              }).ToObservableRangeCollection();
+                x => new ContainerPermissionsModel
+                {
+                    Access = new PermissionSetModel
+                    {
+                        Read = x.Access.Read,
+                        Insert = x.Access.Insert,
+                        Update = x.Access.Update,
+                        Delete = x.Access.Delete,
+                        ManagePermissions = x.Access.ManagePermissions
+                    },
+                    ContainerName = x.ContName
+                }).ToObservableRangeCollection();
             AppContainerRequest = _authReq.AuthReq.AppContainer;
         }
 
@@ -69,37 +69,37 @@ namespace SafeAuthenticator.ViewModels
         {
             AppInfo = _containerReq.ContainersReq.App;
             Containers = _containerReq.ContainersReq.Containers.Select(
-              x => new ContainerPermissionsModel
-              {
-                  Access = new PermissionSetModel
-                  {
-                      Read = x.Access.Read,
-                      Insert = x.Access.Insert,
-                      Update = x.Access.Update,
-                      Delete = x.Access.Delete,
-                      ManagePermissions = x.Access.ManagePermissions
-                  },
-                  ContainerName = x.ContName
-              }).ToObservableRangeCollection();
+                x => new ContainerPermissionsModel
+                {
+                    Access = new PermissionSetModel
+                    {
+                        Read = x.Access.Read,
+                        Insert = x.Access.Insert,
+                        Update = x.Access.Update,
+                        Delete = x.Access.Delete,
+                        ManagePermissions = x.Access.ManagePermissions
+                    },
+                    ContainerName = x.ContName
+                }).ToObservableRangeCollection();
         }
 
         private void ProcessMDataRequestData()
         {
             AppInfo = _shareMdReq.ShareMDataReq.App;
             MData = _shareMdReq.ShareMDataReq.MData.Select(
-              x => new MDataModel
-              {
-                  Access = new PermissionSetModel
-                  {
-                      Read = x.Perms.Read,
-                      Insert = x.Perms.Insert,
-                      Update = x.Perms.Update,
-                      Delete = x.Perms.Delete,
-                      ManagePermissions = x.Perms.ManagePermissions
-                  },
-                  Name = x.Name,
-                  TypeTag = x.TypeTag
-              }).ToObservableRangeCollection();
+                x => new MDataModel
+                {
+                    Access = new PermissionSetModel
+                    {
+                        Read = x.Perms.Read,
+                        Insert = x.Perms.Insert,
+                        Update = x.Perms.Update,
+                        Delete = x.Perms.Delete,
+                        ManagePermissions = x.Perms.ManagePermissions
+                    },
+                    Name = x.Name,
+                    TypeTag = x.TypeTag
+                }).ToObservableRangeCollection();
         }
     }
 }

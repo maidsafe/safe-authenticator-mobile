@@ -29,18 +29,21 @@ namespace SafeAuth.Tests
             return await CreateTestApp(secret, password, invitation);
         }
 
-        public static async Task<(Authenticator, Session)> CreateTestApp(string secret, string password, string invitation)
+        public static async Task<(Authenticator, Session)> CreateTestApp(string secret, string password,
+            string invitation)
         {
             var authReq = new SafeApp.Utilities.AuthReq
             {
-                App = new SafeApp.Utilities.AppExchangeInfo { Id = GetRandomString(10), Name = GetRandomString(5), Scope = null, Vendor = GetRandomString(5) },
+                App = new SafeApp.Utilities.AppExchangeInfo
+                    {Id = GetRandomString(10), Name = GetRandomString(5), Scope = null, Vendor = GetRandomString(5)},
                 AppContainer = true,
                 Containers = new List<SafeApp.Utilities.ContainerPermissions>()
             };
             return await CreateTestApp(secret, password, invitation, authReq);
         }
 
-        internal static async Task<(Authenticator, Session)> CreateTestApp(string secret, string password, string invitation, SafeApp.Utilities.AuthReq authReq)
+        internal static async Task<(Authenticator, Session)> CreateTestApp(string secret, string password,
+            string invitation, SafeApp.Utilities.AuthReq authReq)
         {
             var auth = await Authenticator.CreateAccountAsync(secret, password, invitation);
             var (_, reqMsg) = await Session.EncodeAuthReqAsync(authReq);
@@ -78,21 +81,28 @@ namespace SafeAuth.Tests
         {
             var authReq = new SafeApp.Utilities.AuthReq
             {
-                App = new SafeApp.Utilities.AppExchangeInfo { Id = GetRandomString(10), Name = GetRandomString(5), Scope = null, Vendor = GetRandomString(5) },
+                App = new SafeApp.Utilities.AppExchangeInfo
+                    {Id = GetRandomString(10), Name = GetRandomString(5), Scope = null, Vendor = GetRandomString(5)},
                 AppContainer = true,
                 Containers = new List<SafeApp.Utilities.ContainerPermissions>()
             };
             return authReq;
         }
 
-        public static SafeApp.Utilities.ContainersReq SetContainerPermission(SafeApp.Utilities.AuthReq authReq, string containerType)
+        public static SafeApp.Utilities.ContainersReq SetContainerPermission(SafeApp.Utilities.AuthReq authReq,
+            string containerType)
         {
             var containerRequest = new SafeApp.Utilities.ContainersReq
             {
                 App = authReq.App,
                 Containers = new List<SafeApp.Utilities.ContainerPermissions>
                 {
-                    new SafeApp.Utilities.ContainerPermissions  { ContName = containerType, Access = new SafeApp.Utilities.PermissionSet { Read = true, Insert = true, Delete = true, ManagePermissions = true, Update = true } }
+                    new SafeApp.Utilities.ContainerPermissions
+                    {
+                        ContName = containerType,
+                        Access = new SafeApp.Utilities.PermissionSet
+                            {Read = true, Insert = true, Delete = true, ManagePermissions = true, Update = true}
+                    }
                 }
             };
             return containerRequest;

@@ -3,7 +3,6 @@ using SafeAuthenticator.Native;
 using SafeAuthenticator.ViewModels;
 using System;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -30,9 +29,9 @@ namespace SafeAuthenticator.Views
 
         private async void Send_Response(object sender, EventArgs e)
         {
-            if(sender == AllowButton)
+            if (sender == AllowButton)
                 CompleteRequest?.Invoke(this, new ResponseEventArgs(true));
-            else if(sender == DenyButton)
+            else if (sender == DenyButton)
                 CompleteRequest?.Invoke(this, new ResponseEventArgs(false));
             await Navigation.PopModalAsync();
         }
