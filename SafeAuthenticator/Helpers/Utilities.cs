@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Xamarin.Essentials;
 
 namespace SafeAuthenticator.Helpers {
   internal static class Utilities {
@@ -37,16 +38,17 @@ namespace SafeAuthenticator.Helpers {
     {
       switch (error.ErrorCode)
       {
-        case -2000:            
-        return ("Please update your IP address");
+        case -2000:
+        var current = Connectivity.NetworkAccess;
+        return current != NetworkAccess.Internet? "Internet connection not available" : "Please update your IP address" ;
         case -101:            
-        return ("Secret is invalid");
+        return "Secret is invalid";
         case -3:            
-        return ("Password is invalid");
+        return "Password is invalid";
         case -116:            
-        return ("Invalid invitation token");
+        return "Invalid invitation token";
         case -102:            
-        return ("Secret already exists");
+        return "Secret already exists";
         default:
         return error.Message;
       }            
