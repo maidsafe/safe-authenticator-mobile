@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using SafeAuthenticator.Helpers;
+using SafeAuthenticator.Native;
 using Xamarin.Forms;
 
 namespace SafeAuthenticator.ViewModels {
@@ -69,7 +70,13 @@ namespace SafeAuthenticator.ViewModels {
       try {
         await Authenticator.LoginAsync(AcctSecret, AcctPassword);
         MessagingCenter.Send(this, MessengerConstants.NavHomePage);
-      } catch (Exception ex) {
+      }
+      catch(FfiException ex) {
+        var errorMessage = Utilities.HandleErrorMessage(ex);
+        await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
+        IsUiEnabled = true;
+      }
+      catch (Exception ex) {
         await Application.Current.MainPage.DisplayAlert("Error", $"Log in Failed: {ex.Message}", "OK");
         IsUiEnabled = true;
       }

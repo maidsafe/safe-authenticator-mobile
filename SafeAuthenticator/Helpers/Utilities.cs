@@ -1,5 +1,6 @@
 ﻿using Hexasoft.Zxcvbn;
 using SafeAuthenticator.Models;
+using SafeAuthenticator.Native;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,25 @@ namespace SafeAuthenticator.Helpers {
       else if (calc >= AppConstants.AccStrengthSomeWhatSecure) Strength = "SECURE";
       double percentage = Math.Round(Math.Min((calc / 16) * 100, 100));
       return (calc, percentage, Strength);
+    }
+
+    internal static string HandleErrorMessage(FfiException error)
+    {
+      switch (error.ErrorCode)
+      {
+        case -2000:            
+        return ("Please update your IP address");
+        case -101:            
+        return ("Secret is invalid");
+        case -3:            
+        return ("Password is invalid");
+        case -116:            
+        return ("Invalid invitation token");
+        case -102:            
+        return ("Secret already exists");
+        default:
+        return error.Message;
+      }            
     }
         #region Encoding Extensions
 
