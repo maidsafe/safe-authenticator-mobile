@@ -70,8 +70,6 @@
                 </Grid>
                 <StackLayout Margin="20,20,20,35" HeightRequest="{StaticResource ButtonHeightRequest}"
                              VerticalOptions="Center">
-                    <ActivityIndicator IsRunning="True"
-                                       IsVisible="{Binding IsUiEnabled, Converter={StaticResource InverseBooleanConverter}}" />
                     <Button Text="Login"
                             TextColor="White" Command="{Binding LoginCommand}" IsVisible="{Binding IsUiEnabled}" />
                 </StackLayout>

@@ -66,8 +66,6 @@
                                  VerticalOptions="Fill" HorizontalOptions="Fill" />
                 </Grid>
                 <StackLayout Margin="20" HeightRequest="{StaticResource ButtonHeightRequest}" VerticalOptions="Center">
-                    <ActivityIndicator IsRunning="True"
-                                       IsVisible="{Binding IsUiEnabled, Converter={StaticResource InverseBooleanConverter}}" />
                     <Button Text="Create Account"
                             TextColor="White" Command="{Binding CreateAcctCommand}" IsVisible="{Binding IsUiEnabled}" />
                 </StackLayout>
