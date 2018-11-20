@@ -40,15 +40,17 @@ namespace SafeAuthenticator.Helpers {
       {
         case -2000:
         var current = Connectivity.NetworkAccess;
-        return current != NetworkAccess.Internet? "Internet connection not available" : "Please update your IP address" ;
+        return current != NetworkAccess.Internet? "No internet connection" : "Could not connect to the SAFE Network";
         case -101:            
-        return "Secret is invalid";
+        return "Account does not exist";
         case -3:            
-        return "Password is invalid";
-        case -116:            
-        return "Invalid invitation token";
+        return "Incorrect password";
         case -102:            
-        return "Secret already exists";
+        return "Account already exists";
+        case -116:            
+        return "Invalid invitation";
+        case -117:
+        return "Invitation already claimed";
         default:
         return error.Message;
       }            
