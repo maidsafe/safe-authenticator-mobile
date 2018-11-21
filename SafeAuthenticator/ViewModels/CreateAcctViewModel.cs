@@ -89,7 +89,7 @@ namespace SafeAuthenticator.ViewModels {
         }
       }
       catch(FfiException ex) {
-        var errorMessage = Utilities.HandleErrorMessage(ex);
+        var errorMessage = Utilities.GetErrorMessage(ex);
         await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
       }
       catch (Exception ex) {

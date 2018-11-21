@@ -34,7 +34,7 @@ namespace SafeAuthenticator.Helpers {
       return (calc, percentage, Strength);
     }
 
-    internal static string HandleErrorMessage(FfiException error)
+    internal static string GetErrorMessage(FfiException error)
     {
       switch (error.ErrorCode)
       {
