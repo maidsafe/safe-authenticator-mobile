@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,20 +30,18 @@ using UIKit;
 
 namespace NUnit.Runner.Tests
 {
-    // The UIApplicationDelegate for the application. This class is responsible for launching the 
-    // User Interface of the application, as well as listening (and optionally responding) to 
+    // The UIApplicationDelegate for the application. This class is responsible for launching the
+    // User Interface of the application, as well as listening (and optionally responding) to
     // application events from iOS.
     [Register("AppDelegate")]
     public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
-        //
-        // This method is invoked when the application has loaded and is ready to run. In this 
+        // This method is invoked when the application has loaded and is ready to run. In this
         // method you should instantiate the window, load the UI into it and then make the window
         // visible.
         //
         // You have 17 seconds to return from this method, or iOS will terminate your application.
-        //
-        string TCP_LISTEN_HOST = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList
+        string tcpListenHost = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList
             .First(f => f.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).ToString();
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
@@ -54,7 +52,7 @@ namespace NUnit.Runner.Tests
             var nunit = new NUnit.Runner.App();
 
             // If you want to add tests in another assembly
-            //nunit.AddTestAssembly(typeof(MyTests).Assembly);
+            // nunit.AddTestAssembly(typeof(MyTests).Assembly);
 
             // Available options for testing
             nunit.Options = new TestOptions
@@ -64,12 +62,12 @@ namespace NUnit.Runner.Tests
                 AutoRun = true,
 
                 // If True, the application will terminate automatically after running the tests.
-                //TerminateAfterExecution = true,
+                // TerminateAfterExecution = true,
 
                 // Information about the tcp listener host and port.
                 // For now, send result as XML to the listening server.
-                //TcpWriterParameters = new TcpWriterInfo(System.Net.IPAddress.Any.ToString(), 10500),
-                TcpWriterParameters = new TcpWriterInfo(TCP_LISTEN_HOST, 10500),
+                // TcpWriterParameters = new TcpWriterInfo(System.Net.IPAddress.Any.ToString(), 10500),
+                TcpWriterParameters = new TcpWriterInfo(tcpListenHost, 10500),
 
                 // Creates a NUnit Xml result file on the host file system using PCLStorage library.
                 CreateXmlResultFile = true,
@@ -77,7 +75,8 @@ namespace NUnit.Runner.Tests
                 // Choose a different path for the xml result file (ios file share / library directory)
                 ResultFilePath =
                     Path.Combine(
-                        NSFileManager.DefaultManager.GetUrls(NSSearchPathDirectory.LibraryDirectory,
+                        NSFileManager.DefaultManager.GetUrls(
+                            NSSearchPathDirectory.LibraryDirectory,
                             NSSearchPathDomain.User)[0].Path, "Results.xml")
             };
 

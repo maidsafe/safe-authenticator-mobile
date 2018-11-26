@@ -12,7 +12,7 @@ namespace SafeAuthenticator.Controls.Behaviour
         {
             _entry = entry;
             _entry.IsPassword = true;
-            _tap = new TapGestureRecognizer {NumberOfTapsRequired = 3};
+            _tap = new TapGestureRecognizer { NumberOfTapsRequired = 3 };
             _tap.Tapped += OnTapped;
             _entry.GestureRecognizers.Insert(0, _tap);
             base.OnAttachedTo(entry);

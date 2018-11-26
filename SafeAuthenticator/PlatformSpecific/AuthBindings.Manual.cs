@@ -18,8 +18,7 @@ namespace SafeAuthenticator.Native
             Action<FfiResult, IntPtr, GCHandle> cb)
         {
             var userData = BindingUtils.ToHandlePtr((disconnnectedCb, cb));
-            CreateAccNative(locator, secret, invitation, userData, DelegateOnAuthenticatorDisconnectCb,
-                DelegateOnAuthenticatorCreateCb);
+            CreateAccNative(locator, secret, invitation, userData, DelegateOnAuthenticatorDisconnectCb, DelegateOnAuthenticatorCreateCb);
         }
 
         public Task<IpcReq> DecodeIpcMessage(IntPtr authPtr, string msg)
@@ -40,8 +39,7 @@ namespace SafeAuthenticator.Native
         public void Login(string locator, string secret, Action disconnnectedCb, Action<FfiResult, IntPtr, GCHandle> cb)
         {
             var userData = BindingUtils.ToHandlePtr((disconnnectedCb, cb));
-            LoginNative(locator, secret, userData, DelegateOnAuthenticatorDisconnectCb,
-                DelegateOnAuthenticatorCreateCb);
+            LoginNative(locator, secret, userData, DelegateOnAuthenticatorDisconnectCb, DelegateOnAuthenticatorCreateCb);
         }
 
 #if __IOS__
@@ -87,8 +85,7 @@ namespace SafeAuthenticator.Native
         private static void OnDecodeIpcReqContainersCb(IntPtr userData, uint reqId, IntPtr authReq)
         {
             var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<IpcReq>>(userData);
-            tcs.SetResult(new ContainersIpcReq(reqId,
-                new ContainersReq(Marshal.PtrToStructure<ContainersReqNative>(authReq))));
+            tcs.SetResult(new ContainersIpcReq(reqId, new ContainersReq(Marshal.PtrToStructure<ContainersReqNative>(authReq))));
         }
 
         private static readonly UIntContainersReqCb DelegateOnDecodeIpcReqContainersCb = OnDecodeIpcReqContainersCb;
@@ -113,7 +110,7 @@ namespace SafeAuthenticator.Native
         private static void OnDecodeIpcReqUnregisteredCb(IntPtr userData, uint reqId, IntPtr extraData, UIntPtr size)
         {
             var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<IpcReq>>(userData);
-            tcs.SetResult(new UnregisteredIpcReq(reqId, extraData, (ulong) size));
+            tcs.SetResult(new UnregisteredIpcReq(reqId, extraData, (ulong)size));
         }
 
         private static readonly UIntByteListCb DelegateOnDecodeIpcReqUnregisteredCb = OnDecodeIpcReqUnregisteredCb;
@@ -131,6 +128,7 @@ namespace SafeAuthenticator.Native
 #if __IOS__
         [MonoPInvokeCallback(typeof(IpcReqEncodeCb))]
 #endif
+
         // ReSharper disable once UnusedMember.Local
         private static void OnIpcReqEncodeCb(IntPtr userData, IntPtr result, string msg)
         {
@@ -148,8 +146,7 @@ namespace SafeAuthenticator.Native
         public Task<IpcReq> UnRegisteredDecodeIpcMsgAsync(string msg)
         {
             var (task, userData) = BindingUtils.PrepareTask<IpcReq>();
-            AuthUnregisteredDecodeIpcMsgNative(msg, userData, DelegateOnDecodeIpcReqUnregisteredCb,
-                DelegateOnFfiResultIpcReqErrorCb);
+            AuthUnregisteredDecodeIpcMsgNative(msg, userData, DelegateOnDecodeIpcReqUnregisteredCb, DelegateOnFfiResultIpcReqErrorCb);
             return task;
         }
 

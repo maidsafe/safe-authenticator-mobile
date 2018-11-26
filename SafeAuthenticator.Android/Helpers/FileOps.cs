@@ -17,6 +17,7 @@ namespace SafeAuthenticator.Droid.Helpers
             get
             {
                 string path;
+
                 // Personal -> /data/data/@PACKAGE_NAME@/files
                 path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                 return path;

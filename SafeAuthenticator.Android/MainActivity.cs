@@ -20,15 +20,17 @@ namespace SafeAuthenticator.Droid
          Theme = "@style/MyTheme",
          MainLauncher = true,
          LaunchMode = LaunchMode.SingleTask,
-         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation),
-     IntentFilter(new[] {Intent.ActionView}, Categories = new[] {Intent.CategoryDefault, Intent.CategoryBrowsable},
-         DataScheme = "safe-auth")]
+         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [IntentFilter(new[] { Intent.ActionView }, Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable }, DataScheme = "safe-auth")]
+
     // ReSharper disable once UnusedMember.Global
     public class MainActivity : FormsAppCompatActivity
     {
-        private AuthService Authenticator => DependencyService.Get<AuthService>();
         private static string LogFolderPath => DependencyService.Get<IFileOps>().ConfigFilesPath;
-        private bool KillApp = false;
+
+        private AuthService Authenticator => DependencyService.Get<AuthService>();
+
+        private bool killApp = false;
 
         private void HandleAppLaunch(string uri)
         {
@@ -53,7 +55,7 @@ namespace SafeAuthenticator.Droid
             if (Xamarin.Forms.Application.Current.MainPage is NavigationPage currentNav &&
                 currentNav.Navigation.NavigationStack.Count == 1)
             {
-                if (KillApp)
+                if (killApp)
                 {
                     Authenticator.FreeState();
                     Finish();
@@ -61,9 +63,9 @@ namespace SafeAuthenticator.Droid
                 else
                 {
                     Toast.MakeText(this, "Press Back again to Exit.", ToastLength.Short).Show();
-                    KillApp = true;
+                    killApp = true;
 
-                    Action myAction = () => { KillApp = false; };
+                    Action myAction = () => { killApp = false; };
                     new Handler().PostDelayed(myAction, 3000);
                 }
             }
@@ -97,8 +99,7 @@ namespace SafeAuthenticator.Droid
             }
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions,
-            [GeneratedEnum] Permission[] grantResults)
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -121,8 +122,7 @@ namespace SafeAuthenticator.Droid
             LogUnhandledException(newExc);
         }
 
-        private static void TaskSchedulerOnUnobservedTaskException(object sender,
-            UnobservedTaskExceptionEventArgs exEventArgs)
+        private static void TaskSchedulerOnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs exEventArgs)
         {
             var newExc = new Exception("TaskSchedulerOnUnobservedTaskException", exEventArgs.Exception);
             LogUnhandledException(newExc);

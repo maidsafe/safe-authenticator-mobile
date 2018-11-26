@@ -10,7 +10,8 @@ namespace SafeAuthenticator.Droid.Helpers
 {
     internal class PaddedEntryRenderer : EntryRenderer
     {
-        public PaddedEntryRenderer(Context context) : base(context)
+        public PaddedEntryRenderer(Context context)
+            : base(context)
         {
             AutoPackage = false;
         }

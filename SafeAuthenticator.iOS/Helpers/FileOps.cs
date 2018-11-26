@@ -1,9 +1,9 @@
-﻿using SafeAuthenticator.Helpers;
-using SafeAuthenticator.iOS.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using SafeAuthenticator.Helpers;
+using SafeAuthenticator.iOS.Helpers;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(FileOps))]
@@ -17,6 +17,7 @@ namespace SafeAuthenticator.iOS.Helpers
             get
             {
                 string path;
+
 // Resources -> /Library
                 path = Environment.GetFolderPath(Environment.SpecialFolder.Resources);
                 return path;

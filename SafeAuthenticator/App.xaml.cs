@@ -25,8 +25,7 @@ namespace SafeAuthenticator
         {
             InitializeComponent();
 
-            MessagingCenter.Subscribe<AuthService>(this, MessengerConstants.ResetAppViews,
-                async _ => { await ResetViews(); });
+            MessagingCenter.Subscribe<AuthService>(this, MessengerConstants.ResetAppViews, async _ => { await ResetViews(); });
             Current.MainPage = new NavigationPage(NewStartupPage());
         }
 

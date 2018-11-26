@@ -16,7 +16,7 @@ namespace SafeAuthenticator.Controls
 
         public static ICommand GetItemTapped(BindableObject bindable)
         {
-            return (ICommand) bindable.GetValue(CommandProperty);
+            return (ICommand)bindable.GetValue(CommandProperty);
         }
 
         public static void OnItemTapped(object sender, ItemTappedEventArgs e)

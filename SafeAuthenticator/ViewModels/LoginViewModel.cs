@@ -17,7 +17,7 @@ namespace SafeAuthenticator.ViewModels
             set
             {
                 SetProperty(ref _acctPassword, value);
-                ((Command) LoginCommand).ChangeCanExecute();
+                ((Command)LoginCommand).ChangeCanExecute();
             }
         }
 
@@ -27,7 +27,7 @@ namespace SafeAuthenticator.ViewModels
             set
             {
                 SetProperty(ref _acctSecret, value);
-                ((Command) LoginCommand).ChangeCanExecute();
+                ((Command)LoginCommand).ChangeCanExecute();
             }
         }
 

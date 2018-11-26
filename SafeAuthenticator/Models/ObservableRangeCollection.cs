@@ -27,14 +27,16 @@ namespace SafeAuthenticator.Models
         /// </summary>
         /// <param name="collection">collection: The collection from which the elements are copied.</param>
         /// <exception cref="System.ArgumentNullException">The collection parameter cannot be null.</exception>
-        public ObservableRangeCollection(IEnumerable<T> collection) : base(collection)
+        public ObservableRangeCollection(IEnumerable<T> collection)
+            : base(collection)
         {
         }
 
         /// <summary>
         ///   Adds the elements of the specified collection to the end of the ObservableCollection(Of T).
         /// </summary>
-        public void AddRange(IEnumerable<T> collection,
+        public void AddRange(
+            IEnumerable<T> collection,
             NotifyCollectionChangedAction notificationMode = NotifyCollectionChangedAction.Add)
         {
             if (collection == null)
@@ -67,8 +69,7 @@ namespace SafeAuthenticator.Models
 
             OnPropertyChanged(new PropertyChangedEventArgs("Count"));
             OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, changedItems,
-                startIndex));
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, changedItems, startIndex));
         }
 
         /// <summary>
@@ -94,7 +95,7 @@ namespace SafeAuthenticator.Models
         /// </summary>
         public void Replace(T item)
         {
-            ReplaceRange(new[] {item});
+            ReplaceRange(new[] { item });
         }
 
         /// <summary>

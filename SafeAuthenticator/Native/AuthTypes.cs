@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using JetBrains.Annotations;
@@ -32,35 +32,42 @@ namespace SafeAuthenticator.Native
     [PublicAPI]
     public struct MDataInfo
     {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int) AppConstants.XorNameLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.XorNameLen)]
         public byte[] Name;
 
         public ulong TypeTag;
-        [MarshalAs(UnmanagedType.U1)] public bool HasEncInfo;
+        [MarshalAs(UnmanagedType.U1)]
+        public bool HasEncInfo;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int) AppConstants.SymKeyLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SymKeyLen)]
         public byte[] EncKey;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int) AppConstants.SymNonceLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SymNonceLen)]
         public byte[] EncNonce;
 
-        [MarshalAs(UnmanagedType.U1)] public bool HasNewEncInfo;
+        [MarshalAs(UnmanagedType.U1)]
+        public bool HasNewEncInfo;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int) AppConstants.SymKeyLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SymKeyLen)]
         public byte[] NewEncKey;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int) AppConstants.SymNonceLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SymNonceLen)]
         public byte[] NewEncNonce;
     }
 
     [PublicAPI]
     public struct PermissionSet
     {
-        [MarshalAs(UnmanagedType.U1)] public bool Read;
-        [MarshalAs(UnmanagedType.U1)] public bool Insert;
-        [MarshalAs(UnmanagedType.U1)] public bool Update;
-        [MarshalAs(UnmanagedType.U1)] public bool Delete;
-        [MarshalAs(UnmanagedType.U1)] public bool ManagePermissions;
+        [MarshalAs(UnmanagedType.U1)]
+        public bool Read;
+        [MarshalAs(UnmanagedType.U1)]
+        public bool Insert;
+        [MarshalAs(UnmanagedType.U1)]
+        public bool Update;
+        [MarshalAs(UnmanagedType.U1)]
+        public bool Delete;
+        [MarshalAs(UnmanagedType.U1)]
+        public bool ManagePermissions;
     }
 
     [PublicAPI]
@@ -75,7 +82,7 @@ namespace SafeAuthenticator.Native
             App = native.App;
             AppContainer = native.AppContainer;
             Containers =
-                BindingUtils.CopyToObjectList<ContainerPermissions>(native.ContainersPtr, (int) native.ContainersLen);
+                BindingUtils.CopyToObjectList<ContainerPermissions>(native.ContainersPtr, (int)native.ContainersLen);
         }
 
         public AuthReqNative ToNative()
@@ -85,7 +92,7 @@ namespace SafeAuthenticator.Native
                 App = App,
                 AppContainer = AppContainer,
                 ContainersPtr = BindingUtils.CopyFromObjectList(Containers),
-                ContainersLen = (UIntPtr) (Containers?.Count ?? 0),
+                ContainersLen = (UIntPtr)(Containers?.Count ?? 0),
                 ContainersCap = UIntPtr.Zero
             };
         }
@@ -94,7 +101,8 @@ namespace SafeAuthenticator.Native
     public struct AuthReqNative
     {
         internal AppExchangeInfo App;
-        [MarshalAs(UnmanagedType.U1)] internal bool AppContainer;
+        [MarshalAs(UnmanagedType.U1)]
+        internal bool AppContainer;
         internal IntPtr ContainersPtr;
         internal UIntPtr ContainersLen;
 
@@ -117,7 +125,7 @@ namespace SafeAuthenticator.Native
         {
             App = native.App;
             Containers =
-                BindingUtils.CopyToObjectList<ContainerPermissions>(native.ContainersPtr, (int) native.ContainersLen);
+                BindingUtils.CopyToObjectList<ContainerPermissions>(native.ContainersPtr, (int)native.ContainersLen);
         }
 
         public ContainersReqNative ToNative()
@@ -126,7 +134,7 @@ namespace SafeAuthenticator.Native
             {
                 App = App,
                 ContainersPtr = BindingUtils.CopyFromObjectList(Containers),
-                ContainersLen = (UIntPtr) (Containers?.Count ?? 0),
+                ContainersLen = (UIntPtr)(Containers?.Count ?? 0),
                 ContainersCap = UIntPtr.Zero
             };
         }
@@ -150,16 +158,21 @@ namespace SafeAuthenticator.Native
     [PublicAPI]
     public struct AppExchangeInfo
     {
-        [MarshalAs(UnmanagedType.LPStr)] public string Id;
-        [MarshalAs(UnmanagedType.LPStr)] public string Scope;
-        [MarshalAs(UnmanagedType.LPStr)] public string Name;
-        [MarshalAs(UnmanagedType.LPStr)] public string Vendor;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string Id;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string Scope;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string Name;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string Vendor;
     }
 
     [PublicAPI]
     public struct ContainerPermissions
     {
-        [MarshalAs(UnmanagedType.LPStr)] public string ContName;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string ContName;
         public PermissionSet Access;
     }
 
@@ -172,7 +185,7 @@ namespace SafeAuthenticator.Native
         public ShareMDataReq(ShareMDataReqNative native)
         {
             App = native.App;
-            MData = BindingUtils.CopyToObjectList<ShareMData>(native.MDataPtr, (int) native.MDataLen);
+            MData = BindingUtils.CopyToObjectList<ShareMData>(native.MDataPtr, (int)native.MDataLen);
         }
 
         public ShareMDataReqNative ToNative()
@@ -181,7 +194,7 @@ namespace SafeAuthenticator.Native
             {
                 App = App,
                 MDataPtr = BindingUtils.CopyFromObjectList(MData),
-                MDataLen = (UIntPtr) (MData?.Count ?? 0),
+                MDataLen = (UIntPtr)(MData?.Count ?? 0),
                 MDataCap = UIntPtr.Zero
             };
         }
@@ -207,7 +220,7 @@ namespace SafeAuthenticator.Native
     {
         public ulong TypeTag;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int) AppConstants.XorNameLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.XorNameLen)]
         public byte[] Name;
 
         public PermissionSet Perms;
@@ -226,7 +239,7 @@ namespace SafeAuthenticator.Native
             AppKeys = native.AppKeys;
             AccessContainerInfo = native.AccessContainerInfo;
             AccessContainerEntry = new AccessContainerEntry(native.AccessContainerEntry);
-            BootstrapConfig = BindingUtils.CopyToByteList(native.BootstrapConfigPtr, (int) native.BootstrapConfigLen);
+            BootstrapConfig = BindingUtils.CopyToByteList(native.BootstrapConfigPtr, (int)native.BootstrapConfigLen);
         }
 
         public AuthGrantedNative ToNative()
@@ -237,7 +250,7 @@ namespace SafeAuthenticator.Native
                 AccessContainerInfo = AccessContainerInfo,
                 AccessContainerEntry = AccessContainerEntry.ToNative(),
                 BootstrapConfigPtr = BindingUtils.CopyFromByteList(BootstrapConfig),
-                BootstrapConfigLen = (UIntPtr) (BootstrapConfig?.Count ?? 0),
+                BootstrapConfigLen = (UIntPtr)(BootstrapConfig?.Count ?? 0),
                 BootstrapConfigCap = UIntPtr.Zero
             };
         }
@@ -265,34 +278,34 @@ namespace SafeAuthenticator.Native
     [PublicAPI]
     public struct AppKeys
     {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int) AppConstants.SignPublicKeyLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SignPublicKeyLen)]
         public byte[] OwnerKey;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int) AppConstants.SymKeyLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SymKeyLen)]
         public byte[] EncKey;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int) AppConstants.SignPublicKeyLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SignPublicKeyLen)]
         public byte[] SignPk;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int) AppConstants.SignSecretKeyLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SignSecretKeyLen)]
         public byte[] SignSk;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int) AppConstants.AsymPublicKeyLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.AsymPublicKeyLen)]
         public byte[] EncPk;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int) AppConstants.AsymSecretKeyLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.AsymSecretKeyLen)]
         public byte[] EncSk;
     }
 
     [PublicAPI]
     public struct AccessContInfo
     {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int) AppConstants.XorNameLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.XorNameLen)]
         public byte[] Id;
 
         public ulong Tag;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int) AppConstants.SymNonceLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SymNonceLen)]
         public byte[] Nonce;
     }
 
@@ -303,7 +316,7 @@ namespace SafeAuthenticator.Native
 
         public AccessContainerEntry(AccessContainerEntryNative native)
         {
-            Containers = BindingUtils.CopyToObjectList<ContainerInfo>(native.ContainersPtr, (int) native.ContainersLen);
+            Containers = BindingUtils.CopyToObjectList<ContainerInfo>(native.ContainersPtr, (int)native.ContainersLen);
         }
 
         public AccessContainerEntryNative ToNative()
@@ -311,7 +324,7 @@ namespace SafeAuthenticator.Native
             return new AccessContainerEntryNative()
             {
                 ContainersPtr = BindingUtils.CopyFromObjectList(Containers),
-                ContainersLen = (UIntPtr) (Containers?.Count ?? 0),
+                ContainersLen = (UIntPtr)(Containers?.Count ?? 0),
                 ContainersCap = UIntPtr.Zero
             };
         }
@@ -334,7 +347,8 @@ namespace SafeAuthenticator.Native
     [PublicAPI]
     public struct ContainerInfo
     {
-        [MarshalAs(UnmanagedType.LPStr)] public string Name;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string Name;
         public MDataInfo MDataInfo;
         public PermissionSet Permissions;
     }
@@ -342,21 +356,25 @@ namespace SafeAuthenticator.Native
     [PublicAPI]
     public struct AppAccess
     {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int) AppConstants.SignPublicKeyLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SignPublicKeyLen)]
         public byte[] SignKey;
 
         public PermissionSet Permissions;
-        [MarshalAs(UnmanagedType.LPStr)] public string Name;
-        [MarshalAs(UnmanagedType.LPStr)] public string AppId;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string Name;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string AppId;
     }
 
     [PublicAPI]
     public struct MetadataResponse
     {
-        [MarshalAs(UnmanagedType.LPStr)] public string Name;
-        [MarshalAs(UnmanagedType.LPStr)] public string Description;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string Name;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string Description;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int) AppConstants.XorNameLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.XorNameLen)]
         public byte[] XorName;
 
         public ulong TypeTag;
@@ -370,7 +388,7 @@ namespace SafeAuthenticator.Native
 
         public MDataValue(MDataValueNative native)
         {
-            Content = BindingUtils.CopyToByteList(native.ContentPtr, (int) native.ContentLen);
+            Content = BindingUtils.CopyToByteList(native.ContentPtr, (int)native.ContentLen);
             EntryVersion = native.EntryVersion;
         }
 
@@ -379,7 +397,7 @@ namespace SafeAuthenticator.Native
             return new MDataValueNative()
             {
                 ContentPtr = BindingUtils.CopyFromByteList(Content),
-                ContentLen = (UIntPtr) (Content?.Count ?? 0),
+                ContentLen = (UIntPtr)(Content?.Count ?? 0),
                 EntryVersion = EntryVersion
             };
         }
@@ -405,7 +423,7 @@ namespace SafeAuthenticator.Native
 
         public MDataKey(MDataKeyNative native)
         {
-            Val = BindingUtils.CopyToByteList(native.ValPtr, (int) native.ValLen);
+            Val = BindingUtils.CopyToByteList(native.ValPtr, (int)native.ValLen);
         }
 
         public MDataKeyNative ToNative()
@@ -413,7 +431,7 @@ namespace SafeAuthenticator.Native
             return new MDataKeyNative()
             {
                 ValPtr = BindingUtils.CopyFromByteList(Val),
-                ValLen = (UIntPtr) (Val?.Count ?? 0)
+                ValLen = (UIntPtr)(Val?.Count ?? 0)
             };
         }
     }
@@ -448,7 +466,7 @@ namespace SafeAuthenticator.Native
             CreatedNsec = native.CreatedNsec;
             ModifiedSec = native.ModifiedSec;
             ModifiedNsec = native.ModifiedNsec;
-            UserMetadata = BindingUtils.CopyToByteList(native.UserMetadataPtr, (int) native.UserMetadataLen);
+            UserMetadata = BindingUtils.CopyToByteList(native.UserMetadataPtr, (int)native.UserMetadataLen);
             DataMapName = native.DataMapName;
         }
 
@@ -462,7 +480,7 @@ namespace SafeAuthenticator.Native
                 ModifiedSec = ModifiedSec,
                 ModifiedNsec = ModifiedNsec,
                 UserMetadataPtr = BindingUtils.CopyFromByteList(UserMetadata),
-                UserMetadataLen = (UIntPtr) (UserMetadata?.Count ?? 0),
+                UserMetadataLen = (UIntPtr)(UserMetadata?.Count ?? 0),
                 UserMetadataCap = UIntPtr.Zero,
                 DataMapName = DataMapName
             };
@@ -482,7 +500,7 @@ namespace SafeAuthenticator.Native
         // ReSharper disable once NotAccessedField.Compiler
         internal UIntPtr UserMetadataCap;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int) AppConstants.XorNameLen)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.XorNameLen)]
         internal byte[] DataMapName;
 
         // ReSharper disable once UnusedMember.Global
@@ -509,7 +527,7 @@ namespace SafeAuthenticator.Native
         {
             AppInfo = native.AppInfo;
             Containers =
-                BindingUtils.CopyToObjectList<ContainerPermissions>(native.ContainersPtr, (int) native.ContainersLen);
+                BindingUtils.CopyToObjectList<ContainerPermissions>(native.ContainersPtr, (int)native.ContainersLen);
         }
 
         public RegisteredAppNative ToNative()
@@ -518,7 +536,7 @@ namespace SafeAuthenticator.Native
             {
                 AppInfo = AppInfo,
                 ContainersPtr = BindingUtils.CopyFromObjectList(Containers),
-                ContainersLen = (UIntPtr) (Containers?.Count ?? 0),
+                ContainersLen = (UIntPtr)(Containers?.Count ?? 0),
                 ContainersCap = IntPtr.Zero
             };
         }

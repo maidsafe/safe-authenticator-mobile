@@ -10,7 +10,9 @@ namespace SafeAuthenticator.ViewModels
     {
         private string _accountStorageInfo;
         private bool _isRefreshing;
+
         public ICommand LogoutCommand { get; }
+
         public ObservableRangeCollection<RegisteredAppModel> Apps { get; set; }
 
         public bool IsRefreshing
@@ -20,6 +22,7 @@ namespace SafeAuthenticator.ViewModels
         }
 
         public ICommand RefreshAccountsCommand { get; }
+
         public ICommand AccountSelectedCommand { get; }
 
         public string AccountStorageInfo
@@ -37,8 +40,7 @@ namespace SafeAuthenticator.ViewModels
             LogoutCommand = new Command(OnLogout);
             Device.BeginInvokeOnMainThread(OnRefreshAccounts);
 
-            MessagingCenter.Subscribe<AppInfoViewModel>(this, MessengerConstants.RefreshHomePage,
-                (sender) => { OnRefreshAccounts(); });
+            MessagingCenter.Subscribe<AppInfoViewModel>(this, MessengerConstants.RefreshHomePage, (sender) => { OnRefreshAccounts(); });
         }
 
         private void OnAccountSelected(RegisteredAppModel appModelInfo)
@@ -66,8 +68,7 @@ namespace SafeAuthenticator.ViewModels
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", $"Refresh Accounts Failed: {ex.Message}",
-                    "OK");
+                await Application.Current.MainPage.DisplayAlert("Error", $"Refresh Accounts Failed: {ex.Message}", "OK");
             }
         }
 

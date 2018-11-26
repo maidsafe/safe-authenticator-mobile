@@ -14,14 +14,14 @@ namespace SafeAuthenticator.Controls.Behaviour
 
         public PaddedEntry InputEntry
         {
-            get => (PaddedEntry) GetValue(EntryProperty);
+            get => (PaddedEntry)GetValue(EntryProperty);
             set => SetValue(EntryProperty, value);
         }
 
         protected override void OnAttachedTo(Image image)
         {
             _image = image;
-            _tap = new TapGestureRecognizer {NumberOfTapsRequired = 1};
+            _tap = new TapGestureRecognizer { NumberOfTapsRequired = 1 };
             _tap.Tapped += OnTapped;
             _image.GestureRecognizers.Insert(0, _tap);
             _image.Source = "show_pass.png";

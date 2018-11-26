@@ -19,7 +19,8 @@ namespace SafeAuthenticator.ViewModels
             set => SetProperty(ref _appModelInfo, value);
         }
 
-        [PublicAPI] public ICommand RevokeAppCommand { get; }
+        [PublicAPI]
+        public ICommand RevokeAppCommand { get; }
 
         public AppInfoViewModel(RegisteredAppModel appModelInfo)
         {

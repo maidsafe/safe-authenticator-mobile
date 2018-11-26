@@ -18,7 +18,7 @@ namespace SafeAuthenticator.Controls.Behaviour
 
         private static void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            ((ListView) sender).SelectedItem = null;
+            ((ListView)sender).SelectedItem = null;
         }
     }
 }

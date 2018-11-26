@@ -47,7 +47,8 @@ namespace SafeAuth.Tests
             var containerRequest = Utils.SetContainerPermission(authReq, "_videos");
             var (_, msg) = await Session.EncodeContainerRequestAsync(containerRequest);
             var responseMsg = await Utils.AuthenticateContainerRequest(auth, msg, false);
-            Assert.That(async () => await Session.DecodeIpcMessageAsync(responseMsg),
+            Assert.That(
+                async () => await Session.DecodeIpcMessageAsync(responseMsg),
                 Throws.TypeOf<SafeApp.Utilities.IpcMsgException>());
             Assert.Throws<SafeApp.Utilities.FfiException>(() =>
                 session.AccessContainer.GetMDataInfoAsync("_videos").GetAwaiter().GetResult());
@@ -65,7 +66,8 @@ namespace SafeAuth.Tests
             var containerRequest = Utils.SetContainerPermission(authReq, "_public");
             var (_, msg) = await Session.EncodeContainerRequestAsync(containerRequest);
             var responseMsg = await Utils.AuthenticateContainerRequest(auth, msg, true);
-            Assert.That(async () => await session.AccessContainer.GetMDataInfoAsync("_public"),
+            Assert.That(
+                async () => await session.AccessContainer.GetMDataInfoAsync("_public"),
                 Is.TypeOf<SafeApp.Utilities.MDataInfo>());
             Assert.Throws<SafeApp.Utilities.FfiException>(() =>
                 session.AccessContainer.GetMDataInfoAsync("_videos").GetAwaiter().GetResult());
@@ -74,7 +76,8 @@ namespace SafeAuth.Tests
             (_, msg) = await Session.EncodeContainerRequestAsync(containerRequest);
             responseMsg = await Utils.AuthenticateContainerRequest(auth, msg, true);
             await session.AccessContainer.RefreshAccessInfoAsync();
-            Assert.That(async () => await session.AccessContainer.GetMDataInfoAsync("_videos"),
+            Assert.That(
+                async () => await session.AccessContainer.GetMDataInfoAsync("_videos"),
                 Is.TypeOf<SafeApp.Utilities.MDataInfo>());
         }
 
@@ -89,19 +92,22 @@ namespace SafeAuth.Tests
             var containerRequest = Utils.SetContainerPermission(authReq, "_videos");
             var (_, msg) = await Session.EncodeContainerRequestAsync(containerRequest);
             var responseMsg = await Utils.AuthenticateContainerRequest(auth, msg, true);
-            Assert.That(async () => await session.AccessContainer.GetMDataInfoAsync("_videos"),
+            Assert.That(
+                async () => await session.AccessContainer.GetMDataInfoAsync("_videos"),
                 Is.TypeOf<SafeApp.Utilities.MDataInfo>());
 
             var mDataInfo = await session.AccessContainer.GetMDataInfoAsync("_videos");
             var entryHandle = await session.MDataEntryActions.NewAsync();
             var key = await session.MDataInfoActions.EncryptEntryKeyAsync(mDataInfo, Utils.GetRandomData(10).ToList());
-            var value = await session.MDataInfoActions.EncryptEntryValueAsync(mDataInfo,
+            var value = await session.MDataInfoActions.EncryptEntryValueAsync(
+                mDataInfo,
                 Utils.GetRandomData(10).ToList());
             await session.MDataEntryActions.InsertAsync(entryHandle, key, value);
             await session.MData.MutateEntriesAsync(mDataInfo, entryHandle);
 
             var result = await Utils.RevokeAppAsync(auth, authReq.App.Id);
-            Assert.That(async () => await Session.DecodeIpcMessageAsync(result),
+            Assert.That(
+                async () => await Session.DecodeIpcMessageAsync(result),
                 Is.TypeOf<SafeApp.Utilities.RevokedIpcMsg>());
 
             var entry = await session.MDataEntries.GetHandleAsync(mDataInfo);

@@ -1,6 +1,5 @@
-#if !NETSTANDARD1_2 || __DESKTOP__
+﻿#if !NETSTANDARD1_2 || __DESKTOP__
 #if __IOS__
-using System.Linq;
 using ObjCRuntime;
 #endif
 using System;
@@ -123,8 +122,7 @@ namespace SafeAuthenticator.Native
         }
 
         [DllImport(DllName, EntryPoint = "auth_revoked_apps")]
-        private static extern void AuthRevokedAppsNative(IntPtr auth, IntPtr userData,
-            FfiResultAppExchangeInfoListCb oCb);
+        private static extern void AuthRevokedAppsNative(IntPtr auth, IntPtr userData, FfiResultAppExchangeInfoListCb oCb);
 
         public Task<List<RegisteredApp>> AuthRegisteredAppsAsync(IntPtr auth)
         {
@@ -134,8 +132,7 @@ namespace SafeAuthenticator.Native
         }
 
         [DllImport(DllName, EntryPoint = "auth_registered_apps")]
-        private static extern void AuthRegisteredAppsNative(IntPtr auth, IntPtr userData,
-            FfiResultRegisteredAppListCb oCb);
+        private static extern void AuthRegisteredAppsNative(IntPtr auth, IntPtr userData, FfiResultRegisteredAppListCb oCb);
 
         public Task<List<AppAccess>> AuthAppsAccessingMutableDataAsync(IntPtr auth, byte[] mdName, ulong mdTypeTag)
         {
@@ -147,7 +144,7 @@ namespace SafeAuthenticator.Native
         [DllImport(DllName, EntryPoint = "auth_apps_accessing_mutable_data")]
         private static extern void AuthAppsAccessingMutableDataNative(
             IntPtr auth,
-            [MarshalAs(UnmanagedType.LPArray, SizeConst = (int) AppConstants.XorNameLen)]
+            [MarshalAs(UnmanagedType.LPArray, SizeConst = (int)AppConstants.XorNameLen)]
             byte[] mdName,
             ulong mdTypeTag,
             IntPtr userData,
@@ -304,19 +301,17 @@ namespace SafeAuthenticator.Native
 
         private static readonly FfiResultAccountInfoCb DelegateOnFfiResultAccountInfoCb = OnFfiResultAccountInfoCb;
 
-        private delegate void FfiResultAppAccessListCb(IntPtr userData, IntPtr result, IntPtr appAccessPtr,
-            UIntPtr appAccessLen);
+        private delegate void FfiResultAppAccessListCb(IntPtr userData, IntPtr result, IntPtr appAccessPtr, UIntPtr appAccessLen);
 
 #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultAppAccessListCb))]
 #endif
-        private static void OnFfiResultAppAccessListCb(IntPtr userData, IntPtr result, IntPtr appAccessPtr,
-            UIntPtr appAccessLen)
+        private static void OnFfiResultAppAccessListCb(IntPtr userData, IntPtr result, IntPtr appAccessPtr, UIntPtr appAccessLen)
         {
             BindingUtils.CompleteTask(
                 userData,
                 Marshal.PtrToStructure<FfiResult>(result),
-                () => BindingUtils.CopyToObjectList<AppAccess>(appAccessPtr, (int) appAccessLen));
+                () => BindingUtils.CopyToObjectList<AppAccess>(appAccessPtr, (int)appAccessLen));
         }
 
         private static readonly FfiResultAppAccessListCb
@@ -340,7 +335,7 @@ namespace SafeAuthenticator.Native
             BindingUtils.CompleteTask(
                 userData,
                 Marshal.PtrToStructure<FfiResult>(result),
-                () => BindingUtils.CopyToObjectList<AppExchangeInfo>(appExchangeInfoPtr, (int) appExchangeInfoLen));
+                () => BindingUtils.CopyToObjectList<AppExchangeInfo>(appExchangeInfoPtr, (int)appExchangeInfoLen));
         }
 
         private static readonly FfiResultAppExchangeInfoListCb DelegateOnFfiResultAppExchangeInfoListCb =
@@ -360,19 +355,17 @@ namespace SafeAuthenticator.Native
 
         private static readonly FfiResultCb DelegateOnFfiResultCb = OnFfiResultCb;
 
-        private delegate void FfiResultRegisteredAppListCb(IntPtr userData, IntPtr result, IntPtr registeredAppPtr,
-            UIntPtr registeredAppLen);
+        private delegate void FfiResultRegisteredAppListCb(IntPtr userData, IntPtr result, IntPtr registeredAppPtr, UIntPtr registeredAppLen);
 
 #if __IOS__
         [MonoPInvokeCallback(typeof(FfiResultRegisteredAppListCb))]
 #endif
-        private static void OnFfiResultRegisteredAppListCb(IntPtr userData, IntPtr result, IntPtr registeredAppPtr,
-            UIntPtr registeredAppLen)
+        private static void OnFfiResultRegisteredAppListCb(IntPtr userData, IntPtr result, IntPtr registeredAppPtr, UIntPtr registeredAppLen)
         {
             BindingUtils.CompleteTask(
                 userData,
                 Marshal.PtrToStructure<FfiResult>(result),
-                () => BindingUtils.CopyToObjectList<RegisteredAppNative>(registeredAppPtr, (int) registeredAppLen)
+                () => BindingUtils.CopyToObjectList<RegisteredAppNative>(registeredAppPtr, (int)registeredAppLen)
                     .Select(native => new RegisteredApp(native)).ToList());
         }
 
@@ -399,8 +392,7 @@ namespace SafeAuthenticator.Native
 
         private delegate void UIntContainersReqCb(IntPtr userData, uint reqId, IntPtr req);
 
-        private delegate void UIntShareMDataReqMetadataResponseCb(IntPtr userData, uint reqId, IntPtr req,
-            IntPtr metadata);
+        private delegate void UIntShareMDataReqMetadataResponseCb(IntPtr userData, uint reqId, IntPtr req, IntPtr metadata);
     }
 }
 #endif

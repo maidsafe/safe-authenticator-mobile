@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 
 namespace SafeAuthenticator.Native
 {
+#pragma warning disable SA1401 // Fields should be private
     public abstract class IpcReq
     {
     }
@@ -30,7 +31,7 @@ namespace SafeAuthenticator.Native
         public UnregisteredIpcReq(uint reqId, IntPtr extraDataPtr, ulong extraDataLength)
         {
             ReqId = reqId;
-            ExtraData = BindingUtils.CopyToByteList(extraDataPtr, (int) extraDataLength);
+            ExtraData = BindingUtils.CopyToByteList(extraDataPtr, (int)extraDataLength);
         }
     }
 
@@ -87,4 +88,5 @@ namespace SafeAuthenticator.Native
             Msg = msg;
         }
     }
+#pragma warning restore SA1401 // Fields should be private
 }

@@ -7,11 +7,13 @@ using Xamarin.Forms.Xaml;
 namespace SafeAuthenticator.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+
     // ReSharper disable once MemberCanBeInternal
     public partial class AppInfoPage : ContentPage, ICleanup
     {
         // ReSharper disable once MemberCanBeInternal
-        public AppInfoPage() : this(null)
+        public AppInfoPage()
+            : this(null)
         {
         }
 

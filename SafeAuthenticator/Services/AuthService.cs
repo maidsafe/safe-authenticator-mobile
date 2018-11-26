@@ -22,7 +22,8 @@ namespace SafeAuthenticator.Services
         private readonly SemaphoreSlim _reconnectSemaphore = new SemaphoreSlim(1, 1);
         private Authenticator _authenticator;
         private bool _isLogInitialised;
-        public string AuthenticationReq;
+
+        public string AuthenticationReq { get; set; }
 
         internal bool IsLogInitialised
         {
@@ -44,6 +45,7 @@ namespace SafeAuthenticator.Services
                 var val = Application.Current.Properties[AuthReconnectPropKey] as bool?;
                 return val == true;
             }
+
             set
             {
                 if (value == false)
@@ -92,7 +94,9 @@ namespace SafeAuthenticator.Services
                     }
                     catch (Exception ex)
                     {
-                        await Application.Current.MainPage.DisplayAlert("Error", $"Failed to reconnect: {ex.Message}",
+                        await Application.Current.MainPage.DisplayAlert(
+                            "Error",
+                            $"Failed to reconnect: {ex.Message}",
                             "OK");
                     }
 
@@ -115,8 +119,7 @@ namespace SafeAuthenticator.Services
                     try
                     {
                         var cts = new CancellationTokenSource(2000);
-                        await UserDialogs.Instance.AlertAsync("Network connection established.", "Success", "OK",
-                            cts.Token);
+                        await UserDialogs.Instance.AlertAsync("Network connection established.", "Success", "OK", cts.Token);
                     }
                     catch (OperationCanceledException)
                     {
@@ -189,8 +192,7 @@ namespace SafeAuthenticator.Services
                     }
                     catch (NullReferenceException)
                     {
-                        await Application.Current.MainPage.DisplayAlert("Error",
-                            "Need to be logged in to accept app requests", "OK");
+                        await Application.Current.MainPage.DisplayAlert("Error", "Need to be logged in to accept app requests", "OK");
                     }
 
                     return;
@@ -199,7 +201,7 @@ namespace SafeAuthenticator.Services
                 await CheckAndReconnect();
                 if (encodedUri.Contains("/unregistered"))
                 {
-                    var unregisteredRemoved = encodedUri.Replace("/unregistered", "");
+                    var unregisteredRemoved = encodedUri.Replace("/unregistered", string.Empty);
                     var uencodedReq = UrlFormat.GetRequestData(unregisteredRemoved);
                     var udecodeResult = await Authenticator.UnRegisteredDecodeIpcMsgAsync(uencodedReq);
                     var udecodedType = udecodeResult.GetType();
@@ -226,8 +228,7 @@ namespace SafeAuthenticator.Services
                     if (decodedType == typeof(IpcReqError))
                     {
                         var error = decodeResult as IpcReqError;
-                        await Application.Current.MainPage.DisplayAlert("Auth Request", $"Error: {error?.Description}",
-                            "Ok");
+                        await Application.Current.MainPage.DisplayAlert("Auth Request", $"Error: {error?.Description}", "Ok");
                     }
                     else
                     {

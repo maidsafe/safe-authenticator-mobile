@@ -6,9 +6,13 @@ namespace SafeAuthenticator.Models
     public class PermissionSetModel
     {
         public bool Delete { get; set; }
+
         public bool Insert { get; set; }
+
         public bool ManagePermissions { get; set; }
+
         public bool Read { get; set; }
+
         public bool Update { get; set; }
     }
 
@@ -23,14 +27,17 @@ namespace SafeAuthenticator.Models
             set => _containerName = value;
         }
 
-        [PublicAPI] public PermissionSetModel Access { get; set; }
+        [PublicAPI]
+        public PermissionSetModel Access { get; set; }
     }
 
     public class MDataModel
     {
         public ulong TypeTag { get; set; }
+
         public byte[] Name { get; set; }
 
-        [PublicAPI] public PermissionSetModel Access { get; set; }
+        [PublicAPI]
+        public PermissionSetModel Access { get; set; }
     }
 }

@@ -14,8 +14,9 @@ namespace SafeAuthenticator.iOS
     [Register("AppDelegate")]
     public class AppDelegate : FormsApplicationDelegate
     {
-        private AuthService Authenticator => DependencyService.Get<AuthService>();
         private static string LogFolderPath => DependencyService.Get<IFileOps>().ConfigFilesPath;
+
+        private AuthService Authenticator => DependencyService.Get<AuthService>();
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
@@ -50,8 +51,7 @@ namespace SafeAuthenticator.iOS
 
         #region Error Handling
 
-        private static void TaskSchedulerOnUnobservedTaskException(object sender,
-            UnobservedTaskExceptionEventArgs exEventArgs)
+        private static void TaskSchedulerOnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs exEventArgs)
         {
             var newExc = new Exception("TaskSchedulerOnUnobservedTaskException", exEventArgs.Exception);
             LogUnhandledException(newExc);
@@ -100,8 +100,7 @@ namespace SafeAuthenticator.iOS
 
                     var alert = UIAlertController.Create("Crash Report", errorText, UIAlertControllerStyle.Alert);
                     alert.AddAction(UIAlertAction.Create("Close", UIAlertActionStyle.Cancel, null));
-                    alert.AddAction(UIAlertAction.Create("Clear", UIAlertActionStyle.Default,
-                        action => { File.Delete(errorFilePath); }));
+                    alert.AddAction(UIAlertAction.Create("Clear", UIAlertActionStyle.Default, action => { File.Delete(errorFilePath); }));
                     vc.PresentViewController(alert, true, null);
                 });
         }

@@ -1,8 +1,7 @@
-﻿using SafeAuthenticator.Models;
+﻿using System;
+using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
 using SafeAuthenticator.ViewModels;
-using System;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -38,7 +37,8 @@ namespace SafeAuthenticator.Views
 
         private void Unselect_Item(object sender, ItemTappedEventArgs e)
         {
-            if (e.Item == null) return;
+            if (e.Item == null)
+                return;
             if (sender is ListView lv)
                 lv.SelectedItem = null;
         }

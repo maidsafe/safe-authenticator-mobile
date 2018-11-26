@@ -9,12 +9,17 @@ namespace SafeAuthenticator.Models
 {
     public class RegisteredAppModel : ObservableObject, IComparable, IEquatable<RegisteredAppModel>
     {
-        [PublicAPI] public AppExchangeInfo AppInfo { get; }
+        [PublicAPI]
+        public AppExchangeInfo AppInfo { get; }
 
         public string AppName => AppInfo.Name;
+
         public string AppVendor => AppInfo.Vendor;
+
         public string AppId => AppInfo.Id;
-        [PublicAPI] public ObservableRangeCollection<ContainerPermissionsModel> Containers { get; }
+
+        [PublicAPI]
+        public ObservableRangeCollection<ContainerPermissionsModel> Containers { get; }
 
         public RegisteredAppModel(AppExchangeInfo appInfo, IEnumerable<ContainerPermissions> containers)
         {
@@ -66,7 +71,7 @@ namespace SafeAuthenticator.Models
                 return true;
             }
 
-            return obj.GetType() == GetType() && ((RegisteredAppModel) obj).AppInfo.Id == AppInfo.Id;
+            return obj.GetType() == GetType() && ((RegisteredAppModel)obj).AppInfo.Id == AppInfo.Id;
         }
 
         public override int GetHashCode()

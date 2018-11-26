@@ -9,9 +9,12 @@ namespace SafeAuthenticator.Native
     [PublicAPI]
     public class FfiException : Exception
     {
+#pragma warning disable SA1401 // Fields should be private
         public readonly int ErrorCode;
+#pragma warning restore SA1401 // Fields should be private
 
-        public FfiException(int code, string description) : base($"Error Code: {code}. Description: {description}")
+        public FfiException(int code, string description)
+            : base($"Error Code: {code}. Description: {description}")
         {
             ErrorCode = code;
         }
@@ -20,7 +23,8 @@ namespace SafeAuthenticator.Native
     public struct FfiResult
     {
         public int ErrorCode;
-        [MarshalAs(UnmanagedType.LPStr)] public string Description;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string Description;
 
         public FfiException ToException()
         {
@@ -129,7 +133,7 @@ namespace SafeAuthenticator.Native
         public static T FromHandlePtr<T>(IntPtr ptr, bool free = true)
         {
             var handle = GCHandle.FromIntPtr(ptr);
-            var result = (T) handle.Target;
+            var result = (T)handle.Target;
 
             if (free)
             {

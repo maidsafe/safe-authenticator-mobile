@@ -1,9 +1,9 @@
-﻿using Hexasoft.Zxcvbn;
-using SafeAuthenticator.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Hexasoft.Zxcvbn;
+using SafeAuthenticator.Models;
 
 namespace SafeAuthenticator.Helpers
 {
@@ -24,17 +24,23 @@ namespace SafeAuthenticator.Helpers
 
         internal static (double, double, string) StrengthChecker(string data)
         {
-            if (estimator == null) estimator = new ZxcvbnEstimator();
-            if (string.IsNullOrEmpty(data)) return (0, 0, "");
-            string Strength = null;
+            if (estimator == null)
+                estimator = new ZxcvbnEstimator();
+            if (string.IsNullOrEmpty(data))
+                return (0, 0, string.Empty);
+            string strength = null;
             var result = estimator.EstimateStrength(data);
             var calc = Math.Log(result.Guesses) / Math.Log(10);
-            if (calc < AppConstants.AccStrengthVeryWeak) Strength = "VERY_WEAK";
-            else if (calc < AppConstants.AccStrengthWeak) Strength = "WEAK";
-            else if (calc < AppConstants.AccStrengthSomeWhatSecure) Strength = "SOMEWHAT_SECURE";
-            else if (calc >= AppConstants.AccStrengthSomeWhatSecure) Strength = "SECURE";
+            if (calc < AppConstants.AccStrengthVeryWeak)
+                strength = "VERY_WEAK";
+            else if (calc < AppConstants.AccStrengthWeak)
+                strength = "WEAK";
+            else if (calc < AppConstants.AccStrengthSomeWhatSecure)
+                strength = "SOMEWHAT_SECURE";
+            else if (calc >= AppConstants.AccStrengthSomeWhatSecure)
+                strength = "SECURE";
             double percentage = Math.Round(Math.Min((calc / 16) * 100, 100));
-            return (calc, percentage, Strength);
+            return (calc, percentage, strength);
         }
 
         #region Encoding Extensions
@@ -55,7 +61,7 @@ namespace SafeAuthenticator.Helpers
         {
             var ba = byteList.ToArray();
             var hex = BitConverter.ToString(ba);
-            return hex.Replace("-", "").ToLower();
+            return hex.Replace("-", string.Empty).ToLower();
         }
 
         public static List<byte> ToHexBytes(this string hex)

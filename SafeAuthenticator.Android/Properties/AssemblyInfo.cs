@@ -1,4 +1,4 @@
-using System.Reflection;
+﻿using System.Reflection;
 using Android.App;
 
 // Information about this assembly is defined by the following attributes.
@@ -22,8 +22,8 @@ using Android.App;
 // The following attributes are used to specify the signing key for the assembly,
 // if desired. See the Mono documentation for more information about signing.
 
-//[assembly: AssemblyDelaySign(false)]
-//[assembly: AssemblyKeyFile("")]
+// [assembly: AssemblyDelaySign(false)]
+// [assembly: AssemblyKeyFile("")]
 
 #if DEBUG
 [assembly: Application(Debuggable = true)]

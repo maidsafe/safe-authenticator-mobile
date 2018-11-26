@@ -13,8 +13,8 @@ namespace SafeAuthenticator.ViewModels
         private string _acctSecret;
         private string _invitation;
         private bool _isUiEnabled;
-        private (double, double, string) LocationStrength;
-        private (double, double, string) PasswordStrength;
+        private (double, double, string) locationStrength;
+        private (double, double, string) passwordStrength;
 
         public string AcctPassword
         {
@@ -22,7 +22,7 @@ namespace SafeAuthenticator.ViewModels
             set
             {
                 SetProperty(ref _acctPassword, value);
-                ((Command) CreateAcctCommand).ChangeCanExecute();
+                ((Command)CreateAcctCommand).ChangeCanExecute();
             }
         }
 
@@ -32,7 +32,7 @@ namespace SafeAuthenticator.ViewModels
             set
             {
                 SetProperty(ref _acctSecret, value);
-                ((Command) CreateAcctCommand).ChangeCanExecute();
+                ((Command)CreateAcctCommand).ChangeCanExecute();
             }
         }
 
@@ -42,7 +42,7 @@ namespace SafeAuthenticator.ViewModels
             set
             {
                 SetProperty(ref _invitation, value);
-                ((Command) CreateAcctCommand).ChangeCanExecute();
+                ((Command)CreateAcctCommand).ChangeCanExecute();
             }
         }
 
@@ -101,12 +101,12 @@ namespace SafeAuthenticator.ViewModels
                 {
                     await Task.Run(() =>
                     {
-                        LocationStrength = Utilities.StrengthChecker(AcctSecret);
-                        PasswordStrength = Utilities.StrengthChecker(AcctPassword);
-                        if (LocationStrength.Item1 < AppConstants.AccStrengthWeak)
+                        locationStrength = Utilities.StrengthChecker(AcctSecret);
+                        passwordStrength = Utilities.StrengthChecker(AcctPassword);
+                        if (locationStrength.Item1 < AppConstants.AccStrengthWeak)
                             throw new Exception("Secret needs to be stronger");
 
-                        if (PasswordStrength.Item1 < AppConstants.AccStrengthSomeWhatSecure)
+                        if (passwordStrength.Item1 < AppConstants.AccStrengthSomeWhatSecure)
                             throw new Exception("Password needs to be stronger");
                     });
                     await Authenticator.CreateAccountAsync(AcctSecret, AcctPassword, Invitation);

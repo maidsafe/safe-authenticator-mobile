@@ -8,14 +8,21 @@ namespace SafeAuthenticator.ViewModels
     public class RequestDetailViewModel : ObservableObject
     {
         public AppExchangeInfo AppInfo { get; set; }
+
         public string AppName => AppInfo.Name;
+
         public string AppVendor => AppInfo.Vendor;
+
         public string AppId => AppInfo.Id;
+
         public bool AppContainerRequest { get; set; } = false;
+
         public string PageTitle { get; set; }
+
         public bool IsMDataRequest { get; } = false;
 
         public ObservableRangeCollection<ContainerPermissionsModel> Containers { get; set; }
+
         public ObservableRangeCollection<MDataModel> MData { get; set; }
 
         readonly AuthIpcReq _authReq;
