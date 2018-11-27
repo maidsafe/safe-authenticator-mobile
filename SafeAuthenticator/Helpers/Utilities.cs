@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Hexasoft.Zxcvbn;
 using SafeAuthenticator.Models;
+using SafeAuthenticator.Native;
+using Xamarin.Essentials;
 
 namespace SafeAuthenticator.Helpers
 {
@@ -43,6 +45,27 @@ namespace SafeAuthenticator.Helpers
             return (calc, percentage, strength);
         }
 
+        internal static string GetErrorMessage(FfiException error)
+    {
+      switch (error.ErrorCode)
+      {
+        case -2000:
+        var current = Connectivity.NetworkAccess;
+        return current != NetworkAccess.Internet ? "No internet connection" : "Could not connect to the SAFE Network";
+        case -101:
+        return "Account does not exist";
+        case -3:
+        return "Incorrect password";
+        case -102:
+        return "Account already exists";
+        case -116:
+        return "Invalid invitation";
+        case -117:
+        return "Invitation already claimed";
+        default:
+        return error.Message;
+      }
+    }
         #region Encoding Extensions
 
         public static string ToUtfString(this List<byte> input)

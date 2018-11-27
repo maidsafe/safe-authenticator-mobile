@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Acr.UserDialogs;
 using SafeAuthenticator.Helpers;
+using SafeAuthenticator.Native;
 using Xamarin.Forms;
 
 namespace SafeAuthenticator.ViewModels
@@ -112,6 +113,11 @@ namespace SafeAuthenticator.ViewModels
                     await Authenticator.CreateAccountAsync(AcctSecret, AcctPassword, Invitation);
                     MessagingCenter.Send(this, MessengerConstants.NavHomePage);
                 }
+            }
+            catch (FfiException ex)
+            {
+                var errorMessage = Utilities.GetErrorMessage(ex);
+                await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
             }
             catch (Exception ex)
             {
