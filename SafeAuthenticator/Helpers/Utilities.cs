@@ -46,26 +46,28 @@ namespace SafeAuthenticator.Helpers
         }
 
         internal static string GetErrorMessage(FfiException error)
-    {
-      switch (error.ErrorCode)
-      {
-        case -2000:
-        var current = Connectivity.NetworkAccess;
-        return current != NetworkAccess.Internet ? "No internet connection" : "Could not connect to the SAFE Network";
-        case -101:
-        return "Account does not exist";
-        case -3:
-        return "Incorrect password";
-        case -102:
-        return "Account already exists";
-        case -116:
-        return "Invalid invitation";
-        case -117:
-        return "Invitation already claimed";
-        default:
-        return error.Message;
-      }
-    }
+        {
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+                return "No internet connection";
+            switch (error.ErrorCode)
+            {
+                case -2000:
+                    return "Could not connect to the SAFE Network";
+                case -101:
+                    return "Account does not exist";
+                case -3:
+                    return "Incorrect password";
+                case -102:
+                    return "Account already exists";
+                case -116:
+                    return "Invalid invitation";
+                case -117:
+                    return "Invitation already claimed";
+                default:
+                    return error.Message;
+            }
+        }
         #region Encoding Extensions
 
         public static string ToUtfString(this List<byte> input)

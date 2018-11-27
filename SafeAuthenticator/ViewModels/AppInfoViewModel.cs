@@ -4,6 +4,7 @@ using Acr.UserDialogs;
 using JetBrains.Annotations;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
+using SafeAuthenticator.Native;
 using Xamarin.Forms;
 
 namespace SafeAuthenticator.ViewModels
@@ -38,6 +39,11 @@ namespace SafeAuthenticator.ViewModels
                     MessagingCenter.Send(this, MessengerConstants.NavHomePage);
                     MessagingCenter.Send(this, MessengerConstants.RefreshHomePage);
                 }
+            }
+            catch (FfiException ex)
+            {
+                var errorMessage = Utilities.GetErrorMessage(ex);
+                await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
             }
             catch (Exception ex)
             {

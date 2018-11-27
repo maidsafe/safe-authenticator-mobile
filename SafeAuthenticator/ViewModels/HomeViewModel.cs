@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
+using SafeAuthenticator.Native;
 using Xamarin.Forms;
 
 namespace SafeAuthenticator.ViewModels
@@ -64,12 +65,17 @@ namespace SafeAuthenticator.ViewModels
                 Apps.Sort();
                 var acctStorageTuple = await Authenticator.GetAccountInfoAsync();
                 AccountStorageInfo = $"{acctStorageTuple.Item1} / {acctStorageTuple.Item2}";
-                IsRefreshing = false;
+            }
+            catch (FfiException ex)
+            {
+                var errorMessage = Utilities.GetErrorMessage(ex);
+                await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
             }
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", $"Refresh Accounts Failed: {ex.Message}", "OK");
             }
+            IsRefreshing = false;
         }
 
         public async void HandleAuthenticationReq()

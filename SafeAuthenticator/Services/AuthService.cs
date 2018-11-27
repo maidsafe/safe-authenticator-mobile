@@ -80,26 +80,12 @@ namespace SafeAuthenticator.Services
             {
                 if (_authenticator == null)
                 {
-                    try
+                    var (location, password) = await CredentialCache.Retrieve();
+                    using (UserDialogs.Instance.Loading("Reconnecting to Network"))
                     {
-                        var (location, password) = await CredentialCache.Retrieve();
-                        using (UserDialogs.Instance.Loading("Reconnecting to Network"))
-                        {
-                            await LoginAsync(location, password);
-                            MessagingCenter.Send(this, MessengerConstants.NavHomePage);
-                        }
+                        await LoginAsync(location, password);
+                        MessagingCenter.Send(this, MessengerConstants.NavHomePage);
                     }
-                    catch (NullReferenceException)
-                    {
-                    }
-                    catch (Exception ex)
-                    {
-                        await Application.Current.MainPage.DisplayAlert(
-                            "Error",
-                            $"Failed to reconnect: {ex.Message}",
-                            "OK");
-                    }
-
                     return;
                 }
 
@@ -115,16 +101,16 @@ namespace SafeAuthenticator.Services
                         var (location, password) = await CredentialCache.Retrieve();
                         await LoginAsync(location, password);
                     }
-
-                    try
-                    {
-                        var cts = new CancellationTokenSource(2000);
-                        await UserDialogs.Instance.AlertAsync("Network connection established.", "Success", "OK", cts.Token);
-                    }
-                    catch (OperationCanceledException)
-                    {
-                    }
                 }
+            }
+            catch (NullReferenceException)
+            {
+                // ignore if secret/password is not cached
+            }
+            catch (FfiException ex)
+            {
+                var errorMessage = Utilities.GetErrorMessage(ex);
+                await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
             }
             catch (Exception ex)
             {
