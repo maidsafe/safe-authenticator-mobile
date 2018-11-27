@@ -12,7 +12,7 @@ namespace SafeAuthenticator.Views
     {
         public event EventHandler CompleteRequest;
 
-        RequestDetailViewModel _viewModel;
+        private readonly RequestDetailViewModel _viewModel;
 
         public RequestDetailPage(IpcReq req)
         {

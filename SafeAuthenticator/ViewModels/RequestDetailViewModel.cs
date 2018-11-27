@@ -15,11 +15,11 @@ namespace SafeAuthenticator.ViewModels
 
         public string AppId => AppInfo.Id;
 
-        public bool AppContainerRequest { get; set; } = false;
+        public bool AppContainerRequest { get; set; }
 
         public string PageTitle { get; set; }
 
-        public bool IsMDataRequest { get; } = false;
+        public bool IsMDataRequest { get; }
 
         public ObservableRangeCollection<ContainerPermissionsModel> Containers { get; set; }
 

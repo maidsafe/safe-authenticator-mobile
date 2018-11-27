@@ -10,19 +10,19 @@ namespace SafeAuthenticator.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage, ICleanup
     {
-        HomeViewModel homeViewModel;
+        private readonly HomeViewModel _homeViewModel;
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            homeViewModel.HandleAuthenticationReq();
+            _homeViewModel.HandleAuthenticationReq();
         }
 
         public HomePage()
         {
             InitializeComponent();
-            homeViewModel = new HomeViewModel();
-            BindingContext = homeViewModel;
+            _homeViewModel = new HomeViewModel();
+            BindingContext = _homeViewModel;
             MessagingCenter.Subscribe<HomeViewModel>(
                 this,
                 MessengerConstants.NavLoginPage,

@@ -9,7 +9,7 @@ namespace SafeAuthenticator.Helpers
 {
     internal static class Utilities
     {
-        static ZxcvbnEstimator estimator;
+        private static ZxcvbnEstimator _estimator;
 
         internal static ObservableRangeCollection<T> ToObservableRangeCollection<T>(this IEnumerable<T> source)
         {
@@ -24,12 +24,12 @@ namespace SafeAuthenticator.Helpers
 
         internal static (double, double, string) StrengthChecker(string data)
         {
-            if (estimator == null)
-                estimator = new ZxcvbnEstimator();
+            if (_estimator == null)
+                _estimator = new ZxcvbnEstimator();
             if (string.IsNullOrEmpty(data))
                 return (0, 0, string.Empty);
             string strength = null;
-            var result = estimator.EstimateStrength(data);
+            var result = _estimator.EstimateStrength(data);
             var calc = Math.Log(result.Guesses) / Math.Log(10);
             if (calc < AppConstants.AccStrengthVeryWeak)
                 strength = "VERY_WEAK";

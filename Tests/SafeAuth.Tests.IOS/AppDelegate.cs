@@ -9,7 +9,7 @@ namespace NUnit.Runner.Tests
     [Register("AppDelegate")]
     public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
-        string tcpListenHost = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList
+        private readonly string _tcpListenHost = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList
             .First(f => f.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).ToString();
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
@@ -17,7 +17,7 @@ namespace NUnit.Runner.Tests
             global::Xamarin.Forms.Forms.Init();
 
             // This will load all tests within the current project
-            var nunit = new NUnit.Runner.App();
+            var nunit = new App();
 
             // If you want to add tests in another assembly
             // nunit.AddTestAssembly(typeof(MyTests).Assembly);
@@ -35,7 +35,7 @@ namespace NUnit.Runner.Tests
                 // Information about the tcp listener host and port.
                 // For now, send result as XML to the listening server.
                 // TcpWriterParameters = new TcpWriterInfo(System.Net.IPAddress.Any.ToString(), 10500),
-                TcpWriterParameters = new TcpWriterInfo(tcpListenHost, 10500),
+                TcpWriterParameters = new TcpWriterInfo(_tcpListenHost, 10500),
 
                 // Creates a NUnit Xml result file on the host file system using PCLStorage library.
                 CreateXmlResultFile = true,

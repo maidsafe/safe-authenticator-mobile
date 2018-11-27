@@ -33,7 +33,7 @@ namespace SafeAuthenticator.Droid
 
         private AuthService Authenticator => DependencyService.Get<AuthService>();
 
-        private bool killApp = false;
+        private bool _killApp;
 
         private void HandleAppLaunch(string uri)
         {
@@ -58,7 +58,7 @@ namespace SafeAuthenticator.Droid
             if (Xamarin.Forms.Application.Current.MainPage is NavigationPage currentNav &&
                 currentNav.Navigation.NavigationStack.Count == 1)
             {
-                if (killApp)
+                if (_killApp)
                 {
                     Authenticator.FreeState();
                     Finish();
@@ -66,9 +66,9 @@ namespace SafeAuthenticator.Droid
                 else
                 {
                     Toast.MakeText(this, "Press Back again to Exit.", ToastLength.Short).Show();
-                    killApp = true;
+                    _killApp = true;
 
-                    Action myAction = () => { killApp = false; };
+                    Action myAction = () => { _killApp = false; };
                     new Handler().PostDelayed(myAction, 3000);
                 }
             }

@@ -13,8 +13,8 @@ namespace SafeAuthenticator.ViewModels
         private string _acctSecret;
         private string _invitation;
         private bool _isUiEnabled;
-        private (double, double, string) locationStrength;
-        private (double, double, string) passwordStrength;
+        private (double, double, string) _locationStrength;
+        private (double, double, string) _passwordStrength;
 
         public string AcctPassword
         {
@@ -101,12 +101,12 @@ namespace SafeAuthenticator.ViewModels
                 {
                     await Task.Run(() =>
                     {
-                        locationStrength = Utilities.StrengthChecker(AcctSecret);
-                        passwordStrength = Utilities.StrengthChecker(AcctPassword);
-                        if (locationStrength.Item1 < AppConstants.AccStrengthWeak)
+                        _locationStrength = Utilities.StrengthChecker(AcctSecret);
+                        _passwordStrength = Utilities.StrengthChecker(AcctPassword);
+                        if (_locationStrength.Item1 < AppConstants.AccStrengthWeak)
                             throw new Exception("Secret needs to be stronger");
 
-                        if (passwordStrength.Item1 < AppConstants.AccStrengthSomeWhatSecure)
+                        if (_passwordStrength.Item1 < AppConstants.AccStrengthSomeWhatSecure)
                             throw new Exception("Password needs to be stronger");
                     });
                     await Authenticator.CreateAccountAsync(AcctSecret, AcctPassword, Invitation);

@@ -210,7 +210,7 @@ namespace SafeAuthenticator.Services
                         var uauthReq = udecodeResult as UnregisteredIpcReq;
                         var isGranted = await Application.Current.MainPage.DisplayAlert(
                             "Unregistered auth request",
-                            $"An app is requesting access.",
+                            "An app is requesting access.",
                             "Allow",
                             "Deny");
                         var encodedRsp = await Authenticator.EncodeUnregisteredRespAsync(uauthReq.ReqId, isGranted);
@@ -256,7 +256,7 @@ namespace SafeAuthenticator.Services
 
         private async Task SendResponseBack(IpcReq req, bool isGranted)
         {
-            var encodedRsp = string.Empty;
+            string encodedRsp;
             var formattedRsp = string.Empty;
             var requestType = req.GetType();
             if (requestType == typeof(AuthIpcReq))

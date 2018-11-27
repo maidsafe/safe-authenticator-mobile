@@ -3,5 +3,5 @@
 // Project-level suppressions either have no target or are given
 // a specific target and scoped to a namespace, type, member, etc.
 
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:Element should begin with upper-case letter", Justification = "SA1300:Element should begin with upper-case letter", Scope = "namespace", Target = "~N:SafeAuthenticator.iOS")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:Element should begin with upper-case letter", Justification = "SA1300:Element should begin with upper-case letter", Scope = "namespace", Target = "~N:SafeAuthenticator.iOS.Helpers")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:Element should begin with upper-case letter", Justification = "default iOS namespace", Scope = "namespace", Target = "~N:SafeAuthenticator.iOS")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:Element should begin with upper-case letter", Justification = "default iOS namespace", Scope = "namespace", Target = "~N:SafeAuthenticator.iOS.Helpers")]

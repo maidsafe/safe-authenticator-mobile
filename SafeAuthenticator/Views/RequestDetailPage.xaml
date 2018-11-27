@@ -3,11 +3,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SafeAuthenticator.Views.RequestDetailPage"
-             xmlns:Converters="clr-namespace:SafeAuthenticator.Controls.Converters">
+             xmlns:converters="clr-namespace:SafeAuthenticator.Controls.Converters">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Converters:InverseBooleanConverter x:Key="InverseBoolean" />
-            <Converters:ByteArraytoHexStringConverter x:Key="ByteArraytoHexString" />
+            <converters:InverseBooleanConverter x:Key="InverseBoolean" />
+            <converters:ByteArraytoHexStringConverter x:Key="ByteArraytoHexString" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
