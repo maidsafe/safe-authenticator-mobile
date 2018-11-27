@@ -21,7 +21,10 @@ namespace SafeAuthenticator.Droid
          MainLauncher = true,
          LaunchMode = LaunchMode.SingleTask,
          ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    [IntentFilter(new[] { Intent.ActionView }, Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable }, DataScheme = "safe-auth")]
+    [IntentFilter(
+        new[] { Intent.ActionView },
+        Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
+        DataScheme = "safe-auth")]
 
     // ReSharper disable once UnusedMember.Global
     public class MainActivity : FormsAppCompatActivity

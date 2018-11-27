@@ -5,7 +5,6 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(PaddedEntry), typeof(PaddedEntryRenderer))]
-
 namespace SafeAuthenticator.Droid.Helpers
 {
     internal class PaddedEntryRenderer : EntryRenderer
@@ -20,7 +19,6 @@ namespace SafeAuthenticator.Droid.Helpers
         {
             base.OnElementChanged(e);
 
-            // ReSharper disable once UseNullPropagation
             if (Control != null)
             {
             }

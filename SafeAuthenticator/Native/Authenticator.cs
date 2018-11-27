@@ -14,9 +14,9 @@ namespace SafeAuthenticator.Native
         private static readonly IAuthBindings AuthBindings = DependencyService.Get<IAuthBindings>();
 
         // ReSharper disable once UnassignedField.Global
-#pragma warning disable SA1401 // Fields should be private
+        #pragma warning disable SA1401 // Fields should be private
         public static EventHandler Disconnected;
-#pragma warning restore SA1401 // Fields should be private
+        #pragma warning restore SA1401 // Fields should be private
         private IntPtr _authPtr;
         private GCHandle _disconnectedHandle;
 

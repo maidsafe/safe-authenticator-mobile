@@ -7,7 +7,6 @@ using SafeAuthenticator.Helpers;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(FileOps))]
-
 namespace SafeAuthenticator.Droid.Helpers
 {
     public class FileOps : IFileOps
@@ -16,10 +15,8 @@ namespace SafeAuthenticator.Droid.Helpers
         {
             get
             {
-                string path;
-
                 // Personal -> /data/data/@PACKAGE_NAME@/files
-                path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                 return path;
             }
         }

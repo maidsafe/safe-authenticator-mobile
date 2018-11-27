@@ -7,7 +7,6 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
-
 namespace SafeAuthenticator
 {
     public partial class App : Application

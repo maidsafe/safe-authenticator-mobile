@@ -6,7 +6,6 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(PaddedEntry), typeof(PaddedEntryRenderer))]
-
 namespace SafeAuthenticator.iOS.Helpers
 {
     internal class PaddedEntryRenderer : EntryRenderer
@@ -15,7 +14,6 @@ namespace SafeAuthenticator.iOS.Helpers
         {
             base.OnElementChanged(e);
 
-            // ReSharper disable once UseNullPropagation
             if (Control != null)
             {
                 Control.LeftView = new UIView(new CGRect(0, 0, 40, 0));

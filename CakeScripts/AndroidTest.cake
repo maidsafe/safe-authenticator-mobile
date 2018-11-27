@@ -123,6 +123,6 @@ Task("Test-Android-Emu")
     emu.Kill();
 
 })
-    .ReportError(exception => {
+.ReportError(exception => {
     Information(exception.Message);
 });

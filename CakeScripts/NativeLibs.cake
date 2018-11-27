@@ -106,7 +106,7 @@ Task("Download-Libs")
         }
     }
 })
-    .ReportError(exception => {
+.ReportError(exception => {
     Information(exception.Message);
 });
 
@@ -165,6 +165,6 @@ Task("UnZip-Libs")
         }
     }
 })
-    .ReportError(exception => {
-    Information(exception.Message);
+.ReportError(exception => {
+	Information(exception.Message);
 });

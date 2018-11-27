@@ -7,7 +7,6 @@ using SafeAuthenticator.iOS.Helpers;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(FileOps))]
-
 namespace SafeAuthenticator.iOS.Helpers
 {
     public class FileOps : IFileOps
@@ -16,10 +15,8 @@ namespace SafeAuthenticator.iOS.Helpers
         {
             get
             {
-                string path;
-
-// Resources -> /Library
-                path = Environment.GetFolderPath(Environment.SpecialFolder.Resources);
+                // Resources -> /Library
+                string path = Environment.GetFolderPath(Environment.SpecialFolder.Resources);
                 return path;
             }
         }

@@ -36,6 +36,7 @@ namespace SafeAuthenticator.Native
         public byte[] Name;
 
         public ulong TypeTag;
+
         [MarshalAs(UnmanagedType.U1)]
         public bool HasEncInfo;
 

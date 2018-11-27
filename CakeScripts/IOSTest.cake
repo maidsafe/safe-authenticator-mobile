@@ -72,6 +72,6 @@ Task("Test-IOS-Emu")
     Information("Closing Simulator");
     ShutdownAllAppleSimulators();
 })
-    .ReportError(exception => {
+.ReportError(exception => {
     Information(exception.Message);
 });

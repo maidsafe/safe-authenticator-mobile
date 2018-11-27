@@ -89,20 +89,19 @@ namespace SafeAuthenticator.iOS
             }
 
             var errorText = File.ReadAllText(errorFilePath);
-            Device.BeginInvokeOnMainThread(
-                () =>
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                var vc = UIApplication.SharedApplication?.KeyWindow?.RootViewController;
+                if (vc == null)
                 {
-                    var vc = UIApplication.SharedApplication?.KeyWindow?.RootViewController;
-                    if (vc == null)
-                    {
-                        return;
-                    }
+                    return;
+                }
 
-                    var alert = UIAlertController.Create("Crash Report", errorText, UIAlertControllerStyle.Alert);
-                    alert.AddAction(UIAlertAction.Create("Close", UIAlertActionStyle.Cancel, null));
-                    alert.AddAction(UIAlertAction.Create("Clear", UIAlertActionStyle.Default, action => { File.Delete(errorFilePath); }));
-                    vc.PresentViewController(alert, true, null);
-                });
+                var alert = UIAlertController.Create("Crash Report", errorText, UIAlertControllerStyle.Alert);
+                alert.AddAction(UIAlertAction.Create("Close", UIAlertActionStyle.Cancel, null));
+                alert.AddAction(UIAlertAction.Create("Clear", UIAlertActionStyle.Default, action => { File.Delete(errorFilePath); }));
+                vc.PresentViewController(alert, true, null);
+            });
         }
 
         #endregion
