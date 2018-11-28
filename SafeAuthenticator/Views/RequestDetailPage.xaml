@@ -11,10 +11,15 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Padding="10">
-            <Label Text="{Binding PageTitle}" FontSize="Large" HorizontalTextAlignment="Center" />
-            <BoxView HeightRequest="1" BackgroundColor="Black" HorizontalOptions="FillAndExpand" />
-            <Label Text="App Details" FontSize="Medium" />
+        <StackLayout Padding="10,20,10,10">
+            <Label Text="{Binding PageTitle}" 
+                   FontSize="Large" 
+                   HorizontalTextAlignment="Center"/>
+            <BoxView
+                HeightRequest="1" 
+                BackgroundColor="Black" 
+                HorizontalOptions="FillAndExpand" />
+            <Label Text="App Details" FontSize="Medium"/>
             <Label>
                 <Label.FormattedText>
                     <FormattedString>

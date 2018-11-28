@@ -432,7 +432,7 @@ namespace SafeAuthenticator.Native
             return new MDataKeyNative()
             {
                 KeyPtr = BindingUtils.CopyFromByteList(Key),
-                KeyLen = (UIntPtr)(Val?.Count ?? 0)
+                KeyLen = (UIntPtr)(Key?.Count ?? 0)
             };
         }
     }
