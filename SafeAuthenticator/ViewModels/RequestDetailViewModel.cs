@@ -8,14 +8,21 @@ namespace SafeAuthenticator.ViewModels
     public class RequestDetailViewModel : ObservableObject
     {
         public AppExchangeInfo AppInfo { get; set; }
+
         public string AppName => AppInfo.Name;
+
         public string AppVendor => AppInfo.Vendor;
+
         public string AppId => AppInfo.Id;
-        public bool AppContainerRequest { get; set; } = false;
+
+        public bool AppContainerRequest { get; set; }
+
         public string PageTitle { get; set; }
-        public bool IsMDataRequest { get; } = false;
+
+        public bool IsMDataRequest { get; }
 
         public ObservableRangeCollection<ContainerPermissionsModel> Containers { get; set; }
+
         public ObservableRangeCollection<MDataModel> MData { get; set; }
 
         private readonly AuthIpcReq _authReq;
@@ -50,18 +57,18 @@ namespace SafeAuthenticator.ViewModels
         {
             AppInfo = _authReq.AuthReq.App;
             Containers = _authReq.AuthReq.Containers.Select(
-              x => new ContainerPermissionsModel
-              {
-                  Access = new PermissionSetModel
-                  {
-                      Read = x.Access.Read,
-                      Insert = x.Access.Insert,
-                      Update = x.Access.Update,
-                      Delete = x.Access.Delete,
-                      ManagePermissions = x.Access.ManagePermissions
-                  },
-                  ContainerName = x.ContName
-              }).ToObservableRangeCollection();
+                x => new ContainerPermissionsModel
+                {
+                    Access = new PermissionSetModel
+                    {
+                        Read = x.Access.Read,
+                        Insert = x.Access.Insert,
+                        Update = x.Access.Update,
+                        Delete = x.Access.Delete,
+                        ManagePermissions = x.Access.ManagePermissions
+                    },
+                    ContainerName = x.ContName
+                }).ToObservableRangeCollection();
             AppContainerRequest = _authReq.AuthReq.AppContainer;
         }
 
@@ -69,18 +76,18 @@ namespace SafeAuthenticator.ViewModels
         {
             AppInfo = _containerReq.ContainersReq.App;
             Containers = _containerReq.ContainersReq.Containers.Select(
-              x => new ContainerPermissionsModel
-              {
-                  Access = new PermissionSetModel
-                  {
-                      Read = x.Access.Read,
-                      Insert = x.Access.Insert,
-                      Update = x.Access.Update,
-                      Delete = x.Access.Delete,
-                      ManagePermissions = x.Access.ManagePermissions
-                  },
-                  ContainerName = x.ContName
-              }).ToObservableRangeCollection();
+                x => new ContainerPermissionsModel
+                {
+                    Access = new PermissionSetModel
+                    {
+                        Read = x.Access.Read,
+                        Insert = x.Access.Insert,
+                        Update = x.Access.Update,
+                        Delete = x.Access.Delete,
+                        ManagePermissions = x.Access.ManagePermissions
+                    },
+                    ContainerName = x.ContName
+                }).ToObservableRangeCollection();
         }
 
         private void ProcessMDataRequestData()

@@ -1,78 +1,111 @@
 ﻿using System;
 using System.Windows.Input;
+using Acr.UserDialogs;
 using SafeAuthenticator.Helpers;
+using SafeAuthenticator.Native;
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.ViewModels {
-  internal class LoginViewModel : BaseViewModel {
-    private string _acctPassword;
-    private string _acctSecret;
-    private bool _isUiEnabled;
+namespace SafeAuthenticator.ViewModels
+{
+    internal class LoginViewModel : BaseViewModel
+    {
+        private string _acctPassword;
+        private string _acctSecret;
+        private bool _isUiEnabled;
 
-    public string AcctPassword { get => _acctPassword; set {
+        public string AcctPassword
+        {
+            get => _acctPassword;
+            set
+            {
                 SetProperty(ref _acctPassword, value);
                 ((Command)LoginCommand).ChangeCanExecute();
             }
         }
 
-    public string AcctSecret { get => _acctSecret; set {
+        public string AcctSecret
+        {
+            get => _acctSecret;
+            set
+            {
                 SetProperty(ref _acctSecret, value);
                 ((Command)LoginCommand).ChangeCanExecute();
             }
-       }
-
-    public ICommand CreateAcctCommand { get; }
-
-    public ICommand LoginCommand { get; }
-
-    public bool IsUiEnabled { get => _isUiEnabled; set => SetProperty(ref _isUiEnabled, value); }
-
-    public bool AuthReconnect {
-      get => Authenticator.AuthReconnect;
-      set {
-        if (Authenticator.AuthReconnect != value) {
-          Authenticator.AuthReconnect = value;
         }
 
-        OnPropertyChanged();
-      }
-    }
+        public ICommand CreateAcctCommand { get; }
 
-    public LoginViewModel() {
-      Authenticator.PropertyChanged += (s, e) => {
-        if (e.PropertyName == nameof(Authenticator.IsLogInitialised)) {
-          IsUiEnabled = Authenticator.IsLogInitialised;
+        public ICommand LoginCommand { get; }
+
+        public bool IsUiEnabled
+        {
+            get => _isUiEnabled;
+            set => SetProperty(ref _isUiEnabled, value);
         }
-      };
 
-      IsUiEnabled = Authenticator.IsLogInitialised;
+        public bool AuthReconnect
+        {
+            get => Authenticator.AuthReconnect;
+            set
+            {
+                if (Authenticator.AuthReconnect != value)
+                {
+                    Authenticator.AuthReconnect = value;
+                }
 
-      CreateAcctCommand = new Command(OnCreateAcct);
+                OnPropertyChanged();
+            }
+        }
 
-      LoginCommand = new Command(OnLogin, CanExecute);
+        public LoginViewModel()
+        {
+            Authenticator.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(Authenticator.IsLogInitialised))
+                {
+                    IsUiEnabled = Authenticator.IsLogInitialised;
+                }
+            };
 
-      AcctSecret = string.Empty;
-      AcctPassword = string.Empty;
+            IsUiEnabled = Authenticator.IsLogInitialised;
+
+            CreateAcctCommand = new Command(OnCreateAcct);
+
+            LoginCommand = new Command(OnLogin, CanExecute);
+
+            AcctSecret = string.Empty;
+            AcctPassword = string.Empty;
+        }
+
+        private bool CanExecute()
+        {
+            return !string.IsNullOrWhiteSpace(AcctPassword) && !string.IsNullOrWhiteSpace(AcctSecret);
+        }
+
+        private void OnCreateAcct()
+        {
+            MessagingCenter.Send(this, MessengerConstants.NavCreateAcctPage);
+        }
+
+        private async void OnLogin()
+        {
+            try
+            {
+                using (UserDialogs.Instance.Loading("Loading"))
+                {
+                    await Authenticator.LoginAsync(AcctSecret, AcctPassword);
+                    MessagingCenter.Send(this, MessengerConstants.NavHomePage);
+                }
+            }
+            catch (FfiException ex)
+            {
+                var errorMessage = Utilities.GetErrorMessage(ex);
+                await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", $"Log in Failed: {ex.Message}", "OK");
+            }
+        }
     }
-
-    private bool CanExecute()
-    {
-        return !string.IsNullOrWhiteSpace(AcctPassword) && !string.IsNullOrWhiteSpace(AcctSecret);
-    }
-
-     private void OnCreateAcct() {
-      MessagingCenter.Send(this, MessengerConstants.NavCreateAcctPage);
-    }
-
-    private async void OnLogin() {
-      IsUiEnabled = false;
-      try {
-        await Authenticator.LoginAsync(AcctSecret, AcctPassword);
-        MessagingCenter.Send(this, MessengerConstants.NavHomePage);
-      } catch (Exception ex) {
-        await Application.Current.MainPage.DisplayAlert("Error", $"Log in Failed: {ex.Message}", "OK");
-        IsUiEnabled = true;
-      }
-    }
-  }
 }

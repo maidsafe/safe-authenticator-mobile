@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="..\stylecop.json" Link="stylecop.json" />
+  </ItemGroup>
+  <Import Project="$(MSBuildThisFileDirectory)..\CodeStyles.targets" />
+
+  <ItemGroup>
     <Compile Remove="PlatformSpecific\**" />
     <EmbeddedResource Remove="PlatformSpecific\**" />
     <None Remove="PlatformSpecific\**" />

@@ -22,6 +22,7 @@ tools/**
 *.userprefs
 *.GhostDoc.xml
 .vs/
+.vscode
 
 # ignore Xamarin.Android Resource.Designer.cs files
 **/*.Droid/**/[Rr]esource.[Dd]esigner.cs
@@ -179,7 +180,6 @@ Thumbs.db
 sql/
 *.Cache
 ClientBin/
-[Ss]tyle[Cc]op.*
 ~$*
 *~
 *.dbmdl

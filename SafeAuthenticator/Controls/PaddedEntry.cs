@@ -2,5 +2,7 @@
 
 namespace SafeAuthenticator.Controls
 {
-  public class PaddedEntry : Entry { }
+    public class PaddedEntry : Entry
+    {
+    }
 }

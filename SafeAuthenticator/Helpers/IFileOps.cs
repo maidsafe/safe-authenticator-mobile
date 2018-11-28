@@ -3,8 +3,10 @@ using System.Threading.Tasks;
 
 namespace SafeAuthenticator.Helpers
 {
-  public interface IFileOps {
-    string ConfigFilesPath { get; }
-    Task TransferAssetsAsync(List<(string, string)> fileList);
-  }
+    public interface IFileOps
+    {
+        string ConfigFilesPath { get; }
+
+        Task TransferAssetsAsync(List<(string, string)> fileList);
+    }
 }

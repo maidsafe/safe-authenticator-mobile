@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System.Threading.Tasks;
+using NUnit.Framework;
 using SafeAuthenticator.Native;
-using System.Threading.Tasks;
 
 namespace SafeAuth.Tests
 {
@@ -13,7 +13,9 @@ namespace SafeAuth.Tests
             string secret = Utils.GetRandomString(10);
             string password = Utils.GetRandomString(10);
             var (auth, session) = await Utils.CreateTestApp(secret, password, Utils.GetRandomString(5));
-            Assert.That(async () => await Utils.LoginTestApp(secret, password), Is.TypeOf<Authenticator>());
+            Assert.That(
+                async () => await Utils.LoginTestApp(secret, password),
+                Is.TypeOf<Authenticator>());
             Assert.DoesNotThrowAsync(async () => await Utils.LoginTestApp(secret, password));
         }
 
@@ -22,7 +24,9 @@ namespace SafeAuth.Tests
         {
             string secret = Utils.GetRandomString(10);
             string password = Utils.GetRandomString(10);
-            Assert.That(async () => await Utils.LoginTestApp(secret, password), Throws.TypeOf<FfiException>());
+            Assert.That(
+                async () => await Utils.LoginTestApp(secret, password),
+                Throws.TypeOf<FfiException>());
         }
 
         [Test]
@@ -31,7 +35,9 @@ namespace SafeAuth.Tests
             string secret = Utils.GetRandomString(10);
             string password = Utils.GetRandomString(10);
             var (auth, session) = await Utils.CreateTestApp(secret, password, Utils.GetRandomString(5));
-            Assert.That(async () => await Utils.LoginTestApp(Utils.GetRandomString(10), password), Throws.TypeOf<FfiException>());
+            Assert.That(
+                async () => await Utils.LoginTestApp(Utils.GetRandomString(10), password),
+                Throws.TypeOf<FfiException>());
         }
 
         [Test]
@@ -40,7 +46,9 @@ namespace SafeAuth.Tests
             string secret = Utils.GetRandomString(10);
             string password = Utils.GetRandomString(10);
             var (auth, session) = await Utils.CreateTestApp(secret, password, Utils.GetRandomString(5));
-            Assert.That(async () => await Utils.LoginTestApp(secret, Utils.GetRandomString(10)), Throws.TypeOf<FfiException>());
+            Assert.That(
+                async () => await Utils.LoginTestApp(secret, Utils.GetRandomString(10)),
+                Throws.TypeOf<FfiException>());
         }
     }
 }

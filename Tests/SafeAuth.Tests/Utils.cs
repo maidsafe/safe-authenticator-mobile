@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using SafeAuthenticator.Native;
 using SafeApp;
+using SafeAuthenticator.Native;
 
 namespace SafeAuth.Tests
 {
@@ -33,7 +33,8 @@ namespace SafeAuth.Tests
         {
             var authReq = new SafeApp.Utilities.AuthReq
             {
-                App = new SafeApp.Utilities.AppExchangeInfo { Id = GetRandomString(10), Name = GetRandomString(5), Scope = null, Vendor = GetRandomString(5) },
+                App = new SafeApp.Utilities.AppExchangeInfo
+                    { Id = GetRandomString(10), Name = GetRandomString(5), Scope = null, Vendor = GetRandomString(5) },
                 AppContainer = true,
                 Containers = new List<SafeApp.Utilities.ContainerPermissions>()
             };
@@ -78,7 +79,8 @@ namespace SafeAuth.Tests
         {
             var authReq = new SafeApp.Utilities.AuthReq
             {
-                App = new SafeApp.Utilities.AppExchangeInfo { Id = GetRandomString(10), Name = GetRandomString(5), Scope = null, Vendor = GetRandomString(5) },
+                App = new SafeApp.Utilities.AppExchangeInfo
+                    { Id = GetRandomString(10), Name = GetRandomString(5), Scope = null, Vendor = GetRandomString(5) },
                 AppContainer = true,
                 Containers = new List<SafeApp.Utilities.ContainerPermissions>()
             };
@@ -92,7 +94,12 @@ namespace SafeAuth.Tests
                 App = authReq.App,
                 Containers = new List<SafeApp.Utilities.ContainerPermissions>
                 {
-                    new SafeApp.Utilities.ContainerPermissions  { ContName = containerType, Access = new SafeApp.Utilities.PermissionSet { Read = true, Insert = true, Delete = true, ManagePermissions = true, Update = true } }
+                    new SafeApp.Utilities.ContainerPermissions
+                    {
+                        ContName = containerType,
+                        Access = new SafeApp.Utilities.PermissionSet
+                            { Read = true, Insert = true, Delete = true, ManagePermissions = true, Update = true }
+                    }
                 }
             };
             return containerRequest;

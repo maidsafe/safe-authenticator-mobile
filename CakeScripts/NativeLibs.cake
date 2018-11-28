@@ -1,4 +1,3 @@
-#addin Cake.Curl
 using System.Linq;
 
 var ANDROID_X86_64 = "android-x86_64";
@@ -87,16 +86,7 @@ Task("Download-Libs")
 
                 if (!FileExists(zipSavePath))
                 {
-                    CurlDownloadFiles(
-                        new[] {
-                                new Uri (zipDownloadUrl)
-                        },
-                        new CurlDownloadSettings
-                        {
-                            OutputPaths = new FilePath[] {
-                                    zipSavePath
-                            }
-                        });
+                    DownloadFile(zipDownloadUrl, File(zipSavePath));
                 }
                 else
                 {
@@ -106,7 +96,7 @@ Task("Download-Libs")
         }
     }
 })
-    .ReportError(exception => {
+.ReportError(exception => {
     Information(exception.Message);
 });
 
@@ -168,6 +158,6 @@ Task("UnZip-Libs")
         }
     }
 })
-    .ReportError(exception => {
-    Information(exception.Message);
+.ReportError(exception => {
+	Information(exception.Message);
 });

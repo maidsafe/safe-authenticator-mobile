@@ -205,6 +205,10 @@
       <Version>3.3.0.967583</Version>
     </PackageReference>
   </ItemGroup>
+  <Import Project="$(MSBuildThisFileDirectory)..\CodeStyles.targets" />
+  <ItemGroup>
+    <Content Include="..\stylecop.json" Link="stylecop.json" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="CheckNativeLibs" BeforeTargets="PrepareForBuild">
     <ItemGroup>

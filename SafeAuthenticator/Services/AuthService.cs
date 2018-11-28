@@ -22,8 +22,14 @@ namespace SafeAuthenticator.Services
         private readonly SemaphoreSlim _reconnectSemaphore = new SemaphoreSlim(1, 1);
         private Authenticator _authenticator;
         private bool _isLogInitialised;
-        public string AuthenticationReq;
-        internal bool IsLogInitialised { get => _isLogInitialised; private set => SetProperty(ref _isLogInitialised, value); }
+
+        public string AuthenticationReq { get; set; }
+
+        internal bool IsLogInitialised
+        {
+            get => _isLogInitialised;
+            private set => SetProperty(ref _isLogInitialised, value);
+        }
 
         private CredentialCacheService CredentialCache { get; }
 
@@ -39,6 +45,7 @@ namespace SafeAuthenticator.Services
                 var val = Application.Current.Properties[AuthReconnectPropKey] as bool?;
                 return val == true;
             }
+
             set
             {
                 if (value == false)
@@ -73,19 +80,11 @@ namespace SafeAuthenticator.Services
             {
                 if (_authenticator == null)
                 {
-                    try
+                    var (location, password) = await CredentialCache.Retrieve();
+                    using (UserDialogs.Instance.Loading("Reconnecting to Network"))
                     {
-                        var (location, password) = await CredentialCache.Retrieve();
-                        using (UserDialogs.Instance.Loading("Reconnecting to Network"))
-                        {
-                            await LoginAsync(location, password);
-                            MessagingCenter.Send(this, MessengerConstants.NavHomePage);
-                        }
-                    }
-                    catch (NullReferenceException) { }
-                    catch (Exception ex)
-                    {
-                        await Application.Current.MainPage.DisplayAlert("Error", $"Failed to reconnect: {ex.Message}", "OK");
+                        await LoginAsync(location, password);
+                        MessagingCenter.Send(this, MessengerConstants.NavHomePage);
                     }
                     return;
                 }
@@ -102,14 +101,16 @@ namespace SafeAuthenticator.Services
                         var (location, password) = await CredentialCache.Retrieve();
                         await LoginAsync(location, password);
                     }
-
-                    try
-                    {
-                        var cts = new CancellationTokenSource(2000);
-                        await UserDialogs.Instance.AlertAsync("Network connection established.", "Success", "OK", cts.Token);
-                    }
-                    catch (OperationCanceledException) { }
                 }
+            }
+            catch (NullReferenceException)
+            {
+                // ignore if secret/password is not cached
+            }
+            catch (FfiException ex)
+            {
+                var errorMessage = Utilities.GetErrorMessage(ex);
+                await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
             }
             catch (Exception ex)
             {
@@ -131,6 +132,7 @@ namespace SafeAuthenticator.Services
                 await CredentialCache.Store(location, password);
             }
         }
+
         internal async Task<string> RevokeAppAsync(string appId)
         {
             return await _authenticator.AuthRevokeAppAsync(appId);
@@ -153,7 +155,8 @@ namespace SafeAuthenticator.Services
         internal async Task<(int, int)> GetAccountInfoAsync()
         {
             var acctInfo = await _authenticator.AuthAccountInfoAsync();
-            return (Convert.ToInt32(acctInfo.MutationsDone), Convert.ToInt32(acctInfo.MutationsDone + acctInfo.MutationsAvailable));
+            return (Convert.ToInt32(acctInfo.MutationsDone),
+                Convert.ToInt32(acctInfo.MutationsDone + acctInfo.MutationsAvailable));
         }
 
         internal async Task<List<RegisteredAppModel>> GetRegisteredAppsAsync()
@@ -169,18 +172,22 @@ namespace SafeAuthenticator.Services
                 if (_authenticator == null)
                 {
                     AuthenticationReq = encodedUri;
-                    try { var (location, password) = await CredentialCache.Retrieve(); }
+                    try
+                    {
+                        var (location, password) = await CredentialCache.Retrieve();
+                    }
                     catch (NullReferenceException)
                     {
                         await Application.Current.MainPage.DisplayAlert("Error", "Need to be logged in to accept app requests", "OK");
                     }
+
                     return;
                 }
 
                 await CheckAndReconnect();
                 if (encodedUri.Contains("/unregistered"))
                 {
-                    var unregisteredRemoved = encodedUri.Replace("/unregistered", "");
+                    var unregisteredRemoved = encodedUri.Replace("/unregistered", string.Empty);
                     var uencodedReq = UrlFormat.GetRequestData(unregisteredRemoved);
                     var udecodeResult = await Authenticator.UnRegisteredDecodeIpcMsgAsync(uencodedReq);
                     var udecodedType = udecodeResult.GetType();
@@ -188,10 +195,10 @@ namespace SafeAuthenticator.Services
                     {
                         var uauthReq = udecodeResult as UnregisteredIpcReq;
                         var isGranted = await Application.Current.MainPage.DisplayAlert(
-                                "Unregistered auth request",
-                                $"An app is requesting access.",
-                                "Allow",
-                                "Deny");
+                            "Unregistered auth request",
+                            "An app is requesting access.",
+                            "Allow",
+                            "Deny");
                         var encodedRsp = await Authenticator.EncodeUnregisteredRespAsync(uauthReq.ReqId, isGranted);
                         var appIdFromUrl = UrlFormat.GetAppId(encodedUri);
                         var formattedRsp = UrlFormat.Format(appIdFromUrl, encodedRsp, false);
@@ -237,7 +244,7 @@ namespace SafeAuthenticator.Services
         {
             try
             {
-                var encodedRsp = string.Empty;
+                string encodedRsp;
                 var formattedRsp = string.Empty;
                 var requestType = req.GetType();
                 if (requestType == typeof(AuthIpcReq))
@@ -315,15 +322,15 @@ namespace SafeAuthenticator.Services
             }
 
             Device.BeginInvokeOnMainThread(
-              async () =>
-              {
-                  if (App.IsBackgrounded)
-                  {
-                      return;
-                  }
+                async () =>
+                {
+                    if (App.IsBackgrounded)
+                    {
+                        return;
+                    }
 
-                  await CheckAndReconnect();
-              });
+                    await CheckAndReconnect();
+                });
         }
     }
 }

@@ -1,9 +1,7 @@
-﻿using SafeAuthenticator.Models;
+﻿using System;
+using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
 using SafeAuthenticator.ViewModels;
-using System;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,7 +12,7 @@ namespace SafeAuthenticator.Views
     {
         public event EventHandler CompleteRequest;
 
-        RequestDetailViewModel _viewModel;
+        private readonly RequestDetailViewModel _viewModel;
 
         public RequestDetailPage(IpcReq req)
         {
@@ -30,16 +28,17 @@ namespace SafeAuthenticator.Views
 
         private async void Send_Response(object sender, EventArgs e)
         {
-            if(sender == AllowButton)
+            if (sender == AllowButton)
                 CompleteRequest?.Invoke(this, new ResponseEventArgs(true));
-            else if(sender == DenyButton)
+            else if (sender == DenyButton)
                 CompleteRequest?.Invoke(this, new ResponseEventArgs(false));
             await Navigation.PopModalAsync();
         }
 
         private void Unselect_Item(object sender, ItemTappedEventArgs e)
         {
-            if (e.Item == null) return;
+            if (e.Item == null)
+                return;
             if (sender is ListView lv)
                 lv.SelectedItem = null;
         }

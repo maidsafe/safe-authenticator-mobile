@@ -141,6 +141,7 @@
     <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.Manual.cs">
       <Link>Helpers\AuthBindings.Manual.cs</Link>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\FileOps.cs" />
     <Compile Include="Helpers\PaddedEntryRenderer.cs" />
     <Compile Include="Main.cs" />
@@ -227,6 +228,10 @@
     <PackageReference Include="Xamarin.Forms">
       <Version>3.3.0.967583</Version>
     </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildThisFileDirectory)..\CodeStyles.targets" />
+  <ItemGroup>
+    <Content Include="..\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="CheckNativeLibs" BeforeTargets="PrepareForBuild">
