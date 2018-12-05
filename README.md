@@ -8,26 +8,26 @@ The SAFE Authenticator acts as a gateway to the [SAFE Network](https://safenetwo
 |[![Build Status](https://dev.azure.com/maidsafe/SafeAuthenticator/_apis/build/status/SafeAuthenticator)](https://dev.azure.com/maidsafe/SafeAuthenticator/_build/latest?definitionId=1)| 
  
 ## Features
-- Create your account & login to the SAFE network:
+- **Create your account & login to the SAFE network:**
     - Start by providing a secret & password that serves as your digital fingerprint on the SAFE Network to create an account.
     - Login to the SAFE Network
     - Auto-reconnect: Turn on auto-reconnect to automatically log into the app when resuming from background mode.
 
-- Handle Access Requests from Apps: 
-The SAFE application authorizes through the Authenticator with the required access permissions. The application can create its own container and request access to default containers of the SAFE Network i.e. documents, downloads, music, pictures, videos, public and public names, or other application's containers through the authorization request.
-
-    - Container Request:
+- **Handle Access Requests from Apps:** 
+  The SAFE application authorizes through the Authenticator with the required access permissions. The application can create its own container and request access to default containers of the SAFE Network i.e. documents, downloads, music, pictures, videos, public and public names, or other application's containers through the authorization request.
+  
+    - **Container Request:**
     Application will request access for user's default containers only.
-    - Auth Request:
+    - **Auth Request:**
     Allow apps to request default container access & also to create an apps own private container.
-    - Shared Mutable Data Request:
+    - **Shared Mutable Data Request:**
     Application can request access to mutable data owned by the user. 
-    - Unregistered Access:
+    - **Unregistered Access:**
     Allow an app to read public unencrypted content.
 
-- User Grants Access: When the user approves the request, application specific encryption keys are generated. The application will be identified in the network using its keys. When the user grants or denies authorization, the application will receive a URI. User has the option to grant permission to an application to access user data.
+- **User Grants Access:** When the user approves the request, application specific encryption keys are generated. The application will be identified in the network using its keys. When the user grants or denies authorization, the application will receive a URI. User has the option to grant permission to an application to access user data.
 
-- User can revoke app access: User has the option to revoke access for an app that they have granted access to previously.
+- **User can revoke app access:** User has the option to revoke access for an app that they have granted access to previously.
 
 
 ## Building
@@ -43,7 +43,7 @@ If building on Visual Studio 2017, you will need the following SDKs and workload
 - Latest Xcode
 
 ### Supported platforms
-- Android 4.1+ (armeabi-v7, x86_64)
+- Android 4.1+ (armeabi-v7a, x86_64)
 - iOS 8+ (ARM64, x64)
 
 ### Screenshot
