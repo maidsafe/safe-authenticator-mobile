@@ -50,7 +50,7 @@ If building on Visual Studio 2017, you will need the following SDKs and workload
 <img src="https://i.imgur.com/ctuMXbh.png" width="250" height="350"> <img src="https://i.imgur.com/1403il6.png" width="250" height="350">
 
 ## Further help
-Get your developer related questions clarified on [SAFE Dev Forum](https://forum.safedev.org/). If you're looking to share any other ideas or thoughts on the SAFE Network you can reach out on [SAFE Network Forum](https://safenetforum.org/)
+Get your developer related questions clarified on [SAFE Dev Forum](https://forum.safedev.org/). If you're looking to share any ideas or thoughts on the SAFE Network you can reach out on [SAFE Network Forum](https://safenetforum.org/)
 
 ## License
 Licensed under the General Public License (GPL), version 3 [LICENSE](http://www.gnu.org/licenses/gpl-3.0.en.html).
