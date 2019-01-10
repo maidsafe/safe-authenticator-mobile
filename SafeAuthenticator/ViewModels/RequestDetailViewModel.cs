@@ -15,11 +15,15 @@ namespace SafeAuthenticator.ViewModels
 
         public string AppId => AppInfo.Id;
 
-        public bool AppContainerRequest { get; set; }
-
         public string PageTitle { get; set; }
 
+        public bool IsContainerRequest { get; }
+
         public bool IsMDataRequest { get; }
+
+        public bool IsUnregisteredRequest { get; }
+
+        public string SecondaryTitle { get; set; }
 
         public ObservableRangeCollection<ContainerPermissionsModel> Containers { get; set; }
 
@@ -31,25 +35,33 @@ namespace SafeAuthenticator.ViewModels
 
         public RequestDetailViewModel(IpcReq req)
         {
+            Containers = new ObservableRangeCollection<ContainerPermissionsModel>();
+            MData = new ObservableRangeCollection<MDataModel>();
             var requestType = req.GetType();
-            if (requestType == typeof(AuthIpcReq))
+
+            if (requestType == typeof(UnregisteredIpcReq))
+            {
+                IsUnregisteredRequest = true;
+            }
+            else if (requestType == typeof(AuthIpcReq))
             {
                 _authReq = req as AuthIpcReq;
-                PageTitle = "Authentication Request";
                 ProcessAuthRequestData();
+                SecondaryTitle = Containers.Count > 0 ? "\nis requesting access to" : "\nis requesting access";
             }
             else if (requestType == typeof(ContainersIpcReq))
             {
+                IsContainerRequest = true;
                 _containerReq = req as ContainersIpcReq;
-                PageTitle = "Container Request";
                 ProcessContainerRequestData();
+                SecondaryTitle = Containers.Count > 0 ? "\nis requesting access to" : "\nis requesting access";
             }
             else if (requestType == typeof(ShareMDataIpcReq))
             {
                 _shareMdReq = req as ShareMDataIpcReq;
-                PageTitle = "Share MData Request";
                 IsMDataRequest = true;
                 ProcessMDataRequestData();
+                SecondaryTitle = MData.Count > 0 ? "\nis requesting access to" : "\nis requesting access";
             }
         }
 
@@ -67,9 +79,26 @@ namespace SafeAuthenticator.ViewModels
                         Delete = x.Access.Delete,
                         ManagePermissions = x.Access.ManagePermissions
                     },
-                    ContainerName = x.ContName
+                    ContainerName = Utilities.FormatContainerName(x.ContName)
                 }).ToObservableRangeCollection();
-            AppContainerRequest = _authReq.AuthReq.AppContainer;
+
+            if (_authReq.AuthReq.AppContainer)
+            {
+                Containers.Add(new ContainerPermissionsModel()
+                {
+                    ContainerName = "App's own Container",
+                    Access = new PermissionSetModel
+                    {
+                        Read = true,
+                        Insert = true,
+                        Update = true,
+                        Delete = true,
+                        ManagePermissions = true
+                    }
+                });
+            }
+
+            Containers = Containers.OrderBy(c => c.ContainerName).ToObservableRangeCollection();
         }
 
         private void ProcessContainerRequestData()
@@ -86,8 +115,10 @@ namespace SafeAuthenticator.ViewModels
                         Delete = x.Access.Delete,
                         ManagePermissions = x.Access.ManagePermissions
                     },
-                    ContainerName = x.ContName
+                    ContainerName = Utilities.FormatContainerName(x.ContName)
                 }).ToObservableRangeCollection();
+
+            Containers = Containers.OrderBy(c => c.ContainerName).ToObservableRangeCollection();
         }
 
         private void ProcessMDataRequestData()

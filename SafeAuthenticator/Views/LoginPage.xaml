@@ -4,76 +4,79 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels;assembly=SafeAuthenticator"
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
-             xmlns:behaviour="clr-namespace:SafeAuthenticator.Controls.Behaviour"
-             x:Class="SafeAuthenticator.Views.LoginPage" Title="Login" IsEnabled="{Binding IsUiEnabled}">
+             x:Class="SafeAuthenticator.Views.LoginPage" 
+             NavigationPage.HasNavigationBar="False"
+             Title="Login"
+             IsEnabled="{Binding IsUiEnabled}">
+
     <ContentPage.BindingContext>
         <viewModels:LoginViewModel />
     </ContentPage.BindingContext>
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Join" Command="{Binding CreateAcctCommand}" />
-    </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="NeedHelpStyle" TargetType="Label">
+                <Setter Property="HeightRequest" Value="25" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="ImageStyle" TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="HeightRequest" Value="95" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <ScrollView BackgroundColor="#efeff4">
-            <StackLayout VerticalOptions="Center">
-                <Image Source="auth_start.png" Aspect="AspectFit"
-                       HeightRequest="100" WidthRequest="100" HorizontalOptions="Center" Margin="0,0,0,15" />
-                <Grid Margin="25,0,25,0" IsEnabled="{Binding IsUiEnabled}" HorizontalOptions="Fill">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Label Text="Auto Reconnect"
-                           TextColor="Gray"
-                           FontSize="Medium"
-                           VerticalOptions="Center"
-                           Grid.Column="0" />
-                    <Switch IsToggled="{Binding AuthReconnect}" Grid.Column="1" />
-                </Grid>
-                <Grid Margin="20,5,20,5" HeightRequest="{StaticResource EntryHeightRequest}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{StaticResource PasswordEntryColDefinition1}" />
-                        <ColumnDefinition Width="1" />
-                        <ColumnDefinition Width="{StaticResource PasswordEntryColDefinition3}" />
-                    </Grid.ColumnDefinitions>
-                    <controls:PaddedEntry x:Name="SecretEntry" Placeholder="Secret"
-                                          Grid.Column="0"
-                                          Grid.ColumnSpan="{StaticResource PasswordEntryColumnSpan}"
-                                          Text="{Binding AcctSecret}" IsEnabled="{Binding IsUiEnabled}" />
-                    <Image VerticalOptions="Center" Grid.Column="{StaticResource PasswordEntryImageColumn}"
-                           Aspect="AspectFit"
-                           Margin="{StaticResource PasswordEntryImageMargin}" HeightRequest="25">
-                        <Image.Behaviors>
-                            <behaviour:PasswordImageBehavior InputEntry="{x:Reference SecretEntry}" />
-                        </Image.Behaviors>
-                    </Image>
-                    <StackLayout Grid.Column="1" BackgroundColor="{StaticResource PasswordEntrySeperatorColor}"
-                                 VerticalOptions="Fill" HorizontalOptions="Fill" />
-                </Grid>
-                <Grid Margin="20,5,20,5" HeightRequest="{StaticResource EntryHeightRequest}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{StaticResource PasswordEntryColDefinition1}" />
-                        <ColumnDefinition Width="1" />
-                        <ColumnDefinition Width="{StaticResource PasswordEntryColDefinition3}" />
-                    </Grid.ColumnDefinitions>
-                    <controls:PaddedEntry x:Name="PasswordEntry" Placeholder="Password"
-                                          Grid.Column="0"
-                                          Grid.ColumnSpan="{StaticResource PasswordEntryColumnSpan}"
-                                          Text="{Binding AcctPassword}" IsEnabled="{Binding IsUiEnabled}" />
-                    <Image VerticalOptions="Center" Grid.Column="{StaticResource PasswordEntryImageColumn}"
-                           Aspect="AspectFit"
-                           Margin="{StaticResource PasswordEntryImageMargin}" HeightRequest="25">
-                        <Image.Behaviors>
-                            <behaviour:PasswordImageBehavior InputEntry="{x:Reference PasswordEntry}" />
-                        </Image.Behaviors>
-                    </Image>
-                    <StackLayout Grid.Column="1" BackgroundColor="{StaticResource PasswordEntrySeperatorColor}"
-                                 VerticalOptions="Fill" HorizontalOptions="Fill" />
-                </Grid>
-                <StackLayout Margin="20,20,20,35" HeightRequest="{StaticResource ButtonHeightRequest}"
-                             VerticalOptions="Center">
-                    <Button Text="Login"
-                            TextColor="White" Command="{Binding LoginCommand}" IsVisible="{Binding IsUiEnabled}" />
+        <ScrollView Padding="25">
+            <StackLayout>
+                <StackLayout VerticalOptions="CenterAndExpand"
+                             Spacing="10">
+
+                    <Image Source="authLogo"
+                           Style="{StaticResource ImageStyle}"
+                           HorizontalOptions="Center" />
+
+                    <Label Text="SAFE Authenticator"
+                           Style="{StaticResource TitleStyle}"
+                           HorizontalOptions="Center"
+                           Margin="0,10,0,0" />
+
+                    <controls:MaterialEntry Placeholder="Account Secret"
+                                            IsPassword="True"
+                                            ErrorDisplay="None"
+                                            Margin="0,50,0,0"
+                                            Text="{Binding AccountSecret}" />
+
+                    <controls:MaterialEntry Placeholder="Account Password"
+                                            IsPassword="True"
+                                            ErrorDisplay="None"
+                                            Text="{Binding AccountPassword}" />
+
+                    <Button Text="LOGIN"
+                            Command="{Binding LoginCommand}"
+                            Margin="0,15,0,0" />
+
+                    <Button Text="CREATE ACCOUNT"
+                            HorizontalOptions="Center"
+                            BackgroundColor="Transparent"
+                            TextColor="{StaticResource PrimaryColor}"
+                            Command="{Binding CreateAccountCommand}"
+                            Margin="0,10,0,0" />
                 </StackLayout>
+
+                <Label Text="Need any help?"
+                       HorizontalOptions="Center"
+                       Style="{StaticResource NeedHelpStyle}"
+                       VerticalOptions="End">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                                              Command="{Binding NeedHelpCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

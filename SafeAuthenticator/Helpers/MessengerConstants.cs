@@ -6,6 +6,7 @@
         internal static readonly string NavCreateAcctPage = "NavCreateAcctPage";
         internal static readonly string NavHomePage = "NavHomePage";
         internal static readonly string NavLoginPage = "NavLoginPage";
+        internal static readonly string NavSettingsPage = "NavSettingsPage";
         internal static readonly string ResetAppViews = "ResetAppViews";
         internal static readonly string RefreshHomePage = "RefreshHomePage";
     }

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using SafeAuthenticator.Helpers;
+﻿using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.ViewModels;
 using Xamarin.Forms;
@@ -23,21 +22,7 @@ namespace SafeAuthenticator.Views
             InitializeComponent();
             _homeViewModel = new HomeViewModel();
             BindingContext = _homeViewModel;
-            MessagingCenter.Subscribe<HomeViewModel>(
-                this,
-                MessengerConstants.NavLoginPage,
-                async _ =>
-                {
-                    MessageCenterUnsubscribe();
-                    if (!App.IsPageValid(this))
-                    {
-                        return;
-                    }
 
-                    Debug.WriteLine("HomePage -> LoginPage");
-                    Navigation.InsertPageBefore(new LoginPage(), this);
-                    await Navigation.PopAsync();
-                });
             MessagingCenter.Subscribe<HomeViewModel, RegisteredAppModel>(
                 this,
                 MessengerConstants.NavAppInfoPage,
@@ -48,15 +33,26 @@ namespace SafeAuthenticator.Views
                         MessageCenterUnsubscribe();
                         return;
                     }
-
                     await Navigation.PushAsync(new AppInfoPage(appInfo));
-                    AccountsView.SelectedItem = null;
+                });
+
+            MessagingCenter.Subscribe<HomeViewModel>(
+                this,
+                MessengerConstants.NavSettingsPage,
+                async _ =>
+                {
+                    if (!App.IsPageValid(this))
+                    {
+                        MessageCenterUnsubscribe();
+                        return;
+                    }
+                    await Navigation.PushAsync(new SettingsPage());
                 });
         }
 
         public void MessageCenterUnsubscribe()
         {
-            MessagingCenter.Unsubscribe<HomeViewModel>(this, MessengerConstants.NavLoginPage);
+            MessagingCenter.Unsubscribe<HomeViewModel>(this, MessengerConstants.NavSettingsPage);
             MessagingCenter.Unsubscribe<HomeViewModel, RegisteredAppModel>(this, MessengerConstants.NavAppInfoPage);
         }
     }

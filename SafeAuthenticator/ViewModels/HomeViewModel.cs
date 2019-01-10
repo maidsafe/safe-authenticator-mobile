@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Input;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
@@ -9,10 +10,11 @@ namespace SafeAuthenticator.ViewModels
 {
     internal class HomeViewModel : BaseViewModel
     {
-        private string _accountStorageInfo;
         private bool _isRefreshing;
 
-        public ICommand LogoutCommand { get; }
+        public ICommand RefreshAccountsCommand { get; }
+
+        public ICommand SettingsCommand { get; }
 
         public ObservableRangeCollection<RegisteredAppModel> Apps { get; set; }
 
@@ -22,14 +24,23 @@ namespace SafeAuthenticator.ViewModels
             private set => SetProperty(ref _isRefreshing, value);
         }
 
-        public ICommand RefreshAccountsCommand { get; }
+        private RegisteredAppModel _selectedRegisteredAccount;
 
-        public ICommand AccountSelectedCommand { get; }
-
-        public string AccountStorageInfo
+        public RegisteredAppModel SelectedRegisteredAccount
         {
-            get => _accountStorageInfo;
-            set => SetProperty(ref _accountStorageInfo, value);
+            get
+            {
+                return _selectedRegisteredAccount;
+            }
+
+            set
+            {
+                if (value != null)
+                {
+                    OnAccountSelected(value);
+                    SetProperty(ref _selectedRegisteredAccount, value);
+                }
+            }
         }
 
         public HomeViewModel()
@@ -37,11 +48,15 @@ namespace SafeAuthenticator.ViewModels
             IsRefreshing = false;
             Apps = new ObservableRangeCollection<RegisteredAppModel>();
             RefreshAccountsCommand = new Command(OnRefreshAccounts);
-            AccountSelectedCommand = new Command<RegisteredAppModel>(OnAccountSelected);
-            LogoutCommand = new Command(OnLogout);
+            SettingsCommand = new Command(OnSettings);
             Device.BeginInvokeOnMainThread(OnRefreshAccounts);
 
             MessagingCenter.Subscribe<AppInfoViewModel>(this, MessengerConstants.RefreshHomePage, (sender) => { OnRefreshAccounts(); });
+        }
+
+        ~HomeViewModel()
+        {
+            MessagingCenter.Unsubscribe<AppInfoViewModel>(this, MessengerConstants.RefreshHomePage);
         }
 
         private void OnAccountSelected(RegisteredAppModel appModelInfo)
@@ -49,10 +64,9 @@ namespace SafeAuthenticator.ViewModels
             MessagingCenter.Send(this, MessengerConstants.NavAppInfoPage, appModelInfo);
         }
 
-        private async void OnLogout()
+        private void OnSettings()
         {
-            await Authenticator.LogoutAsync();
-            MessagingCenter.Send(this, MessengerConstants.NavLoginPage);
+            MessagingCenter.Send(this, MessengerConstants.NavSettingsPage);
         }
 
         private async void OnRefreshAccounts()
@@ -61,10 +75,8 @@ namespace SafeAuthenticator.ViewModels
             {
                 IsRefreshing = true;
                 var registeredApps = await Authenticator.GetRegisteredAppsAsync();
+                registeredApps = registeredApps.OrderBy(a => a.AppName).ToList();
                 Apps.ReplaceRange(registeredApps);
-                Apps.Sort();
-                var acctStorageTuple = await Authenticator.GetAccountInfoAsync();
-                AccountStorageInfo = $"{acctStorageTuple.Item1} / {acctStorageTuple.Item2}";
             }
             catch (FfiException ex)
             {

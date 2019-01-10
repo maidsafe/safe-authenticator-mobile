@@ -31,23 +31,30 @@ namespace SafeAuthenticator.ViewModels
 
         private async void OnRevokeAppCommand()
         {
-            try
+            if (await Application.Current.MainPage.DisplayAlert(
+                "Revoke Access",
+                $"Are you sure you want to revoke access for {_appModelInfo.AppName} ?",
+                "Revoke",
+                "Cancel"))
             {
-                using (UserDialogs.Instance.Loading("Revoking permission"))
+                try
                 {
-                    await Authenticator.RevokeAppAsync(_appModelInfo.AppId);
-                    MessagingCenter.Send(this, MessengerConstants.NavHomePage);
-                    MessagingCenter.Send(this, MessengerConstants.RefreshHomePage);
+                    using (UserDialogs.Instance.Loading("Revoking app access"))
+                    {
+                        await Authenticator.RevokeAppAsync(_appModelInfo.AppId);
+                        MessagingCenter.Send(this, MessengerConstants.NavHomePage);
+                        MessagingCenter.Send(this, MessengerConstants.RefreshHomePage);
+                    }
                 }
-            }
-            catch (FfiException ex)
-            {
-                var errorMessage = Utilities.GetErrorMessage(ex);
-                await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", $"Revoke app Failed: {ex.Message}", "OK");
+                catch (FfiException ex)
+                {
+                    var errorMessage = Utilities.GetErrorMessage(ex);
+                    await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
+                }
+                catch (Exception ex)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", $"Revoke app Failed: {ex.Message}", "OK");
+                }
             }
         }
     }

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          x:Class="SafeAuthenticator.Controls.ContainerPermissionViewCell"
+          IsEnabled="False">
+
+    <Grid Padding="0"
+          Margin="0,15,0,0"
+          VerticalOptions="CenterAndExpand"
+          RowSpacing="10"
+          ColumnSpacing="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="9*" />
+        </Grid.ColumnDefinitions>
+
+        <Image Source="{Binding ContainerName, Converter={StaticResource ContainerNameToImageConverter}}"
+               HeightRequest="25"
+               WidthRequest="25"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"
+               Grid.RowSpan="2" />
+
+        <StackLayout VerticalOptions="FillAndExpand"
+                     Grid.Column="1"
+                     Grid.Row="0"
+                     Spacing="3">
+            <Label Text="{Binding ContainerName}"
+                   TextColor="Black"
+                   FontSize="14" />
+            <Label Text="{Binding Access, Converter={StaticResource FormatContainerPermissionsConverter}}"
+                   TextColor="{StaticResource GreySmokeMediumColor}"
+                   FontSize="12" />
+        </StackLayout>
+
+        <BoxView BackgroundColor="Gray"
+                 Margin="0,5,0,0"
+                 Grid.Row="1"
+                 Grid.Column="1"
+                 VerticalOptions="End"
+                 HeightRequest="0.5" />
+    </Grid>
+
+</ViewCell>

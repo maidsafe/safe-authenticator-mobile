@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.ViewModels;
 using Xamarin.Forms;
@@ -30,8 +29,6 @@ namespace SafeAuthenticator.Views
                     {
                         return;
                     }
-
-                    Debug.WriteLine("CreateAcctPage -> HomePage");
                     Navigation.InsertPageBefore(new HomePage(), rootPage);
                     await Navigation.PopToRootAsync();
                 });

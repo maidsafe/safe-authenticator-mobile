@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using CarouselView.FormsPlugin.iOS;
 using Foundation;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Services;
@@ -20,7 +21,9 @@ namespace SafeAuthenticator.iOS
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            Rg.Plugins.Popup.Popup.Init();
             Forms.Init();
+            CarouselViewRenderer.Init();
             LoadApplication(new App());
 
             AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;

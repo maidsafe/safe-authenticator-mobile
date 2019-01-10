@@ -118,21 +118,35 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="LaunchScreen.storyboard" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="..\SafeAuthenticator\crust.config">
       <Link>crust.config</Link>
     </Content>
     <Content Include="..\SafeAuthenticator\log.toml">
       <Link>log.toml</Link>
     </Content>
-    <BundleResource Include="Resources\hide_pass.png" />
-    <BundleResource Include="Resources\auth_start.png" />
-    <BundleResource Include="Resources\show_pass.png" />
+    <BundleResource Include="Resources\authLogo.png" />
+    <BundleResource Include="Resources\documents.png" />
+    <BundleResource Include="Resources\downloads.png" />
+    <BundleResource Include="Resources\MData.png" />
+    <BundleResource Include="Resources\music.png" />
+    <BundleResource Include="Resources\pictures.png" />
+    <BundleResource Include="Resources\publicContainer.png" />
+    <BundleResource Include="Resources\publicNames.png" />
+    <BundleResource Include="Resources\tutorial1.png" />
+    <BundleResource Include="Resources\tutorial2.png" />
+    <BundleResource Include="Resources\videos.png" />
+    <BundleResource Include="Resources\HidePasswordIcon.png" />
+    <BundleResource Include="Resources\ShowPasswordIcon.png" />
+    <BundleResource Include="Resources\settingsIcon%402.png" />
+    <BundleResource Include="Resources\settingsIcon%403x.png" />
+    <BundleResource Include="Resources\info.png" />
+    <BundleResource Include="Resources\appcontainer.png" />
+    <BundleResource Include="Resources\tutorial0.png" />
+    <BundleResource Include="Resources\clipboardPaste.png" />
     <None Include="app.config" />
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <InterfaceDefinition Include="LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.cs">
@@ -141,24 +155,20 @@
     <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.Manual.cs">
       <Link>Helpers\AuthBindings.Manual.cs</Link>
     </Compile>
+    <Compile Include="Extensions\KeyboardExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Extensions\ColorExtension.cs" />
+    <Compile Include="Helpers\AppleNativeBrowserService.cs" />
+    <Compile Include="Helpers\BorderlessEntryRenderer.cs" />
     <Compile Include="Helpers\FileOps.cs" />
-    <Compile Include="Helpers\PaddedEntryRenderer.cs" />
+    <Compile Include="Extensions\FontExtensions.cs" />
+    <Compile Include="Helpers\FloatLabeledTextField.cs" />
+    <Compile Include="Helpers\GradientContentViewRenderer.cs" />
+    <Compile Include="Helpers\MaterialEntryRenderer.cs" />
+    <Compile Include="Helpers\ShowHidePassEffect.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\profile_generic.png" />
-    <BundleResource Include="Resources\profile_generic%402x.png" />
-    <BundleResource Include="Resources\profile_generic%403x.png" />
-    <BundleResource Include="Resources\slideout.png" />
-    <BundleResource Include="Resources\slideout%402x.png" />
-    <BundleResource Include="Resources\tab_about.png" />
-    <BundleResource Include="Resources\tab_about%402x.png" />
-    <BundleResource Include="Resources\tab_about%403x.png" />
-    <BundleResource Include="Resources\tab_feed.png" />
-    <BundleResource Include="Resources\tab_feed%402x.png" />
-    <BundleResource Include="Resources\tab_feed%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SafeAuthenticator\SafeAuthenticator.csproj">
@@ -188,9 +198,6 @@
     <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\LaunchImages.launchimage\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <NativeReference Include="Native References/libsafe_authenticator.a">
@@ -207,6 +214,9 @@
     <PackageReference Include="Acr.UserDialogs">
       <Version>7.0.1</Version>
     </PackageReference>
+    <PackageReference Include="CarouselView.FormsPlugin">
+      <Version>5.2.0</Version>
+    </PackageReference>
     <PackageReference Include="JetBrains.Annotations">
       <Version>11.1.0</Version>
     </PackageReference>
@@ -215,6 +225,9 @@
     </PackageReference>
     <PackageReference Include="PInvoke.NCrypt">
       <Version>0.5.97</Version>
+    </PackageReference>
+    <PackageReference Include="Rg.Plugins.Popup">
+      <Version>1.1.5.180</Version>
     </PackageReference>
     <PackageReference Include="Splat">
       <Version>2.0.0</Version>
@@ -226,7 +239,7 @@
       <Version>0.11.0-preview</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>3.3.0.967583</Version>
+      <Version>3.4.0.1008975</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildThisFileDirectory)..\CodeStyles.targets" />

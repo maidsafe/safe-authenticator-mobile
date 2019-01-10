@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>SafeAuthenticator</string>
+	<string>Safe&#x2007;Authenticator</string>
 	<key>CFBundleName</key>
 	<string>SafeAuthenticator</string>
 	<key>CFBundleIdentifier</key>
@@ -51,9 +51,9 @@
 			<string>None</string>
 		</dict>
 	</array>
-	<key>XSLaunchImageAssets</key>
-	<string>Resources/Media.xcassets/LaunchImages.launchimage</string>
 	<key>XSAppIconAssets</key>
 	<string>Resources/Media.xcassets/AppIcons.appiconset</string>
+	<key>UIMainStoryboardFile</key>
+	<string>LaunchScreen</string>
 </dict>
 </plist>

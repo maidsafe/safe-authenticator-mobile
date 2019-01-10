@@ -3,56 +3,60 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
-             Title="Home"
-             x:Class="SafeAuthenticator.Views.HomePage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Logout" Command="{Binding LogoutCommand}" />
-    </ContentPage.ToolbarItems>
-    <ContentPage.Content>
-        <StackLayout VerticalOptions="StartAndExpand">
-            <StackLayout>
-                <Label Text="Acct Info"
-                       LineBreakMode="TailTruncation"
-                       TextColor="Gray"
-                       Margin="15,10,15,0"
-                       FontSize="Medium" />
-                <Label Text="{Binding AccountStorageInfo}"
-                       LineBreakMode="TailTruncation"
-                       Margin="25,5,25,10"
-                       TextColor="DarkGray"
-                       FontSize="Medium" />
-            </StackLayout>
-            <StackLayout BackgroundColor="LightGray" HeightRequest="2" />
+             xmlns:behaviour="clr-namespace:SafeAuthenticator.Controls.Behaviour"
+             x:Class="SafeAuthenticator.Views.HomePage"
+             Title="SAFE Authenticator">
 
-            <Label Text="Authorised Apps:" Margin="15,10,15,10"
-                   TextColor="Gray"
-                   LineBreakMode="TailTruncation"
-                   FontSize="Medium" />
-            <ListView x:Name="AccountsView" ItemsSource="{Binding Apps}"
-                      VerticalOptions="FillAndExpand"
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="settingsIcon"
+                     Command="{Binding SettingsCommand}"
+                     Text="Settings" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout Spacing="10">
+
+            <ListView x:Name="AccountsListView"
                       HasUnevenRows="True"
+                      SeparatorVisibility="None"
+                      ItemsSource="{Binding Apps}"
                       RefreshCommand="{Binding RefreshAccountsCommand}"
                       IsPullToRefreshEnabled="True"
                       IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
-                      controls:ItemTappedAttached.Command="{Binding AccountSelectedCommand}"
+                      SelectedItem="{Binding SelectedRegisteredAccount}"
                       CachingStrategy="RecycleElement">
+
+                <ListView.Behaviors>
+                    <behaviour:ListViewNoSelectionBehavior />
+                </ListView.Behaviors>
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Padding="25,10,25,10">
-                                <Label Text="{Binding AppName}"
-                                       LineBreakMode="TailTruncation"
-                                       VerticalTextAlignment="Center"
-                                       FontSize="20" />
-                            </StackLayout>
-                        </ViewCell>
+                        <controls:RegisteredAppViewCell />
                     </DataTemplate>
                 </ListView.ItemTemplate>
+
                 <ListView.Footer>
-                    <StackLayout Orientation="Horizontal" BackgroundColor="LightGray">
-                        <Label Margin="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
-                               Text="No Apps." TextColor="Gray"
-                               IsVisible="{Binding Apps.Count, Converter={StaticResource IsCollectionEmptyConverter}}" />
+                    <StackLayout Orientation="Horizontal">
+                        <Label Margin="20"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="CenterAndExpand"
+                               IsVisible="False">
+                            <Label.Triggers>
+                                <MultiTrigger TargetType="Label">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Apps.Count}"
+                                                          Value="0" />
+                                        <BindingCondition Binding="{Binding IsRefreshing}"
+                                                          Value="False" />
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="IsVisible"
+                                            Value="True" />
+                                    <Setter Property="Text"
+                                            Value="No apps have been authorised yet." />
+                                </MultiTrigger>
+                            </Label.Triggers>
+                        </Label>
                     </StackLayout>
                 </ListView.Footer>
             </ListView>

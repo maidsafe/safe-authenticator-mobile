@@ -2,75 +2,157 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels;assembly=SafeAuthenticator"
+             xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
-             xmlns:behaviour="clr-namespace:SafeAuthenticator.Controls.Behaviour"
-             x:Class="SafeAuthenticator.Views.CreateAcctPage" Title="Create Account" IsEnabled="{Binding IsUiEnabled}">
+             xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels"
+             x:Class="SafeAuthenticator.Views.CreateAcctPage"
+             Title="Create Account">
+
     <ContentPage.BindingContext>
-        <viewModels:CreateAcctViewModel />
+        <viewModels:CreateAcctViewModel/>
     </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="ImageStyle" TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="HeightRequest" Value="30" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <ScrollView BackgroundColor="#efeff4">
-            <StackLayout VerticalOptions="Center">
-                <Entry Placeholder="Invitation" Margin="20,0,20,25"
-                       Text="{Binding Invitation}" IsEnabled="{Binding IsUiEnabled}" />
-                <Grid Margin="25,0,25,0" IsEnabled="{Binding IsUiEnabled}" HorizontalOptions="Fill">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Label Text="Auto Reconnect"
-                           TextColor="Gray"
-                           FontSize="Medium"
-                           VerticalOptions="Center"
-                           Grid.Column="0" />
-                    <Switch IsToggled="{Binding AuthReconnect}" Grid.Column="1" />
-                </Grid>
-                <Grid Margin="20,5,20,5" HeightRequest="{StaticResource EntryHeightRequest}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{StaticResource PasswordEntryColDefinition1}" />
-                        <ColumnDefinition Width="1" />
-                        <ColumnDefinition Width="{StaticResource PasswordEntryColDefinition3}" />
-                    </Grid.ColumnDefinitions>
-                    <controls:PaddedEntry x:Name="SecretEntry" Placeholder="Secret"
-                                          Grid.Column="0"
-                                          Grid.ColumnSpan="{StaticResource PasswordEntryColumnSpan}"
-                                          Text="{Binding AcctSecret}" IsEnabled="{Binding IsUiEnabled}" />
-                    <Image VerticalOptions="Center" Grid.Column="{StaticResource PasswordEntryImageColumn}"
-                           Aspect="AspectFit"
-                           Margin="{StaticResource PasswordEntryImageMargin}" HeightRequest="25">
-                        <Image.Behaviors>
-                            <behaviour:PasswordImageBehavior InputEntry="{x:Reference SecretEntry}" />
-                        </Image.Behaviors>
-                    </Image>
-                    <StackLayout Grid.Column="1" BackgroundColor="{StaticResource PasswordEntrySeperatorColor}"
-                                 VerticalOptions="Fill" HorizontalOptions="Fill" />
-                </Grid>
-                <Grid Margin="20,5,20,5" HeightRequest="{StaticResource EntryHeightRequest}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{StaticResource PasswordEntryColDefinition1}" />
-                        <ColumnDefinition Width="1" />
-                        <ColumnDefinition Width="{StaticResource PasswordEntryColDefinition3}" />
-                    </Grid.ColumnDefinitions>
-                    <controls:PaddedEntry x:Name="PasswordEntry" Placeholder="Password"
-                                          Grid.Column="0"
-                                          Grid.ColumnSpan="{StaticResource PasswordEntryColumnSpan}"
-                                          Text="{Binding AcctPassword}" IsEnabled="{Binding IsUiEnabled}" />
-                    <Image VerticalOptions="Center" Grid.Column="{StaticResource PasswordEntryImageColumn}"
-                           Aspect="AspectFit"
-                           Margin="{StaticResource PasswordEntryImageMargin}" HeightRequest="25">
-                        <Image.Behaviors>
-                            <behaviour:PasswordImageBehavior InputEntry="{x:Reference PasswordEntry}" />
-                        </Image.Behaviors>
-                    </Image>
-                    <StackLayout Grid.Column="1" BackgroundColor="{StaticResource PasswordEntrySeperatorColor}"
-                                 VerticalOptions="Fill" HorizontalOptions="Fill" />
-                </Grid>
-                <StackLayout Margin="20" HeightRequest="{StaticResource ButtonHeightRequest}" VerticalOptions="Center">
-                    <Button Text="Create Account"
-                            TextColor="White" Command="{Binding CreateAcctCommand}" IsVisible="{Binding IsUiEnabled}" />
-                </StackLayout>
-            </StackLayout>
-        </ScrollView>
+        <StackLayout Spacing="10">
+            <cv:CarouselViewControl                    
+                    ShowArrows="False"
+                    ShowIndicators="False"
+                    IsSwipeEnabled="False"
+                    HeightRequest="350"
+                    PositionSelectedCommand="{Binding CarouselPageChangeCommand}"
+                    Position="{Binding CarouselPagePosition}"
+                    Margin="0,40,0,0">
+                <cv:CarouselViewControl.ItemsSource>
+                    <x:Array Type="{x:Type View}">
+
+                        <!-- Invitation -->
+                        <StackLayout>
+                            <StackLayout Spacing="10"
+                                         Padding="25,0">
+
+                                <Label Text="First, you need an invitation token"
+                                       Style="{DynamicResource TitleStyle}" />
+
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="In order to create an account, you need to achieve trust level 1 on the " />
+                                            <Span Text="SAFE network forum" 
+                                                  TextColor="{StaticResource PrimaryColor}"
+                                                  TextDecorations="Underline">
+                                                <Span.GestureRecognizers>
+                                                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                                              Command="{Binding OpenForumLinkCommand}">
+                                                    </TapGestureRecognizer>
+                                                </Span.GestureRecognizers>
+                                            </Span>
+                                            <Span Text="." />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Button Text="CLAIM INVITATION TOKEN"
+                                            Margin="0,20,0,0"
+                                            Command="{Binding ClaimTokenCommand}" />
+
+                                <Label Text="OR"
+                                       HorizontalOptions="Center"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="{StaticResource GreySmokeMediumColor}"
+                                       Margin="0,20,0,0"
+                                       Style="{DynamicResource TitleStyle}" />
+
+                                <StackLayout Orientation="Horizontal"
+                                                 Margin="0,20,0,0">
+
+                                    <controls:MaterialEntry Placeholder="Invitation token"
+                                                            Text="{Binding Invitation}"
+                                                            HorizontalOptions="FillAndExpand" 
+                                                            ErrorDisplay="None" />
+
+                                    <Image Source="clipboardPaste"
+                                           Style="{DynamicResource ImageStyle}"
+                                           Margin="0,0,0,5">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                                  Command="{Binding ClipboardPasteCommand}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <!-- Account Secret -->
+                        <StackLayout Spacing="15"
+                                         Padding="25,0">
+                            <Label Text="Account Secret"
+                                   Style="{DynamicResource TitleStyle}"/>
+
+                            <Label Text="Your 'Account Secret' is private and should not be shared with anyone."
+                                       Margin="0,0,0,20" />
+
+                            <controls:MaterialEntry Placeholder="Account secret"
+                                                        IsPassword="True"
+                                                        Text="{Binding AcctSecret}"
+                                                        ErrorDisplay="None"
+                                                        Margin="0,50,0,0" />
+
+                            <controls:MaterialEntry Placeholder="Confirm account secret"
+                                                        IsPassword="True"
+                                                        Text="{Binding ConfirmAcctSecret}"
+                                                        ErrorText="{Binding AcctSecretErrorMsg}" />
+                        </StackLayout>
+
+                        <!-- Account Password -->
+                        <StackLayout Spacing="15"
+                                     Padding="25,0">
+
+                            <Label Text="Account Password"
+                                   Style="{DynamicResource TitleStyle}"/>
+
+                            <Label Text="Your 'Account Password' is never sent to the network, it will not leave your device."
+                                   Margin="0,0,0,20" />
+
+                            <controls:MaterialEntry Placeholder="Account password"
+                                                    IsPassword="True"
+                                                    Text="{Binding AcctPassword}"
+                                                    ErrorDisplay="None"
+                                                    Margin="0,50,0,0" />
+
+                            <controls:MaterialEntry Placeholder="Confirm account password"
+                                                    IsPassword="True"
+                                                    Text="{Binding ConfirmAcctPassword}"
+                                                    ErrorText="{Binding AcctPasswordErrorMsg}" />
+                        </StackLayout>
+                    </x:Array>
+                </cv:CarouselViewControl.ItemsSource>
+            </cv:CarouselViewControl>
+
+            <Button Text="CONTINUE"
+                        Command="{Binding CarouselContinueCommand}"
+                        Margin="25,0"/>
+
+            <Button Text="BACK"
+                        HorizontalOptions="Center"
+                        Command="{Binding CarouselBackCommand}"
+                        IsVisible="{Binding IsBackButtonVisible}"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource PrimaryColor}"
+                        Margin="25,0"/>
+        </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>

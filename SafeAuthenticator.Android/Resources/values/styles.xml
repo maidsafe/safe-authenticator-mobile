@@ -1,6 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <resources>
+  <style name="Theme.Splash"
+         parent="android:Theme">
+    <item name="android:windowBackground" > @drawable/SplashBackground </item>
+    <item name="android:windowNoTitle" > true </item>
+  </style>
   <style name="MyTheme" parent="MyTheme.Base">
   </style>
   <!-- Base theme applied no matter what API -->
@@ -11,12 +16,12 @@
     <item name="windowActionBar">false</item>
     <!-- Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette-->
     <!-- colorPrimary is used for the default action bar background -->
-    <item name="colorPrimary">#5593d7</item>
+    <item name="colorPrimary">#0074e4</item>
     <!-- colorPrimaryDark is used for the status bar -->
-    <item name="colorPrimaryDark">#5593d7</item>
+    <item name="colorPrimaryDark">#0074e4</item>
     <!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
-    <item name="colorAccent">#5593d7</item>
+    <item name="colorAccent">#0074e4</item>
     <!-- You can also set colorControlNormal, colorControlActivated
          colorControlHighlight and colorSwitchThumbNormal. -->
     <item name="windowActionModeOverlay">true</item>
@@ -24,7 +29,7 @@
     <item name="android:textAppearanceButton">@style/mybutton.text</item>
   </style>
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
-    <item name="colorAccent">#FF4081</item>
+    <item name="colorAccent">#0074e4</item>
   </style>
   <style name="mybutton.text" parent="Base.TextAppearance.AppCompat.Button">
     <item name="textAllCaps">false</item>

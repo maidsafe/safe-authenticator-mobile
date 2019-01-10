@@ -1,91 +1,96 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:converters="clr-namespace:SafeAuthenticator.Controls.Converters"
              x:Class="SafeAuthenticator.App">
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Primary">#5593d7</Color>
-            <Color x:Key="PrimaryDark">#5593d7</Color>
-            <Color x:Key="Accent">#96d1ff</Color>
-            <Color x:Key="LightBackgroundColor">#FAFAFA</Color>
-            <Color x:Key="DarkBackgroundColor">#C0C0C0</Color>
-            <Color x:Key="MediumGrayTextColor">#4d4d4d</Color>
-            <Color x:Key="LightTextColor">#999999</Color>
 
-            <Color x:Key="ButtonNormal">#5791cd</Color>
-            <Color x:Key="ButtonDisabled">#8aa5c0</Color>
-            <OnPlatform x:TypeArguments="system:Double" x:Key="ButtonHeightRequest">
-                <OnPlatform.Platforms>
-                    <On Platform="iOS" Value="45" />
-                    <On Platform="Android" Value="50" />
-                </OnPlatform.Platforms>
-            </OnPlatform>
-            <OnPlatform x:TypeArguments="system:Double" x:Key="EntryHeightRequest">
-                <OnPlatform.Platforms>
-                    <On Platform="iOS" Value="40" />
-                    <On Platform="Android" Value="45" />
-                </OnPlatform.Platforms>
-            </OnPlatform>
+            <!-- COLORS -->
+            <Color x:Key="PrimaryColor">#0074e4</Color>
+            <Color x:Key="BlackColor">#000000</Color>
+            <Color x:Key="WhiteColor">#ffffff</Color>
+            <Color x:Key="RedColor">#d94a3d</Color>
+            <Color x:Key="GreySmokeLightColor">#c2c1c1</Color>
+            <Color x:Key="GreySmokeMediumColor">#8b8b8b</Color>
+            <Color x:Key="GreySnowMediumColor">#e4e4e4</Color>
+
+            <!-- CONVERTERS -->
+            <converters:IsCollectionEmptyConverter x:Key="IsCollectionEmptyConverter" />
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+            <converters:FormatTitleConverter x:Key="FormatTitleConverter" />
+            <converters:FormatContainerNameConverter x:Key="FormatContainerNameConverter" />
+            <converters:ContainerNameToImageConverter x:Key="ContainerNameToImageConverter" />
+            <converters:FormatContainerPermissionsConverter x:Key="FormatContainerPermissionsConverter" />
+            <converters:ByteArraytoHexStringConverter x:Key="ByteArraytoHexStringConverter" />
+
+            <!-- SIZES -->
+            <OnPlatform x:Key="ButtonHeightRequest"
+                        x:TypeArguments="x:Double"
+                        Android="40" 
+                        iOS="45" />
+
+            <OnPlatform x:Key="EntryHeightRequest"
+                        x:TypeArguments="x:Double"
+                        Android="40" 
+                        iOS="40" />
+            
+            <OnPlatform x:Key="LittleSize"
+                        x:TypeArguments="x:Double"
+                        Android="12" 
+                        iOS="11" />
+
+            <OnPlatform x:Key="MidMediumSize"
+                        x:TypeArguments="x:Double"
+                        Android="14"
+                        iOS="12" />
+
+            <OnPlatform x:Key="MediumSize"
+                        x:TypeArguments="x:Double"
+                        Android="16"
+                        iOS="14" />
+
+            <OnPlatform x:Key="LargeSize"
+                        x:TypeArguments="x:Double"
+                        Android="18"
+                        iOS="16" />
+
+            <!-- STYLES -->
+            <Style x:Key="InfoButton" TargetType="ImageButton">
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="Source" Value="info" />
+            </Style>
 
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="BarTextColor" Value="White" />
+                <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="BarTextColor" Value="{StaticResource  WhiteColor}" />
             </Style>
+
             <Style TargetType="Button">
                 <Setter Property="HeightRequest" Value="{StaticResource ButtonHeightRequest}" />
-                <Setter Property="FontSize" Value="20" />
-                <Setter Property="BackgroundColor" Value="{StaticResource ButtonNormal}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="CornerRadius" Value="5" />
                 <Style.Triggers>
                     <Trigger TargetType="Button" Property="IsEnabled" Value="False">
-                        <Setter Property="BackgroundColor" Value="{StaticResource ButtonDisabled}" />
+                        <Setter Property="BackgroundColor" Value="{StaticResource GreySmokeLightColor}" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
+
             <Style TargetType="Entry">
                 <Setter Property="HeightRequest" Value="{StaticResource EntryHeightRequest}" />
-                <Setter Property="FontSize" Value="20" />
-                <Setter Property="HorizontalTextAlignment" Value="Center" />
             </Style>
-            <OnPlatform x:TypeArguments="x:Int32" x:Key="PasswordEntryImageColumn">
-                <OnPlatform.Platforms>
-                    <On Platform="iOS" Value="0" />
-                    <On Platform="Android" Value="2" />
-                </OnPlatform.Platforms>
-            </OnPlatform>
-            <OnPlatform x:TypeArguments="x:Int32" x:Key="PasswordEntryColumnSpan">
-                <OnPlatform.Platforms>
-                    <On Platform="iOS" Value="3" />
-                    <On Platform="Android" Value="1" />
-                </OnPlatform.Platforms>
-            </OnPlatform>
-            <OnPlatform x:TypeArguments="GridLength" x:Key="PasswordEntryColDefinition1">
-                <OnPlatform.Platforms>
-                    <On Platform="iOS" Value="35" />
-                    <On Platform="Android" Value="*" />
-                </OnPlatform.Platforms>
-            </OnPlatform>
-            <OnPlatform x:TypeArguments="GridLength" x:Key="PasswordEntryColDefinition3">
-                <OnPlatform.Platforms>
-                    <On Platform="iOS" Value="*" />
-                    <On Platform="Android" Value="35" />
-                </OnPlatform.Platforms>
-            </OnPlatform>
-            <OnPlatform x:TypeArguments="Thickness" x:Key="PasswordEntryImageMargin">
-                <OnPlatform.Platforms>
-                    <On Platform="iOS" Value="10,0,0,0" />
-                    <On Platform="Android" Value="0,0,10,0" />
-                </OnPlatform.Platforms>
-            </OnPlatform>
-            <OnPlatform x:TypeArguments="Color" x:Key="PasswordEntrySeperatorColor">
-                <OnPlatform.Platforms>
-                    <On Platform="iOS" Value="LightGray" />
-                    <On Platform="Android" Value="Transparent" />
-                </OnPlatform.Platforms>
-            </OnPlatform>
-            <converters:IsCollectionEmptyConverter x:Key="IsCollectionEmptyConverter" />
-            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

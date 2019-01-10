@@ -24,32 +24,49 @@ namespace SafeAuthenticator.Helpers
             return result;
         }
 
-        internal static (double, double, string) StrengthChecker(string data)
+        internal static StrengthIndicator StrengthChecker(string data)
         {
             if (_estimator == null)
+            {
                 _estimator = new ZxcvbnEstimator();
-            if (string.IsNullOrEmpty(data))
-                return (0, 0, string.Empty);
-            string strength = null;
-            var result = _estimator.EstimateStrength(data);
-            var calc = Math.Log(result.Guesses) / Math.Log(10);
-            if (calc < AppConstants.AccStrengthVeryWeak)
-                strength = "VERY_WEAK";
-            else if (calc < AppConstants.AccStrengthWeak)
-                strength = "WEAK";
-            else if (calc < AppConstants.AccStrengthSomeWhatSecure)
-                strength = "SOMEWHAT_SECURE";
-            else if (calc >= AppConstants.AccStrengthSomeWhatSecure)
-                strength = "SECURE";
-            double percentage = Math.Round(Math.Min((calc / 16) * 100, 100));
-            return (calc, percentage, strength);
+            }
+
+            var strengthIndicator = new StrengthIndicator();
+
+            if (!string.IsNullOrEmpty(data))
+            {
+                var result = _estimator.EstimateStrength(data);
+                strengthIndicator.Guesses = Math.Log(result.Guesses) / Math.Log(10);
+                if (strengthIndicator.Guesses < AppConstants.AccStrengthVeryWeak)
+                {
+                    strengthIndicator.Strength = "VERY_WEAK";
+                }
+                else if (strengthIndicator.Guesses < AppConstants.AccStrengthWeak)
+                {
+                    strengthIndicator.Strength = "WEAK";
+                }
+                else if (strengthIndicator.Guesses < AppConstants.AccStrengthSomeWhatSecure)
+                {
+                    strengthIndicator.Strength = "SOMEWHAT_SECURE";
+                }
+                else if (strengthIndicator.Guesses >= AppConstants.AccStrengthSomeWhatSecure)
+                {
+                    strengthIndicator.Strength = "SECURE";
+                }
+
+                strengthIndicator.Percentage = Math.Round(Math.Min((strengthIndicator.Guesses / 16) * 100, 100));
+            }
+            return strengthIndicator;
         }
 
         internal static string GetErrorMessage(FfiException error)
         {
             var current = Connectivity.NetworkAccess;
             if (current != NetworkAccess.Internet)
+            {
                 return "No internet connection";
+            }
+
             switch (error.ErrorCode)
             {
                 case -2000:
@@ -61,13 +78,50 @@ namespace SafeAuthenticator.Helpers
                 case -102:
                     return "Account already exists";
                 case -116:
-                    return "Invalid invitation";
+                    return "Invalid invitation token";
                 case -117:
                     return "Invitation already claimed";
+                case -206:
+                    return "SharedMData request denied";
+                case -113:
+                    return "Insufficient account balance";
                 default:
                     return error.Message;
             }
         }
+
+        internal static string GetRandomColor(int appNameLength)
+        {
+            var colors = new List<string>
+            {
+                "#EF5350",
+                "#7E57C2",
+                "#29B6F6",
+                "#66BB6A",
+                "#FF7043",
+                "#42A5F5",
+                "#EC407A",
+                "#AB47BC",
+                "#26A69A"
+            };
+            return colors[appNameLength % colors.Count];
+        }
+
+        internal static string FormatContainerName(string containerName)
+        {
+            if (containerName.StartsWith("apps/"))
+            {
+                return "App's own Container";
+            }
+
+            if (containerName == "_publicNames")
+            {
+                return "Public Names";
+            }
+
+            return $"{containerName.Substring(1, 1).ToUpper()}{containerName.Substring(2)}";
+        }
+
         #region Encoding Extensions
 
         public static string ToUtfString(this List<byte> input)

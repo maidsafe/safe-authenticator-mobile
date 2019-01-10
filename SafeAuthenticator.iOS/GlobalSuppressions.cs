@@ -5,3 +5,4 @@
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:Element should begin with upper-case letter", Justification = "default iOS namespace", Scope = "namespace", Target = "~N:SafeAuthenticator.iOS")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:Element should begin with upper-case letter", Justification = "default iOS namespace", Scope = "namespace", Target = "~N:SafeAuthenticator.iOS.Helpers")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:Element should begin with upper-case letter", Justification = "default iOS namespace", Scope = "namespace", Target = "~N:SafeAuthenticator.iOS.Extensions")]
