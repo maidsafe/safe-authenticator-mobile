@@ -194,6 +194,11 @@ namespace SafeAuthenticator.Services
                     requestPage.CompleteRequest += async (s, e) =>
                     {
                         var args = e as ResponseEventArgs;
+                        if (args.Response)
+                        {
+                            MessagingCenter.Send(this, MessengerConstants.RefreshHomePage, decodeResult);
+                        }
+
                         await SendResponseBack(encodedUri, decodeResult, args.Response);
                     };
 
