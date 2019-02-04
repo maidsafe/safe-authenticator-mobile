@@ -4,7 +4,6 @@ using Rg.Plugins.Popup.Services;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
 using SafeAuthenticator.ViewModels;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace SafeAuthenticator.Views

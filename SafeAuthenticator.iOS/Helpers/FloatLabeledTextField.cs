@@ -38,10 +38,7 @@ namespace SafeAuthenticator.iOS.Helpers
 
         public UIColor FloatingLabelTextColor
         {
-            get
-            {
-                return _floatingLabelTextColor;
-            }
+            get => _floatingLabelTextColor;
 
             set
             {
@@ -55,10 +52,7 @@ namespace SafeAuthenticator.iOS.Helpers
 
         public UIColor FloatingLabelActiveTextColor
         {
-            get
-            {
-                return _floatingLabelActiveTextColor;
-            }
+            get => _floatingLabelActiveTextColor;
 
             set
             {
@@ -74,51 +68,36 @@ namespace SafeAuthenticator.iOS.Helpers
 
         public bool UnderlineErrorSpaceEnabled { get; set; } = true;
 
-        public float UnderlineSpace
-        {
-            get
-            {
-                return UnderlineErrorSpaceEnabled ? 22 : 4;
-            }
-        }
+        public float UnderlineSpace => UnderlineErrorSpaceEnabled ? 22 : 4;
 
         public UIColor ErrorTextColor
         {
-            get { return _errorLabel.TextColor; }
-            set { _errorLabel.TextColor = value; }
+            get => _errorLabel.TextColor;
+            set => _errorLabel.TextColor = value;
         }
 
         public bool UnderlineErrorTextIsVisible
         {
-            get
-            {
-                return !_errorLabel.Hidden;
-            }
+            get => !_errorLabel.Hidden;
 
-            set
-            {
-                _errorLabel.Hidden = !value;
-            }
+            set => _errorLabel.Hidden = !value;
         }
 
         public CGColor UnderlineColor
         {
-            get { return _underline.BackgroundColor; }
-            set { _underline.BackgroundColor = value; }
+            get => _underline.BackgroundColor;
+            set => _underline.BackgroundColor = value;
         }
 
         public UIFont FloatingLabelFont
         {
-            get { return _floatingLabel.Font; }
-            set { _floatingLabel.Font = value; }
+            get => _floatingLabel.Font;
+            set => _floatingLabel.Font = value;
         }
 
         public string ErrorText
         {
-            get
-            {
-                return _errorLabel.Text;
-            }
+            get => _errorLabel.Text;
 
             set
             {
@@ -135,10 +114,7 @@ namespace SafeAuthenticator.iOS.Helpers
 
         public override string Placeholder
         {
-            get
-            {
-                return base.Placeholder;
-            }
+            get => base.Placeholder;
 
             set
             {

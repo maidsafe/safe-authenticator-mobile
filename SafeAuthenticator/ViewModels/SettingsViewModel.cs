@@ -6,11 +6,11 @@ using Xamarin.Forms;
 
 namespace SafeAuthenticator.ViewModels
 {
-    class SettingsViewModel : BaseViewModel
+    internal class SettingsViewModel : BaseViewModel
     {
         public ICommand LogoutCommand { get; }
 
-        public ICommand FAQCommand { get; }
+        public ICommand FaqCommand { get; }
 
         public ICommand PrivacyInfoCommand { get; }
 
@@ -41,7 +41,7 @@ namespace SafeAuthenticator.ViewModels
             LogoutCommand = new Command(OnLogout);
             AccountStorageInfo = "Fetching account info...";
 
-            FAQCommand = new Command(() =>
+            FaqCommand = new Command(() =>
             {
                 OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(@"https://safenetforum.org/t/safe-authenticator-faq/26683");
             });
@@ -72,11 +72,13 @@ namespace SafeAuthenticator.ViewModels
 
         private async void OnLogout()
         {
-            if (await Application.Current.MainPage.DisplayAlert(
+            var result = await Application.Current.MainPage.DisplayAlert(
                 "Logout",
                 "Are you sure you want to logout?",
                 "Logout",
-                "Cancel"))
+                "Cancel");
+
+            if (result)
             {
                 AuthReconnect = false;
                 await Authenticator.LogoutAsync();

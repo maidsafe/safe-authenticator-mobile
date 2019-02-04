@@ -63,15 +63,7 @@ namespace SafeAuthenticator.iOS.Extensions
                 return null;
             }
 
-            UIFont targetFont;
-            if (span.IsDefault())
-            {
-                targetFont = ((IFontElement)owner).ToUIFont();
-            }
-            else
-            {
-                targetFont = span.ToUIFont();
-            }
+            var targetFont = span.IsDefault() ? ((IFontElement)owner).ToUIFont() : span.ToUIFont();
 
             var fgcolor = span.ForegroundColor;
             if (fgcolor.IsDefault)

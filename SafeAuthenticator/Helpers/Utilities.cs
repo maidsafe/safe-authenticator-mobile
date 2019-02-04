@@ -33,29 +33,31 @@ namespace SafeAuthenticator.Helpers
 
             var strengthIndicator = new StrengthIndicator();
 
-            if (!string.IsNullOrEmpty(data))
+            if (string.IsNullOrEmpty(data))
             {
-                var result = _estimator.EstimateStrength(data);
-                strengthIndicator.Guesses = Math.Log(result.Guesses) / Math.Log(10);
-                if (strengthIndicator.Guesses < AppConstants.AccStrengthVeryWeak)
-                {
-                    strengthIndicator.Strength = "VERY_WEAK";
-                }
-                else if (strengthIndicator.Guesses < AppConstants.AccStrengthWeak)
-                {
-                    strengthIndicator.Strength = "WEAK";
-                }
-                else if (strengthIndicator.Guesses < AppConstants.AccStrengthSomeWhatSecure)
-                {
-                    strengthIndicator.Strength = "SOMEWHAT_SECURE";
-                }
-                else if (strengthIndicator.Guesses >= AppConstants.AccStrengthSomeWhatSecure)
-                {
-                    strengthIndicator.Strength = "SECURE";
-                }
-
-                strengthIndicator.Percentage = Math.Round(Math.Min((strengthIndicator.Guesses / 16) * 100, 100));
+                throw new Exception("Can't check strength for empty string.");
             }
+
+            var result = _estimator.EstimateStrength(data);
+            strengthIndicator.Guesses = Math.Log(result.Guesses) / Math.Log(10);
+            if (strengthIndicator.Guesses < AppConstants.AccStrengthVeryWeak)
+            {
+                strengthIndicator.Strength = "VERY_WEAK";
+            }
+            else if (strengthIndicator.Guesses < AppConstants.AccStrengthWeak)
+            {
+                strengthIndicator.Strength = "WEAK";
+            }
+            else if (strengthIndicator.Guesses < AppConstants.AccStrengthSomeWhatSecure)
+            {
+                strengthIndicator.Strength = "SOMEWHAT_SECURE";
+            }
+            else if (strengthIndicator.Guesses >= AppConstants.AccStrengthSomeWhatSecure)
+            {
+                strengthIndicator.Strength = "SECURE";
+            }
+
+            strengthIndicator.Percentage = Math.Round(Math.Min((strengthIndicator.Guesses / 16) * 100, 100));
             return strengthIndicator;
         }
 

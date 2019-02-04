@@ -131,7 +131,7 @@ namespace SafeAuthenticator.ViewModels
 
             IsUiEnabled = Authenticator.IsLogInitialised;
 
-            CarouselContinueCommand = new Command(async () => await OnContinueAsync(), () => CanExecute());
+            CarouselContinueCommand = new Command(async () => await OnContinueAsync(), CanExecute);
             CarouselBackCommand = new Command(OnBack);
             CarouselPageChangeCommand = new Command(CarouselPageChange);
             OpenForumLinkCommand = new Command(() =>

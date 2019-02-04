@@ -28,18 +28,17 @@ namespace SafeAuthenticator.ViewModels
 
         public RegisteredAppModel SelectedRegisteredAccount
         {
-            get
-            {
-                return _selectedRegisteredAccount;
-            }
+            get => _selectedRegisteredAccount;
 
             set
             {
-                if (value != null)
+                if (value == null)
                 {
-                    OnAccountSelected(value);
-                    SetProperty(ref _selectedRegisteredAccount, value);
+                    return;
                 }
+
+                OnAccountSelected(value);
+                SetProperty(ref _selectedRegisteredAccount, value);
             }
         }
 

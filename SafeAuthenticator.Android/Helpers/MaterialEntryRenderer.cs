@@ -172,7 +172,7 @@ namespace SafeAuthenticator.Droid.Helpers
 
         protected AColor GetPlaceholderColor() => Element.PlaceholderColor.ToAndroid(Color.FromHex("#80000000"));
 
-        private AColor GetActivePlaceholderColor() => Element.ActivePlaceholderColor.ToAndroid(global::Android.Resource.Attribute.ColorAccent, Context);
+        private AColor GetActivePlaceholderColor() => Element.ActivePlaceholderColor.ToAndroid(Android.Resource.Attribute.ColorAccent, Context);
 
         protected virtual void SetLabelAndUnderlineColor()
         {
@@ -194,14 +194,14 @@ namespace SafeAuthenticator.Droid.Helpers
         {
             var hintText = Control.Class.GetDeclaredField("mFocusedTextColor");
             hintText.Accessible = true;
-            hintText.Set(Control, new ColorStateList(new int[][] { new[] { 0 } }, new int[] { color }));
+            hintText.Set(Control, new ColorStateList(new[] { new[] { 0 } }, new int[] { color }));
         }
 
         private void SetHintLabelDefaultColor(AColor color)
         {
             var hint = Control.Class.GetDeclaredField("mDefaultTextColor");
             hint.Accessible = true;
-            hint.Set(Control, new ColorStateList(new int[][] { new[] { 0 } }, new int[] { color }));
+            hint.Set(Control, new ColorStateList(new[] { new[] { 0 } }, new int[] { color }));
         }
 
         private void SetText()

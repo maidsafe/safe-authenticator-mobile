@@ -9,9 +9,9 @@ namespace SafeAuthenticator.Droid.ControlsRenderers
 {
     public static class FontExtensions
     {
-        const string _loadFromAssetsRegex = @"\w+\.((ttf)|(otf))\#\w*";
+        private const string LoadFromAssetsRegex = @"\w+\.((ttf)|(otf))\#\w*";
 
-        private static readonly Dictionary<Tuple<string, FontAttributes>, Typeface> _typefaces = new Dictionary<Tuple<string, FontAttributes>, Typeface>();
+        private static readonly Dictionary<Tuple<string, FontAttributes>, Typeface> Typefaces = new Dictionary<Tuple<string, FontAttributes>, Typeface>();
 
         // We don't create and cache a Regex object here because we may not ever need it, and creating Regexes is surprisingly expensive (especially on older hardware)
         // Instead, we'll use the static Regex.IsMatch below, which will create and cache the regex internally as needed. It's the equivalent of Lazy<Regex> with less code.
@@ -53,7 +53,7 @@ namespace SafeAuthenticator.Droid.ControlsRenderers
 
             var key = new Tuple<string, FontAttributes>(self.FontFamily, self.FontAttributes);
             Typeface result;
-            if (_typefaces.TryGetValue(key, out result))
+            if (Typefaces.TryGetValue(key, out result))
                 return result;
 
             if (self.FontFamily == null)
@@ -61,7 +61,7 @@ namespace SafeAuthenticator.Droid.ControlsRenderers
                 var style = ToTypefaceStyle(self.FontAttributes);
                 result = Typeface.Create(Typeface.Default, style);
             }
-            else if (Regex.IsMatch(self.FontFamily, _loadFromAssetsRegex))
+            else if (Regex.IsMatch(self.FontFamily, LoadFromAssetsRegex))
             {
                 result = Typeface.CreateFromAsset(AApplication.Context.Assets, FontNameToFontFile(self.FontFamily));
             }
@@ -70,7 +70,7 @@ namespace SafeAuthenticator.Droid.ControlsRenderers
                 var style = ToTypefaceStyle(self.FontAttributes);
                 result = Typeface.Create(self.FontFamily, style);
             }
-            return _typefaces[key] = result;
+            return Typefaces[key] = result;
         }
 
         internal static bool IsDefault(this Entry self)
@@ -85,7 +85,7 @@ namespace SafeAuthenticator.Droid.ControlsRenderers
 
             var key = new Tuple<string, FontAttributes>(self.FontFamily, self.FontAttributes);
             Typeface result;
-            if (_typefaces.TryGetValue(key, out result))
+            if (Typefaces.TryGetValue(key, out result))
                 return result;
 
             if (self.FontFamily == null)
@@ -93,7 +93,7 @@ namespace SafeAuthenticator.Droid.ControlsRenderers
                 var style = ToTypefaceStyle(self.FontAttributes);
                 result = Typeface.Create(Typeface.Default, style);
             }
-            else if (Regex.IsMatch(self.FontFamily, _loadFromAssetsRegex))
+            else if (Regex.IsMatch(self.FontFamily, LoadFromAssetsRegex))
             {
                 result = Typeface.CreateFromAsset(AApplication.Context.Assets, FontNameToFontFile(self.FontFamily));
             }
@@ -102,7 +102,7 @@ namespace SafeAuthenticator.Droid.ControlsRenderers
                 var style = ToTypefaceStyle(self.FontAttributes);
                 result = Typeface.Create(self.FontFamily, style);
             }
-            return _typefaces[key] = result;
+            return Typefaces[key] = result;
         }
 
         public static TypefaceStyle ToTypefaceStyle(FontAttributes attrs)

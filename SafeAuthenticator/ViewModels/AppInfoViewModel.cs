@@ -33,7 +33,7 @@ namespace SafeAuthenticator.ViewModels
         {
             if (await Application.Current.MainPage.DisplayAlert(
                 "Revoke Access",
-                $"Are you sure you want to revoke access for {_appModelInfo.AppName} ?",
+                $"Are you sure you want to revoke access for {_appModelInfo.AppName}?",
                 "Revoke",
                 "Cancel"))
             {

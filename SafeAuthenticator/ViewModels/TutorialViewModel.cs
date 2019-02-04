@@ -64,10 +64,9 @@ namespace SafeAuthenticator.ViewModels
 
         private void OnSecondaryButton()
         {
-            if (CarouselPagePosition < 2)
-                MessagingCenter.Send(this, MessengerConstants.NavLoginPage);
-            else
-                MessagingCenter.Send(this, MessengerConstants.NavCreateAcctPage);
+            MessagingCenter.Send(
+                this,
+                CarouselPagePosition < 2 ? MessengerConstants.NavLoginPage : MessengerConstants.NavCreateAcctPage);
         }
 
         private void OnPrimaryButton()

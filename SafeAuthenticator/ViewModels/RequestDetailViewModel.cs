@@ -139,7 +139,7 @@ namespace SafeAuthenticator.ViewModels
                   TypeTag = x.TypeTag
               }).ToObservableRangeCollection();
 
-            for (int i = 0; i < MData.Count(); i++)
+            for (var i = 0; i < MData.Count; i++)
             {
                 MData[i].MetaName = _shareMdReq.MetadataResponse[i].Name;
                 MData[i].MetaDescription = _shareMdReq.MetadataResponse[i].Description;
