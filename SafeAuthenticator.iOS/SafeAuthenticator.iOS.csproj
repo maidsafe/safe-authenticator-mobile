@@ -166,7 +166,7 @@
     <Compile Include="Helpers\FloatLabeledTextField.cs" />
     <Compile Include="Helpers\GradientContentViewRenderer.cs" />
     <Compile Include="Helpers\MaterialEntryRenderer.cs" />
-    <Compile Include="Helpers\ShowHidePassEffect.cs" />
+    <Compile Include="Helpers\ShowHidePasswordEffect.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
   </ItemGroup>

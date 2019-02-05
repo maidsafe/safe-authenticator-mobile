@@ -41,6 +41,7 @@
                                          Style="{StaticResource InfoButton}"/>
                         </StackLayout>
                         <Label Text="{Binding AccountStorageInfo}"
+                               Style="{StaticResource ItemStyle}"
                                TextColor="{StaticResource GreySmokeMediumColor}"
                                LineBreakMode="TailTruncation" />
                     </StackLayout>
@@ -89,6 +90,8 @@
                         <Label Text="Application version"
                                Style="{StaticResource ItemStyle}" />
                         <Label Text="0.1.0" 
+                               Margin="0,5,0,0"
+                               Style="{StaticResource ItemStyle}"
                                TextColor="{StaticResource GreySmokeMediumColor}"
                                HorizontalOptions="Start" />
                     </StackLayout>

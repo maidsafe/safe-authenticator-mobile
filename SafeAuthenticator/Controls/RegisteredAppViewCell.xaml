@@ -29,13 +29,13 @@
                Padding="0">
 
             <Label Text="{Binding AppName, Converter={StaticResource FormatTitleConverter}}"
-                   FontSize="Medium"
+                   FontSize="{StaticResource LargeSize}"
                    Margin="0"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
                    HorizontalTextAlignment="Center"
                    VerticalTextAlignment="Center"
-                   TextColor="White" />
+                   TextColor="{StaticResource WhiteColor}" />
         </Frame>
 
         <StackLayout
@@ -45,17 +45,17 @@
             Spacing="3">
 
             <Label Text="{Binding AppName}"
-                   TextColor="Black"
-                   FontSize="14"
+                   TextColor="{StaticResource BlackColor}"
+                   FontSize="{StaticResource MidMediumSize}"
                    LineBreakMode="TailTruncation" />
 
             <Label Text="{Binding AppVendor}"
-                   TextColor="#8b8b8b"
-                   FontSize="12"
+                   TextColor="{StaticResource GreySmokeMediumColor}"
+                   FontSize="{StaticResource LittleSize}"
                    LineBreakMode="TailTruncation" />
         </StackLayout>
 
-        <BoxView BackgroundColor="Gray"
+        <BoxView BackgroundColor="{StaticResource GreySmokeLightColor}"
                  Grid.Row="1"
                  Grid.Column="1"
                  VerticalOptions="End"

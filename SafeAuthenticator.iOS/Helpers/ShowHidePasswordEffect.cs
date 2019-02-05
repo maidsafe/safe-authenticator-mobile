@@ -6,10 +6,10 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ResolutionGroupName("Xamarin")]
-[assembly: ExportEffect(typeof(ShowHidePassEffect), "ShowHidePasswordEffect")]
+[assembly: ExportEffect(typeof(ShowHidePasswordEffect), "ShowHidePasswordEffect")]
 namespace SafeAuthenticator.iOS.Helpers
 {
-    public class ShowHidePassEffect : PlatformEffect
+    public class ShowHidePasswordEffect : PlatformEffect
     {
         protected override void OnAttached()
         {

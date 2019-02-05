@@ -32,7 +32,7 @@
                      Spacing="3">
 
             <Label Text="{Binding MetaName}"
-                   FontSize="14">
+                   FontSize="{StaticResource MidMediumSize}">
                 <Label.Triggers>
                     <DataTrigger TargetType="Label"
                                          Binding="{Binding MetaName.Length}"
@@ -44,7 +44,7 @@
 
             <Label Text="{Binding Access, Converter={StaticResource FormatContainerPermissionsConverter}}"
                    TextColor="{StaticResource GreySmokeMediumColor}"
-                   FontSize="12" />
+                   FontSize="{StaticResource LittleSize}" />
         </StackLayout>
 
         <BoxView BackgroundColor="{StaticResource GreySmokeLightColor}"

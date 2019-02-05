@@ -1,4 +1,5 @@
 ﻿using System;
+using SafeAuthenticator.Controls.Effects;
 using Xamarin.Forms;
 
 namespace SafeAuthenticator.Controls

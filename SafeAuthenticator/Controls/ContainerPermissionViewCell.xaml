@@ -32,14 +32,14 @@
                      Grid.Row="0"
                      Spacing="3">
             <Label Text="{Binding ContainerName}"
-                   TextColor="Black"
-                   FontSize="14" />
+                   TextColor="{StaticResource BlackColor}"
+                   FontSize="{StaticResource MidMediumSize}" />
             <Label Text="{Binding Access, Converter={StaticResource FormatContainerPermissionsConverter}}"
                    TextColor="{StaticResource GreySmokeMediumColor}"
-                   FontSize="12" />
+                   FontSize="{StaticResource LittleSize}" />
         </StackLayout>
 
-        <BoxView BackgroundColor="Gray"
+        <BoxView BackgroundColor="{StaticResource GreySmokeLightColor}"
                  Margin="0,5,0,0"
                  Grid.Row="1"
                  Grid.Column="1"
