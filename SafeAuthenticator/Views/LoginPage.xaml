@@ -16,11 +16,11 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="TitleStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="FontSize" Value="{StaticResource ExtraLargeSize}" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
             <Style x:Key="NeedHelpStyle" TargetType="Label">
-                <Setter Property="HeightRequest" Value="{StaticResource LargeSize}" />
+                <Setter Property="HeightRequest" Value="{StaticResource ExtraLargeSize}" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
             <Style x:Key="ImageStyle" TargetType="Image">

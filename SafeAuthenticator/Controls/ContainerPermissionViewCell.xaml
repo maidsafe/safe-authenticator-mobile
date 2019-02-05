@@ -33,10 +33,10 @@
                      Spacing="3">
             <Label Text="{Binding ContainerName}"
                    TextColor="{StaticResource BlackColor}"
-                   FontSize="{StaticResource MidMediumSize}" />
+                   FontSize="{StaticResource MediumSize}" />
             <Label Text="{Binding Access, Converter={StaticResource FormatContainerPermissionsConverter}}"
                    TextColor="{StaticResource GreySmokeMediumColor}"
-                   FontSize="{StaticResource LittleSize}" />
+                   FontSize="{StaticResource SmallSize}" />
         </StackLayout>
 
         <BoxView BackgroundColor="{StaticResource GreySmokeLightColor}"

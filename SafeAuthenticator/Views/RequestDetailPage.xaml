@@ -27,14 +27,14 @@
         <ResourceDictionary>
             <converters:InverseBooleanConverter x:Key="InverseBoolean" />
             <Style x:Key="H1Style" TargetType="Label">
-                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
             <Style x:Key="H2Style" TargetType="Label">
-                <Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
             </Style>
             <Style x:Key="H3Style" TargetType="Label">
-                <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+                <Setter Property="FontSize" Value="{StaticResource SmallSize}" />
             </Style>
             <Style x:Key="ButtonStyle" TargetType="Button">
                 <Setter Property="HeightRequest" Value="40" />

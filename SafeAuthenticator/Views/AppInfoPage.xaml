@@ -16,15 +16,15 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="PrimaryTitleStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="FontSize" Value="{StaticResource ExtraLargeSize}" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
             <Style x:Key="SecondaryTitleStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
             <Style x:Key="DescriptionStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+                <Setter Property="FontSize" Value="{StaticResource SmallSize}" />
             </Style>
             <Style x:Key="RevokeButtonStyle" TargetType="Button">
                 <Setter Property="MinimumHeightRequest" Value="50" />

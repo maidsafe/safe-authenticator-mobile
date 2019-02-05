@@ -15,7 +15,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="TitleStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
             <Style x:Key="ImageStyle" TargetType="Image">

@@ -37,22 +37,22 @@
                         Android="40" 
                         iOS="40" />
             
-            <OnPlatform x:Key="LittleSize"
+            <OnPlatform x:Key="SmallSize"
                         x:TypeArguments="x:Double"
                         Android="12" 
                         iOS="11" />
 
-            <OnPlatform x:Key="MidMediumSize"
+            <OnPlatform x:Key="MediumSize"
                         x:TypeArguments="x:Double"
                         Android="14"
                         iOS="12" />
 
-            <OnPlatform x:Key="MediumSize"
+            <OnPlatform x:Key="LargeSize"
                         x:TypeArguments="x:Double"
                         Android="16"
                         iOS="14" />
 
-            <OnPlatform x:Key="LargeSize"
+            <OnPlatform x:Key="ExtraLargeSize"
                         x:TypeArguments="x:Double"
                         Android="18"
                         iOS="16" />

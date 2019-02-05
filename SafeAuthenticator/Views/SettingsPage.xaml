@@ -8,13 +8,13 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="TitleStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="FontSize" Value="{StaticResource ExtraLargeSize}" />
             </Style>
             <Style x:Key="ItemStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
             </Style>
             <Style x:Key="LogoutStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="FontSize" Value="{StaticResource ExtraLargeSize}" />
             </Style>
             <Style x:Key="BoxViewStyle" TargetType="BoxView">
                 <Setter Property="HeightRequest" Value="0.5" />
