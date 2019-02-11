@@ -104,16 +104,24 @@
                             <Label Text="Your 'Account Secret' is private and should not be shared with anyone."
                                        Margin="0,0,0,20" />
 
-                            <controls:MaterialEntry Placeholder="Account secret"
-                                                        IsPassword="True"
-                                                        Text="{Binding AcctSecret}"
-                                                        ErrorDisplay="None"
-                                                        Margin="0,50,0,0" />
+                            <ContentView>
+                                <StackLayout>
+                                    <controls:MaterialEntry x:Name="SecretEntry"
+                                                    Placeholder="Account secret"
+                                                    IsPassword="True"
+                                                    Text="{Binding AcctSecret}"
+                                                    ErrorDisplay="None"
+                                                    Margin="0,50,0,0"
+                                                    ReturnType="Next" />
 
-                            <controls:MaterialEntry Placeholder="Confirm account secret"
-                                                        IsPassword="True"
-                                                        Text="{Binding ConfirmAcctSecret}"
-                                                        ErrorText="{Binding AcctSecretErrorMsg}" />
+                                    <controls:MaterialEntry x:Name="ConfirmSecretEntry"
+                                                    Placeholder="Confirm account secret"
+                                                    IsPassword="True"
+                                                    Text="{Binding ConfirmAcctSecret}"
+                                                    ErrorText="{Binding AcctSecretErrorMsg}"
+                                                    ReturnType="Done" />
+                                </StackLayout>
+                            </ContentView>
                         </StackLayout>
 
                         <!-- Account Password -->
@@ -126,16 +134,20 @@
                             <Label Text="Your 'Account Password' is never sent to the network, it will not leave your device."
                                    Margin="0,0,0,20" />
 
-                            <controls:MaterialEntry Placeholder="Account password"
+                            <controls:MaterialEntry x:Name="PasswordEntry"
+                                                    Placeholder="Account password"
                                                     IsPassword="True"
                                                     Text="{Binding AcctPassword}"
                                                     ErrorDisplay="None"
-                                                    Margin="0,50,0,0" />
+                                                    Margin="0,50,0,0"
+                                                    ReturnType="Next" />
 
-                            <controls:MaterialEntry Placeholder="Confirm account password"
+                            <controls:MaterialEntry x:Name="ConfirmPasswordEntry"
+                                                    Placeholder="Confirm account password"
                                                     IsPassword="True"
                                                     Text="{Binding ConfirmAcctPassword}"
-                                                    ErrorText="{Binding AcctPasswordErrorMsg}" />
+                                                    ErrorText="{Binding AcctPasswordErrorMsg}"
+                                                    ReturnType="Done" />
                         </StackLayout>
                     </x:Array>
                 </cv:CarouselViewControl.ItemsSource>

@@ -161,6 +161,7 @@
     <Compile Include="Extensions\ColorExtension.cs" />
     <Compile Include="Helpers\AppleNativeBrowserService.cs" />
     <Compile Include="Helpers\BorderlessEntryRenderer.cs" />
+    <Compile Include="Helpers\EntryMoveNextEffect.cs" />
     <Compile Include="Helpers\FileOps.cs" />
     <Compile Include="Extensions\FontExtensions.cs" />
     <Compile Include="Helpers\FloatLabeledTextField.cs" />
