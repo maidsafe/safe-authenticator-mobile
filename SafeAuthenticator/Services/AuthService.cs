@@ -190,8 +190,8 @@ namespace SafeAuthenticator.Services
                 }
                 else
                 {
-                    var requestPage = new RequestDetailPage(encodedUri, decodeResult);
                     MessagingCenter.Send(this, MessengerConstants.NavHomePage);
+                    var requestPage = new RequestDetailPage(encodedUri, decodeResult);
                     await Application.Current.MainPage.Navigation.PushPopupAsync(requestPage);
                 }
             }
@@ -206,44 +206,35 @@ namespace SafeAuthenticator.Services
             }
         }
 
-        internal async Task SendResponseBack(string encodedUri, IpcReq req, bool isGranted)
+        internal async Task<string> GetEncodedResponseAsync(IpcReq req, bool isGranted)
         {
-            string encodedRsp;
-            var formattedRsp = string.Empty;
+            string encodedRsp = string.Empty;
             var requestType = req.GetType();
             if (requestType == typeof(UnregisteredIpcReq))
             {
                 var uauthReq = req as UnregisteredIpcReq;
                 encodedRsp = await Authenticator.EncodeUnregisteredRespAsync(uauthReq.ReqId, isGranted);
-                var appIdFromUrl = UrlFormat.GetAppId(encodedUri);
-                formattedRsp = UrlFormat.Format(appIdFromUrl, encodedRsp, false);
             }
             else if (requestType == typeof(AuthIpcReq))
             {
                 var authReq = req as AuthIpcReq;
                 encodedRsp = await _authenticator.EncodeAuthRespAsync(authReq, isGranted);
-                formattedRsp = UrlFormat.Format(authReq?.AuthReq.App.Id, encodedRsp, false);
             }
             else if (requestType == typeof(ContainersIpcReq))
             {
                 var containerReq = req as ContainersIpcReq;
                 encodedRsp = await _authenticator.EncodeContainersRespAsync(containerReq, isGranted);
-                formattedRsp = UrlFormat.Format(containerReq?.ContainersReq.App.Id, encodedRsp, false);
             }
             else if (requestType == typeof(ShareMDataIpcReq))
             {
                 var mDataShareReq = req as ShareMDataIpcReq;
                 if (!isGranted)
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "SharedMData request denied", "OK");
-                    return;
+                    throw new Exception("SharedMData request denied");
                 }
                 encodedRsp = await _authenticator.EncodeShareMdataRespAsync(mDataShareReq, isGranted);
-                formattedRsp = UrlFormat.Format(mDataShareReq?.ShareMDataReq.App.Id, encodedRsp, false);
             }
-
-            Debug.WriteLine($"Encoded Rsp to app: {formattedRsp}");
-            Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
+            return encodedRsp;
         }
 
         private async Task<bool> HandleUnregisteredAppRequest(string encodedUri)

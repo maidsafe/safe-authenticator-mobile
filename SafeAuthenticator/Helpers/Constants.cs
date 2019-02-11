@@ -1,11 +1,11 @@
 ﻿namespace SafeAuthenticator.Helpers
 {
-    static class Constants
+    internal static class Constants
     {
         // StringStrength
-        public const int AccStrengthVeryWeak = 4;
-        public const int AccStrengthWeak = 8;
-        public const int AccStrengthSomeWhatSecure = 10;
+        internal const int AccStrengthVeryWeak = 4;
+        internal const int AccStrengthWeak = 8;
+        internal const int AccStrengthSomeWhatSecure = 10;
 
         internal static readonly string AppName = "SAFE Authenticator";
         internal static readonly string IsFirstLaunch = "IsFirstLaunch";

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
 using Rg.Plugins.Popup.Services;
@@ -200,8 +201,11 @@ namespace SafeAuthenticator.ViewModels
                 var response = sender == "ALLOW" ? true : false;
                 PopupLayoutHeight = minPopupHeight;
                 PopupState = Constants.Loading;
-                await Authenticator.SendResponseBack(encodedRequest, decodedRequest, response);
+                var encodedRsp = await Authenticator.GetEncodedResponseAsync(decodedRequest, response);
                 await PopupNavigation.Instance.PopAsync();
+                var formattedRsp = UrlFormat.Format(AppId, encodedRsp, false);
+                Debug.WriteLine($"Encoded Rsp to app: {formattedRsp}");
+                Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
             }
             catch (FfiException ex)
             {
