@@ -119,7 +119,7 @@
                     <StackLayout.Triggers>
                         <DataTrigger TargetType="StackLayout"
                                          Binding="{Binding PopupState}"
-                                         Value="none">
+                                         Value="None">
                             <Setter Property="IsVisible" Value="True" />
                         </DataTrigger>
                     </StackLayout.Triggers>
@@ -240,7 +240,7 @@
                     <StackLayout.Triggers>
                         <DataTrigger TargetType="StackLayout"
                                          Binding="{Binding PopupState}"
-                                         Value="loading">
+                                         Value="Loading">
                             <Setter Property="IsVisible" Value="True" />
                         </DataTrigger>
                     </StackLayout.Triggers>
@@ -261,7 +261,7 @@
                     <Frame.Triggers>
                         <DataTrigger TargetType="Frame"
                                      Binding="{Binding PopupState}"
-                                     Value="error">
+                                     Value="Error">
                             <Setter Property="IsVisible" 
                                     Value="True" />
                         </DataTrigger>
@@ -278,7 +278,7 @@
                     <StackLayout.Triggers>
                         <DataTrigger TargetType="StackLayout"
                                          Binding="{Binding PopupState}"
-                                         Value="none">
+                                         Value="None">
                             <Setter Property="IsVisible" Value="True" />
                         </DataTrigger>
                     </StackLayout.Triggers>
@@ -315,7 +315,7 @@
                     <Button.Triggers>
                         <DataTrigger TargetType="Button"
                                          Binding="{Binding PopupState}"
-                                         Value="error">
+                                         Value="Error">
                             <Setter Property="IsVisible" Value="True" />
                         </DataTrigger>
                     </Button.Triggers>

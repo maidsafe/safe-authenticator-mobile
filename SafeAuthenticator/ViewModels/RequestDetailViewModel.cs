@@ -77,7 +77,7 @@ namespace SafeAuthenticator.ViewModels
             encodedRequest = encodedUri;
             decodedRequest = req;
 
-            PopupState = "none";
+            PopupState = Constants.None;
             SendResponseCommand = new Command<string>(OnSendResponse);
 
             if (requestType == typeof(UnregisteredIpcReq))
@@ -199,7 +199,7 @@ namespace SafeAuthenticator.ViewModels
             {
                 var response = sender == "ALLOW" ? true : false;
                 PopupLayoutHeight = minPopupHeight;
-                PopupState = "loading";
+                PopupState = Constants.Loading;
                 await Authenticator.SendResponseBack(encodedRequest, decodedRequest, response);
                 await PopupNavigation.Instance.PopAsync();
             }
@@ -208,13 +208,13 @@ namespace SafeAuthenticator.ViewModels
                 var errorMessage = Utilities.GetErrorMessage(ex);
                 PopupLayoutHeight = minPopupHeight;
                 ErrorMessage = errorMessage;
-                PopupState = "error";
+                PopupState = Constants.Error;
             }
             catch (Exception ex)
             {
                 PopupLayoutHeight = minPopupHeight;
                 ErrorMessage = ex.Message;
-                PopupState = "error";
+                PopupState = Constants.Error;
             }
         }
     }

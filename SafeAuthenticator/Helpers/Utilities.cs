@@ -40,19 +40,19 @@ namespace SafeAuthenticator.Helpers
 
             var result = _estimator.EstimateStrength(data);
             strengthIndicator.Guesses = Math.Log(result.Guesses) / Math.Log(10);
-            if (strengthIndicator.Guesses < AppConstants.AccStrengthVeryWeak)
+            if (strengthIndicator.Guesses < Constants.AccStrengthVeryWeak)
             {
                 strengthIndicator.Strength = "VERY_WEAK";
             }
-            else if (strengthIndicator.Guesses < AppConstants.AccStrengthWeak)
+            else if (strengthIndicator.Guesses < Constants.AccStrengthWeak)
             {
                 strengthIndicator.Strength = "WEAK";
             }
-            else if (strengthIndicator.Guesses < AppConstants.AccStrengthSomeWhatSecure)
+            else if (strengthIndicator.Guesses < Constants.AccStrengthSomeWhatSecure)
             {
                 strengthIndicator.Strength = "SOMEWHAT_SECURE";
             }
-            else if (strengthIndicator.Guesses >= AppConstants.AccStrengthSomeWhatSecure)
+            else if (strengthIndicator.Guesses >= Constants.AccStrengthSomeWhatSecure)
             {
                 strengthIndicator.Strength = "SECURE";
             }
