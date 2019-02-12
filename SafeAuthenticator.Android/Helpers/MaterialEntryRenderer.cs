@@ -94,6 +94,9 @@ namespace SafeAuthenticator.Droid.Helpers
                 if (!string.IsNullOrWhiteSpace(Element.AutomationId))
                     EditText.ContentDescription = Element.AutomationId;
 
+                if (Element.IsUnderlineTransparent)
+                    Control.EditText.SetPadding(Control.PaddingLeft, Control.PaddingTop, Control.PaddingRight, 0);
+
                 _defaultTextColor = EditText.TextColors;
 
                 Focusable = true;

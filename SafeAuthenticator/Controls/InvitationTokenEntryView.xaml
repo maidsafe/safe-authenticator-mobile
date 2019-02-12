@@ -27,6 +27,7 @@
 
             <controls:MaterialEntry x:Name="InvitationTokenEntry"
                                     Placeholder="Invitation token"
+                                    VerticalOptions="End"
                                     Text="{Binding Invitation}"
                                     HorizontalOptions="FillAndExpand" 
                                     ErrorDisplay="None"
@@ -35,6 +36,7 @@
             <Image Source="clipboardPaste"
                    Style="{DynamicResource ImageStyle}"
                    Grid.Column="1"
+                   VerticalOptions="End"
                    HorizontalOptions="End">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1"
@@ -43,8 +45,8 @@
             </Image>
 
             <BoxView x:Name="underline"
-                     BackgroundColor="#80000000"
                      Grid.Row="1"
+                     BackgroundColor="{StaticResource DefaultPlaceholderColor}"
                      HorizontalOptions="FillAndExpand" 
                      Grid.Column="0"
                      Grid.ColumnSpan="2" 
@@ -53,7 +55,7 @@
                     <DataTrigger Binding="{Binding Source={x:Reference InvitationTokenEntry}, Path=IsFocused}" 
                                  Value="True"
                                  TargetType="BoxView" >
-                        <Setter Property="BackgroundColor" Value="#0074e4"/>
+                        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}"/>
                     </DataTrigger>
                 </BoxView.Triggers>
             </BoxView>

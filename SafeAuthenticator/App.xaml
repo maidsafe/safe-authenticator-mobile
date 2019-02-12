@@ -16,6 +16,7 @@
             <Color x:Key="GreySmokeLightColor">#c2c1c1</Color>
             <Color x:Key="GreySmokeMediumColor">#8b8b8b</Color>
             <Color x:Key="GreySnowMediumColor">#e4e4e4</Color>
+            <Color x:Key="DefaultPlaceholderColor">#80000000</Color>
 
             <!-- CONVERTERS -->
             <converters:IsCollectionEmptyConverter x:Key="IsCollectionEmptyConverter" />
@@ -90,7 +91,7 @@
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
             </Style>
-
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

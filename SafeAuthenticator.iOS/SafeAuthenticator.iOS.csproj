@@ -87,7 +87,7 @@
     <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Developer: Ashwin Kumar (QY457ZUAH2)</CodesignKey>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchDebug>true</MtouchDebug>
     <MtouchFastDev>true</MtouchFastDev>
@@ -100,8 +100,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <MtouchExtraArgs>
     </MtouchExtraArgs>
-    <CodesignProvision>
-    </CodesignProvision>
+    <CodesignProvision>iOS App Dev 09/01/19</CodesignProvision>
     <MtouchNoSymbolStrip>false</MtouchNoSymbolStrip>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
