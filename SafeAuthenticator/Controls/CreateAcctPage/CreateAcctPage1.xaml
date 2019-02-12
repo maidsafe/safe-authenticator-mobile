@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
+             x:Class="SafeAuthenticator.Controls.CreateAcctPage1">
+  
+    <StackLayout Spacing="10"
+                 Padding="25,0">
+      <Label Text="First, you need an invitation token"
+             Style="{DynamicResource TitleStyle}" />
+
+        <Label>
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="In order to create an account, you need to achieve trust level 1 on the " />
+                    <Span Text="SAFE network forum" 
+                          TextColor="{StaticResource PrimaryColor}"
+                          TextDecorations="Underline">
+                      <Span.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                                              Command="{Binding OpenForumLinkCommand}">
+                            </TapGestureRecognizer>
+                        </Span.GestureRecognizers>
+                    </Span>
+                    <Span Text="." />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <Button Text="CLAIM INVITATION TOKEN"
+                Margin="0,20,0,0"
+                Command="{Binding ClaimTokenCommand}" />
+
+        <Label Text="OR"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               TextColor="{StaticResource GreySmokeMediumColor}"
+               Margin="0,20,0,0"
+               Style="{DynamicResource TitleStyle}" />
+
+        <StackLayout Orientation="Horizontal"
+                     Margin="0,20,0,0">
+
+            <controls:MaterialEntry Placeholder="Invitation token"
+                                    Text="{Binding Invitation}"
+                                    HorizontalOptions="FillAndExpand" 
+                                    ErrorDisplay="None"
+                                    ReturnType="Done"
+                                    ReturnCommand="{Binding CarouselContinueCommand}"/>
+
+            <Image Source="clipboardPaste"
+                   Style="{DynamicResource ImageStyle}"
+                   Margin="0,0,0,5">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                                          Command="{Binding ClipboardPasteCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+        </StackLayout>
+    </StackLayout>
+</StackLayout>
+    
