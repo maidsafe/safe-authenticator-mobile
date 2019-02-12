@@ -18,15 +18,11 @@
                 <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
-            <Style x:Key="ImageStyle" TargetType="Image">
-                <Setter Property="Aspect" Value="AspectFit" />
-                <Setter Property="HeightRequest" Value="30" />
-            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Spacing="10">
+        <StackLayout Spacing="10" >
             <cv:CarouselViewControl                    
                     ShowArrows="False"
                     ShowIndicators="False"
@@ -55,7 +51,7 @@
                                                   TextDecorations="Underline">
                                                 <Span.GestureRecognizers>
                                                     <TapGestureRecognizer NumberOfTapsRequired="1"
-                                                                              Command="{Binding OpenForumLinkCommand}">
+                                                                          Command="{Binding OpenForumLinkCommand}">
                                                     </TapGestureRecognizer>
                                                 </Span.GestureRecognizers>
                                             </Span>
@@ -75,23 +71,8 @@
                                        Margin="0,20,0,0"
                                        Style="{DynamicResource TitleStyle}" />
 
-                                <StackLayout Orientation="Horizontal"
-                                                 Margin="0,20,0,0">
+                                <controls:InvitationTokenEntryView />
 
-                                    <controls:MaterialEntry Placeholder="Invitation token"
-                                                            Text="{Binding Invitation}"
-                                                            HorizontalOptions="FillAndExpand" 
-                                                            ErrorDisplay="None" />
-
-                                    <Image Source="clipboardPaste"
-                                           Style="{DynamicResource ImageStyle}"
-                                           Margin="0,0,0,5">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer NumberOfTapsRequired="1"
-                                                                  Command="{Binding ClipboardPasteCommand}" />
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                </StackLayout>
                             </StackLayout>
                         </StackLayout>
 
@@ -142,16 +123,16 @@
             </cv:CarouselViewControl>
 
             <Button Text="CONTINUE"
-                        Command="{Binding CarouselContinueCommand}"
-                        Margin="25,0"/>
+                    Command="{Binding CarouselContinueCommand}"
+                    Margin="25,0"/>
 
             <Button Text="BACK"
-                        HorizontalOptions="Center"
-                        Command="{Binding CarouselBackCommand}"
-                        IsVisible="{Binding IsBackButtonVisible}"
-                        BackgroundColor="Transparent"
-                        TextColor="{StaticResource PrimaryColor}"
-                        Margin="25,0"/>
+                    HorizontalOptions="Center"
+                    Command="{Binding CarouselBackCommand}"
+                    IsVisible="{Binding IsBackButtonVisible}"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource PrimaryColor}"
+                    Margin="25,0"/>
         </StackLayout>
 
     </ContentPage.Content>
