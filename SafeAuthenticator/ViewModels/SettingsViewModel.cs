@@ -16,10 +16,18 @@ namespace SafeAuthenticator.ViewModels
 
         private string _accountStorageInfo;
 
+        private bool _refreshIndicator;
+
         public string AccountStorageInfo
         {
             get => _accountStorageInfo;
             set => SetProperty(ref _accountStorageInfo, value);
+        }
+
+        public bool RefreshIndicator
+        {
+            get => _refreshIndicator;
+            set => SetProperty(ref _refreshIndicator, value);
         }
 
         public bool AuthReconnect
@@ -39,7 +47,15 @@ namespace SafeAuthenticator.ViewModels
         public SettingsViewModel()
         {
             LogoutCommand = new Command(OnLogout);
-            AccountStorageInfo = "Fetching account info...";
+
+            if (string.IsNullOrEmpty(Authenticator.PreviousAccountInfo))
+            {
+                AccountStorageInfo = "Fetching account info...";
+            }
+            else
+            {
+                AccountStorageInfo = Authenticator.PreviousAccountInfo;
+            }
 
             FaqCommand = new Command(() =>
             {
@@ -56,8 +72,11 @@ namespace SafeAuthenticator.ViewModels
         {
             try
             {
+                RefreshIndicator = true;
                 var acctStorageTuple = await Authenticator.GetAccountInfoAsync();
                 AccountStorageInfo = $"{acctStorageTuple.Item1} / {acctStorageTuple.Item2}";
+                Authenticator.PreviousAccountInfo = AccountStorageInfo;
+                RefreshIndicator = false;
             }
             catch (FfiException ex)
             {

@@ -38,7 +38,12 @@
                                    Style="{StaticResource ItemStyle}"
                                    VerticalOptions="Center" />
                             <ImageButton x:Name="AccountStatusImage" 
-                                         Style="{StaticResource InfoButton}"/>
+                                         Style="{StaticResource InfoButton}"
+                                         IsVisible="{Binding RefreshIndicator, Converter={StaticResource InverseBooleanConverter}}"/>
+                            <ActivityIndicator IsRunning="True"
+                                               HeightRequest="15"
+                                               WidthRequest="15"
+                                               IsVisible="{Binding RefreshIndicator}"/>
                         </StackLayout>
                         <Label Text="{Binding AccountStorageInfo}"
                                Style="{StaticResource ItemStyle}"
