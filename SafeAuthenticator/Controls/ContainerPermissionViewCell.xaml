@@ -27,7 +27,7 @@
                HorizontalOptions="Center"
                Grid.RowSpan="2" />
 
-        <StackLayout VerticalOptions="FillAndExpand"
+        <StackLayout VerticalOptions="CenterAndExpand"
                      Grid.Column="1"
                      Grid.Row="0"
                      Spacing="3">

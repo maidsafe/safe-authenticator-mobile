@@ -79,9 +79,7 @@
 
             <ListView HasUnevenRows="True"
                       SeparatorVisibility="None"
-                      ItemsSource="{Binding AppModelInfo.Containers}"
-                      IsPullToRefreshEnabled="False"
-                      CachingStrategy="RecycleElement">
+                      ItemsSource="{Binding AppModelInfo.Containers}">
 
                 <ListView.Behaviors>
                     <behaviour:ListViewNoSelectionBehavior />
