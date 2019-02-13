@@ -12,7 +12,6 @@ namespace SafeAuthenticator.Views
         public CreateAcctPage()
         {
             InitializeComponent();
-
             MessagingCenter.Subscribe<CreateAcctViewModel>(
                 this,
                 MessengerConstants.NavHomePage,

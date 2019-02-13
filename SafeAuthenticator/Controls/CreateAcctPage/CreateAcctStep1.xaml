@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
+             x:Class="SafeAuthenticator.Controls.CreateAcctStep1">
+
+    <StackLayout Spacing="10"
+                 Padding="25,0">
+        <StackLayout.Resources>
+            <ResourceDictionary>
+                <Style x:Key="ImageStyle" TargetType="Image">
+                    <Setter Property="Aspect" Value="AspectFit" />
+                    <Setter Property="HeightRequest" Value="30" />
+                </Style>
+            </ResourceDictionary>
+        </StackLayout.Resources>
+        
+            <Label Text="First, you need an invitation token"
+             Style="{DynamicResource TitleStyle}" />
+
+        <Label>
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="In order to create an account, you need to achieve trust level 1 on the " />
+                    <Span Text="SAFE network forum" 
+                          TextColor="{StaticResource PrimaryColor}"
+                          TextDecorations="Underline">
+                        <Span.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                                              Command="{Binding OpenForumLinkCommand}">
+                            </TapGestureRecognizer>
+                        </Span.GestureRecognizers>
+                    </Span>
+                    <Span Text="." />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <Button Text="CLAIM INVITATION TOKEN"
+                Margin="0,20,0,0"
+                Command="{Binding ClaimTokenCommand}" />
+
+        <Label Text="OR"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               TextColor="{StaticResource GreySmokeMediumColor}"
+               Margin="0,20,0,0"
+               Style="{DynamicResource TitleStyle}" />
+
+        <Grid RowSpacing="0"
+              VerticalOptions="CenterAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <controls:MaterialEntry x:Name="InvitationTokenEntry"
+                                    Placeholder="Invitation token"
+                                    Text="{Binding Invitation}"
+                                    HorizontalOptions="FillAndExpand" 
+                                    ErrorDisplay="None"
+                                    IsUnderlineTransparent="true"
+                                    ReturnType="Done"
+                                    ReturnCommand="{Binding CarouselContinueCommand}"/>
+
+            <Image Source="clipboardPaste"
+                   Style="{DynamicResource ImageStyle}"
+                   Grid.Column="1"
+                   HorizontalOptions="End">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                                          Command="{Binding ClipboardPasteCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+
+            <BoxView x:Name="underline"
+                     Grid.Row="1"
+                     Style="{StaticResource InvitationEntryUnderlineStyle}"
+                     HorizontalOptions="FillAndExpand" 
+                     Grid.Column="0"
+                     Grid.ColumnSpan="2" 
+                     HeightRequest="1.5">
+                <BoxView.Triggers>
+                    <DataTrigger Binding="{Binding Source={x:Reference InvitationTokenEntry}, Path=IsFocused}" 
+                                 Value="True"
+                                 TargetType="BoxView" >
+                        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}"/>
+                    </DataTrigger>
+                </BoxView.Triggers>
+            </BoxView>
+        </Grid>
+    </StackLayout>
+</StackLayout>

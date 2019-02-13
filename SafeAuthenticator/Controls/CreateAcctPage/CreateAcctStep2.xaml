@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
+             x:Class="SafeAuthenticator.Controls.CreateAcctStep2"
+             Spacing="15"
+             Padding="25,0">
+    
+    <Label Text="Account Secret"
+           Style="{DynamicResource TitleStyle}"/>
+
+    <Label Text="Your 'Account Secret' is private and should not be shared with anyone."
+           Margin="0,0,0,20" />
+
+    <ContentView>
+        <StackLayout>
+            <controls:MaterialEntry x:Name="SecretEntry"
+                                    Placeholder="Account secret"
+                                    IsPassword="True"
+                                    Text="{Binding AcctSecret}"
+                                    ErrorDisplay="None"
+                                    Margin="0,50,0,0"
+                                    ReturnType="Next"
+                                    NextEntry="{Reference ConfirmSecretEntry}"/>
+
+            <controls:MaterialEntry x:Name="ConfirmSecretEntry"
+                                    Placeholder="Confirm account secret"
+                                    IsPassword="True"
+                                    Text="{Binding ConfirmAcctSecret}"
+                                    ErrorText="{Binding AcctSecretErrorMsg}"
+                                    ReturnType="Done"
+                                    ReturnCommand="{Binding CarouselContinueCommand}" />
+        </StackLayout>
+    </ContentView>
+</StackLayout>

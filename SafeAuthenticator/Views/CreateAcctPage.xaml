@@ -35,89 +35,14 @@
                     <x:Array Type="{x:Type View}">
 
                         <!-- Invitation -->
-                        <StackLayout>
-                            <StackLayout Spacing="10"
-                                         Padding="25,0">
-
-                                <Label Text="First, you need an invitation token"
-                                       Style="{DynamicResource TitleStyle}" />
-
-                                <Label>
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="In order to create an account, you need to achieve trust level 1 on the " />
-                                            <Span Text="SAFE network forum" 
-                                                  TextColor="{StaticResource PrimaryColor}"
-                                                  TextDecorations="Underline">
-                                                <Span.GestureRecognizers>
-                                                    <TapGestureRecognizer NumberOfTapsRequired="1"
-                                                                          Command="{Binding OpenForumLinkCommand}">
-                                                    </TapGestureRecognizer>
-                                                </Span.GestureRecognizers>
-                                            </Span>
-                                            <Span Text="." />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-
-                                <Button Text="CLAIM INVITATION TOKEN"
-                                            Margin="0,20,0,0"
-                                            Command="{Binding ClaimTokenCommand}" />
-
-                                <Label Text="OR"
-                                       HorizontalOptions="Center"
-                                       HorizontalTextAlignment="Center"
-                                       TextColor="{StaticResource GreySmokeMediumColor}"
-                                       Margin="0,20,0,0"
-                                       Style="{DynamicResource TitleStyle}" />
-
-                                <controls:InvitationTokenEntryView />
-
-                            </StackLayout>
-                        </StackLayout>
+                        <controls:CreateAcctStep1/>
 
                         <!-- Account Secret -->
-                        <StackLayout Spacing="15"
-                                         Padding="25,0">
-                            <Label Text="Account Secret"
-                                   Style="{DynamicResource TitleStyle}"/>
-
-                            <Label Text="Your 'Account Secret' is private and should not be shared with anyone."
-                                       Margin="0,0,0,20" />
-
-                            <controls:MaterialEntry Placeholder="Account secret"
-                                                        IsPassword="True"
-                                                        Text="{Binding AcctSecret}"
-                                                        ErrorDisplay="None"
-                                                        Margin="0,50,0,0" />
-
-                            <controls:MaterialEntry Placeholder="Confirm account secret"
-                                                        IsPassword="True"
-                                                        Text="{Binding ConfirmAcctSecret}"
-                                                        ErrorText="{Binding AcctSecretErrorMsg}" />
-                        </StackLayout>
+                        <controls:CreateAcctStep2/>
 
                         <!-- Account Password -->
-                        <StackLayout Spacing="15"
-                                     Padding="25,0">
-
-                            <Label Text="Account Password"
-                                   Style="{DynamicResource TitleStyle}"/>
-
-                            <Label Text="Your 'Account Password' is never sent to the network, it will not leave your device."
-                                   Margin="0,0,0,20" />
-
-                            <controls:MaterialEntry Placeholder="Account password"
-                                                    IsPassword="True"
-                                                    Text="{Binding AcctPassword}"
-                                                    ErrorDisplay="None"
-                                                    Margin="0,50,0,0" />
-
-                            <controls:MaterialEntry Placeholder="Confirm account password"
-                                                    IsPassword="True"
-                                                    Text="{Binding ConfirmAcctPassword}"
-                                                    ErrorText="{Binding AcctPasswordErrorMsg}" />
-                        </StackLayout>
+                        <controls:CreateAcctStep3/>
+                        
                     </x:Array>
                 </cv:CarouselViewControl.ItemsSource>
             </cv:CarouselViewControl>

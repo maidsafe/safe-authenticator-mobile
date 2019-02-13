@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
+             x:Class="SafeAuthenticator.Controls.CreateAcctStep3"
+             Spacing="15"
+             Padding="25,0">
+    <Label Text="Account Password"
+           Style="{DynamicResource TitleStyle}" />
+
+    <Label Text="Your 'Account Password' is never sent to the network, it will not leave your device."
+           Margin="0,0,0,20" />
+
+    <controls:MaterialEntry x:Name="PasswordEntry"
+                            Placeholder="Account password"
+                            IsPassword="True"
+                            Text="{Binding AcctPassword}"
+                            ErrorDisplay="None"
+                            Margin="0,50,0,0"
+                            ReturnType="Next"
+                            NextEntry="{Reference ConfirmPasswordEntry}" />
+
+    <controls:MaterialEntry x:Name="ConfirmPasswordEntry"
+                            Placeholder="Confirm account password"
+                            IsPassword="True"
+                            Text="{Binding ConfirmAcctPassword}"
+                            ErrorText="{Binding AcctPasswordErrorMsg}"
+                            ReturnType="Done"
+                            ReturnCommand="{Binding CarouselContinueCommand}" />
+</StackLayout>

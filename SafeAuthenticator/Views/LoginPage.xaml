@@ -45,16 +45,22 @@
                            HorizontalOptions="Center"
                            Margin="0,10,0,0" />
 
-                    <controls:MaterialEntry Placeholder="Account Secret"
+                    <controls:MaterialEntry x:Name="SecretEntry"
+                                            Placeholder="Account Secret" 
                                             IsPassword="True"
                                             ErrorDisplay="None"
                                             Margin="0,50,0,0"
-                                            Text="{Binding AccountSecret}" />
+                                            Text="{Binding AccountSecret}"                                                                                        
+                                            NextEntry="{Reference PasswordEntry}"
+                                            ReturnType="Next" />
 
-                    <controls:MaterialEntry Placeholder="Account Password"
+                    <controls:MaterialEntry x:Name="PasswordEntry"
+                                            Placeholder="Account Password" 
                                             IsPassword="True"
                                             ErrorDisplay="None"
-                                            Text="{Binding AccountPassword}" />
+                                            Text="{Binding AccountPassword}"
+                                            ReturnType="Done" 
+                                            ReturnCommand="{Binding LoginCommand}"/>
 
                     <Button Text="LOGIN"
                             Command="{Binding LoginCommand}"

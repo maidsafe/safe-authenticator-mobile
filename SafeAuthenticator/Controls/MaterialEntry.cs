@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using SafeAuthenticator.Controls.Effects;
 using Xamarin.Forms;
 
@@ -12,12 +13,12 @@ namespace SafeAuthenticator.Controls
             {
                 FloatingHintEnabled = false;
             }
+            Effects.Add(new EntryMoveNextEffect());
         }
 
         protected override void OnPropertyChanging(string propertyName = null)
         {
             base.OnPropertyChanging(propertyName);
-
             if (propertyName == IsPasswordProperty.PropertyName && Device.RuntimePlatform == Device.iOS)
             {
                 Effects.Add(new ShowHidePasswordEffect());
@@ -48,6 +49,11 @@ namespace SafeAuthenticator.Controls
             typeof(Color),
             typeof(MaterialEntry),
             Color.Accent);
+
+        public static readonly BindableProperty NextEntryProperty = BindableProperty.Create(
+            nameof(NextEntry),
+            typeof(View),
+            typeof(MaterialEntry));
 
         /// <summary>
         /// ActivePlaceholderColor summary.
@@ -82,6 +88,15 @@ namespace SafeAuthenticator.Controls
         }
 
         /// <summary>
+        /// The next entry to move to when 'return' is hit on keyboard.
+        /// </summary>
+        public View NextEntry
+        {
+            get => (View)GetValue(NextEntryProperty);
+            set => SetValue(NextEntryProperty, value);
+        }
+
+        /// <summary>
         /// If enabled this property makes the color of underline transparent. This is a bindable property.
         /// </summary>
         public bool IsUnderlineTransparent
@@ -104,6 +119,21 @@ namespace SafeAuthenticator.Controls
 
         protected virtual void OnErrorTextChanged(BindableObject bindableObject, object oldValue, object newValue)
         {
+        }
+
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+
+            Completed += (sender, e) =>
+            {
+                OnNext();
+            };
+        }
+
+        public void OnNext()
+        {
+            NextEntry?.Focus();
         }
     }
 

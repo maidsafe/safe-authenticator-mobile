@@ -161,6 +161,7 @@
     <Compile Include="Extensions\ColorExtension.cs" />
     <Compile Include="Helpers\AppleNativeBrowserService.cs" />
     <Compile Include="Helpers\BorderlessEntryRenderer.cs" />
+    <Compile Include="Helpers\EntryMoveNextEffect.cs" />
     <Compile Include="Helpers\FileOps.cs" />
     <Compile Include="Extensions\FontExtensions.cs" />
     <Compile Include="Helpers\FloatLabeledTextField.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="Helpers\ShowHidePasswordEffect.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SafeAuthenticator\SafeAuthenticator.csproj">
