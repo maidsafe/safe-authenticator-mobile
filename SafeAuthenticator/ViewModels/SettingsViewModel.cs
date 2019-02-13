@@ -50,7 +50,7 @@ namespace SafeAuthenticator.ViewModels
             AccountStorageInfo = Preferences.Get(nameof(AccountStorageInfo), "--");
             LogoutCommand = new Command(OnLogout);
 
-            FAQCommand = new Command(() =>
+            FaqCommand = new Command(() =>
             {
                 OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(@"https://safenetforum.org/t/safe-authenticator-faq/26683");
             });
@@ -65,11 +65,11 @@ namespace SafeAuthenticator.ViewModels
         {
             try
             {
-                IsBusy = false;
+                IsBusy = true;
                 var acctStorageTuple = await Authenticator.GetAccountInfoAsync();
                 AccountStorageInfo = $"{acctStorageTuple.Item1} / {acctStorageTuple.Item2}";
                 Preferences.Set(nameof(AccountStorageInfo), AccountStorageInfo);
-                IsBusy = true;
+                IsBusy = false;
             }
             catch (FfiException ex)
             {
@@ -84,16 +84,15 @@ namespace SafeAuthenticator.ViewModels
 
         private async void OnLogout()
         {
-
             if (await Application.Current.MainPage.DisplayAlert(
                 "Logout",
                 "Are you sure you want to logout?",
                 "Logout",
                 "Cancel"))
             {
-                await Authenticator.LogoutAsync();
                 AuthReconnect = false;
                 Preferences.Remove(nameof(AccountStorageInfo));
+                await Authenticator.LogoutAsync();
                 MessagingCenter.Send(this, MessengerConstants.NavLoginPage);
             }
         }

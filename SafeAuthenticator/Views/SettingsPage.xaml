@@ -37,10 +37,11 @@
                                    Style="{StaticResource ItemStyle}"
                                    VerticalOptions="Center" />
                             <ImageButton x:Name="AccountStatusImage" 
-                                         Style="{StaticResource InfoButtonStyle}"
-                                         IsVisible="{Binding IsBusy}"/>
+                                         Style="{StaticResource InfoButton}"
+                                         IsVisible="{Binding IsBusy, Converter={StaticResource InverseBooleanConverter}}"/>
                             <ActivityIndicator Style="{StaticResource RefreshIndicatorStyle}"
-                                               IsVisible="{Binding IsBusy, Converter={StaticResource InverseBooleanConverter}}"/>
+                                               IsVisible="{Binding IsBusy}"
+                                               IsRunning="{Binding IsBusy}" />
                         </StackLayout>
                         <Label Text="{Binding AccountStorageInfo}"
                                Style="{StaticResource ItemStyle}"
