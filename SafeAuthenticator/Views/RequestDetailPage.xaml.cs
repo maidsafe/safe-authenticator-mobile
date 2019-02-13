@@ -1,7 +1,4 @@
-﻿using System;
-using Rg.Plugins.Popup.Pages;
-using Rg.Plugins.Popup.Services;
-using SafeAuthenticator.Models;
+﻿using Rg.Plugins.Popup.Pages;
 using SafeAuthenticator.Native;
 using SafeAuthenticator.ViewModels;
 using Xamarin.Forms.Xaml;
@@ -11,11 +8,9 @@ namespace SafeAuthenticator.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RequestDetailPage : PopupPage
     {
-        public event EventHandler CompleteRequest;
-
         private readonly RequestDetailViewModel _viewModel;
 
-        public RequestDetailPage(IpcReq req)
+        public RequestDetailPage(string encodedUri, IpcReq req)
         {
             InitializeComponent();
 
@@ -23,26 +18,13 @@ namespace SafeAuthenticator.Views
             {
                 AppDetailsStackLayout.IsVisible = !AppDetailsStackLayout.IsVisible;
                 if (AppDetailsStackLayout.IsVisible)
-                    PopupLayout.HeightRequest += 85;
+                    PopupLayout.HeightRequest += 105;
                 else
-                    PopupLayout.HeightRequest -= 85;
+                    PopupLayout.HeightRequest -= 105;
             };
 
-            _viewModel = new RequestDetailViewModel(req);
+            _viewModel = new RequestDetailViewModel(encodedUri, req);
             BindingContext = _viewModel;
-        }
-
-        private void Send_Response(object sender, EventArgs e)
-        {
-            if (sender == AllowButton)
-            {
-                CompleteRequest?.Invoke(this, new ResponseEventArgs(true));
-            }
-            else if (sender == DenyButton)
-            {
-                CompleteRequest?.Invoke(this, new ResponseEventArgs(false));
-            }
-            PopupNavigation.Instance.PopAsync();
         }
     }
 }

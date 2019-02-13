@@ -17,8 +17,5 @@ namespace SafeAuthenticator.Helpers
         public const ulong SymKeyLen = 32;
         public const ulong SymNonceLen = 24;
         public const ulong XorNameLen = 32;
-        public const int AccStrengthVeryWeak = 4;
-        public const int AccStrengthWeak = 8;
-        public const int AccStrengthSomeWhatSecure = 10;
     }
 }

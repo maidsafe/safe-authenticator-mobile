@@ -16,6 +16,8 @@
             <Color x:Key="GreySmokeLightColor">#c2c1c1</Color>
             <Color x:Key="GreySmokeMediumColor">#8b8b8b</Color>
             <Color x:Key="GreySnowMediumColor">#e4e4e4</Color>
+            <Color x:Key="DefaultAndroidPlaceholderColor">#80000000</Color>
+            <Color x:Key="DefaultiOSPlaceholderColor">#a9a9a9</Color>
 
             <!-- CONVERTERS -->
             <converters:IsCollectionEmptyConverter x:Key="IsCollectionEmptyConverter" />
@@ -57,6 +59,11 @@
                         Android="18"
                         iOS="16" />
 
+            <OnPlatform x:Key="DefaultPlaceholderColor"
+                        x:TypeArguments="Color"         
+                        Android="{StaticResource DefaultAndroidPlaceholderColor}" 
+                        iOS="{StaticResource DefaultiOSPlaceholderColor}" />
+
             <!-- STYLES -->
             <Style x:Key="InfoButton" TargetType="ImageButton">
                 <Setter Property="Padding" Value="5" />
@@ -89,6 +96,10 @@
 
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
+            </Style>
+
+            <Style x:Key="InvitationEntryUnderlineStyle" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="{StaticResource DefaultPlaceholderColor}" />
             </Style>
 
         </ResourceDictionary>

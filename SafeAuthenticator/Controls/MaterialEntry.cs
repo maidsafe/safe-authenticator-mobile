@@ -25,6 +25,12 @@ namespace SafeAuthenticator.Controls
             }
         }
 
+        public static readonly BindableProperty IsUnderlineTransparentProperty = BindableProperty.Create(
+            nameof(IsUnderlineTransparent),
+            typeof(bool),
+            typeof(MaterialEntry),
+            default(bool));
+
         public static readonly BindableProperty ErrorTextProperty = BindableProperty.Create(
             nameof(ErrorText),
             typeof(string),
@@ -88,6 +94,15 @@ namespace SafeAuthenticator.Controls
         {
             get => (View)GetValue(NextEntryProperty);
             set => SetValue(NextEntryProperty, value);
+        }
+
+        /// <summary>
+        /// If enabled this property makes the color of underline transparent. This is a bindable property.
+        /// </summary>
+        public bool IsUnderlineTransparent
+        {
+            get { return (bool)GetValue(IsUnderlineTransparentProperty); }
+            set { SetValue(IsUnderlineTransparentProperty, value); }
         }
 
         /// <summary>
