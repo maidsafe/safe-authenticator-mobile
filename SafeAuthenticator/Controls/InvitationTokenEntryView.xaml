@@ -27,7 +27,6 @@
 
             <controls:MaterialEntry x:Name="InvitationTokenEntry"
                                     Placeholder="Invitation token"
-                                    VerticalOptions="End"
                                     Text="{Binding Invitation}"
                                     HorizontalOptions="FillAndExpand" 
                                     ErrorDisplay="None"
@@ -36,7 +35,6 @@
             <Image Source="clipboardPaste"
                    Style="{DynamicResource ImageStyle}"
                    Grid.Column="1"
-                   VerticalOptions="End"
                    HorizontalOptions="End">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1"
@@ -46,7 +44,7 @@
 
             <BoxView x:Name="underline"
                      Grid.Row="1"
-                     BackgroundColor="{StaticResource DefaultPlaceholderColor}"
+                     Style="{StaticResource InvitationEntryUnderlineStyle}"
                      HorizontalOptions="FillAndExpand" 
                      Grid.Column="0"
                      Grid.ColumnSpan="2" 
