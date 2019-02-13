@@ -2,7 +2,7 @@
 <StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
-             x:Class="SafeAuthenticator.Controls.CreateAcctPage2"
+             x:Class="SafeAuthenticator.Controls.CreateAcctStep2"
              Spacing="15"
              Padding="25,0">
     

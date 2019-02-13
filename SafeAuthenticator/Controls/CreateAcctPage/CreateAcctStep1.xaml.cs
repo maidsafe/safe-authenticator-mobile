@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace SafeAuthenticator.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CreateAcctPage3 : StackLayout
+    public partial class CreateAcctStep1 : StackLayout
     {
-        public CreateAcctPage3()
+        public CreateAcctStep1()
         {
             InitializeComponent();
         }

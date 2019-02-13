@@ -2,11 +2,11 @@
 <StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
-             x:Class="SafeAuthenticator.Controls.CreateAcctPage1">
-  
+             x:Class="SafeAuthenticator.Controls.CreateAcctStep1">
+
     <StackLayout Spacing="10"
                  Padding="25,0">
-      <Label Text="First, you need an invitation token"
+        <Label Text="First, you need an invitation token"
              Style="{DynamicResource TitleStyle}" />
 
         <Label>
@@ -16,8 +16,8 @@
                     <Span Text="SAFE network forum" 
                           TextColor="{StaticResource PrimaryColor}"
                           TextDecorations="Underline">
-                      <Span.GestureRecognizers>
-                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                        <Span.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1"
                                               Command="{Binding OpenForumLinkCommand}">
                             </TapGestureRecognizer>
                         </Span.GestureRecognizers>
@@ -59,4 +59,3 @@
         </StackLayout>
     </StackLayout>
 </StackLayout>
-    

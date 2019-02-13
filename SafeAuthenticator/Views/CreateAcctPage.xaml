@@ -39,13 +39,13 @@
                     <x:Array Type="{x:Type View}">
 
                         <!-- Invitation -->
-                        <controls:CreateAcctPage1/>
+                        <controls:CreateAcctStep1/>
 
                         <!-- Account Secret -->
-                        <controls:CreateAcctPage2/>
+                        <controls:CreateAcctStep2/>
 
                         <!-- Account Password -->
-                        <controls:CreateAcctPage3/>
+                        <controls:CreateAcctStep3/>
                         
                     </x:Array>
                 </cv:CarouselViewControl.ItemsSource>

@@ -4,7 +4,6 @@ using SafeAuthenticator.Droid.Helpers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ResolutionGroupName("Xamarin")]
 [assembly: ExportEffect(typeof(EntryMoveNextEffect), nameof(EntryMoveNextEffect))]
 namespace SafeAuthenticator.Droid.Helpers
 {
@@ -19,7 +18,7 @@ namespace SafeAuthenticator.Droid.Helpers
             {
                 var entry = ((TextInputLayout)Control).EditText;
 
-                entry.ImeOptions = (xfControl.ReturnType == "Next") ?
+                entry.ImeOptions = (xfControl.ReturnType == ReturnType.Next) ?
                     Android.Views.InputMethods.ImeAction.Next :
                     Android.Views.InputMethods.ImeAction.Done;
 

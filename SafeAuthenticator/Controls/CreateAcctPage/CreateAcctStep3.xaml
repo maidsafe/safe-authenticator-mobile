@@ -2,7 +2,7 @@
 <StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
-             x:Class="SafeAuthenticator.Controls.CreateAcctPage3"
+             x:Class="SafeAuthenticator.Controls.CreateAcctStep3"
              Spacing="15"
              Padding="25,0">
     <Label Text="Account Password"
@@ -28,4 +28,3 @@
                             ReturnType="Done"
                             ReturnCommand="{Binding CarouselContinueCommand}" />
 </StackLayout>
-    

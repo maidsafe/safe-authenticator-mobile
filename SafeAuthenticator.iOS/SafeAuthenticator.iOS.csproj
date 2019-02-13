@@ -170,6 +170,7 @@
     <Compile Include="Helpers\ShowHidePasswordEffect.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SafeAuthenticator\SafeAuthenticator.csproj">

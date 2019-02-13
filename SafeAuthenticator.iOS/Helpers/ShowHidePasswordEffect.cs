@@ -5,7 +5,6 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ResolutionGroupName("Xamarin")]
 [assembly: ExportEffect(typeof(ShowHidePasswordEffect), "ShowHidePasswordEffect")]
 namespace SafeAuthenticator.iOS.Helpers
 {

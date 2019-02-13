@@ -13,8 +13,7 @@ namespace SafeAuthenticator.Controls
             {
                 FloatingHintEnabled = false;
             }
-
-            Effects.Add(Effect.Resolve("Xamarin.EntryMoveNextEffect"));
+            Effects.Add(new EntryMoveNextEffect());
         }
 
         protected override void OnPropertyChanging(string propertyName = null)
@@ -48,11 +47,6 @@ namespace SafeAuthenticator.Controls
         public static readonly BindableProperty NextEntryProperty = BindableProperty.Create(
             nameof(NextEntry),
             typeof(View),
-            typeof(MaterialEntry));
-
-        public static new readonly BindableProperty ReturnTypeProperty = BindableProperty.Create(
-            nameof(NextEntry),
-            typeof(string),
             typeof(MaterialEntry));
 
         /// <summary>
@@ -94,12 +88,6 @@ namespace SafeAuthenticator.Controls
         {
             get => (View)GetValue(NextEntryProperty);
             set => SetValue(NextEntryProperty, value);
-        }
-
-        public new string ReturnType
-        {
-            get => (string)GetValue(ReturnTypeProperty);
-            set => SetValue(ReturnTypeProperty, value);
         }
 
         /// <summary>

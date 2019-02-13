@@ -16,9 +16,9 @@ namespace SafeAuthenticator.iOS.Helpers
             // Check if the attached element is of the expected type and has the NextEntry
             // property set. if so, configure the keyboard to indicate there is another entry
             // in the form and the dismiss action to focus on the next entry
-            if (Element is MaterialEntry xfControl && xfControl.ReturnType != null)
+            if (Element is MaterialEntry xfControl && xfControl.ReturnType != ReturnType.Default)
             {
-                entry.ReturnKeyType = (xfControl.ReturnType == "Next") ?
+                entry.ReturnKeyType = (xfControl.ReturnType == ReturnType.Next) ?
                     UIReturnKeyType.Next :
                     UIReturnKeyType.Done;
             }
