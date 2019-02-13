@@ -52,15 +52,10 @@ namespace SafeAuthenticator
 
         private Page NewStartupPage()
         {
-            if (!Current.Properties.ContainsKey(Constants.IsFirstLaunch))
-            {
-                Current.Properties[Constants.IsFirstLaunch] = true;
+            if (!Current.Properties.ContainsKey(Constants.IsTutorialComplete))
                 return new TutorialPage();
-            }
             else
-            {
                 return new LoginPage();
-            }
         }
 
         protected override async void OnStart()
