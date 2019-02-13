@@ -26,7 +26,6 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Spacing="15">
-
                 <StackLayout Padding="16, 10"
                              Spacing="15">
                     <Label Text="Account"
@@ -38,12 +37,10 @@
                                    Style="{StaticResource ItemStyle}"
                                    VerticalOptions="Center" />
                             <ImageButton x:Name="AccountStatusImage" 
-                                         Style="{StaticResource InfoButton}"
-                                         IsVisible="{Binding RefreshIndicator, Converter={StaticResource InverseBooleanConverter}}"/>
-                            <ActivityIndicator IsRunning="True"
-                                               HeightRequest="15"
-                                               WidthRequest="15"
-                                               IsVisible="{Binding RefreshIndicator}"/>
+                                         Style="{StaticResource InfoButtonStyle}"
+                                         IsVisible="{Binding IsBusy}"/>
+                            <ActivityIndicator Style="{StaticResource RefreshIndicatorStyle}"
+                                               IsVisible="{Binding IsBusy, Converter={StaticResource InverseBooleanConverter}}"/>
                         </StackLayout>
                         <Label Text="{Binding AccountStorageInfo}"
                                Style="{StaticResource ItemStyle}"

@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Native;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace SafeAuthenticator.ViewModels
@@ -14,20 +15,20 @@ namespace SafeAuthenticator.ViewModels
 
         public ICommand PrivacyInfoCommand { get; }
 
-        private string _accountStorageInfo;
-
-        private bool _refreshIndicator;
+        private string _accountStatus;
 
         public string AccountStorageInfo
         {
-            get => _accountStorageInfo;
-            set => SetProperty(ref _accountStorageInfo, value);
+            get => _accountStatus;
+            set => SetProperty(ref _accountStatus, value);
         }
 
-        public bool RefreshIndicator
+        private bool _isBusy;
+
+        public bool IsBusy
         {
-            get => _refreshIndicator;
-            set => SetProperty(ref _refreshIndicator, value);
+            get => _isBusy;
+            set => SetProperty(ref _isBusy, value);
         }
 
         public bool AuthReconnect
@@ -46,18 +47,10 @@ namespace SafeAuthenticator.ViewModels
 
         public SettingsViewModel()
         {
+            AccountStorageInfo = Preferences.Get(nameof(AccountStorageInfo), "--");
             LogoutCommand = new Command(OnLogout);
 
-            if (string.IsNullOrEmpty(Authenticator.PreviousAccountInfo))
-            {
-                AccountStorageInfo = "Fetching account info...";
-            }
-            else
-            {
-                AccountStorageInfo = Authenticator.PreviousAccountInfo;
-            }
-
-            FaqCommand = new Command(() =>
+            FAQCommand = new Command(() =>
             {
                 OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(@"https://safenetforum.org/t/safe-authenticator-faq/26683");
             });
@@ -72,11 +65,11 @@ namespace SafeAuthenticator.ViewModels
         {
             try
             {
-                RefreshIndicator = true;
+                IsBusy = false;
                 var acctStorageTuple = await Authenticator.GetAccountInfoAsync();
                 AccountStorageInfo = $"{acctStorageTuple.Item1} / {acctStorageTuple.Item2}";
-                Authenticator.PreviousAccountInfo = AccountStorageInfo;
-                RefreshIndicator = false;
+                Preferences.Set(nameof(AccountStorageInfo), AccountStorageInfo);
+                IsBusy = true;
             }
             catch (FfiException ex)
             {
@@ -91,16 +84,16 @@ namespace SafeAuthenticator.ViewModels
 
         private async void OnLogout()
         {
-            var result = await Application.Current.MainPage.DisplayAlert(
+
+            if (await Application.Current.MainPage.DisplayAlert(
                 "Logout",
                 "Are you sure you want to logout?",
                 "Logout",
-                "Cancel");
-
-            if (result)
+                "Cancel"))
             {
-                AuthReconnect = false;
                 await Authenticator.LogoutAsync();
+                AuthReconnect = false;
+                Preferences.Remove(nameof(AccountStorageInfo));
                 MessagingCenter.Send(this, MessengerConstants.NavLoginPage);
             }
         }

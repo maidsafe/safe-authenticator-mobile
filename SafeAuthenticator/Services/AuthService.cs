@@ -26,9 +26,6 @@ namespace SafeAuthenticator.Services
         private bool _isLogInitialised;
         private string _secret;
         private string _password;
-        private string _previousAccountInfo;
-
-        public string PreviousAccountInfo { get => _previousAccountInfo; set => _previousAccountInfo = value; }
 
         public string AuthenticationReq { get; set; }
 
