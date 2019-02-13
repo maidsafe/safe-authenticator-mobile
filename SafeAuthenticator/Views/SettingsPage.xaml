@@ -74,7 +74,7 @@
                            Style="{StaticResource ItemStyle}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1"
-                                                  Command="{Binding FAQCommand}" />
+                                                  Command="{Binding FaqCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
 
