@@ -27,7 +27,7 @@
                 <Setter Property="FontSize" Value="{StaticResource SmallSize}" />
             </Style>
             <Style x:Key="RevokeButtonStyle" TargetType="Button">
-                <Setter Property="MinimumHeightRequest" Value="50" />
+                <Setter Property="HeightRequest" Value="35" />
                 <Setter Property="Padding" Value="5" />
                 <Setter Property="WidthRequest" Value="100" />
             </Style>
@@ -40,6 +40,10 @@
             <Grid RowSpacing="10"
                   VerticalOptions="CenterAndExpand"
                   ColumnSpacing="15">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*" />
@@ -61,6 +65,7 @@
                         Style="{StaticResource RevokeButtonStyle}"
                         Text="REVOKE"
                         HorizontalOptions="End"
+                        VerticalOptions="StartAndExpand"
                         Command="{Binding RevokeAppCommand}" />
             </Grid>
 

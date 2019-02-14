@@ -6,7 +6,7 @@
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
              x:Class="SafeAuthenticator.Views.LoginPage" 
              NavigationPage.HasNavigationBar="False"
-             Title="Login"
+             NavigationPage.BackButtonTitle="Login"
              IsEnabled="{Binding IsUiEnabled}">
 
     <ContentPage.BindingContext>

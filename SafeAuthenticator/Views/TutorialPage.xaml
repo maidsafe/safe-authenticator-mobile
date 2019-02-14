@@ -6,6 +6,7 @@
              xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels"
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls;assembly=SafeAuthenticator"
              x:Class="SafeAuthenticator.Views.TutorialPage"
+             NavigationPage.BackButtonTitle="Login"
              NavigationPage.HasNavigationBar="False">
 
     <ContentPage.BindingContext>
