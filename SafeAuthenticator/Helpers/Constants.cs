@@ -9,6 +9,7 @@
 
         internal static readonly string AppName = "SAFE Authenticator";
         internal static readonly string IsTutorialComplete = "IsTutorialComplete";
+        internal static readonly string AppOwnContainer = "App's own Container";
 
         // Authentication PopupState
         internal static readonly string None = "None";

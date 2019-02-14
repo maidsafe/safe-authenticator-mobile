@@ -4,7 +4,6 @@ using System.Windows.Input;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
-using SafeAuthenticator.Services;
 using Xamarin.Forms;
 
 namespace SafeAuthenticator.ViewModels
@@ -61,10 +60,10 @@ namespace SafeAuthenticator.ViewModels
                 {
                     var ipcReq = (AuthIpcReq)decodeResult;
                     var app = new RegisteredAppModel(ipcReq.AuthReq.App, ipcReq.AuthReq.Containers);
-                    var isAppContainerPresent = ipcReq.AuthReq.AppContainer;
+                    var isAppContainerRequested = ipcReq.AuthReq.AppContainer;
                     var appOwnContainer = new ContainerPermissionsModel()
                     {
-                        ContainerName = "App's own Container",
+                        ContainerName = Constants.AppOwnContainer,
                         Access = new PermissionSetModel
                         {
                             Read = true,
@@ -79,7 +78,7 @@ namespace SafeAuthenticator.ViewModels
                     if (!Apps.Contains(app))
                     {
                         // Adding app's own container if present
-                        if (isAppContainerPresent)
+                        if (isAppContainerRequested)
                         {
                             app.Containers.Add(appOwnContainer);
                             app.Containers.ReplaceRange(app.Containers.OrderBy(a => a.ContainerName).ToObservableRangeCollection());
@@ -89,23 +88,24 @@ namespace SafeAuthenticator.ViewModels
                         registeredApps = registeredApps.OrderBy(a => a.AppName).ToObservableRangeCollection();
                         Apps.ReplaceRange(registeredApps);
                     }
-
-                    // If app already exists in registeredAppList, and app's own container is requested but not previously added
-                    else if (isAppContainerPresent)
+                    else
                     {
-                        var registeredAppsItem = Apps.FirstOrDefault(a => a.AppId == app.AppId);
-                        var container = registeredAppsItem.Containers.FirstOrDefault(a => a.ContainerName == "App's own Container");
-                        if (container == null)
+                        // If app already exists in registeredAppList, and app's own container is requested but not previously added
+                        if (isAppContainerRequested)
                         {
-                            registeredAppsItem.Containers.Add(appOwnContainer);
-                            registeredAppsItem.Containers.ReplaceRange(registeredAppsItem.Containers.OrderBy(a => a.ContainerName).ToObservableRangeCollection());
+                            var registeredAppsItem = Apps.FirstOrDefault(a => a.AppId == app.AppId);
+                            var container = registeredAppsItem.Containers.FirstOrDefault(a => a.ContainerName == Constants.AppOwnContainer);
+                            if (container == null)
+                            {
+                                registeredAppsItem.Containers.Add(appOwnContainer);
+                                registeredAppsItem.Containers.ReplaceRange(registeredAppsItem.Containers.OrderBy(a => a.ContainerName).ToObservableRangeCollection());
+                            }
                         }
                     }
                 }
-
-                // Container Request
                 else if (decodedType == typeof(ContainersIpcReq))
                 {
+                    // Container Request
                     var ipcReq = (ContainersIpcReq)decodeResult;
                     var app = new RegisteredAppModel(ipcReq.ContainersReq.App, ipcReq.ContainersReq.Containers);
 
@@ -114,11 +114,9 @@ namespace SafeAuthenticator.ViewModels
                     {
                         var containersItem = registeredAppsItem.Containers.FirstOrDefault(a => a.ContainerName == container.ContainerName);
 
-                        // Add new containers
+                        // If requested container not present add new else update permission set of existing container
                         if (containersItem == null)
                             registeredAppsItem.Containers.Add(container);
-
-                        // Update permission set of existing containers
                         else
                             containersItem.Access = container.Access;
                     }

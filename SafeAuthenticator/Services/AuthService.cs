@@ -190,18 +190,6 @@ namespace SafeAuthenticator.Services
                 }
                 else
                 {
-                    // var requestPage = new RequestDetailPage(decodeResult);
-                    // requestPage.CompleteRequest += async (s, e) =>
-                    // {
-                    //    var args = e as ResponseEventArgs;
-                    //    if (args.Response)
-                    //    {
-                    //        MessagingCenter.Send(this, MessengerConstants.RefreshHomePage, decodeResult);
-                    //    }
-
-                    // await SendResponseBack(encodedUri, decodeResult, args.Response);
-                    // };
-
                     MessagingCenter.Send(this, MessengerConstants.NavHomePage);
                     var requestPage = new RequestDetailPage(encodedUri, decodeResult);
                     await Application.Current.MainPage.Navigation.PushPopupAsync(requestPage);
