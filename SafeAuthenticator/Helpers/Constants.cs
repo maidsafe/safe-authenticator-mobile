@@ -8,7 +8,7 @@
         internal const int AccStrengthSomeWhatSecure = 10;
 
         internal static readonly string AppName = "SAFE Authenticator";
-        internal static readonly string IsFirstLaunch = "IsFirstLaunch";
+        internal static readonly string IsTutorialComplete = "IsTutorialComplete";
 
         // Authentication PopupState
         internal static readonly string None = "None";

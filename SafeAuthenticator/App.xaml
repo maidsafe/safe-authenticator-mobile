@@ -66,10 +66,16 @@
 
             <!-- STYLES -->
             <Style x:Key="InfoButton" TargetType="ImageButton">
-                <Setter Property="Padding" Value="5" />
+                <Setter Property="Aspect" Value="Fill" />
                 <Setter Property="BackgroundColor" Value="Transparent" />
-                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="HeightRequest" Value="22" />
+                <Setter Property="WidthRequest" Value="22" />
                 <Setter Property="Source" Value="info" />
+            </Style>
+
+            <Style x:Key="RefreshIndicatorStyle" TargetType="ActivityIndicator">
+                <Setter Property="HeightRequest" Value="22" />
+                <Setter Property="WidthRequest" Value="22" />
             </Style>
 
             <Style TargetType="NavigationPage">

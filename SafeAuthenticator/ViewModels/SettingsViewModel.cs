@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Native;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace SafeAuthenticator.ViewModels
@@ -14,12 +15,20 @@ namespace SafeAuthenticator.ViewModels
 
         public ICommand PrivacyInfoCommand { get; }
 
-        private string _accountStorageInfo;
+        private string _accountStatus;
 
         public string AccountStorageInfo
         {
-            get => _accountStorageInfo;
-            set => SetProperty(ref _accountStorageInfo, value);
+            get => _accountStatus;
+            set => SetProperty(ref _accountStatus, value);
+        }
+
+        private bool _isBusy;
+
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set => SetProperty(ref _isBusy, value);
         }
 
         public bool AuthReconnect
@@ -38,8 +47,8 @@ namespace SafeAuthenticator.ViewModels
 
         public SettingsViewModel()
         {
+            AccountStorageInfo = Preferences.Get(nameof(AccountStorageInfo), "--");
             LogoutCommand = new Command(OnLogout);
-            AccountStorageInfo = "Fetching account info...";
 
             FaqCommand = new Command(() =>
             {
@@ -56,8 +65,11 @@ namespace SafeAuthenticator.ViewModels
         {
             try
             {
+                IsBusy = true;
                 var acctStorageTuple = await Authenticator.GetAccountInfoAsync();
                 AccountStorageInfo = $"{acctStorageTuple.Item1} / {acctStorageTuple.Item2}";
+                Preferences.Set(nameof(AccountStorageInfo), AccountStorageInfo);
+                IsBusy = false;
             }
             catch (FfiException ex)
             {
@@ -72,15 +84,14 @@ namespace SafeAuthenticator.ViewModels
 
         private async void OnLogout()
         {
-            var result = await Application.Current.MainPage.DisplayAlert(
+            if (await Application.Current.MainPage.DisplayAlert(
                 "Logout",
                 "Are you sure you want to logout?",
                 "Logout",
-                "Cancel");
-
-            if (result)
+                "Cancel"))
             {
                 AuthReconnect = false;
+                Preferences.Remove(nameof(AccountStorageInfo));
                 await Authenticator.LogoutAsync();
                 MessagingCenter.Send(this, MessengerConstants.NavLoginPage);
             }
