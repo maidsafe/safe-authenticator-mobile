@@ -3,12 +3,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SafeAuthenticator.Views.SettingsPage"
+             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects"             
              Title="Settings">
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="TitleStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="{StaticResource ExtraLargeSize}" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
             </Style>
             <Style x:Key="ItemStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
@@ -20,6 +22,9 @@
                 <Setter Property="HeightRequest" Value="0.5" />
                 <Setter Property="Color" Value="{StaticResource GreySmokeMediumColor}" />
             </Style>
+            <Style x:Key="ExternalLinkStyle" TargetType="StackLayout">
+                <Setter Property="HeightRequest" Value="40" />
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -30,8 +35,7 @@
                 <StackLayout Padding="16, 10"
                              Spacing="15">
                     <Label Text="Account"
-                           Style="{StaticResource TitleStyle}" 
-                           TextColor="{StaticResource PrimaryColor}"/>
+                           Style="{StaticResource TitleStyle}" />
                     <StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Account Status"
@@ -64,29 +68,35 @@
                     </Grid>
                 </StackLayout>
 
-                <BoxView Style="{StaticResource BoxViewStyle}"/>
+                <BoxView Style="{StaticResource BoxViewStyle}" />
 
-                <StackLayout Padding="16, 0" Spacing="20">
+                <StackLayout Spacing="0">
 
                     <Label Text="Help"
+                           Margin="16,0,16,10"
                            Style="{StaticResource TitleStyle}" />
-                    <Label Text="FAQs"
-                           Style="{StaticResource ItemStyle}">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1"
-                                                  Command="{Binding FAQCommand}" />
-                        </Label.GestureRecognizers>
-                    </Label>
 
-                    <Label Text="Privacy statement" 
-                           Style="{StaticResource ItemStyle}" >
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1"
-                                                  Command="{Binding PrivacyInfoCommand}" />
-                        </Label.GestureRecognizers>
-                    </Label>
-                    
-                    <StackLayout>
+                    <StackLayout xe:TouchEffect.Color="{StaticResource GreySmokeMediumColor}"
+                                 xe:Commands.Tap="{Binding FaqCommand}"
+                                 Style="{StaticResource ExternalLinkStyle}">
+                        
+                        <Label Text="FAQs"
+                               Margin="16,0"
+                               Style="{StaticResource ItemStyle}"
+                               VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
+
+                    <StackLayout xe:TouchEffect.Color="{StaticResource GreySmokeMediumColor}"
+                                 xe:Commands.Tap="{Binding PrivacyInfoCommand}"
+                                 Style="{StaticResource ExternalLinkStyle}">
+
+                        <Label Text="Privacy statement"
+                               Margin="16,0"
+                               Style="{StaticResource ItemStyle}"
+                               VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
+
+                    <StackLayout Margin="16,10">
                         <Label Text="Application version"
                                Style="{StaticResource ItemStyle}" />
                         <Label Text="0.1.0" 

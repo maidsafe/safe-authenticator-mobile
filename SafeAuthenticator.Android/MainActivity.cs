@@ -92,6 +92,7 @@ namespace SafeAuthenticator.Droid
 
             base.OnCreate(bundle);
             Rg.Plugins.Popup.Popup.Init(this, bundle);
+            XamEffects.Droid.Effects.Init();
             Forms.Init(this, bundle);
 
             DisplayCrashReport();

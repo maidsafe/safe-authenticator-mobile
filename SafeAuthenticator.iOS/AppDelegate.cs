@@ -23,6 +23,7 @@ namespace SafeAuthenticator.iOS
         {
             Rg.Plugins.Popup.Popup.Init();
             Forms.Init();
+            XamEffects.iOS.Effects.Init();
             CarouselViewRenderer.Init();
             LoadApplication(new App());
 
