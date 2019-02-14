@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Input;
-using Acr.UserDialogs;
 using JetBrains.Annotations;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
@@ -39,7 +38,7 @@ namespace SafeAuthenticator.ViewModels
             {
                 try
                 {
-                    using (UserDialogs.Instance.Loading("Revoking app access"))
+                    using (NativeProgressDialog.ShowNativeDialog("Revoking app access"))
                     {
                         await Authenticator.RevokeAppAsync(_appModelInfo.AppId);
                         MessagingCenter.Send(this, MessengerConstants.NavHomePage);

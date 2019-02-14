@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Acr.UserDialogs;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -96,8 +95,6 @@ namespace SafeAuthenticator.Droid
             Forms.Init(this, bundle);
 
             DisplayCrashReport();
-
-            UserDialogs.Init(this);
             CarouselViewRenderer.Init();
             LoadApplication(new App());
 

@@ -4,8 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Acr.UserDialogs;
 using Rg.Plugins.Popup.Extensions;
+using SafeAuthenticator.Controls;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
@@ -26,6 +26,8 @@ namespace SafeAuthenticator.Services
         private bool _isLogInitialised;
         private string _secret;
         private string _password;
+
+        protected INativeProgressDialogService NativeProgressDialog => DependencyService.Get<INativeProgressDialogService>();
 
         public string AuthenticationReq { get; set; }
 
@@ -92,7 +94,7 @@ namespace SafeAuthenticator.Services
                     if (AuthReconnect)
                     {
                         var (location, password) = await CredentialCache.Retrieve();
-                        using (UserDialogs.Instance.Loading("Reconnecting to Network"))
+                        using (NativeProgressDialog.ShowNativeDialog("Reconnecting to Network"))
                         {
                             await LoginAsync(location, password);
                             MessagingCenter.Send(this, MessengerConstants.NavHomePage);
@@ -101,7 +103,7 @@ namespace SafeAuthenticator.Services
                 }
                 else if (_authenticator.IsDisconnected)
                 {
-                    using (UserDialogs.Instance.Loading("Reconnecting to Network"))
+                    using (NativeProgressDialog.ShowNativeDialog("Reconnecting to Network"))
                     {
                         await LoginAsync(_secret, _password);
                     }

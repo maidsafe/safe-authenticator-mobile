@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Input;
-using Acr.UserDialogs;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Native;
 using Xamarin.Forms;
@@ -80,7 +79,7 @@ namespace SafeAuthenticator.ViewModels
         {
             try
             {
-                using (UserDialogs.Instance.Loading("Logging in"))
+                using (NativeProgressDialog.ShowNativeDialog("Logging in"))
                 {
                     await Authenticator.LoginAsync(AccountSecret, AccountPassword);
                     MessagingCenter.Send(this, MessengerConstants.NavHomePage);

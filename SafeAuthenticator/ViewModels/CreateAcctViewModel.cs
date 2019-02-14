@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Acr.UserDialogs;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
@@ -171,7 +170,7 @@ namespace SafeAuthenticator.ViewModels
             {
                 if (CarouselPagePosition == 1)
                 {
-                    using (UserDialogs.Instance.Loading("Checking secret strength"))
+                    using (NativeProgressDialog.ShowNativeDialog("Checking secret strength"))
                     {
                         await Task.Run(() =>
                         {
@@ -212,7 +211,7 @@ namespace SafeAuthenticator.ViewModels
 
         private async Task CreateAcct()
         {
-            using (UserDialogs.Instance.Loading("Creating account"))
+            using (NativeProgressDialog.ShowNativeDialog("Creating account"))
             {
                 await Task.Run(() =>
                 {
