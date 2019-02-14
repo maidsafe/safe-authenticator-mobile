@@ -3,7 +3,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SafeAuthenticator.Views.SettingsPage"
-             xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects"             
+             xmlns:XamEffects="clr-namespace:XamEffects;assembly=XamEffects"             
              Title="Settings">
 
     <ContentPage.Resources>
@@ -79,8 +79,8 @@
                            Margin="16,0,16,10"
                            Style="{StaticResource TitleStyle}" />
 
-                    <StackLayout xe:TouchEffect.Color="{StaticResource GreySmokeMediumColor}"
-                                 xe:Commands.Tap="{Binding FaqCommand}"
+                    <StackLayout XamEffects:TouchEffect.Color="{StaticResource GreySmokeMediumColor}"
+                                 XamEffects:Commands.Tap="{Binding FaqCommand}"
                                  Style="{StaticResource ExternalLinkStyle}">
                         
                         <Label Text="FAQs"
@@ -89,8 +89,8 @@
                                VerticalOptions="CenterAndExpand" />
                     </StackLayout>
 
-                    <StackLayout xe:TouchEffect.Color="{StaticResource GreySmokeMediumColor}"
-                                 xe:Commands.Tap="{Binding PrivacyInfoCommand}"
+                    <StackLayout XamEffects:TouchEffect.Color="{StaticResource GreySmokeMediumColor}"
+                                 XamEffects:Commands.Tap="{Binding PrivacyInfoCommand}"
                                  Style="{StaticResource ExternalLinkStyle}">
 
                         <Label Text="Privacy statement"
