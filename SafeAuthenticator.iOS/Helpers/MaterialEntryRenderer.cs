@@ -200,6 +200,9 @@ namespace SafeAuthenticator.iOS.Helpers
 
         private CGColor GetUnderlineColorForState()
         {
+            if (Element.IsUnderlineTransparent)
+                return Color.Transparent.ToCGColor();
+
             if (_hasError)
                 return UIColor.Red.CGColor;
 

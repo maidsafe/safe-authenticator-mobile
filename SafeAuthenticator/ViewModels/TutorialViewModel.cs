@@ -64,6 +64,7 @@ namespace SafeAuthenticator.ViewModels
 
         private void OnSecondaryButton()
         {
+            Application.Current.Properties[Constants.IsTutorialComplete] = true;
             MessagingCenter.Send(
                 this,
                 CarouselPagePosition < 2 ? MessengerConstants.NavLoginPage : MessengerConstants.NavCreateAcctPage);
@@ -72,9 +73,14 @@ namespace SafeAuthenticator.ViewModels
         private void OnPrimaryButton()
         {
             if (CarouselPagePosition < 2)
+            {
                 CarouselPagePosition += 1;
+            }
             else
+            {
+                Application.Current.Properties[Constants.IsTutorialComplete] = true;
                 MessagingCenter.Send(this, MessengerConstants.NavLoginPage);
+            }
         }
     }
 }

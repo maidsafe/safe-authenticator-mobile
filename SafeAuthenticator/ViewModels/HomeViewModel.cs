@@ -52,7 +52,7 @@ namespace SafeAuthenticator.ViewModels
             Device.BeginInvokeOnMainThread(OnRefreshAccounts);
 
             MessagingCenter.Subscribe<AppInfoViewModel>(this, MessengerConstants.RefreshHomePage, (sender) => { OnRefreshAccounts(); });
-            MessagingCenter.Subscribe<AuthService, IpcReq>(this, MessengerConstants.RefreshHomePage, (sender, decodeResult) =>
+            MessagingCenter.Subscribe<RequestDetailViewModel, IpcReq>(this, MessengerConstants.RefreshHomePage, (sender, decodeResult) =>
             {
                 var decodedType = decodeResult.GetType();
 
@@ -130,7 +130,7 @@ namespace SafeAuthenticator.ViewModels
         ~HomeViewModel()
         {
             MessagingCenter.Unsubscribe<AppInfoViewModel>(this, MessengerConstants.RefreshHomePage);
-            MessagingCenter.Unsubscribe<AuthService, RegisteredAppModel>(this, MessengerConstants.RefreshHomePage);
+            MessagingCenter.Unsubscribe<RequestDetailViewModel, RegisteredAppModel>(this, MessengerConstants.RefreshHomePage);
         }
 
         private void OnAccountSelected(RegisteredAppModel appModelInfo)

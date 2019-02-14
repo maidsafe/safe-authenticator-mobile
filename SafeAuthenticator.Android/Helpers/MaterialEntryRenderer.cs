@@ -94,6 +94,9 @@ namespace SafeAuthenticator.Droid.Helpers
                 if (!string.IsNullOrWhiteSpace(Element.AutomationId))
                     EditText.ContentDescription = Element.AutomationId;
 
+                if (Element.IsUnderlineTransparent)
+                    Control.EditText.SetPadding(Control.PaddingLeft, Control.PaddingTop, Control.PaddingRight, 0);
+
                 _defaultTextColor = EditText.TextColors;
 
                 Focusable = true;
@@ -143,7 +146,8 @@ namespace SafeAuthenticator.Droid.Helpers
                      (e.PropertyName == Entry.FontSizeProperty.PropertyName))
                 SetFontAttributesSizeAndFamily();
             else if (e.PropertyName == MaterialEntry.ActivePlaceholderColorProperty.PropertyName ||
-                     e.PropertyName == Entry.PlaceholderColorProperty.PropertyName)
+                     e.PropertyName == Entry.PlaceholderColorProperty.PropertyName ||
+                     e.PropertyName == MaterialEntry.IsUnderlineTransparentProperty.PropertyName)
                 SetLabelAndUnderlineColor();
             else if (e.PropertyName == Entry.TextColorProperty.PropertyName)
                 SetTextColor();
@@ -186,8 +190,16 @@ namespace SafeAuthenticator.Droid.Helpers
 
         private void SetUnderlineColor(AColor color)
         {
-            var element = (ITintableBackgroundView)EditText;
-            element.SupportBackgroundTintList = ColorStateList.ValueOf(color);
+            if (Element.IsUnderlineTransparent)
+            {
+                var element = (ITintableBackgroundView)EditText;
+                element.SupportBackgroundTintList = ColorStateList.ValueOf(AColor.Transparent);
+            }
+            else
+            {
+                var element = (ITintableBackgroundView)EditText;
+                element.SupportBackgroundTintList = ColorStateList.ValueOf(color);
+            }
         }
 
         private void SetHintLabelActiveColor(AColor color)

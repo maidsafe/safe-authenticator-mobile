@@ -176,7 +176,7 @@ namespace SafeAuthenticator.ViewModels
                         await Task.Run(() =>
                         {
                             _locationStrength = Utilities.StrengthChecker(AcctSecret);
-                            if (_locationStrength.Guesses < AppConstants.AccStrengthWeak)
+                            if (_locationStrength.Guesses < Constants.AccStrengthWeak)
                             {
                                 AcctSecretErrorMsg = "Secret needs to be stronger";
                                 throw new InvalidOperationException();
@@ -217,7 +217,7 @@ namespace SafeAuthenticator.ViewModels
                 await Task.Run(() =>
                 {
                     _passwordStrength = Utilities.StrengthChecker(AcctPassword);
-                    if (_passwordStrength.Guesses < AppConstants.AccStrengthSomeWhatSecure)
+                    if (_passwordStrength.Guesses < Constants.AccStrengthSomeWhatSecure)
                     {
                         AcctPasswordErrorMsg = "Password needs to be stronger";
                         throw new InvalidOperationException();
