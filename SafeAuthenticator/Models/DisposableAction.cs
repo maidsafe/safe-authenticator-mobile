@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SafeAuthenticator.Controls
+namespace SafeAuthenticator.Models
 {
     public class DisposableAction : IDisposable
     {

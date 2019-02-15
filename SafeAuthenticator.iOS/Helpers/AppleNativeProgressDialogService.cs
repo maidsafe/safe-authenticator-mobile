@@ -2,6 +2,7 @@
 using BigTed;
 using SafeAuthenticator.Controls;
 using SafeAuthenticator.iOS.Helpers;
+using SafeAuthenticator.Models;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(AppleNativeProgressDialogService))]
