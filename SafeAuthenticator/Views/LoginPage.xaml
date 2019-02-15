@@ -20,7 +20,8 @@
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
             <Style x:Key="NeedHelpStyle" TargetType="Label">
-                <Setter Property="HeightRequest" Value="{StaticResource ExtraLargeSize}" />
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="HeightRequest" Value="30" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
             <Style x:Key="ImageStyle" TargetType="Image">
