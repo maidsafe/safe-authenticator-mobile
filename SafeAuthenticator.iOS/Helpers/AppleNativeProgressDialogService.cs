@@ -10,11 +10,6 @@ namespace SafeAuthenticator.iOS.Helpers
 {
     class AppleNativeProgressDialogService : INativeProgressDialogService
     {
-        public void HideNativeDialog()
-        {
-            BTProgressHUD.Dismiss();
-        }
-
         public IDisposable ShowNativeDialog(string message, string title)
         {
             BTProgressHUD.Show(message, -1, ProgressHUD.MaskType.Black);
