@@ -27,9 +27,12 @@
                 <Setter Property="FontSize" Value="{StaticResource SmallSize}" />
             </Style>
             <Style x:Key="RevokeButtonStyle" TargetType="Button">
-                <Setter Property="HeightRequest" Value="35" />
                 <Setter Property="Padding" Value="5" />
+                <Setter Property="HeightRequest" Value="35" />
                 <Setter Property="WidthRequest" Value="100" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{StaticResource GreySmokeDarkColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource GreySnowMediumColor}" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>

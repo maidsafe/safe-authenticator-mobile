@@ -15,6 +15,7 @@
             <Color x:Key="RedColor">#d94a3d</Color>
             <Color x:Key="GreySmokeLightColor">#c2c1c1</Color>
             <Color x:Key="GreySmokeMediumColor">#8b8b8b</Color>
+            <Color x:Key="GreySmokeDarkColor">#555555</Color>
             <Color x:Key="GreySnowMediumColor">#e4e4e4</Color>
             <Color x:Key="DefaultAndroidPlaceholderColor">#80000000</Color>
             <Color x:Key="DefaultiOSPlaceholderColor">#a9a9a9</Color>
@@ -36,28 +37,28 @@
 
             <OnPlatform x:Key="EntryHeightRequest"
                         x:TypeArguments="x:Double"
-                        Android="40" 
+                        Android="40"
                         iOS="40" />
             
             <OnPlatform x:Key="SmallSize"
                         x:TypeArguments="x:Double"
-                        Android="12" 
-                        iOS="11" />
+                        Android="12"
+                        iOS="14" />
 
             <OnPlatform x:Key="MediumSize"
                         x:TypeArguments="x:Double"
                         Android="14"
-                        iOS="12" />
+                        iOS="16" />
 
             <OnPlatform x:Key="LargeSize"
                         x:TypeArguments="x:Double"
                         Android="16"
-                        iOS="14" />
+                        iOS="18" />
 
             <OnPlatform x:Key="ExtraLargeSize"
                         x:TypeArguments="x:Double"
                         Android="18"
-                        iOS="16" />
+                        iOS="20" />
 
             <OnPlatform x:Key="DefaultPlaceholderColor"
                         x:TypeArguments="Color"         
