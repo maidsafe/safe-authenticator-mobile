@@ -22,8 +22,9 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Spacing="10" >
-            <cv:CarouselViewControl                    
+        <ScrollView>
+            <StackLayout Spacing="10">
+                <cv:CarouselViewControl
                     ShowArrows="False"
                     ShowIndicators="False"
                     IsSwipeEnabled="False"
@@ -31,34 +32,34 @@
                     PositionSelectedCommand="{Binding CarouselPageChangeCommand}"
                     Position="{Binding CarouselPagePosition}"
                     Margin="0,40,0,0">
-                <cv:CarouselViewControl.ItemsSource>
-                    <x:Array Type="{x:Type View}">
+                    <cv:CarouselViewControl.ItemsSource>
+                        <x:Array Type="{x:Type View}">
 
-                        <!-- Invitation -->
-                        <controls:CreateAcctStep1/>
+                            <!-- Invitation -->
+                            <controls:CreateAcctStep1/>
 
-                        <!-- Account Secret -->
-                        <controls:CreateAcctStep2/>
+                            <!-- Account Secret -->
+                            <controls:CreateAcctStep2/>
 
-                        <!-- Account Password -->
-                        <controls:CreateAcctStep3/>
-                        
-                    </x:Array>
-                </cv:CarouselViewControl.ItemsSource>
-            </cv:CarouselViewControl>
+                            <!-- Account Password -->
+                            <controls:CreateAcctStep3/>
 
-            <Button Text="CONTINUE"
+                        </x:Array>
+                    </cv:CarouselViewControl.ItemsSource>
+                </cv:CarouselViewControl>
+
+                <Button Text="CONTINUE"
                     Command="{Binding CarouselContinueCommand}"
                     Margin="25,0"/>
 
-            <Button Text="BACK"
+                <Button Text="BACK"
                     HorizontalOptions="Center"
                     Command="{Binding CarouselBackCommand}"
                     IsVisible="{Binding IsBackButtonVisible}"
                     BackgroundColor="Transparent"
                     TextColor="{StaticResource PrimaryColor}"
                     Margin="25,0"/>
-        </StackLayout>
-
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

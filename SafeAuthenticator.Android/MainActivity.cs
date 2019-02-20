@@ -97,6 +97,7 @@ namespace SafeAuthenticator.Droid
             DisplayCrashReport();
             CarouselViewRenderer.Init();
             LoadApplication(new App());
+            Window.SetSoftInputMode(Android.Views.SoftInput.AdjustResize);
 
             if (Intent?.Data != null)
             {

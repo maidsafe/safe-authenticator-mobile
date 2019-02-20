@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels;assembly=SafeAuthenticator"
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
-             x:Class="SafeAuthenticator.Views.LoginPage" 
+             x:Class="SafeAuthenticator.Views.LoginPage"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.BackButtonTitle="Login"
              IsEnabled="{Binding IsUiEnabled}">
@@ -32,7 +32,9 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <ScrollView Padding="25">
+        <controls:CustomScrollView  x:Name="ScrollLayout"
+                                    Padding="25"
+                                    IsScrollEnabled="False">
             <StackLayout>
                 <StackLayout VerticalOptions="CenterAndExpand"
                              Spacing="10">
@@ -47,21 +49,25 @@
                            Margin="0,10,0,0" />
 
                     <controls:MaterialEntry x:Name="SecretEntry"
-                                            Placeholder="Account Secret" 
+                                            Placeholder="Account Secret"
                                             IsPassword="True"
                                             ErrorDisplay="None"
                                             Margin="0,50,0,0"
-                                            Text="{Binding AccountSecret}"                                                                                        
+                                            Text="{Binding AccountSecret}"
                                             NextEntry="{Reference PasswordEntry}"
-                                            ReturnType="Next" />
+                                            ReturnType="Next"
+                                            Focused="CustomEntryFocused"
+                                            Unfocused="CustomEntryUnfocused"/>
 
                     <controls:MaterialEntry x:Name="PasswordEntry"
                                             Placeholder="Account Password" 
                                             IsPassword="True"
                                             ErrorDisplay="None"
                                             Text="{Binding AccountPassword}"
-                                            ReturnType="Done" 
-                                            ReturnCommand="{Binding LoginCommand}"/>
+                                            ReturnType="Done"
+                                            ReturnCommand="{Binding LoginCommand}"
+                                            Focused="CustomEntryFocused"
+                                            Unfocused="CustomEntryUnfocused"/>
 
                     <Button Text="LOGIN"
                             Command="{Binding LoginCommand}"
@@ -85,6 +91,6 @@
                     </Label.GestureRecognizers>
                 </Label>
             </StackLayout>
-        </ScrollView>
+        </controls:CustomScrollView>
     </ContentPage.Content>
 </ContentPage>

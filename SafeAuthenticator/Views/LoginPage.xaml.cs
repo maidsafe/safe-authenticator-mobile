@@ -68,5 +68,15 @@ namespace SafeAuthenticator.Views
             MessagingCenter.Unsubscribe<LoginViewModel>(this, MessengerConstants.NavHomePage);
             MessagingCenter.Unsubscribe<LoginViewModel>(this, MessengerConstants.NavCreateAcctPage);
         }
+
+        private void CustomEntryFocused(object sender, FocusEventArgs e)
+        {
+            ScrollLayout.IsScrollEnabled = true;
+        }
+
+        private void CustomEntryUnfocused(object sender, FocusEventArgs e)
+        {
+            ScrollLayout.IsScrollEnabled = false;
+        }
     }
 }
