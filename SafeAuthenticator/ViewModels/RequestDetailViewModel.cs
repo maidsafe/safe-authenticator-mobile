@@ -207,7 +207,7 @@ namespace SafeAuthenticator.ViewModels
                     MessagingCenter.Send(this, MessengerConstants.RefreshHomePage, decodedRequest);
 
                 await PopupNavigation.Instance.PopAsync();
-                var formattedRsp = UrlFormat.Format(AppId, encodedRsp, false);
+                var formattedRsp = UrlFormat.Format(AppId ?? UrlFormat.GetAppId(encodedRequest), encodedRsp, false);
                 Debug.WriteLine($"Encoded Rsp to app: {formattedRsp}");
                 Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
             }

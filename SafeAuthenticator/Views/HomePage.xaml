@@ -22,7 +22,7 @@
                       ItemsSource="{Binding Apps}"
                       RefreshCommand="{Binding RefreshAccountsCommand}"
                       IsPullToRefreshEnabled="True"
-                      IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
+                      IsRefreshing="{Binding IsRefreshing}"
                       SelectedItem="{Binding SelectedRegisteredAccount}"
                       CachingStrategy="RecycleElement">
 

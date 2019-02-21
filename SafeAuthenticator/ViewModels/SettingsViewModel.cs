@@ -65,11 +65,14 @@ namespace SafeAuthenticator.ViewModels
         {
             try
             {
+                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+                    throw new Exception("No internet connection");
+                }
                 IsBusy = true;
                 var acctStorageTuple = await Authenticator.GetAccountInfoAsync();
                 AccountStorageInfo = $"{acctStorageTuple.Item1} / {acctStorageTuple.Item2}";
                 Preferences.Set(nameof(AccountStorageInfo), AccountStorageInfo);
-                IsBusy = false;
             }
             catch (FfiException ex)
             {
@@ -78,8 +81,9 @@ namespace SafeAuthenticator.ViewModels
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", $"Log in Failed: {ex.Message}", "OK");
+                await Application.Current.MainPage.DisplayAlert("Error", $"Fetching account info failed: {ex.Message}", "OK");
             }
+            IsBusy = false;
         }
 
         private async void OnLogout()

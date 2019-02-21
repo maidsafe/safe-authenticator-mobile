@@ -4,6 +4,7 @@ using System.Windows.Input;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace SafeAuthenticator.ViewModels
@@ -146,6 +147,10 @@ namespace SafeAuthenticator.ViewModels
             try
             {
                 IsRefreshing = true;
+                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+                    throw new Exception("No internet connection");
+                }
                 var registeredApps = await Authenticator.GetRegisteredAppsAsync();
                 registeredApps = registeredApps.OrderBy(a => a.AppName).ToList();
                 Apps.ReplaceRange(registeredApps);
