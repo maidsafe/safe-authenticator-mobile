@@ -188,7 +188,7 @@ namespace SafeAuthenticator.Services
                 if (decodedType == typeof(IpcReqError))
                 {
                     var error = decodeResult as IpcReqError;
-                    await Application.Current.MainPage.DisplayAlert("Auth Request", $"Error: {error?.Description}", "Ok");
+                    await Application.Current.MainPage.DisplayAlert("Auth Request", $"Error: {error?.Description}", "OK");
                 }
                 else
                 {

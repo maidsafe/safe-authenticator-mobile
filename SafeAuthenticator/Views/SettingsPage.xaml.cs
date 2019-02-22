@@ -24,7 +24,7 @@ namespace SafeAuthenticator.Views
 
             AccountStatusImage.Clicked += (s, e) =>
             {
-                DisplayAlert("Account Status", "The number of store and modify operations completed on this account.", "ok");
+                DisplayAlert("Account Status", "The number of store and modify operations completed on this account.", "OK");
             };
 
             MessagingCenter.Subscribe<SettingsViewModel>(

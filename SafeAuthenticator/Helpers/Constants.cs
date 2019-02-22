@@ -15,5 +15,9 @@
         internal static readonly string None = "None";
         internal static readonly string Error = "Error";
         internal static readonly string Loading = "Loading";
+
+        // Dialogs
+        internal static readonly string AutoReconnectInfoDialog = "Enable this feature to automatically reconnect to the network." +
+            "Your credentials will be securely stored on your device.Logging out will clear the credentials from memory.";
     }
 }

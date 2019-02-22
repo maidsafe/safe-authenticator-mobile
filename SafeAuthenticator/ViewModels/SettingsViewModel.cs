@@ -39,10 +39,21 @@ namespace SafeAuthenticator.ViewModels
                 if (Authenticator.AuthReconnect != value)
                 {
                     Authenticator.AuthReconnect = value;
+                    if (AuthReconnect)
+                        OnAutoReconnect();
                 }
 
                 OnPropertyChanged();
             }
+        }
+
+        private async void OnAutoReconnect()
+        {
+            AuthReconnect = await Application.Current.MainPage.DisplayAlert(
+            "Auto Reconnect",
+            Constants.AutoReconnectInfoDialog,
+            "OK",
+            "Cancel");
         }
 
         public SettingsViewModel()
