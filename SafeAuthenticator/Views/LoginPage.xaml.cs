@@ -39,8 +39,6 @@ namespace SafeAuthenticator.Views
                         return;
                     }
 
-                    Debug.WriteLine("LoginPage -> HomePage");
-
                     Navigation.InsertPageBefore(new HomePage(), this);
                     await Navigation.PopAsync();
                 });
@@ -56,7 +54,6 @@ namespace SafeAuthenticator.Views
                         return;
                     }
 
-                    Debug.WriteLine("LoginPage -> CreateAcctPage");
                     NavigationPage.SetBackButtonTitle(this, "Login");
                     await Navigation.PushAsync(new CreateAcctPage());
                 });

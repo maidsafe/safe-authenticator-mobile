@@ -27,11 +27,13 @@ namespace SafeAuthenticator
 
             MessagingCenter.Subscribe<AuthService>(this, MessengerConstants.ResetAppViews, async _ => { await ResetViews(); });
             Current.MainPage = new NavigationPage(NewStartupPage());
-            MessagingCenter.Subscribe<AuthService>(this, MessengerConstants.NavHomePage, async _ =>
+            MessagingCenter.Subscribe<AuthService>(this, MessengerConstants.NavPreviousPage, async _ =>
             {
                 var navigationStackSize = Current.MainPage.Navigation.NavigationStack.Count - 1;
                 var topNavigationStackPageType = Current.MainPage.Navigation.NavigationStack[navigationStackSize].GetType();
-                if (topNavigationStackPageType == typeof(SettingsPage) || topNavigationStackPageType == typeof(AppInfoPage))
+                if (topNavigationStackPageType == typeof(SettingsPage) ||
+                    topNavigationStackPageType == typeof(AppInfoPage) ||
+                    topNavigationStackPageType == typeof(CreateAcctPage))
                 {
                     await Current.MainPage.Navigation.PopAsync();
                 }

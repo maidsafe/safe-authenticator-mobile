@@ -174,7 +174,15 @@ namespace SafeAuthenticator.Services
                     if (await HandleUnregisteredAppRequest(encodedUri))
                         return;
                     AuthenticationReq = encodedUri;
-                    await Application.Current.MainPage.DisplayAlert("Login", "An application is requesting access, login to view details", "OK");
+                    var response = await Application.Current.MainPage.DisplayAlert(
+                        "Login Required",
+                        "An application is requesting access, login to authorise",
+                        "Login",
+                        "Cancel");
+                    if (response)
+                    {
+                        MessagingCenter.Send(this, MessengerConstants.NavPreviousPage);
+                    }
                     return;
                 }
 
@@ -192,7 +200,7 @@ namespace SafeAuthenticator.Services
                 }
                 else
                 {
-                    MessagingCenter.Send(this, MessengerConstants.NavHomePage);
+                    MessagingCenter.Send(this, MessengerConstants.NavPreviousPage);
                     var requestPage = new RequestDetailPage(encodedUri, decodeResult);
                     await Application.Current.MainPage.Navigation.PushPopupAsync(requestPage);
                 }
