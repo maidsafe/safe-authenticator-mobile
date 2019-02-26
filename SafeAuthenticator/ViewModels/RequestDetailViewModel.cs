@@ -53,6 +53,14 @@ namespace SafeAuthenticator.ViewModels
             set => SetProperty(ref _popupLayoutHeight, value);
         }
 
+        private bool _isAppDetailsVisible;
+
+        public bool IsAppDetailsVisible
+        {
+            get => _isAppDetailsVisible;
+            set => SetProperty(ref _isAppDetailsVisible, value);
+        }
+
         private string _errorMessage;
 
         public string ErrorMessage
@@ -70,6 +78,8 @@ namespace SafeAuthenticator.ViewModels
 
         public ICommand SendResponseCommand { get; }
 
+        public ICommand InfoButtonCommand { get; }
+
         public RequestDetailViewModel(string encodedUri, IpcReq req)
         {
             Containers = new ObservableRangeCollection<ContainerPermissionsModel>();
@@ -79,7 +89,10 @@ namespace SafeAuthenticator.ViewModels
             decodedRequest = req;
 
             PopupState = Constants.None;
+            IsAppDetailsVisible = false;
+
             SendResponseCommand = new Command<string>(OnSendResponse);
+            InfoButtonCommand = new Command(OnInfoButtonCommand);
 
             if (requestType == typeof(UnregisteredIpcReq))
             {
@@ -106,6 +119,15 @@ namespace SafeAuthenticator.ViewModels
                 SecondaryTitle = MData.Count > 0 ? "\nis requesting access to" : "\nis requesting access";
             }
             PopupLayoutHeight = (Containers.Count == 0 && MData.Count == 0) ? minPopupHeight : maxPopupHeight;
+        }
+
+        private void OnInfoButtonCommand()
+        {
+            IsAppDetailsVisible = !IsAppDetailsVisible;
+            if (IsAppDetailsVisible)
+                PopupLayoutHeight += 105;
+            else
+                PopupLayoutHeight -= 105;
         }
 
         private void ProcessAuthRequestData()
@@ -199,6 +221,9 @@ namespace SafeAuthenticator.ViewModels
             try
             {
                 var response = sender == "ALLOW" ? true : false;
+                if (IsAppDetailsVisible)
+                    IsAppDetailsVisible = !IsAppDetailsVisible;
+
                 PopupLayoutHeight = minPopupHeight;
                 PopupState = Constants.Loading;
                 var encodedRsp = await Authenticator.GetEncodedResponseAsync(decodedRequest, response);

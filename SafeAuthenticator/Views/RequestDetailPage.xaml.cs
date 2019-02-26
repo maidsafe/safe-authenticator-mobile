@@ -14,15 +14,6 @@ namespace SafeAuthenticator.Views
         {
             InitializeComponent();
 
-            InfoIcon.Clicked += (s, e) =>
-            {
-                AppDetailsStackLayout.IsVisible = !AppDetailsStackLayout.IsVisible;
-                if (AppDetailsStackLayout.IsVisible)
-                    PopupLayout.HeightRequest += 105;
-                else
-                    PopupLayout.HeightRequest -= 105;
-            };
-
             _viewModel = new RequestDetailViewModel(encodedUri, req);
             BindingContext = _viewModel;
         }

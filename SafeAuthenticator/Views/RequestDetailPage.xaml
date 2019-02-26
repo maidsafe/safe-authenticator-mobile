@@ -51,8 +51,7 @@
         <Frame Padding="0"
                BackgroundColor="{StaticResource WhiteColor}">
 
-            <StackLayout x:Name="PopupLayout" 
-                         Spacing="10"
+            <StackLayout Spacing="10"
                          Padding="16"
                          HeightRequest="{Binding PopupLayoutHeight}">
 
@@ -91,12 +90,12 @@
                                  x:Name="InfoIcon"
                                  HorizontalOptions="EndAndExpand"
                                  VerticalOptions="Start"
-                                 IsVisible="{Binding IsUnregisteredRequest, Converter={StaticResource InverseBoolean}}"/>
+                                 Command="{Binding InfoButtonCommand}"
+                                 IsVisible="{Binding IsUnregisteredRequest, Converter={StaticResource InverseBoolean}}" />
                 </Grid>
 
-                <StackLayout x:Name="AppDetailsStackLayout"
-                             VerticalOptions="Start" 
-                             IsVisible="False" 
+                <StackLayout VerticalOptions="Start" 
+                             IsVisible="{Binding IsAppDetailsVisible}" 
                              Margin="10,0">
                     <Label Style="{StaticResource H2Style}">
                         <Label.FormattedText>
