@@ -2,10 +2,10 @@
 <StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
-             x:Class="SafeAuthenticator.Controls.CreateAcctStep1">
+             x:Class="SafeAuthenticator.Controls.CreateAcctStep1"
+             xmlns:XamEffects="clr-namespace:XamEffects;assembly=XamEffects">
 
-    <StackLayout Spacing="10"
-                 Padding="25,0">
+    <StackLayout Spacing="10">
         <StackLayout.Resources>
             <ResourceDictionary>
                 <Style x:Key="ImageStyle" TargetType="Image">
@@ -14,11 +14,12 @@
                 </Style>
             </ResourceDictionary>
         </StackLayout.Resources>
-        
-            <Label Text="First, you need an invitation token"
+
+        <Label Text="First, you need an invitation token"
+               Margin="25,0"
              Style="{DynamicResource TitleStyle}" />
 
-        <Label>
+        <Label Margin="25,0">
             <Label.FormattedText>
                 <FormattedString>
                     <Span Text="In order to create an account, you need to achieve trust level 1 on the " />
@@ -37,14 +38,14 @@
         </Label>
 
         <Button Text="CLAIM INVITATION TOKEN"
-                Margin="0,20,0,0"
+                Margin="25,20,25,0"
                 Command="{Binding ClaimTokenCommand}" />
 
         <Label Text="OR"
                HorizontalOptions="Center"
                HorizontalTextAlignment="Center"
                TextColor="{StaticResource GreySmokeMediumColor}"
-               Margin="0,20,0,0"
+               Margin="25,20,25,0"
                Style="{DynamicResource TitleStyle}" />
 
         <Grid RowSpacing="0"
@@ -65,27 +66,37 @@
                                     ErrorDisplay="None"
                                     IsUnderlineTransparent="true"
                                     ReturnType="Done"
+                                    Margin="25,0,0,0"
                                     ReturnCommand="{Binding CarouselContinueCommand}"/>
 
-            <Image Source="clipboardPaste"
-                   Style="{DynamicResource ImageStyle}"
+            <Frame CornerRadius="22.5"
                    Grid.Column="1"
+                   HeightRequest="45"
+                   WidthRequest="45"
+                   HasShadow="False"
+                   Padding="0"
+                   Margin="0,0,10,0"
+                   BackgroundColor="Transparent"
                    HorizontalOptions="End"
-                   VerticalOptions="End"
-                   Margin="0,0,0,5">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer NumberOfTapsRequired="1"
-                                          Command="{Binding ClipboardPasteCommand}" />
-                </Image.GestureRecognizers>
-            </Image>
-
+                   VerticalOptions="End">
+                <StackLayout x:Name="PasteIconStackLayout">
+                    <Image x:Name="PasteIcon" 
+                           Source="clipboardPaste"
+                           Margin="0,0,0,-5"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="CenterAndExpand"
+                           Style="{StaticResource ImageStyle}" />
+                </StackLayout>
+            </Frame>
+            
             <BoxView x:Name="underline"
                      Grid.Row="1"
                      Style="{StaticResource InvitationEntryUnderlineStyle}"
                      HorizontalOptions="FillAndExpand" 
                      Grid.Column="0"
                      Grid.ColumnSpan="2" 
-                     HeightRequest="1.5">
+                     HeightRequest="1.5"
+                     Margin="25,0">
                 <BoxView.Triggers>
                     <DataTrigger Binding="{Binding Source={x:Reference InvitationTokenEntry}, Path=IsFocused}" 
                                  Value="True"
