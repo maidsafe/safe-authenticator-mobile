@@ -12,24 +12,21 @@
     <Label Text="Your 'Account Secret' is private and should not be shared with anyone."
            Margin="0,0,0,20" />
 
-    <ContentView>
-        <StackLayout>
-            <controls:MaterialEntry x:Name="SecretEntry"
-                                    Placeholder="Account secret"
-                                    IsPassword="True"
-                                    Text="{Binding AcctSecret}"
-                                    ErrorDisplay="None"
-                                    Margin="0,50,0,0"
-                                    ReturnType="Next"
-                                    NextEntry="{Reference ConfirmSecretEntry}"/>
+    <controls:MaterialEntry x:Name="SecretEntry"
+                            Placeholder="Account secret"
+                            IsPassword="True"
+                            Text="{Binding AcctSecret}"
+                            ErrorDisplay="None"
+                            Margin="0,50,0,5"
+                            ReturnType="Next"
+                            NextEntry="{Reference ConfirmSecretEntry}"/>
 
-            <controls:MaterialEntry x:Name="ConfirmSecretEntry"
-                                    Placeholder="Confirm account secret"
-                                    IsPassword="True"
-                                    Text="{Binding ConfirmAcctSecret}"
-                                    ErrorText="{Binding AcctSecretErrorMsg}"
-                                    ReturnType="Done"
-                                    ReturnCommand="{Binding CarouselContinueCommand}" />
-        </StackLayout>
-    </ContentView>
+    <controls:MaterialEntry x:Name="ConfirmSecretEntry"
+                            Placeholder="Confirm account secret"
+                            IsPassword="True"
+                            Text="{Binding ConfirmAcctSecret}"
+                            ErrorText="{Binding AcctSecretErrorMsg}"
+                            ReturnType="Done"
+                            ReturnCommand="{Binding CarouselContinueCommand}" />
+    
 </StackLayout>

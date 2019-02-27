@@ -52,7 +52,7 @@
                                             Placeholder="Account Secret"
                                             IsPassword="True"
                                             ErrorDisplay="None"
-                                            Margin="0,50,0,0"
+                                            Margin="0,50,0,5"
                                             Text="{Binding AccountSecret}"
                                             NextEntry="{Reference PasswordEntry}"
                                             ReturnType="Next"
@@ -71,7 +71,7 @@
 
                     <Button Text="LOGIN"
                             Command="{Binding LoginCommand}"
-                            Margin="0,15,0,0" />
+                            Margin="0,20,0,0" />
 
                     <Button Text="CREATE ACCOUNT"
                             HorizontalOptions="Center"

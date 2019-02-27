@@ -13,6 +13,7 @@
             <Color x:Key="BlackColor">#000000</Color>
             <Color x:Key="WhiteColor">#ffffff</Color>
             <Color x:Key="RedColor">#d94a3d</Color>
+            <Color x:Key="GreySnowLightColor">#eeeeee</Color>
             <Color x:Key="GreySmokeLightColor">#c2c1c1</Color>
             <Color x:Key="GreySmokeMediumColor">#8b8b8b</Color>
             <Color x:Key="GreySmokeDarkColor">#555555</Color>

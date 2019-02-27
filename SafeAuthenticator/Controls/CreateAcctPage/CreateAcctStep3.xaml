@@ -16,7 +16,7 @@
                             IsPassword="True"
                             Text="{Binding AcctPassword}"
                             ErrorDisplay="None"
-                            Margin="0,50,0,0"
+                            Margin="0,50,0,5"
                             ReturnType="Next"
                             NextEntry="{Reference ConfirmPasswordEntry}" />
 
