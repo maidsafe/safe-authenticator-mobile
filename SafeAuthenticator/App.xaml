@@ -29,6 +29,7 @@
             <converters:ContainerNameToImageConverter x:Key="ContainerNameToImageConverter" />
             <converters:FormatContainerPermissionsConverter x:Key="FormatContainerPermissionsConverter" />
             <converters:ByteArraytoHexStringConverter x:Key="ByteArraytoHexStringConverter" />
+            <converters:HtmlLabelConverter x:Key="HtmlLabelConverter" />
 
             <!-- SIZES -->
             <OnPlatform x:Key="ButtonHeightRequest"

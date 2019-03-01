@@ -61,7 +61,7 @@ namespace SafeAuthenticator.ViewModels
             CreateAccountCommand = new Command(OnCreateAcct);
             NeedHelpCommand = new Command(() =>
             {
-                OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(@"https://safenetforum.org/t/safe-authenticator-faq/26683");
+                OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(Constants.FaqUrl);
             });
         }
 

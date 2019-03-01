@@ -19,5 +19,11 @@
         // Dialogs
         internal static readonly string AutoReconnectInfoDialog = "Enable this feature to automatically reconnect to the network." +
             " Your credentials will be securely stored on your device. Logging out will clear the credentials from memory.";
+
+        // URL
+        internal static readonly string ClaimTokenUrl = @"https://invite.maidsafe.net/";
+        internal static readonly string ForumLinkUrl = @"https://safenetforum.org/t/trust-level-1-basic-user-requirements/15200";
+        internal static readonly string PrivacyInfoUrl = @"https://safenetwork.tech/privacy/";
+        internal static readonly string FaqUrl = @"https://safenetforum.org/t/safe-authenticator-faq/26683";
     }
 }

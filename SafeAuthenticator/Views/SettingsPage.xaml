@@ -37,7 +37,7 @@
                            Style="{StaticResource TitleStyle}" />
                     <StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="Account Status"
+                            <Label Text="Account status"
                                    Style="{StaticResource ItemStyle}"
                                    VerticalOptions="Center" />
                             <ImageButton x:Name="AccountStatusImage" 
@@ -61,7 +61,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Label Text="Auto Reconnect"
+                        <Label Text="Auto reconnect"
                                Style="{StaticResource ItemStyle}"
                                VerticalOptions="Center" />
                         <Switch Grid.Column="1"

@@ -105,7 +105,8 @@ namespace SafeAuthenticator.Services
                 {
                     using (NativeProgressDialog.ShowNativeDialog("Reconnecting to Network"))
                     {
-                        await LoginAsync(_secret, _password);
+                        await _authenticator.AuthReconnectAsync();
+                        _authenticator.IsDisconnected = false;
                     }
                 }
             }
@@ -169,26 +170,31 @@ namespace SafeAuthenticator.Services
         {
             try
             {
-                if (_authenticator == null && !AuthReconnect)
+                if (await HandleUnregisteredAppRequest(encodedUri))
+                    return;
+
+                if (_authenticator == null)
                 {
-                    if (await HandleUnregisteredAppRequest(encodedUri))
-                        return;
                     AuthenticationReq = encodedUri;
-                    var response = await Application.Current.MainPage.DisplayAlert(
-                        "Login Required",
-                        "An application is requesting access, login to authorise",
-                        "Login",
-                        "Cancel");
-                    if (response)
+                    if (!AuthReconnect)
                     {
-                        MessagingCenter.Send(this, MessengerConstants.NavPreviousPage);
+                        var response = await Application.Current.MainPage.DisplayAlert(
+                            "Login Required",
+                            "An application is requesting access, login to authorise",
+                            "Login",
+                            "Cancel");
+                        if (response)
+                        {
+                            MessagingCenter.Send(this, MessengerConstants.NavPreviousPage);
+                        }
                     }
                     return;
                 }
 
-                await CheckAndReconnect();
-                if (await HandleUnregisteredAppRequest(encodedUri))
-                    return;
+                if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+                {
+                    await CheckAndReconnect();
+                }
 
                 var encodedReq = UrlFormat.GetRequestData(encodedUri);
                 var decodeResult = await _authenticator.DecodeIpcMessageAsync(encodedReq);

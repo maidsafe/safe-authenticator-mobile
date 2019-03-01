@@ -162,7 +162,7 @@ namespace SafeAuthenticator.ViewModels
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", $"Refresh Accounts Failed: {ex.Message}", "OK");
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
             IsRefreshing = false;
         }

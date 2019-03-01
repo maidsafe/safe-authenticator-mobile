@@ -63,12 +63,12 @@ namespace SafeAuthenticator.ViewModels
 
             FaqCommand = new Command(() =>
             {
-                OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(@"https://safenetforum.org/t/safe-authenticator-faq/26683");
+                OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(Constants.FaqUrl);
             });
 
             PrivacyInfoCommand = new Command(() =>
             {
-                OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(@"https://safenetwork.tech/privacy/");
+                OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(Constants.PrivacyInfoUrl);
             });
         }
 

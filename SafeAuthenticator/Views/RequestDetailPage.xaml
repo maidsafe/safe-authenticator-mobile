@@ -263,9 +263,10 @@
 
                 <Frame HasShadow="False"
                        CornerRadius="4"
-                       Padding="26,0"
+                       Margin="26,0"
+                       Padding="10"
                        BackgroundColor="{StaticResource RedLightColor}"
-                       IsVisible="False"                        
+                       IsVisible="False"                     
                        VerticalOptions="CenterAndExpand">
                     <Frame.Triggers>
                         <DataTrigger TargetType="Frame"
@@ -275,9 +276,10 @@
                                     Value="True" />
                         </DataTrigger>
                     </Frame.Triggers>
+
                     <Label Text="{Binding ErrorMessage}"
                            TextColor="{StaticResource RedColor}"
-                           FontSize="{StaticResource LargeSize}"
+                           Style="{StaticResource H2Style}"
                            HorizontalTextAlignment="Center" />
                 </Frame>
 
@@ -322,7 +324,7 @@
                         BackgroundColor="Transparent" 
                         WidthRequest="50"
                         IsVisible="False"
-                        Padding="16,0">
+                        Margin="0,0,16,0">
                     <Button.Triggers>
                         <DataTrigger TargetType="Button"
                                          Binding="{Binding PopupState}"

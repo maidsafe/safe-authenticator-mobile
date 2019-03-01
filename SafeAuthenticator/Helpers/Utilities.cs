@@ -73,6 +73,8 @@ namespace SafeAuthenticator.Helpers
             {
                 case -2000:
                     return "Could not connect to the SAFE Network";
+                case -11:
+                    return "Try updating your IP on invite.maidsafe.net";
                 case -101:
                     return "Account does not exist";
                 case -3:

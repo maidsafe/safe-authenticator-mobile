@@ -6,6 +6,7 @@ using Rg.Plugins.Popup.Services;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace SafeAuthenticator.ViewModels
@@ -34,7 +35,7 @@ namespace SafeAuthenticator.ViewModels
 
         public ObservableRangeCollection<MDataModel> MData { get; set; }
 
-        int minPopupHeight = 170;
+        int minPopupHeight = 210;
         int maxPopupHeight = 260;
 
         private string _popupState;
@@ -226,6 +227,11 @@ namespace SafeAuthenticator.ViewModels
 
                 PopupLayoutHeight = minPopupHeight;
                 PopupState = Constants.Loading;
+
+                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+                    throw new Exception("No internet connection");
+                }
                 var encodedRsp = await Authenticator.GetEncodedResponseAsync(decodedRequest, response);
 
                 if (response)

@@ -151,15 +151,16 @@ namespace SafeAuthenticator.ViewModels
             CarouselPageChangeCommand = new Command(CarouselPageChange);
             OpenForumLinkCommand = new Command(() =>
             {
-                OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(@"https://safenetforum.org/t/trust-level-1-basic-user-requirements/15200");
+                OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(Constants.ForumLinkUrl);
             });
             ClaimTokenCommand = new Command(() =>
             {
-                OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(@"https://invite.maidsafe.net/");
+                OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(Constants.ClaimTokenUrl);
             });
             ClipboardPasteCommand = new Command(async () =>
             {
-                string invitation_temp = (await Clipboard.GetTextAsync()).Trim();
+                var clipboardText = await Clipboard.GetTextAsync();
+                var invitation_temp = clipboardText?.Trim();
                 if (!string.IsNullOrWhiteSpace(invitation_temp))
                     Invitation = invitation_temp;
             });
