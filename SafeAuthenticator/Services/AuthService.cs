@@ -202,7 +202,7 @@ namespace SafeAuthenticator.Services
                 if (decodedType == typeof(IpcReqError))
                 {
                     var error = decodeResult as IpcReqError;
-                    await Application.Current.MainPage.DisplayAlert("Auth Request", $"Error: {error?.Description}", "OK");
+                    throw new FfiException(error.Code, error.Description);
                 }
                 else
                 {
@@ -214,7 +214,7 @@ namespace SafeAuthenticator.Services
             catch (FfiException ex)
             {
                 var errorMessage = Utilities.GetErrorMessage(ex);
-                await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
+                await Application.Current.MainPage.DisplayAlert("Authorisation Error", errorMessage, "OK");
             }
             catch (Exception ex)
             {

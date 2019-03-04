@@ -101,7 +101,7 @@
                        IsVisible="{Binding IsUnregisteredRequest}"
                        Text="Authorisation request" />
 
-                <StackLayout VerticalOptions="Start" 
+                <StackLayout VerticalOptions="Start"
                              IsVisible="{Binding IsAppDetailsVisible}"
                              Padding="16,10"
                              BackgroundColor="{StaticResource GreySnowLightColor}">
@@ -109,7 +109,7 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="Vendor&#10;"
-                                      TextColor="{StaticResource GreySmokeMediumColor}" 
+                                      TextColor="{StaticResource GreySmokeMediumColor}"
                                       Style="{StaticResource H3Style}" />
                                 <Span Text="{Binding AppVendor}" />
                                 <Span Text="&#10;&#10;App ID&#10;"
@@ -131,8 +131,8 @@
                             <Setter Property="IsVisible" Value="True" />
                         </DataTrigger>
                     </StackLayout.Triggers>
-                    
-                        <Label HorizontalTextAlignment="Center"
+
+                    <Label HorizontalTextAlignment="Center"
                                IsVisible="{Binding IsUnregisteredRequest}"
                                FontSize="{StaticResource LargeSize}"
                                Text="An application is requesting access to read public content on the network" />
@@ -255,7 +255,7 @@
                     </StackLayout.Triggers>
 
                     <ActivityIndicator IsRunning="True"/>
-                    
+
                     <Label Text="Please wait..."
                            FontSize="{StaticResource LargeSize}"
                            VerticalTextAlignment="Center"/>
@@ -266,13 +266,13 @@
                        Margin="26,0"
                        Padding="10"
                        BackgroundColor="{StaticResource RedLightColor}"
-                       IsVisible="False"                     
+                       IsVisible="False"
                        VerticalOptions="CenterAndExpand">
                     <Frame.Triggers>
                         <DataTrigger TargetType="Frame"
                                      Binding="{Binding PopupState}"
                                      Value="Error">
-                            <Setter Property="IsVisible" 
+                            <Setter Property="IsVisible"
                                     Value="True" />
                         </DataTrigger>
                     </Frame.Triggers>
@@ -299,7 +299,7 @@
                             Text="DENY"
                             HorizontalOptions="EndAndExpand"
                             TextColor="{StaticResource PrimaryColor}"
-                            Command="{Binding SendResponseCommand}" 
+                            Command="{Binding SendResponseCommand}"
                             CommandParameter="{Binding Source={x:Reference DenyButton}, Path=Text}"
                             Style="{StaticResource ButtonStyle}"
                             BackgroundColor="Transparent" />
@@ -318,10 +318,10 @@
                         VerticalOptions="End"
                         HorizontalOptions="End"
                         TextColor="{StaticResource PrimaryColor}"
-                        Command="{Binding SendResponseCommand}" 
+                        Command="{Binding SendResponseCommand}"
                         CommandParameter="{Binding Source={x:Reference OkButton}, Path=Text}"
                         Style="{StaticResource ButtonStyle}"
-                        BackgroundColor="Transparent" 
+                        BackgroundColor="Transparent"
                         WidthRequest="50"
                         IsVisible="False"
                         Margin="0,0,16,0">
