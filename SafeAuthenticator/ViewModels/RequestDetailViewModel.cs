@@ -146,14 +146,14 @@ namespace SafeAuthenticator.ViewModels
                         Delete = x.Access.Delete,
                         ManagePermissions = x.Access.ManagePermissions
                     },
-                    ContainerName = Utilities.FormatContainerName(x.ContName)
+                    ContainerName = Utilities.FormatContainerName(x.ContName, AppInfo.Id)
                 }).ToObservableRangeCollection();
 
             if (_authReq.AuthReq.AppContainer)
             {
                 Containers.Add(new ContainerPermissionsModel()
                 {
-                    ContainerName = "App's own Container",
+                    ContainerName = Constants.AppOwnFormattedContainer,
                     Access = new PermissionSetModel
                     {
                         Read = true,
@@ -182,7 +182,7 @@ namespace SafeAuthenticator.ViewModels
                         Delete = x.Access.Delete,
                         ManagePermissions = x.Access.ManagePermissions
                     },
-                    ContainerName = Utilities.FormatContainerName(x.ContName)
+                    ContainerName = Utilities.FormatContainerName(x.ContName, AppInfo.Id)
                 }).ToObservableRangeCollection();
 
             Containers = Containers.OrderBy(c => c.ContainerName).ToObservableRangeCollection();
@@ -231,7 +231,7 @@ namespace SafeAuthenticator.ViewModels
 
                 if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
-                    throw new Exception("No internet connection");
+                    throw new Exception(Constants.NoInternetMessage);
                 }
                 var encodedRsp = await Authenticator.GetEncodedResponseAsync(decodedRequest, response);
 

@@ -1,5 +1,11 @@
 # safe-authenticator-mobile Change Log
 
+## [0.1.3]
+- Handle error when app URI not found (PR [#132](https://github.com/maidsafe/safe-authenticator-mobile/pull/132)).
+- Handle invalid container names (PR [#133](https://github.com/maidsafe/safe-authenticator-mobile/pull/133)).
+- Fix container name displayed for other app containers (PR [#138](https://github.com/maidsafe/safe-authenticator-mobile/pull/138)).
+- Use AuthFlushAppRevocationQueueAsync API to flush revoke queue (PR [#140](https://github.com/maidsafe/safe-authenticator-mobile/pull/140)).
+
 ## [0.1.2]
 - Add fallback option when opening hyperlinks using ChromeCustomTabs (PR [#123](https://github.com/maidsafe/safe-authenticator-mobile/pull/123)).
 - Hide auto-reconnect option if API level < 19 (PR [#123](https://github.com/maidsafe/safe-authenticator-mobile/pull/123)). 

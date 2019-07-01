@@ -18,7 +18,7 @@
     <EmbeddedResource Remove="PlatformSpecific\**" />
     <None Remove="PlatformSpecific\**" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <Reference Include="Hexasoft.Zxcvbn">
       <HintPath>..\Hexasoft.Zxcvbn.dll</HintPath>
@@ -77,7 +77,7 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
-  
+
   <ItemGroup>
     <None Update="App.xaml">
       <Generator>MSBuild:Compile</Generator>

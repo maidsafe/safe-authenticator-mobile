@@ -20,7 +20,7 @@
             <ColumnDefinition Width="9*" />
         </Grid.ColumnDefinitions>
 
-        <Image Source="{Binding ContainerName, Converter={StaticResource ContainerNameToImageConverter}}"
+        <Image Source="{Binding ContainerImage}"
                HeightRequest="25"
                WidthRequest="25"
                VerticalOptions="Center"

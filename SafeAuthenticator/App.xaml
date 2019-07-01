@@ -25,8 +25,6 @@
             <converters:IsCollectionEmptyConverter x:Key="IsCollectionEmptyConverter" />
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
             <converters:FormatTitleConverter x:Key="FormatTitleConverter" />
-            <converters:FormatContainerNameConverter x:Key="FormatContainerNameConverter" />
-            <converters:ContainerNameToImageConverter x:Key="ContainerNameToImageConverter" />
             <converters:FormatContainerPermissionsConverter x:Key="FormatContainerPermissionsConverter" />
             <converters:ByteArraytoHexStringConverter x:Key="ByteArraytoHexStringConverter" />
             <converters:HtmlLabelConverter x:Key="HtmlLabelConverter" />

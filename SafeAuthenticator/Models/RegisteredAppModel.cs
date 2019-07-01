@@ -37,7 +37,7 @@ namespace SafeAuthenticator.Models
                         Delete = x.Access.Delete,
                         ManagePermissions = x.Access.ManagePermissions
                     },
-                    ContainerName = Utilities.FormatContainerName(x.ContName)
+                    ContainerName = Utilities.FormatContainerName(x.ContName, appInfo.Id)
                 }).ToObservableRangeCollection();
 
             Containers = Containers.OrderBy(c => c.ContainerName).ToObservableRangeCollection();

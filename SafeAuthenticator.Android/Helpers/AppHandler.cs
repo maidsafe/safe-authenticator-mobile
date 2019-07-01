@@ -17,6 +17,7 @@ namespace SafeAuthenticator.Droid.Helpers
             {
                 var parsedUri = Android.Net.Uri.Parse(uri);
                 var intent = new Intent(Intent.ActionView, parsedUri);
+                intent.AddFlags(ActivityFlags.NewTask);
                 Activity.Current.AppContext.StartActivity(intent);
                 result = true;
             }

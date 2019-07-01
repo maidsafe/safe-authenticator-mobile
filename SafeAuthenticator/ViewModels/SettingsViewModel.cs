@@ -82,7 +82,7 @@ namespace SafeAuthenticator.ViewModels
             {
                 if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
-                    throw new Exception("No internet connection");
+                    throw new Exception(Constants.NoInternetMessage);
                 }
                 IsBusy = true;
                 var acctStorageTuple = await Authenticator.GetAccountInfoAsync();

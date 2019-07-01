@@ -1,17 +1,14 @@
 ﻿using JetBrains.Annotations;
+using SafeAuthenticator.Helpers;
 
 namespace SafeAuthenticator.Models
 {
     public class ContainerPermissionsModel
     {
-        private string _containerName;
+        public string ContainerImage => Utilities.FormatContainerNameToImage(ContainerName);
 
         [PublicAPI]
-        public string ContainerName
-        {
-            get => _containerName.StartsWith("apps/") ? "App Container" : _containerName;
-            set => _containerName = value;
-        }
+        public string ContainerName { get; set; }
 
         [PublicAPI]
         public PermissionSetModel Access { get; set; }

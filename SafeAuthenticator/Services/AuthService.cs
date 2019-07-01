@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -35,6 +36,12 @@ namespace SafeAuthenticator.Services
         {
             get => _isLogInitialised;
             private set => SetProperty(ref _isLogInitialised, value);
+        }
+
+        internal bool IsRevocationComplete
+        {
+            get => Preferences.Get(Constants.IsRevocationComplete, true);
+            set => Preferences.Set(Constants.IsRevocationComplete, value);
         }
 
         private CredentialCacheService CredentialCache { get; }
@@ -163,6 +170,10 @@ namespace SafeAuthenticator.Services
         internal async Task<List<RegisteredAppModel>> GetRegisteredAppsAsync()
         {
             var appList = await _authenticator.AuthRegisteredAppsAsync();
+            foreach (var app in appList)
+            {
+                Utilities.UpdateAppContainerNameList(app.AppInfo.Id, app.AppInfo.Name);
+            }
             return appList.Select(app => new RegisteredAppModel(app.AppInfo, app.Containers)).ToList();
         }
 
@@ -279,6 +290,11 @@ namespace SafeAuthenticator.Services
             _authenticator = await Authenticator.LoginAsync(location, password);
             _secret = location;
             _password = password;
+        }
+
+        internal async Task FlushAppRevocationQueueAsync()
+        {
+            await _authenticator.AuthFlushAppRevocationQueueAsync();
         }
 
         internal async Task LogoutAsync()
