@@ -172,7 +172,7 @@ The release process is triggered by the maintainers of the package once it is me
 
 ## Useful resources
 
-* [Using High-Performance C++ Libraries in Cross-Platform Xamarin.Forms Applications](https://blog.xamarin.com/using-c-libraries-xamarin-forms-apps/)
+* [Using High-Performance C++ Libraries in Cross-Platform Xamarin.Forms Applications](https://devblogs.microsoft.com/xamarin/using-c-libraries-xamarin-forms-apps/)
 * [Native interoperability](https://docs.microsoft.com/en-us/dotnet/standard/native-interop/)
 * [Interop with Native Libraries](https://www.mono-project.com/docs/advanced/pinvoke/)
 * [Using Native Libraries in Xamarin.Android](https://docs.microsoft.com/en-us/xamarin/android/platform/native-libraries)

@@ -5,7 +5,7 @@
 #addin "Cake.Powershell"
 
 var IOS_SIM_NAME = EnvironmentVariable("IOS_SIM_NAME") ?? "iPhone X";
-var IOS_SIM_RUNTIME = EnvironmentVariable("IOS_SIM_RUNTIME") ?? "iOS 12.0";
+var IOS_SIM_RUNTIME = EnvironmentVariable("IOS_SIM_RUNTIME") ?? "iOS 12.1";
 var IOS_TEST_PROJ = "../Tests/SafeAuth.Tests.IOS/SafeAuth.Tests.IOS.csproj";
 var IOS_BUNDLE_ID = "net.maidsafe.SafeAuthenticatorTests";
 var IOS_IPA_PATH = "../Tests/SafeAuth.Tests.IOS/bin/iPhoneSimulator/Release/NunitTests.app";
