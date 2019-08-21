@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(GradientContentView), typeof(GradientContentViewRenderer))]
+
 namespace SafeAuthenticator.Droid.Helpers
 {
     public class GradientContentViewRenderer : ViewRenderer<GradientContentView, Android.Views.View>

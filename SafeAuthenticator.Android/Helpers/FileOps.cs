@@ -7,6 +7,7 @@ using SafeAuthenticator.Helpers;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(FileOps))]
+
 namespace SafeAuthenticator.Droid.Helpers
 {
     public class FileOps : IFileOps

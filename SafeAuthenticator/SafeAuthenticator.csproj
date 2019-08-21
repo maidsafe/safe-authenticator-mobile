@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -27,13 +27,13 @@
 
   <ItemGroup>
     <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
-    <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
+    <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
     <PackageReference Include="Jint" Version="2.10.3" />
-    <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.180" />
-    <PackageReference Include="System.ValueTuple" Version="4.4.0" />
-    <PackageReference Include="Xamarin.Essentials" Version="0.11.0-preview" />
-    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
-    <PackageReference Include="XamEffects" Version="1.5.6" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.188" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.673156" />
+    <PackageReference Include="XamEffects" Version="1.6.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -124,6 +124,10 @@
     <None Update="Views\WebPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="StyleCop.Analyzers" Version="1.1.118" />
   </ItemGroup>
 
 </Project>

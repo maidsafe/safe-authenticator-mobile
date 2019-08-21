@@ -5,6 +5,7 @@ using SafeAuthenticator.Services;
 using Activity = Plugin.CurrentActivity.CrossCurrentActivity;
 
 [assembly: Xamarin.Forms.Dependency(typeof(AppHandler))]
+
 namespace SafeAuthenticator.Droid.Helpers
 {
     class AppHandler : IAppHandler

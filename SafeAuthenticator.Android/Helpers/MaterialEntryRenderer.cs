@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using Android.Content;
 using Android.Content.Res;
+using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Support.V7.Widget;
@@ -22,6 +23,7 @@ using Color = Xamarin.Forms.Color;
 using FormsAppCompat = Xamarin.Forms.Platform.Android.AppCompat;
 
 [assembly: ExportRenderer(typeof(MaterialEntry), typeof(MaterialEntryRenderer))]
+
 namespace SafeAuthenticator.Droid.Helpers
 {
     public class MaterialEntryRenderer : FormsAppCompat.ViewRenderer<MaterialEntry, TextInputLayout>,
@@ -204,16 +206,14 @@ namespace SafeAuthenticator.Droid.Helpers
 
         private void SetHintLabelActiveColor(AColor color)
         {
-            var hintText = Control.Class.GetDeclaredField("mFocusedTextColor");
+            var hintText = Control.Class.GetDeclaredField("focusedTextColor");
             hintText.Accessible = true;
             hintText.Set(Control, new ColorStateList(new[] { new[] { 0 } }, new int[] { color }));
         }
 
         private void SetHintLabelDefaultColor(AColor color)
         {
-            var hint = Control.Class.GetDeclaredField("mDefaultTextColor");
-            hint.Accessible = true;
-            hint.Set(Control, new ColorStateList(new[] { new[] { 0 } }, new int[] { color }));
+            Control.EditText.SetHintTextColor(new ColorStateList(new[] { new[] { 0 } }, new int[] { color }));
         }
 
         private void SetText()
