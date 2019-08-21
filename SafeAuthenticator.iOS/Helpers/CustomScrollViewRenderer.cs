@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(CustomScrollView), typeof(CustomScrollViewRenderer))]
+
 namespace SafeAuthenticator.iOS.Helpers
 {
     class CustomScrollViewRenderer : ScrollViewRenderer
@@ -19,7 +20,7 @@ namespace SafeAuthenticator.iOS.Helpers
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            if (!(propertyChangedEventArgs.PropertyName == "IsScrollEnabled"))
+            if (propertyChangedEventArgs.PropertyName != "IsScrollEnabled")
                 return;
 
             var isScrollEnabled = ((CustomScrollView)sender).IsScrollEnabled;

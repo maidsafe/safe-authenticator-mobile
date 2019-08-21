@@ -2,13 +2,13 @@
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using CarouselView.FormsPlugin.iOS;
 using Foundation;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Services;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using CarouselViewRenderer = CarouselView.FormsPlugin.iOS.CarouselViewRenderer;
 
 namespace SafeAuthenticator.iOS
 {
@@ -19,7 +19,7 @@ namespace SafeAuthenticator.iOS
 
         private AuthService Authenticator => DependencyService.Get<AuthService>();
 
-        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             Rg.Plugins.Popup.Popup.Init();
             Forms.Init();
@@ -32,7 +32,7 @@ namespace SafeAuthenticator.iOS
 
             DisplayCrashReport();
 
-            return base.FinishedLaunching(app, options);
+            return base.FinishedLaunching(uiApplication, launchOptions);
         }
 
         public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)

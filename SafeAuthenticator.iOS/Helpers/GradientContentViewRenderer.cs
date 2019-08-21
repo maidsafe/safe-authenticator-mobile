@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(GradientContentView), typeof(GradientContentViewRenderer))]
+
 namespace SafeAuthenticator.iOS.Helpers
 {
     public class GradientContentViewRenderer : VisualElementRenderer<ContentView>
