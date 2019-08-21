@@ -224,7 +224,7 @@ namespace SafeAuthenticator.iOS.Extensions
 #pragma warning restore 0414
         }
 
-        public static UIFont ToUIFont(this Label label)
+        public static UIFont ToUiFont(this Label label)
         {
             var values = label.GetValues(Label.FontFamilyProperty, Label.FontSizeProperty, Label.FontAttributesProperty);
             return ToUIFont((string)values[0], (float)(double)values[1], (FontAttributes)values[2]) ??
