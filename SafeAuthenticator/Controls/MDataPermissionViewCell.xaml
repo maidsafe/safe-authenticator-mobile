@@ -4,22 +4,11 @@
           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
           x:Class="SafeAuthenticator.Controls.MDataPermissionViewCell"
           IsEnabled="False">
-
-    <Grid Padding="0"
-          Margin="0,15,0,0"
-          VerticalOptions="CenterAndExpand"
-          RowSpacing="10"
-          ColumnSpacing="10">
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="9*" />
-        </Grid.ColumnDefinitions>
-
+    
+    <StackLayout Padding="0"
+                 Margin="0,15,0,0"
+                 Orientation="Vertical"
+                 VerticalOptions="CenterAndExpand">
         <Image Source="MData"
                HeightRequest="25"
                WidthRequest="25"
@@ -27,17 +16,16 @@
                HorizontalOptions="Center" />
 
         <StackLayout VerticalOptions="CenterAndExpand"
-                     Grid.Column="1"
-                     Grid.Row="0"
                      Spacing="3">
 
             <Label Text="{Binding MetaName}"
                    FontSize="{StaticResource MediumSize}">
                 <Label.Triggers>
                     <DataTrigger TargetType="Label"
-                                         Binding="{Binding MetaName.Length}"
-                                         Value="0">
-                        <Setter Property="Text" Value="{Binding Name, Converter={StaticResource ByteArraytoHexStringConverter}}" />
+                                 Binding="{Binding MetaName.Length}"
+                                 Value="0">
+                        <Setter Property="Text"
+                                Value="{Binding Name, Converter={StaticResource ByteArraytoHexStringConverter}}" />
                     </DataTrigger>
                 </Label.Triggers>
             </Label>
@@ -49,9 +37,8 @@
 
         <BoxView BackgroundColor="{StaticResource GreySmokeLightColor}"
                  Margin="0,5,0,0"
-                 Grid.Row="1"
-                 Grid.Column="1"
                  VerticalOptions="End"
                  HeightRequest="0.5" />
-    </Grid>
+
+    </StackLayout>
 </ViewCell>

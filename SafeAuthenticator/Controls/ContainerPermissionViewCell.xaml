@@ -4,47 +4,32 @@
           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
           x:Class="SafeAuthenticator.Controls.ContainerPermissionViewCell"
           IsEnabled="False">
-
-    <Grid Padding="0"
-          Margin="0,15,0,0"
-          VerticalOptions="CenterAndExpand"
-          RowSpacing="10"
-          ColumnSpacing="10">
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="9*" />
-        </Grid.ColumnDefinitions>
-
+    <StackLayout Padding="0,5,0,0"
+                 VerticalOptions="CenterAndExpand"
+                 Orientation="Horizontal">
         <Image Source="{Binding ContainerImage}"
-               HeightRequest="25"
-               WidthRequest="25"
-               VerticalOptions="Center"
-               HorizontalOptions="Center"
-               Grid.RowSpan="2" />
+                   HeightRequest="25"
+                   WidthRequest="25"
+                   VerticalOptions="Center"
+                   HorizontalOptions="CenterAndExpand" />
 
         <StackLayout VerticalOptions="CenterAndExpand"
-                     Grid.Column="1"
-                     Grid.Row="0"
-                     Spacing="3">
+                     HorizontalOptions="StartAndExpand"
+                     Orientation="Vertical">
+            
             <Label Text="{Binding ContainerName}"
                    TextColor="{StaticResource BlackColor}"
+                   HorizontalOptions="StartAndExpand"
                    FontSize="{StaticResource MediumSize}" />
             <Label Text="{Binding Access, Converter={StaticResource FormatContainerPermissionsConverter}}"
+                   HorizontalOptions="EndAndExpand"
                    TextColor="{StaticResource GreySmokeMediumColor}"
                    FontSize="{StaticResource SmallSize}" />
+            <BoxView BackgroundColor="{StaticResource GreySmokeLightColor}"
+                     Margin="0,5,0,0"
+                     VerticalOptions="End"
+                     HorizontalOptions="FillAndExpand"
+                     HeightRequest="0.5" />
         </StackLayout>
-
-        <BoxView BackgroundColor="{StaticResource GreySmokeLightColor}"
-                 Margin="0,5,0,0"
-                 Grid.Row="1"
-                 Grid.Column="1"
-                 VerticalOptions="End"
-                 HeightRequest="0.5" />
-    </Grid>
-
+    </StackLayout>
 </ViewCell>
