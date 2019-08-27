@@ -6,6 +6,7 @@ using SafeAuthenticator.Models;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(AppleNativeProgressDialogService))]
+
 namespace SafeAuthenticator.iOS.Helpers
 {
     class AppleNativeProgressDialogService : INativeProgressDialogService

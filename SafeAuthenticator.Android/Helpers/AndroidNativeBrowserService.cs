@@ -6,6 +6,7 @@ using SafeAuthenticator.Droid.Helpers;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(AndroidNativeBrowserService))]
+
 namespace SafeAuthenticator.Droid.Helpers
 {
     public class AndroidNativeBrowserService : INativeBrowserService

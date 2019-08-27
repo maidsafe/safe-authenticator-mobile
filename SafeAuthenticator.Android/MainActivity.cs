@@ -13,6 +13,7 @@ using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using CarouselViewRenderer = CarouselView.FormsPlugin.Android.CarouselViewRenderer;
 
 namespace SafeAuthenticator.Droid
 {

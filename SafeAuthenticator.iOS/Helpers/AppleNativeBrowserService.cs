@@ -6,6 +6,7 @@ using UIKit;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(AppleNativeBrowserService))]
+
 namespace SafeAuthenticator.iOS.Helpers
 {
     public class AppleNativeBrowserService : INativeBrowserService

@@ -13,6 +13,7 @@ using Color = Xamarin.Forms.Color;
 using ColorExtensions = SafeAuthenticator.iOS.Extensions.ColorExtensions;
 
 [assembly: ExportRenderer(typeof(MaterialEntry), typeof(MaterialEntryRenderer))]
+
 namespace SafeAuthenticator.iOS.Helpers
 {
     public class MaterialEntryRenderer : ViewRenderer<MaterialEntry, FloatLabeledTextField>

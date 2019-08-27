@@ -5,6 +5,7 @@ using SafeAuthenticator.Services;
 using UIKit;
 
 [assembly: Xamarin.Forms.Dependency(typeof(AppHandler))]
+
 namespace SafeAuthenticator.iOS.Helpers
 {
     class AppHandler : IAppHandler

@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportEffect(typeof(EntryMoveNextEffect), nameof(EntryMoveNextEffect))]
+
 namespace SafeAuthenticator.iOS.Helpers
 {
     class EntryMoveNextEffect : PlatformEffect

@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportEffect(typeof(EntryMoveNextEffect), nameof(EntryMoveNextEffect))]
+
 namespace SafeAuthenticator.Droid.Helpers
 {
     public class EntryMoveNextEffect : PlatformEffect

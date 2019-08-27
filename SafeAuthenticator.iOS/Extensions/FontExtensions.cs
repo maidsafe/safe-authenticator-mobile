@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AVFoundation;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -224,9 +225,12 @@ namespace SafeAuthenticator.iOS.Extensions
 #pragma warning restore 0414
         }
 
-        public static UIFont ToUIFont(this Label label)
+        public static UIFont ToUiFont(this Label label)
         {
-            var values = label.GetValues(Label.FontFamilyProperty, Label.FontSizeProperty, Label.FontAttributesProperty);
+            var values = new object[3];
+            values[0] = label.GetValue(Label.FontFamilyProperty);
+            values[1] = label.GetValue(Label.FontSizeProperty);
+            values[2] = label.GetValue(Label.FontAttributesProperty);
             return ToUIFont((string)values[0], (float)(double)values[1], (FontAttributes)values[2]) ??
                    UIFont.SystemFontOfSize(UIFont.LabelFontSize);
         }

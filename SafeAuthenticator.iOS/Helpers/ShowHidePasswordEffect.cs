@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportEffect(typeof(ShowHidePasswordEffect), "ShowHidePasswordEffect")]
+
 namespace SafeAuthenticator.iOS.Helpers
 {
     public class ShowHidePasswordEffect : PlatformEffect
