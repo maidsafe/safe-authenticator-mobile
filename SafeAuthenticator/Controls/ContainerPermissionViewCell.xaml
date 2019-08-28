@@ -4,29 +4,34 @@
           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
           x:Class="SafeAuthenticator.Controls.ContainerPermissionViewCell"
           IsEnabled="False">
-    <StackLayout Padding="0,5,0,0"
-                 VerticalOptions="CenterAndExpand"
-                 Orientation="Horizontal">
+
+    <StackLayout Padding="5, 0"
+                 Orientation="Horizontal"
+                 Spacing="20"
+                 Margin="0, 5, 0, 0">
+
         <Image Source="{Binding ContainerImage}"
-                   HeightRequest="25"
-                   WidthRequest="25"
-                   VerticalOptions="Center"
-                   HorizontalOptions="CenterAndExpand" />
+               HeightRequest="25"
+               WidthRequest="25"
+               VerticalOptions="Center"
+               HorizontalOptions="Start" />
 
         <StackLayout VerticalOptions="CenterAndExpand"
-                     HorizontalOptions="StartAndExpand"
-                     Orientation="Vertical">
-            
-            <Label Text="{Binding ContainerName}"
-                   TextColor="{StaticResource BlackColor}"
-                   HorizontalOptions="StartAndExpand"
-                   FontSize="{StaticResource MediumSize}" />
-            <Label Text="{Binding Access, Converter={StaticResource FormatContainerPermissionsConverter}}"
-                   HorizontalOptions="EndAndExpand"
-                   TextColor="{StaticResource GreySmokeMediumColor}"
-                   FontSize="{StaticResource SmallSize}" />
+                     HorizontalOptions="FillAndExpand"
+                     Spacing="3">
+
+            <StackLayout VerticalOptions="CenterAndExpand"
+                         Padding="0, 10">
+                <Label Text="{Binding ContainerName}"
+                       TextColor="{StaticResource BlackColor}"
+                       FontSize="{StaticResource MediumSize}" />
+
+                <Label Text="{Binding Access, Converter={StaticResource FormatContainerPermissionsConverter}}"
+                       TextColor="{StaticResource GreySmokeMediumColor}"
+                       FontSize="{StaticResource SmallSize}" />
+            </StackLayout>
+
             <BoxView BackgroundColor="{StaticResource GreySmokeLightColor}"
-                     Margin="0,5,0,0"
                      VerticalOptions="End"
                      HorizontalOptions="FillAndExpand"
                      HeightRequest="0.5" />

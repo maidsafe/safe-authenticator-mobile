@@ -3,10 +3,10 @@
 <ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
           x:Class="SafeAuthenticator.Controls.RegisteredAppViewCell">
-    <StackLayout Padding="10, 0"
+    <StackLayout Padding="15, 0"
                  Orientation="Horizontal"
-                 Spacing="10"
-                 Margin="0,15,0,0">
+                 Spacing="20"
+                 Margin="0, 5, 0, 0">
         <Frame CornerRadius="22.5"
                HeightRequest="45"
                WidthRequest="45"
@@ -29,15 +29,20 @@
         <StackLayout VerticalOptions="CenterAndExpand"
                      HorizontalOptions="FillAndExpand"
                      Spacing="5">
-            <Label Text="{Binding AppName}"
-                   TextColor="{StaticResource BlackColor}"
-                   FontSize="{StaticResource MediumSize}"
-                   LineBreakMode="TailTruncation" />
 
-            <Label Text="{Binding AppVendor}"
-                   TextColor="{StaticResource GreySmokeMediumColor}"
-                   FontSize="{StaticResource SmallSize}"
-                   LineBreakMode="TailTruncation" />
+            <StackLayout VerticalOptions="CenterAndExpand"
+                         Padding="0, 10">
+                <Label Text="{Binding AppName}"
+                       TextColor="{StaticResource BlackColor}"
+                       FontSize="{StaticResource MediumSize}"
+                       LineBreakMode="TailTruncation" />
+
+                <Label Text="{Binding AppVendor}"
+                       TextColor="{StaticResource GreySmokeMediumColor}"
+                       FontSize="{StaticResource SmallSize}"
+                       LineBreakMode="TailTruncation" />
+            </StackLayout>
+
             <BoxView BackgroundColor="{StaticResource GreySmokeLightColor}"
                      VerticalOptions="End"
                      HorizontalOptions="FillAndExpand"
