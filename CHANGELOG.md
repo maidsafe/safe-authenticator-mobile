@@ -1,5 +1,9 @@
 # safe-authenticator-mobile Change Log
 
+## [0.1.5]
+
+* Fix the app crash (#155) ([f55cd5c])(https://github.com/maidsafe/safe-authenticator-mobile/commit/f55cd5c47044d6332fc179550ca2646272683298)
+
 ## [0.1.4]
 
 * Update iOS build from iPhone/iPad to universal (#150) ([476a09e](https://github.com/maidsafe/safe-authenticator-mobile/commit/476a09e)), closes [#150](https://github.com/maidsafe/safe-authenticator-mobile/issues/150)
