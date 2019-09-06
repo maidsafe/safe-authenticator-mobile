@@ -24,7 +24,7 @@ namespace SafeAuthenticator.Views
             _settingsViewModel = new SettingsViewModel();
             BindingContext = _settingsViewModel;
 
-            if (DeviceInfo.Platform == DevicePlatform.Android &&
+            if (Device.RuntimePlatform == Device.Android &&
                  DeviceInfo.Version < Version.Parse("4.4"))
             {
                 AutoReconnectLayout.IsVisible = false;

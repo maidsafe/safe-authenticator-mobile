@@ -21,18 +21,11 @@ namespace SafeAuthenticator.iOS.Helpers
         private bool _hasError;
         private bool _hasFocus;
         private UIColor _defaultTextColor;
+        private bool _disposed;
 
         protected override void OnElementChanged(ElementChangedEventArgs<MaterialEntry> e)
         {
             base.OnElementChanged(e);
-
-            // unsubscribe
-            if (e.OldElement != null)
-            {
-                Control.EditingDidBegin -= OnEditingDidBegin;
-                Control.EditingDidEnd -= OnEditingDidEnd;
-                Control.EditingChanged -= ViewOnEditingChanged;
-            }
 
             if (e.NewElement != null)
             {
@@ -64,6 +57,28 @@ namespace SafeAuthenticator.iOS.Helpers
                 Control.EditingDidEnd += OnEditingDidEnd;
                 Control.EditingChanged += ViewOnEditingChanged;
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (_disposed)
+                return;
+
+            _disposed = true;
+
+            if (disposing)
+            {
+                _defaultTextColor = null;
+
+                if (Control != null)
+                {
+                    Control.EditingDidBegin -= OnEditingDidBegin;
+                    Control.EditingChanged -= ViewOnEditingChanged;
+                    Control.EditingDidEnd -= OnEditingDidEnd;
+                }
+            }
+
+            base.Dispose(disposing);
         }
 
 #pragma warning disable CS0114 // Member hides inherited member; missing override keyword
