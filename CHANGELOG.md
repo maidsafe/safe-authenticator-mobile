@@ -2,7 +2,7 @@
 
 ## [0.1.5]
 
-* Fix the app crash (#155) ([f55cd5c])(https://github.com/maidsafe/safe-authenticator-mobile/commit/f55cd5c47044d6332fc179550ca2646272683298)
+* Fix the app crash caused by null reference exception in the material entry renderer in iOS  (#155) ([f55cd5c])(https://github.com/maidsafe/safe-authenticator-mobile/commit/f55cd5c47044d6332fc179550ca2646272683298)
 
 ## [0.1.4]
 
