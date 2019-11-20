@@ -6,7 +6,7 @@ namespace SafeAuthenticator.Native
 {
     public partial interface IAuthBindings
     {
-        void CreateAccount(string locator, string secret, string invitation, Action disconnnectedCb, Action<FfiResult, IntPtr, GCHandle> cb);
+        void CreateAccount(string locator, string secret, Action disconnnectedCb, Action<FfiResult, IntPtr, GCHandle> cb);
 
         void Login(string locator, string secret, Action disconnnectedCb, Action<FfiResult, IntPtr, GCHandle> cb);
 
