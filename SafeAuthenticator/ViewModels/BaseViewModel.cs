@@ -9,6 +9,8 @@ namespace SafeAuthenticator.ViewModels
     {
         protected AuthService Authenticator => DependencyService.Get<AuthService>();
 
+        protected VaultConnectionFileManager VaultConnectionFileManager => DependencyService.Get<VaultConnectionFileManager>();
+
         protected INativeBrowserService OpeNativeBrowserService => DependencyService.Get<INativeBrowserService>();
 
         protected INativeProgressDialogService NativeProgressDialog => DependencyService.Get<INativeProgressDialogService>();
