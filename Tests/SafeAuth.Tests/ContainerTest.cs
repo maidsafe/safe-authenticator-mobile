@@ -15,7 +15,7 @@ namespace SafeAuth.Tests
             string password = Utils.GetRandomString(10);
 
             var authReq = Utils.CreateAuthRequest();
-            var (auth, session) = await Utils.CreateTestApp(secret, password, Utils.GetRandomString(5), authReq);
+            var (auth, session) = await Utils.CreateTestApp(secret, password, authReq);
             Assert.Throws<SafeApp.Utilities.FfiException>(() =>
                 session.AccessContainer.GetMDataInfoAsync("_public").GetAwaiter().GetResult());
 
@@ -40,7 +40,7 @@ namespace SafeAuth.Tests
             string password = Utils.GetRandomString(10);
 
             var authReq = Utils.CreateAuthRequest();
-            var (auth, session) = await Utils.CreateTestApp(secret, password, Utils.GetRandomString(5), authReq);
+            var (auth, session) = await Utils.CreateTestApp(secret, password, authReq);
             Assert.Throws<SafeApp.Utilities.FfiException>(() =>
                 session.AccessContainer.GetMDataInfoAsync("_videos").GetAwaiter().GetResult());
 
@@ -61,7 +61,7 @@ namespace SafeAuth.Tests
             string password = Utils.GetRandomString(10);
 
             var authReq = Utils.CreateAuthRequest();
-            var (auth, session) = await Utils.CreateTestApp(secret, password, Utils.GetRandomString(5), authReq);
+            var (auth, session) = await Utils.CreateTestApp(secret, password, authReq);
 
             var containerRequest = Utils.SetContainerPermission(authReq, "_public");
             var (_, msg) = await Session.EncodeContainerRequestAsync(containerRequest);
@@ -88,7 +88,7 @@ namespace SafeAuth.Tests
             string password = Utils.GetRandomString(10);
 
             var authReq = Utils.CreateAuthRequest();
-            var (auth, session) = await Utils.CreateTestApp(secret, password, Utils.GetRandomString(5), authReq);
+            var (auth, session) = await Utils.CreateTestApp(secret, password, authReq);
             var containerRequest = Utils.SetContainerPermission(authReq, "_videos");
             var (_, msg) = await Session.EncodeContainerRequestAsync(containerRequest);
             var responseMsg = await Utils.AuthenticateContainerRequest(auth, msg, true);

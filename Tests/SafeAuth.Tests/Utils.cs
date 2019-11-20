@@ -25,25 +25,24 @@ namespace SafeAuth.Tests
         {
             string secret = GetRandomString(10);
             string password = GetRandomString(10);
-            string invitation = GetRandomString(5);
-            return await CreateTestApp(secret, password, invitation);
+            return await CreateTestApp(secret, password);
         }
 
-        public static async Task<(Authenticator, Session)> CreateTestApp(string secret, string password, string invitation)
+        public static async Task<(Authenticator, Session)> CreateTestApp(string secret, string password)
         {
             var authReq = new SafeApp.Utilities.AuthReq
             {
                 App = new SafeApp.Utilities.AppExchangeInfo
-                    { Id = GetRandomString(10), Name = GetRandomString(5), Scope = null, Vendor = GetRandomString(5) },
+                { Id = GetRandomString(10), Name = GetRandomString(5), Scope = null, Vendor = GetRandomString(5) },
                 AppContainer = true,
                 Containers = new List<SafeApp.Utilities.ContainerPermissions>()
             };
-            return await CreateTestApp(secret, password, invitation, authReq);
+            return await CreateTestApp(secret, password, authReq);
         }
 
-        internal static async Task<(Authenticator, Session)> CreateTestApp(string secret, string password, string invitation, SafeApp.Utilities.AuthReq authReq)
+        internal static async Task<(Authenticator, Session)> CreateTestApp(string secret, string password, SafeApp.Utilities.AuthReq authReq)
         {
-            var auth = await Authenticator.CreateAccountAsync(secret, password, invitation);
+            var auth = await Authenticator.CreateAccountAsync(secret, password);
             var (_, reqMsg) = await Session.EncodeAuthReqAsync(authReq);
             var ipcReq = await auth.DecodeIpcMessageAsync(reqMsg);
             Assert.That(ipcReq, Is.TypeOf<AuthIpcReq>());
@@ -80,7 +79,7 @@ namespace SafeAuth.Tests
             var authReq = new SafeApp.Utilities.AuthReq
             {
                 App = new SafeApp.Utilities.AppExchangeInfo
-                    { Id = GetRandomString(10), Name = GetRandomString(5), Scope = null, Vendor = GetRandomString(5) },
+                { Id = GetRandomString(10), Name = GetRandomString(5), Scope = null, Vendor = GetRandomString(5) },
                 AppContainer = true,
                 Containers = new List<SafeApp.Utilities.ContainerPermissions>()
             };

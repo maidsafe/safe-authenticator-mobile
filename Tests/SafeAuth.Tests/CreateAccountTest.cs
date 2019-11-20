@@ -19,9 +19,8 @@ namespace SafeAuth.Tests
         {
             string secret = null;
             string password = Utils.GetRandomString(10);
-            string invitation = Utils.GetRandomString(5);
             Assert.That(
-                async () => await Utils.CreateTestApp(secret, password, invitation),
+                async () => await Utils.CreateTestApp(secret, password),
                 Throws.TypeOf<FfiException>());
         }
 
@@ -30,9 +29,8 @@ namespace SafeAuth.Tests
         {
             string secret = Utils.GetRandomString(10);
             string password = null;
-            string invitation = Utils.GetRandomString(5);
             Assert.That(
-                async () => await Utils.CreateTestApp(secret, password, invitation),
+                async () => await Utils.CreateTestApp(secret, password),
                 Throws.TypeOf<FfiException>());
         }
 
@@ -41,9 +39,8 @@ namespace SafeAuth.Tests
         {
             string secret = Utils.GetRandomString(10);
             string password = Utils.GetRandomString(10);
-            string invitation = null;
             Assert.That(
-                async () => await Utils.CreateTestApp(secret, password, invitation),
+                async () => await Utils.CreateTestApp(secret, password),
                 Throws.TypeOf<FfiException>());
         }
 
@@ -52,14 +49,12 @@ namespace SafeAuth.Tests
         {
             string secret = Utils.GetRandomString(10);
             string password = Utils.GetRandomString(10);
-            string invitation = Utils.GetRandomString(5);
-            var (auth, session) = await Utils.CreateTestApp(secret, password, invitation);
+            var (auth, session) = await Utils.CreateTestApp(secret, password);
             auth.Dispose();
 
             password = Utils.GetRandomString(10);
-            invitation = Utils.GetRandomString(5);
             Assert.That(
-                async () => await Utils.CreateTestApp(secret, password, invitation),
+                async () => await Utils.CreateTestApp(secret, password),
                 Throws.TypeOf<FfiException>());
         }
     }
