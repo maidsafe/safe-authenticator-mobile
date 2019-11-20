@@ -57,7 +57,7 @@ namespace SafeAuthenticator.Native
         }
 
         [PublicAPI]
-        public static Task<Authenticator> CreateAccountAsync(string locator, string secret, string invitation)
+        public static Task<Authenticator> CreateAccountAsync(string locator, string secret)
         {
             return Task.Run(
                 () =>
@@ -81,7 +81,7 @@ namespace SafeAuthenticator.Native
                         authenticator.Init(ptr, disconnectHandle);
                         tcs.SetResult(authenticator);
                     };
-                    AuthBindings.CreateAccount(locator, secret, invitation, disconnect, cb);
+                    AuthBindings.CreateAccount(locator, secret, disconnect, cb);
                     return tcs.Task;
                 });
         }
@@ -102,12 +102,6 @@ namespace SafeAuthenticator.Native
         {
             FreeAuth();
             GC.SuppressFinalize(this);
-        }
-
-        [PublicAPI]
-        public Task<AccountInfo> AuthAccountInfoAsync()
-        {
-            return AuthBindings.AuthAccountInfoAsync(_authPtr);
         }
 
         [PublicAPI]
@@ -208,7 +202,7 @@ namespace SafeAuthenticator.Native
         [PublicAPI]
         public static bool IsMockBuild()
         {
-            return AuthBindings.IsMockBuild();
+            return AuthBindings.AuthIsMock();
         }
 
         [PublicAPI]

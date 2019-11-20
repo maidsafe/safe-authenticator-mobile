@@ -134,9 +134,9 @@ namespace SafeAuthenticator.Services
             }
         }
 
-        internal async Task CreateAccountAsync(string location, string password, string invitation)
+        internal async Task CreateAccountAsync(string location, string password)
         {
-            _authenticator = await Authenticator.CreateAccountAsync(location, password, invitation);
+            _authenticator = await Authenticator.CreateAccountAsync(location, password);
             _secret = location;
             _password = password;
         }
