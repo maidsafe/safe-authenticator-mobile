@@ -36,6 +36,13 @@
                                     Padding="25"
                                     IsScrollEnabled="False">
             <StackLayout>
+                <Image Source="addNew"
+                       HorizontalOptions="EndAndExpand"
+                       HeightRequest="35"
+                       WidthRequest="35"
+                       Margin="10"
+                       x:Name="ConnectionSettingsMenuIcon" />
+
                 <StackLayout VerticalOptions="CenterAndExpand">
 
                     <Image Source="authLogo"

@@ -1,4 +1,12 @@
-﻿using SafeAuthenticator.Services;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Newtonsoft.Json;
+using SafeAuthenticator.Helpers;
+using SafeAuthenticator.Models;
+using SafeAuthenticator.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(VaultConnectionFileManager))]
@@ -7,31 +15,94 @@ namespace SafeAuthenticator.Services
 {
     public class VaultConnectionFileManager
     {
-        private static string _defaultVaultConnectionFileName = "vault_connection_info.config";
+        private static string ConfigFilePath => DependencyService.Get<IFileOps>().ConfigFilesPath;
 
-        internal void AddNewVaultConnectionConfigFile(string friendlyFileName, string fileLocation)
+        private static readonly string _vaultConnectionFilePreferenceKey = "VaultConnectionFileList";
+        private static readonly string _defaultVaultConnectionFileName = "vault_connection_info.config";
+
+        private List<VaultConnectionFile> _vaultConnectionFileList;
+
+        public VaultConnectionFileManager()
         {
-            // Todo: Copy the file, add entry in the list and give it a random name and store in app Directory.
+            _ = GetAllFileEntries();
         }
 
-        internal void DeleteVaultConnectionConfigFile(string friendlyFileName)
+        internal VaultConnectionFile AddNewVaultConnectionConfigFile(string friendlyFileName, byte[] fileData)
         {
-            // Todo: Delete file from the app directory and remove from list as well.
+            var fileId = Convert.ToInt32(DateTime.Now.ToString("MMddmmssff"));
+            File.WriteAllBytes(Path.Combine(ConfigFilePath, $"{fileId}.config"), fileData);
+
+            var connecitonFile = new VaultConnectionFile
+            {
+                FiendlyFileName = friendlyFileName,
+                FileId = fileId,
+                AddedOn = DateTime.Now.ToUniversalTime()
+            };
+            _vaultConnectionFileList.Add(connecitonFile);
+
+            UpdateListInDevicePreferenceStore();
+
+            return connecitonFile;
         }
 
-        internal void SetAsActiveConnectionConfigFile(string friendlyFileName)
+        internal void DeleteVaultConnectionConfigFile(int fileId)
         {
-            // Todo: Replace existing vault file with the given file.
+            var fileEntry = _vaultConnectionFileList.FirstOrDefault(t => t.FileId == fileId);
+            if (fileEntry == null)
+                return;
+
+            _vaultConnectionFileList.Remove(fileEntry);
+            UpdateListInDevicePreferenceStore();
+            File.Delete(Path.Combine(ConfigFilePath, $"{fileId}.config"));
         }
 
-        internal void GetAllFileEntries()
+        internal void SetAsActiveConnectionConfigFile(int fileId)
         {
-            // Todo: Read file list from the memory and return the same.
+            var fileEntry = _vaultConnectionFileList.FirstOrDefault(t => t.FileId == fileId);
+            if (fileEntry == null)
+                return;
+
+            File.Delete(Path.Combine(ConfigFilePath, _defaultVaultConnectionFileName));
+            var fileData = File.ReadAllBytes(Path.Combine(ConfigFilePath, $"{fileId}.config"));
+            File.WriteAllBytes(Path.Combine(ConfigFilePath, _defaultVaultConnectionFileName), fileData);
+        }
+
+        internal List<VaultConnectionFile> GetAllFileEntries()
+        {
+            if (_vaultConnectionFileList == null)
+                _vaultConnectionFileList = new List<VaultConnectionFile>();
+
+            string storedList;
+            if (Preferences.ContainsKey(_vaultConnectionFilePreferenceKey))
+                storedList = Preferences.Get(_vaultConnectionFilePreferenceKey, string.Empty);
+            else
+                storedList = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(storedList))
+                _vaultConnectionFileList = JsonConvert.DeserializeObject<List<VaultConnectionFile>>(storedList);
+
+            return _vaultConnectionFileList;
         }
 
         internal void DeleteAllFiles()
         {
-            // Todo: Delete all config files and clear the list in memory.
+            if (Preferences.ContainsKey(_vaultConnectionFilePreferenceKey))
+                Preferences.Remove(_vaultConnectionFilePreferenceKey);
+
+            var configFiles = Directory.GetFiles(ConfigFilePath, ".config");
+            foreach (var file in configFiles)
+            {
+                File.Delete(file);
+            }
+        }
+
+        private void UpdateListInDevicePreferenceStore()
+        {
+            if (Preferences.ContainsKey(_vaultConnectionFilePreferenceKey))
+                Preferences.Remove(_vaultConnectionFilePreferenceKey);
+
+            var serializedList = JsonConvert.SerializeObject(_vaultConnectionFileList);
+            Preferences.Set(_vaultConnectionFilePreferenceKey, serializedList);
         }
     }
 }
