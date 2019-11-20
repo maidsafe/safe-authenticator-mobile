@@ -480,7 +480,7 @@ namespace SafeAuthenticator.Native
                 UserMetadataPtr = BindingUtils.CopyFromByteList(UserMetadata),
                 UserMetadataLen = (UIntPtr)(UserMetadata?.Count ?? 0),
                 UserMetadataCap = UIntPtr.Zero,
-                DataMapName = DataMapName
+                DataMapName = DataMapName,
                 Published = Published
             };
         }

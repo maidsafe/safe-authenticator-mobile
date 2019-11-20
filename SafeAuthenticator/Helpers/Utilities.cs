@@ -82,10 +82,6 @@ namespace SafeAuthenticator.Helpers
                     return Constants.IncorrectPassword;
                 case Constants.AccountExistsError:
                     return Constants.AccountAlreadyExists;
-                case Constants.InvalidInvitationError:
-                    return Constants.InvalidInvitationToken;
-                case Constants.InvitationAlreadyClaimedError:
-                    return Constants.InvitationAlreadyClaimed;
                 case Constants.SharedMDataDeniedError:
                     return Constants.SharedMDataRequestDenied;
                 case Constants.LowBalanceError:

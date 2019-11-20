@@ -19,8 +19,6 @@
         internal const int NoSuchAccountError = -101;
         internal const int SymmetricDecipherFailureError = -3;
         internal const int AccountExistsError = -102;
-        internal const int InvalidInvitationError = -116;
-        internal const int InvitationAlreadyClaimedError = -117;
         internal const int SharedMDataDeniedError = -206;
         internal const int LowBalanceError = -113;
         internal const int NoSuchContainerError = -1015;
@@ -31,8 +29,6 @@
         internal const string AccountNotPresent = "Account does not exist";
         internal const string IncorrectPassword = "Incorrect password";
         internal const string AccountAlreadyExists = "Account already exists";
-        internal const string InvalidInvitationToken = "Invalid invitation token";
-        internal const string InvitationAlreadyClaimed = "Invitation already claimed";
         internal const string SharedMDataRequestDenied = "SharedMData request denied";
         internal const string InsufficientAccountBalance = "Insufficient account balance";
         internal const string InvalidContainer = "An invalid container '{0}' has been requested";

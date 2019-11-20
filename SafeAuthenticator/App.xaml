@@ -2,7 +2,6 @@
 
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:converters="clr-namespace:SafeAuthenticator.Controls.Converters"
              x:Class="SafeAuthenticator.App">
     <Application.Resources>
@@ -103,10 +102,6 @@
 
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
-            </Style>
-
-            <Style x:Key="InvitationEntryUnderlineStyle" TargetType="BoxView">
-                <Setter Property="BackgroundColor" Value="{StaticResource DefaultPlaceholderColor}" />
             </Style>
 
         </ResourceDictionary>

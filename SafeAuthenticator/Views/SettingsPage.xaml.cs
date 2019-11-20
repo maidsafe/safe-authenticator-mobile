@@ -15,7 +15,6 @@ namespace SafeAuthenticator.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            _settingsViewModel.GetAccountInfo();
         }
 
         public SettingsPage()
@@ -36,8 +35,6 @@ namespace SafeAuthenticator.Views
             {
                 DisplayAlert("Account Status", "The number of store and modify operations completed on this account.", "OK");
             };
-
-            AccountStatusImage.GestureRecognizers.Add(tap);
 
             MessagingCenter.Subscribe<SettingsViewModel>(
                 this,

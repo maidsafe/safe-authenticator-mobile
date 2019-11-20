@@ -36,7 +36,7 @@
                         <x:Array Type="{x:Type View}">
 
                             <!-- Invitation -->
-                            <controls:CreateAcctStep1/>
+                            <!--<controls:CreateAcctStep1/>-->
 
                             <!-- Account Secret -->
                             <controls:CreateAcctStep2/>

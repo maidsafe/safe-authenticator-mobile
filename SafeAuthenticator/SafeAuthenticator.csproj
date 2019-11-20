@@ -46,9 +46,6 @@
     <Compile Update="Controls\CreateAcctPage\CreateAcctStep3.xaml.cs">
       <DependentUpon>CreateAcctStep3.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Controls\CreateAcctPage\CreateAcctStep1.xaml.cs">
-      <DependentUpon>CreateAcctStep1.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Controls\RegisteredAppViewCell.xaml.cs">
       <DependentUpon>RegisteredAppViewCell.xaml</DependentUpon>
     </Compile>
@@ -58,9 +55,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Controls\CreateAcctPage\CreateAcctStep1.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Controls\CreateAcctPage\CreateAcctStep2.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
