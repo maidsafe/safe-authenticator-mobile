@@ -7,31 +7,11 @@ using SafeAuthenticator.Helpers;
 namespace SafeAuthenticator.Native
 {
     [PublicAPI]
-    public enum MDataAction
-    {
-        // ReSharper disable once InconsistentNaming
-        Insert,
-
-        // ReSharper disable once InconsistentNaming
-        Update,
-
-        // ReSharper disable once InconsistentNaming
-        Delete,
-
-        // ReSharper disable once InconsistentNaming
-        ManagePermissions,
-    }
-
-    [PublicAPI]
-    public struct AccountInfo
-    {
-        public ulong MutationsDone;
-        public ulong MutationsAvailable;
-    }
-
-    [PublicAPI]
     public struct MDataInfo
     {
+        [MarshalAs(UnmanagedType.U1)]
+        public bool Seq;
+
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.XorNameLen)]
         public byte[] Name;
 
@@ -76,12 +56,18 @@ namespace SafeAuthenticator.Native
     {
         public AppExchangeInfo App;
         public bool AppContainer;
+        public bool AppPermissionTransferCoins;
+        public bool AppPermissionPerformMutations;
+        public bool AppPermissionGetBalance;
         public List<ContainerPermissions> Containers;
 
         public AuthReq(AuthReqNative native)
         {
             App = native.App;
             AppContainer = native.AppContainer;
+            AppPermissionTransferCoins = native.AppPermissionTransferCoins;
+            AppPermissionPerformMutations = native.AppPermissionPerformMutations;
+            AppPermissionGetBalance = native.AppPermissionGetBalance;
             Containers =
                 BindingUtils.CopyToObjectList<ContainerPermissions>(native.ContainersPtr, (int)native.ContainersLen);
         }
@@ -92,6 +78,9 @@ namespace SafeAuthenticator.Native
             {
                 App = App,
                 AppContainer = AppContainer,
+                AppPermissionTransferCoins = AppPermissionTransferCoins,
+                AppPermissionPerformMutations = AppPermissionPerformMutations,
+                AppPermissionGetBalance = AppPermissionGetBalance,
                 ContainersPtr = BindingUtils.CopyFromObjectList(Containers),
                 ContainersLen = (UIntPtr)(Containers?.Count ?? 0),
                 ContainersCap = UIntPtr.Zero
@@ -104,6 +93,12 @@ namespace SafeAuthenticator.Native
         internal AppExchangeInfo App;
         [MarshalAs(UnmanagedType.U1)]
         internal bool AppContainer;
+        [MarshalAs(UnmanagedType.U1)]
+        public bool AppPermissionTransferCoins;
+        [MarshalAs(UnmanagedType.U1)]
+        public bool AppPermissionPerformMutations;
+        [MarshalAs(UnmanagedType.U1)]
+        public bool AppPermissionGetBalance;
         internal IntPtr ContainersPtr;
         internal UIntPtr ContainersLen;
 
@@ -459,6 +454,7 @@ namespace SafeAuthenticator.Native
         public uint ModifiedNsec;
         public List<byte> UserMetadata;
         public byte[] DataMapName;
+        public bool Published;
 
         public File(FileNative native)
         {
@@ -469,6 +465,7 @@ namespace SafeAuthenticator.Native
             ModifiedNsec = native.ModifiedNsec;
             UserMetadata = BindingUtils.CopyToByteList(native.UserMetadataPtr, (int)native.UserMetadataLen);
             DataMapName = native.DataMapName;
+            Published = native.Published;
         }
 
         public FileNative ToNative()
@@ -484,6 +481,7 @@ namespace SafeAuthenticator.Native
                 UserMetadataLen = (UIntPtr)(UserMetadata?.Count ?? 0),
                 UserMetadataCap = UIntPtr.Zero,
                 DataMapName = DataMapName
+                Published = Published
             };
         }
     }
@@ -503,6 +501,9 @@ namespace SafeAuthenticator.Native
 
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.XorNameLen)]
         internal byte[] DataMapName;
+
+        [MarshalAs(UnmanagedType.U1)]
+        public bool Published;
 
         // ReSharper disable once UnusedMember.Global
         public void Free()

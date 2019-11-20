@@ -1,7 +1,7 @@
 using System.Linq;
 
-var ANDROID_X86_64 = "android-x86_64";
-var ANDROID_ARMEABI_V7A = "android-armeabiv7a";
+var ANDROID_X86_64 = "x86_64-linux-android";
+var ANDROID_ARMEABI_V7A = "armv7-linux-androideabi";
 var LibTypes = new string[] {
     "-mock",
     ""
@@ -13,7 +13,7 @@ var ANDROID_ARCHITECTURES = new string[] {
 };
 
 var IOS_ARCHITECTURES = new string[] {
-    "ios"
+    "apple-ios"
 };
 
 var All_ARCHITECTURES = new string[][] {
@@ -30,8 +30,8 @@ enum Environment
 // --------------------------------------------------------------------------------
 // Native lib directory
 // --------------------------------------------------------------------------------
-var TAG = "0.9.1";
-var nativeLibDirectory = Directory(string.Concat(System.IO.Path.GetTempPath(), "nativeauthlibs"));
+var TAG = "9d4ea0b";
+var nativeLibDirectory = Directory(string.Concat(System.IO.Path.GetTempPath(), "NativeAuthLibs"));
 var androidLibDirectory = Directory("../SafeAuthenticator.Android/lib/");
 var iosLibDirectory = Directory("../SafeAuthenticator.iOS/Native References/");
 var androidTestLibDirectory = Directory("../Tests/SafeAuth.Tests.Android/lib/");
