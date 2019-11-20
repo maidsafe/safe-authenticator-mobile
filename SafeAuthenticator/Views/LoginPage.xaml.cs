@@ -57,6 +57,16 @@ namespace SafeAuthenticator.Views
                     NavigationPage.SetBackButtonTitle(this, "Login");
                     await Navigation.PushAsync(new CreateAcctPage());
                 });
+
+            var connectionMenuTapGestureRecogniser = new TapGestureRecognizer()
+            {
+                NumberOfTapsRequired = 1
+            };
+            connectionMenuTapGestureRecogniser.Tapped += (s, e) =>
+            {
+                Navigation.PushAsync(new VaultConnectionFilePage());
+            };
+            ConnectionSettingsMenuIcon.GestureRecognizers.Add(connectionMenuTapGestureRecogniser);
         }
 
         public void MessageCenterUnsubscribe()

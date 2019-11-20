@@ -3,10 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SafeAuthenticator.Views.VaultConnectionFilePage"
              Title="Manage Vault Connection Files">
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="addNew"
+                     Text="Add new file"
+                     Command="{Binding AddNewVaultConnectionFileCommand}"
+                     Order="Primary">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-
+            <CollectionView ItemsSource="{Binding VaultConnectionFiles}">
+                <CollectionView.EmptyView>
+                    <Label Text="0 vault connection info file exists." />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="FillAndExpand"
+                         Padding="20, 10"
+                         Spacing="10">
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <Label FontSize="Medium" Text="{Binding FiendlyFileName}" />
+                                <Label FontSize="Micro" Text="{Binding FiendlyFileName}" />
+                            </StackLayout>
+                            <Image Source="MData"
+                       WidthRequest="25"
+                       HeightRequest="25"
+                       VerticalOptions="Center"
+                       HorizontalOptions="End" />
+                            <Image Source="MData"
+                       WidthRequest="25"
+                       HeightRequest="25"
+                       VerticalOptions="Center"
+                       HorizontalOptions="End" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
