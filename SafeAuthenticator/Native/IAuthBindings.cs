@@ -6,13 +6,13 @@ namespace SafeAuthenticator.Native
 {
     public partial interface IAuthBindings
     {
-        bool IsMockBuild();
+        bool AuthIsMock();
 
         Task AuthReconnectAsync(IntPtr auth);
 
-        Task<AccountInfo> AuthAccountInfoAsync(IntPtr auth);
-
         Task<string> AuthExeFileStemAsync();
+
+        Task AuthSetConfigDirPathAsync(string newPath);
 
         Task AuthSetAdditionalSearchPathAsync(string newPath);
 
