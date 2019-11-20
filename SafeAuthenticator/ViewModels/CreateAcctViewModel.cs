@@ -15,7 +15,6 @@ namespace SafeAuthenticator.ViewModels
         private string _acctPassword;
         private string _confirmAcctSecret;
         private string _confirmAcctPassword;
-        private string _invitation;
         private bool _isUiEnabled;
         private StrengthIndicator _locationStrength;
         private StrengthIndicator _passwordStrength;
@@ -56,16 +55,6 @@ namespace SafeAuthenticator.ViewModels
             set
             {
                 SetProperty(ref _confirmAcctPassword, value);
-                ((Command)CarouselContinueCommand).ChangeCanExecute();
-            }
-        }
-
-        public string Invitation
-        {
-            get => _invitation;
-            set
-            {
-                SetProperty(ref _invitation, value);
                 ((Command)CarouselContinueCommand).ChangeCanExecute();
             }
         }
@@ -157,13 +146,6 @@ namespace SafeAuthenticator.ViewModels
             {
                 OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(Constants.ClaimTokenUrl);
             });
-            ClipboardPasteCommand = new Command(async () =>
-            {
-                var clipboardText = await Clipboard.GetTextAsync();
-                var invitation_temp = clipboardText?.Trim();
-                if (!string.IsNullOrWhiteSpace(invitation_temp))
-                    Invitation = invitation_temp;
-            });
         }
 
         private bool CanExecute()
@@ -171,8 +153,6 @@ namespace SafeAuthenticator.ViewModels
             switch (CarouselPagePosition)
             {
                 case 0:
-                    return !string.IsNullOrWhiteSpace(Invitation);
-                case 1:
                     {
                         if (AcctSecret == ConfirmAcctSecret)
                         {
@@ -181,7 +161,7 @@ namespace SafeAuthenticator.ViewModels
                         }
                         return !string.IsNullOrWhiteSpace(AcctSecret) && !string.IsNullOrWhiteSpace(ConfirmAcctSecret);
                     }
-                case 2:
+                case 1:
                     {
                         if (AcctPassword == ConfirmAcctPassword)
                         {
@@ -272,7 +252,7 @@ namespace SafeAuthenticator.ViewModels
                     AcctPasswordStrengthErrorMsg = string.Empty;
                 });
 
-                await Authenticator.CreateAccountAsync(AcctSecret, AcctPassword, Invitation);
+                await Authenticator.CreateAccountAsync(AcctSecret, AcctPassword);
                 MessagingCenter.Send(this, MessengerConstants.NavHomePage);
             }
         }

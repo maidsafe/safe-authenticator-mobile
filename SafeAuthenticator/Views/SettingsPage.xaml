@@ -35,23 +35,6 @@
                              Spacing="15">
                     <Label Text="Account"
                            Style="{StaticResource TitleStyle}" />
-                    <StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Account status"
-                                   Style="{StaticResource ItemStyle}"
-                                   VerticalOptions="Center" />
-                            <Image x:Name="AccountStatusImage"
-                                         Style="{StaticResource InfoButton}"
-                                         IsVisible="{Binding IsBusy, Converter={StaticResource InverseBooleanConverter}}"/>
-                            <ActivityIndicator Style="{StaticResource RefreshIndicatorStyle}"
-                                               IsVisible="{Binding IsBusy}"
-                                               IsRunning="{Binding IsBusy}" />
-                        </StackLayout>
-                        <Label Text="{Binding AccountStorageInfo}"
-                               Style="{StaticResource ItemStyle}"
-                               TextColor="{StaticResource GreySmokeMediumColor}"
-                               LineBreakMode="TailTruncation" />
-                    </StackLayout>
 
                     <Grid x:Name="AutoReconnectLayout">
                         <Grid.RowDefinitions>

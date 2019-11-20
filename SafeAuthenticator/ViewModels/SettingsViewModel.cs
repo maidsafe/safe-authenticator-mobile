@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
 using SafeAuthenticator.Helpers;
-using SafeAuthenticator.Native;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -16,14 +15,6 @@ namespace SafeAuthenticator.ViewModels
         public ICommand PrivacyInfoCommand { get; }
 
         public string ApplicationVersion => AppInfo.VersionString;
-
-        private string _accountStatus;
-
-        public string AccountStorageInfo
-        {
-            get => _accountStatus;
-            set => SetProperty(ref _accountStatus, value);
-        }
 
         private bool _isBusy;
 
@@ -62,7 +53,6 @@ namespace SafeAuthenticator.ViewModels
 
         public SettingsViewModel()
         {
-            AccountStorageInfo = Preferences.Get(nameof(AccountStorageInfo), "--");
             LogoutCommand = new Command(OnLogout);
 
             FaqCommand = new Command(() =>
@@ -74,31 +64,6 @@ namespace SafeAuthenticator.ViewModels
             {
                 OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(Constants.PrivacyInfoUrl);
             });
-        }
-
-        public async void GetAccountInfo()
-        {
-            try
-            {
-                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
-                {
-                    throw new Exception(Constants.NoInternetMessage);
-                }
-                IsBusy = true;
-                var acctStorageTuple = await Authenticator.GetAccountInfoAsync();
-                AccountStorageInfo = $"{acctStorageTuple.Item1} / {acctStorageTuple.Item2}";
-                Preferences.Set(nameof(AccountStorageInfo), AccountStorageInfo);
-            }
-            catch (FfiException ex)
-            {
-                var errorMessage = Utilities.GetErrorMessage(ex);
-                await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", $"Fetching account info failed: {ex.Message}", "OK");
-            }
-            IsBusy = false;
         }
 
         private async void OnLogout()
@@ -113,7 +78,6 @@ namespace SafeAuthenticator.ViewModels
                 {
                     using (NativeProgressDialog.ShowNativeDialog("Logging out"))
                     {
-                        Preferences.Remove(nameof(AccountStorageInfo));
                         await Authenticator.LogoutAsync();
                         MessagingCenter.Send(this, MessengerConstants.NavLoginPage);
                     }

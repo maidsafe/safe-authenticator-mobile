@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -158,13 +157,6 @@ namespace SafeAuthenticator.Services
                 _authenticator.Dispose();
                 _authenticator = null;
             }
-        }
-
-        internal async Task<(int, int)> GetAccountInfoAsync()
-        {
-            var acctInfo = await _authenticator.AuthAccountInfoAsync();
-            return (Convert.ToInt32(acctInfo.MutationsDone),
-                Convert.ToInt32(acctInfo.MutationsDone + acctInfo.MutationsAvailable));
         }
 
         internal async Task<List<RegisteredAppModel>> GetRegisteredAppsAsync()
