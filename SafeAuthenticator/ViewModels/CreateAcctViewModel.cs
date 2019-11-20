@@ -179,7 +179,7 @@ namespace SafeAuthenticator.ViewModels
         {
             try
             {
-                if (CarouselPagePosition == 1)
+                if (CarouselPagePosition == 0)
                 {
                     if (AcctSecret != ConfirmAcctSecret)
                     {
@@ -203,11 +203,11 @@ namespace SafeAuthenticator.ViewModels
                     }
                 }
 
-                if (CarouselPagePosition < 2)
+                if (CarouselPagePosition < 1)
                 {
                     CarouselPagePosition += 1;
                 }
-                else
+                else if (CarouselPagePosition == 1)
                 {
                     if (AcctPassword != ConfirmAcctPassword)
                     {
@@ -221,10 +221,8 @@ namespace SafeAuthenticator.ViewModels
             catch (FfiException ex)
             {
                 var errorMessage = Utilities.GetErrorMessage(ex);
-                if (ex.ErrorCode == -116)
+                if (ex.ErrorCode == -102)
                     CarouselPagePosition = 0;
-                else if (ex.ErrorCode == -102)
-                    CarouselPagePosition = 1;
 
                 await Application.Current.MainPage.DisplayAlert("Create account", errorMessage, "OK");
             }
