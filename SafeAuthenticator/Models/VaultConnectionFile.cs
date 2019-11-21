@@ -9,5 +9,7 @@ namespace SafeAuthenticator.Models
         public int FileId { get; set; }
 
         public DateTime AddedOn { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

@@ -52,19 +52,30 @@ namespace SafeAuthenticator.Services
                 return;
 
             _vaultConnectionFileList.Remove(fileEntry);
-            UpdateListInDevicePreferenceStore();
             File.Delete(Path.Combine(ConfigFilePath, $"{fileId}.config"));
+            UpdateListInDevicePreferenceStore();
         }
 
         internal void SetAsActiveConnectionConfigFile(int fileId)
         {
+            var currentActiveFile = _vaultConnectionFileList.Where(t => t.IsActive);
+            if (currentActiveFile != null && currentActiveFile.Any())
+            {
+                foreach (var item in currentActiveFile)
+                {
+                    item.IsActive = false;
+                }
+            }
+
             var fileEntry = _vaultConnectionFileList.FirstOrDefault(t => t.FileId == fileId);
             if (fileEntry == null)
                 return;
 
+            fileEntry.IsActive = true;
             File.Delete(Path.Combine(ConfigFilePath, _defaultVaultConnectionFileName));
             var fileData = File.ReadAllBytes(Path.Combine(ConfigFilePath, $"{fileId}.config"));
             File.WriteAllBytes(Path.Combine(ConfigFilePath, _defaultVaultConnectionFileName), fileData);
+            UpdateListInDevicePreferenceStore();
         }
 
         internal List<VaultConnectionFile> GetAllFileEntries()
@@ -86,14 +97,16 @@ namespace SafeAuthenticator.Services
 
         internal void DeleteAllFiles()
         {
-            if (Preferences.ContainsKey(_vaultConnectionFilePreferenceKey))
-                Preferences.Remove(_vaultConnectionFilePreferenceKey);
-
-            var configFiles = Directory.GetFiles(ConfigFilePath, ".config");
+            var configFiles = Directory.GetFiles(ConfigFilePath, "*.config");
             foreach (var file in configFiles)
             {
                 File.Delete(file);
             }
+
+            if (Preferences.ContainsKey(_vaultConnectionFilePreferenceKey))
+                Preferences.Remove(_vaultConnectionFilePreferenceKey);
+
+            _vaultConnectionFileList.Clear();
         }
 
         private void UpdateListInDevicePreferenceStore()
