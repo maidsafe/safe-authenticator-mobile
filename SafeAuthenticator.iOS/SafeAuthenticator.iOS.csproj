@@ -147,6 +147,11 @@
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
+    <BundleResource Include="Resources\addNew%402x.png" />
+    <BundleResource Include="Resources\addNew%403x.png" />
+    <BundleResource Include="Resources\deleteAll%402x.png" />
+    <BundleResource Include="Resources\deleteAll%403x.png" />
+    <BundleResource Include="Resources\select.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.cs">
@@ -245,6 +250,9 @@
     </PackageReference>
     <PackageReference Include="XamEffects">
       <Version>1.6.3</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Plugin.FilePicker">
+      <Version>2.1.36-beta</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildThisFileDirectory)..\CodeStyles.targets" />
