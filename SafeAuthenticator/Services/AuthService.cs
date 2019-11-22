@@ -133,6 +133,13 @@ namespace SafeAuthenticator.Services
             }
         }
 
+        internal async Task SetConfigFileDirectoryPathAsync()
+        {
+            var fileOps = DependencyService.Get<IFileOps>();
+            await Authenticator.AuthSetConfigurationFilePathAsync(fileOps.ConfigFilesPath);
+            Debug.WriteLine($"Set config dir path to : {fileOps.ConfigFilesPath}");
+        }
+
         internal async Task CreateAccountAsync(string location, string password)
         {
             _authenticator = await Authenticator.CreateAccountAsync(location, password);

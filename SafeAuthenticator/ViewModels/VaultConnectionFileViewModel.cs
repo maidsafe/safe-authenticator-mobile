@@ -109,6 +109,7 @@ namespace SafeAuthenticator.ViewModels
             try
             {
                 VaultConnectionFileManager.SetAsActiveConnectionConfigFile(fileId);
+                Task.Run(async () => await Authenticator.SetConfigFileDirectoryPathAsync());
             }
             catch (Exception ex)
             {
