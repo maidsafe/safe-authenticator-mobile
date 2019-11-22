@@ -14,6 +14,8 @@ namespace SafeAuthenticator.ViewModels
 
         public ICommand PrivacyInfoCommand { get; }
 
+        public ICommand VauleCommandManagerCommand { get; }
+
         public string ApplicationVersion => AppInfo.VersionString;
 
         private bool _isBusy;
@@ -54,6 +56,11 @@ namespace SafeAuthenticator.ViewModels
         public SettingsViewModel()
         {
             LogoutCommand = new Command(OnLogout);
+
+            VauleCommandManagerCommand = new Command(() =>
+            {
+                MessagingCenter.Send(this, MessengerConstants.NavVaultConnectionManagerPage);
+            });
 
             FaqCommand = new Command(() =>
             {

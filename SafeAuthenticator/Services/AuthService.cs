@@ -31,6 +31,8 @@ namespace SafeAuthenticator.Services
 
         public string AuthenticationReq { get; set; }
 
+        public bool IsLoggedIn => _authenticator != null;
+
         internal bool IsLogInitialised
         {
             get => _isLogInitialised;
