@@ -6,8 +6,7 @@
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
              x:Class="SafeAuthenticator.Views.LoginPage"
              NavigationPage.HasNavigationBar="False"
-             NavigationPage.BackButtonTitle="Login"
-             IsEnabled="{Binding IsUiEnabled}">
+             NavigationPage.BackButtonTitle="Login">
 
     <ContentPage.BindingContext>
         <viewModels:LoginViewModel />
@@ -36,11 +35,12 @@
                                     Padding="25"
                                     IsScrollEnabled="False">
             <StackLayout>
-                <Image Source="addNew"
+                <Image Source="gearIcon"
                        HorizontalOptions="EndAndExpand"
-                       HeightRequest="35"
-                       WidthRequest="35"
-                       Margin="10"
+                       HeightRequest="25"
+                       WidthRequest="25"
+                       Margin="10, 30"
+                       VerticalOptions="Start"
                        x:Name="ConnectionSettingsMenuIcon" />
 
                 <StackLayout VerticalOptions="CenterAndExpand">

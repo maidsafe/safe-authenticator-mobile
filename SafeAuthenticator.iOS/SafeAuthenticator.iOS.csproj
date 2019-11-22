@@ -118,9 +118,6 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\SafeAuthenticator\crust.config">
-      <Link>crust.config</Link>
-    </Content>
     <Content Include="..\SafeAuthenticator\log.toml">
       <Link>log.toml</Link>
     </Content>
@@ -152,6 +149,7 @@
     <BundleResource Include="Resources\deleteAll%402x.png" />
     <BundleResource Include="Resources\deleteAll%403x.png" />
     <BundleResource Include="Resources\select.png" />
+    <BundleResource Include="Resources\gearIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.cs">

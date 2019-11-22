@@ -78,6 +78,15 @@ namespace SafeAuthenticator.Services
             UpdateListInDevicePreferenceStore();
         }
 
+        internal bool ActiveConnectionConfigFileExists()
+        {
+            var configFiles = Directory.GetFiles(ConfigFilePath, _defaultVaultConnectionFileName);
+            if (configFiles.Count() > 0)
+                return true;
+            else
+                return false;
+        }
+
         internal List<VaultConnectionFile> GetAllFileEntries()
         {
             if (_vaultConnectionFileList == null)

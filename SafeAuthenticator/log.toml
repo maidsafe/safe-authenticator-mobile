@@ -17,7 +17,7 @@ file_timestamp = true
 level = "error"
 appenders = ["async_console", "async_file"]
 
-[loggers."crust"]
+[loggers."quic-p2p"]
 level = "debug"
 
 [loggers."routing"]

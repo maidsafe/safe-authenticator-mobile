@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Threading.Tasks;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Services;
 using SafeAuthenticator.ViewModels;
@@ -67,6 +68,31 @@ namespace SafeAuthenticator.Views
                 Navigation.PushAsync(new VaultConnectionFilePage());
             };
             ConnectionSettingsMenuIcon.GestureRecognizers.Add(connectionMenuTapGestureRecogniser);
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (BindingContext != null)
+            {
+                var loginPageViewModel = (LoginViewModel)BindingContext;
+
+                if (loginPageViewModel != null)
+                {
+                    if (loginPageViewModel.VaultConnectionFileExists())
+                    {
+                        Task.Run(async () => await loginPageViewModel.SetVaultConnectionConfigFileDirAsync());
+                    }
+                    else
+                    {
+                        DisplayAlert(
+                            "Vault Connection File",
+                            "Please upload/set a default vault connection file from the settings menu.",
+                            "ok");
+                    }
+                }
+            }
         }
 
         public void MessageCenterUnsubscribe()

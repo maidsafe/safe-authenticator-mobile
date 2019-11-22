@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Native;
@@ -63,6 +64,16 @@ namespace SafeAuthenticator.ViewModels
             {
                 OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(Constants.FaqUrl);
             });
+        }
+
+        public async Task SetVaultConnectionConfigFileDirAsync()
+        {
+            await Authenticator.SetConfigFileDirectoryPathAsync();
+        }
+
+        public bool VaultConnectionFileExists()
+        {
+            return VaultConnectionFileManager.ActiveConnectionConfigFileExists();
         }
 
         private bool CanExecute()

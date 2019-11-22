@@ -32,14 +32,13 @@ namespace SafeAuthenticator.Native
         [PublicAPI]
         public static async Task AuthInitLoggingAsync(string outputFileName)
         {
-            var appName = await AuthBindings.AuthExeFileStemAsync();
             var fileList = new List<(string, string)>
-                { ("crust.config", $"{appName}.crust.config"), ("log.toml", "log.toml") };
+                { ("log.toml", "log.toml") };
 
             var fileOps = DependencyService.Get<IFileOps>();
             await fileOps.TransferAssetsAsync(fileList);
 
-            Debug.WriteLine($"Assets Transferred - {appName}");
+            Debug.WriteLine($"Assets Transferred");
             await AuthBindings.AuthSetAdditionalSearchPathAsync(fileOps.ConfigFilesPath);
             await AuthBindings.AuthInitLoggingAsync(outputFileName);
         }
@@ -48,6 +47,12 @@ namespace SafeAuthenticator.Native
         public static Task AuthSetAdditionalSearchPathAsync(string newPath)
         {
             return AuthBindings.AuthSetAdditionalSearchPathAsync(newPath);
+        }
+
+        [PublicAPI]
+        public static Task AuthSetConfigurationFilePathAsync(string configDirPath)
+        {
+            return AuthBindings.AuthSetConfigDirPathAsync(configDirPath);
         }
 
         [PublicAPI]

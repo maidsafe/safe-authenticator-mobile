@@ -80,9 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidNativeLibrary Include="lib\armeabi-v7a\libsafe_authenticator.so" />
-    <AndroidAsset Include="..\SafeAuthenticator\crust.config">
-      <Link>Assets\crust.config</Link>
-    </AndroidAsset>
     <AndroidAsset Include="..\SafeAuthenticator\log.toml">
       <Link>Assets\log.toml</Link>
     </AndroidAsset>
@@ -134,6 +131,10 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\select.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\gearIcon.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
