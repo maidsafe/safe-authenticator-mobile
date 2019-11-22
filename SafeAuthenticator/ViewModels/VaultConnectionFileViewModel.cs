@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Plugin.FilePicker;
 using Plugin.FilePicker.Abstractions;
+using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using Xamarin.Forms;
 
@@ -59,8 +60,30 @@ namespace SafeAuthenticator.ViewModels
                     DeleteVaultFileAsync(SelectedFile.FileId);
                     break;
                 case "Activate":
-                    SetNewDefaultVaultFile(SelectedFile.FileId);
-                    RefreshVaultConnectionFilesList();
+                    if (Authenticator.IsLoggedIn)
+                    {
+                        var result = await Application.Current.MainPage.DisplayAlert(
+                            "Vault connection file",
+                            "You'll be logged out of the app.",
+                            "Continue",
+                            "Cancel");
+
+                        if (result)
+                        {
+                            SetNewDefaultVaultFile(SelectedFile.FileId);
+                            RefreshVaultConnectionFilesList();
+                            using (NativeProgressDialog.ShowNativeDialog("Logging out"))
+                            {
+                                await Authenticator.LogoutAsync();
+                                MessagingCenter.Send(this, MessengerConstants.NavLoginPage);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        SetNewDefaultVaultFile(SelectedFile.FileId);
+                        RefreshVaultConnectionFilesList();
+                    }
                     break;
             }
         }

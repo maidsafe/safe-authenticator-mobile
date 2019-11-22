@@ -49,11 +49,25 @@ namespace SafeAuthenticator.Views
                     Navigation.InsertPageBefore(new LoginPage(), Navigation.NavigationStack[0]);
                     await Navigation.PopToRootAsync();
                 });
+
+            MessagingCenter.Subscribe<SettingsViewModel>(
+                this,
+                MessengerConstants.NavVaultConnectionManagerPage,
+                async _ =>
+                {
+                    MessageCenterUnsubscribe();
+                    if (!App.IsPageValid(this))
+                    {
+                        return;
+                    }
+                    await Navigation.PushAsync(new VaultConnectionFilePage());
+                });
         }
 
         private void MessageCenterUnsubscribe()
         {
             MessagingCenter.Unsubscribe<HomeViewModel>(this, MessengerConstants.NavLoginPage);
+            MessagingCenter.Unsubscribe<HomeViewModel>(this, MessengerConstants.NavVaultConnectionManagerPage);
         }
     }
 }

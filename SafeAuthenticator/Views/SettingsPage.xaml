@@ -52,6 +52,14 @@
                                 VerticalOptions="Center"
                                 IsToggled="{Binding AuthReconnect}" />
                     </Grid>
+                    <StackLayout XamEffects:TouchEffect.Color="{StaticResource GreySmokeMediumColor}"
+                                 XamEffects:Commands.Tap="{Binding VauleCommandManagerCommand}"
+                                 Style="{StaticResource ExternalLinkStyle}">
+
+                        <Label Text="Vault connection file manager"
+                               Style="{StaticResource ItemStyle}"
+                               VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
                 </StackLayout>
 
                 <BoxView Style="{StaticResource BoxViewStyle}" />
