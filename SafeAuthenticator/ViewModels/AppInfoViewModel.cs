@@ -4,7 +4,6 @@ using JetBrains.Annotations;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
-using SafeAuthenticator.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 

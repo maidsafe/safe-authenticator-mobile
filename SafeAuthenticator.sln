@@ -8,7 +8,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeAuthenticator.iOS", "Sa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A1435084-9D61-4EFC-8107-3B435CEB1363}"
 	ProjectSection(SolutionItems) = preProject
-		NuGet.Config = NuGet.Config
+		Directory.Build.props = Directory.Build.props
+		stylecop.json = stylecop.json
+		SafeAuthenticator.ruleset = SafeAuthenticator.ruleset
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeAuthenticator", "SafeAuthenticator\SafeAuthenticator.csproj", "{2477DBAF-96EE-4EA4-8DDC-0150DA13991F}"
