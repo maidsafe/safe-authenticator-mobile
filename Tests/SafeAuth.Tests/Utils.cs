@@ -30,17 +30,20 @@ namespace SafeAuth.Tests
 
         public static async Task<(Authenticator, Session)> CreateTestApp(string secret, string password)
         {
-            var authReq = new SafeApp.Utilities.AuthReq
+            var authReq = new SafeApp.Core.AuthReq
             {
-                App = new SafeApp.Utilities.AppExchangeInfo
+                App = new SafeApp.Core.AppExchangeInfo
                 { Id = GetRandomString(10), Name = GetRandomString(5), Scope = null, Vendor = GetRandomString(5) },
                 AppContainer = true,
-                Containers = new List<SafeApp.Utilities.ContainerPermissions>()
+                Containers = new List<SafeApp.Core.ContainerPermissions>()
             };
             return await CreateTestApp(secret, password, authReq);
         }
 
-        internal static async Task<(Authenticator, Session)> CreateTestApp(string secret, string password, SafeApp.Utilities.AuthReq authReq)
+        internal static async Task<(Authenticator, Session)> CreateTestApp(
+            string secret,
+            string password,
+            SafeApp.Core.AuthReq authReq)
         {
             var auth = await Authenticator.CreateAccountAsync(secret, password);
             var (_, reqMsg) = await Session.EncodeAuthReqAsync(authReq);
@@ -50,12 +53,12 @@ namespace SafeAuth.Tests
             var authIpcReq = ipcReq as AuthIpcReq;
             var resMsg = await auth.EncodeAuthRespAsync(authIpcReq, true);
             var ipcResponse = await Session.DecodeIpcMessageAsync(resMsg);
-            Assert.That(ipcResponse, Is.TypeOf<SafeApp.Utilities.AuthIpcMsg>());
+            Assert.That(ipcResponse, Is.TypeOf<SafeApp.Core.AuthIpcMsg>());
 
-            var authResponse = ipcResponse as SafeApp.Utilities.AuthIpcMsg;
+            var authResponse = ipcResponse as SafeApp.Core.AuthIpcMsg;
             Assert.That(authResponse, Is.Not.Null);
 
-            var session = await Session.AppRegisteredAsync(authReq.App.Id, authResponse.AuthGranted);
+            var session = await Session.AppConnectAsync(authReq.App.Id, resMsg);
             return (auth, session);
         }
 
@@ -74,29 +77,31 @@ namespace SafeAuth.Tests
             return await auth.AuthRegisteredAppsAsync();
         }
 
-        public static SafeApp.Utilities.AuthReq CreateAuthRequest()
+        public static SafeApp.Core.AuthReq CreateAuthRequest()
         {
-            var authReq = new SafeApp.Utilities.AuthReq
+            var authReq = new SafeApp.Core.AuthReq
             {
-                App = new SafeApp.Utilities.AppExchangeInfo
+                App = new SafeApp.Core.AppExchangeInfo
                 { Id = GetRandomString(10), Name = GetRandomString(5), Scope = null, Vendor = GetRandomString(5) },
                 AppContainer = true,
-                Containers = new List<SafeApp.Utilities.ContainerPermissions>()
+                Containers = new List<SafeApp.Core.ContainerPermissions>()
             };
             return authReq;
         }
 
-        public static SafeApp.Utilities.ContainersReq SetContainerPermission(SafeApp.Utilities.AuthReq authReq, string containerType)
+        public static SafeApp.Core.ContainersReq SetContainerPermission(
+            SafeApp.Core.AuthReq authReq,
+            string containerType)
         {
-            var containerRequest = new SafeApp.Utilities.ContainersReq
+            var containerRequest = new SafeApp.Core.ContainersReq
             {
                 App = authReq.App,
-                Containers = new List<SafeApp.Utilities.ContainerPermissions>
+                Containers = new List<SafeApp.Core.ContainerPermissions>
                 {
-                    new SafeApp.Utilities.ContainerPermissions
+                    new SafeApp.Core.ContainerPermissions
                     {
                         ContName = containerType,
-                        Access = new SafeApp.Utilities.PermissionSet
+                        Access = new SafeApp.Core.PermissionSet
                             { Read = true, Insert = true, Delete = true, ManagePermissions = true, Update = true }
                     }
                 }

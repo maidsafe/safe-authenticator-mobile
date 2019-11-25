@@ -9,7 +9,6 @@
     <Import_RootNamespace>SafeAuth.Tests</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)ContainerTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CreateAccountTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LoginTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils.cs" />
