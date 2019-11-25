@@ -141,9 +141,6 @@
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="SafeApp.MockAuthBindings">
-      <HintPath>C:\Users\Ashwin\.nuget\packages\maidsafe.safeapp\0.1.1\build\Xamarin.iOS10\SafeApp.MockAuthBindings.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -169,7 +166,7 @@
       <Version>7.0.1</Version>
     </PackageReference>
     <PackageReference Include="MaidSafe.SafeApp">
-      <Version>0.2.2</Version>
+      <Version>0.3.0-rc1</Version>
     </PackageReference>
     <PackageReference Include="NUnit">
       <Version>3.6.1</Version>
@@ -178,7 +175,7 @@
       <Version>3.6.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.1.0.673156</Version>
+      <Version>4.3.0.991211</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="..\SafeAuth.Tests\SafeAuth.Tests.projitems" Label="Shared" />
