@@ -9,11 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\stylecop.json" Link="stylecop.json" />
-  </ItemGroup>
-  <Import Project="$(MSBuildThisFileDirectory)..\CodeStyles.targets" />
-
-  <ItemGroup>
     <Compile Remove="PlatformSpecific\**" />
     <EmbeddedResource Remove="PlatformSpecific\**" />
     <None Remove="PlatformSpecific\**" />
@@ -121,9 +116,4 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="StyleCop.Analyzers" Version="1.1.118" />
-  </ItemGroup>
-
 </Project>

@@ -180,10 +180,6 @@
   </ItemGroup>
   <Import Project="..\SafeAuth.Tests\SafeAuth.Tests.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <Import Project="$(MSBuildThisFileDirectory)..\..\CodeStyles.targets" />
-  <ItemGroup>
-    <Content Include="..\..\stylecop.json" Link="stylecop.json" />
-  </ItemGroup>
   <Target Name="CheckNativeLibs" BeforeTargets="PrepareForBuild">
     <ItemGroup>
       <NativeSafeAuthLibs Include="Native References\*.a" />

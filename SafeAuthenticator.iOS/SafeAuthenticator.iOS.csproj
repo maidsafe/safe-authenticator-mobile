@@ -253,10 +253,6 @@
       <Version>2.1.36-beta</Version>
     </PackageReference>
   </ItemGroup>
-  <Import Project="$(MSBuildThisFileDirectory)..\CodeStyles.targets" />
-  <ItemGroup>
-    <Content Include="..\stylecop.json" Link="stylecop.json" />
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="CheckNativeLibs" BeforeTargets="PrepareForBuild">
     <ItemGroup>
