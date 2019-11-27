@@ -39,6 +39,22 @@ namespace SafeAuthenticator.ViewModels
         int minPopupHeight = 210;
         int maxPopupHeight = 260;
 
+        private bool _showTestCoinPermissions;
+
+        public bool ShowTestCoinPermissions
+        {
+            get => _showTestCoinPermissions;
+            set => SetProperty(ref _showTestCoinPermissions, value);
+        }
+
+        private string _testCoinPermissions;
+
+        public string TestCoinPermissions
+        {
+            get => _testCoinPermissions;
+            set => SetProperty(ref _testCoinPermissions, value);
+        }
+
         private string _popupState;
 
         public string PopupState
@@ -166,6 +182,20 @@ namespace SafeAuthenticator.ViewModels
             }
 
             Containers = Containers.OrderBy(c => c.ContainerName).ToObservableRangeCollection();
+
+            if (_authReq.AuthReq.AppPermissionGetBalance)
+                TestCoinPermissions += "Check balance ,";
+
+            if (_authReq.AuthReq.AppPermissionTransferCoins)
+                TestCoinPermissions += "Transfer coins";
+
+            if (!string.IsNullOrEmpty(TestCoinPermissions))
+                ShowTestCoinPermissions = true;
+            else
+                return;
+
+            if (TestCoinPermissions.EndsWith(","))
+                TestCoinPermissions = TestCoinPermissions.TrimEnd(',');
         }
 
         private void ProcessContainerRequestData()

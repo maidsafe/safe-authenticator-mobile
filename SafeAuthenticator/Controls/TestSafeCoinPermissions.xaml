@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SafeAuthenticator.Controls.TestSafeCoinPermissions">
+  <ContentView.Content>
+        <StackLayout Padding="5, 0"
+                     Orientation="Horizontal"
+                     Spacing="20"
+                     Margin="0, 5, 0, 0">
+
+            <Image Source="AppContainer"
+                   HeightRequest="25"
+                   WidthRequest="25"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start" />
+
+            <StackLayout VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         Spacing="3">
+
+                <StackLayout VerticalOptions="CenterAndExpand"
+                             Padding="0, 10">
+                    <Label Text="Test Coin Permissions"
+                           TextColor="{StaticResource BlackColor}"
+                           FontSize="{StaticResource MediumSize}" />
+
+                    <Label x:Name="TestCoinsPermissionText"
+                           TextColor="{StaticResource GreySmokeMediumColor}"
+                           FontSize="{StaticResource SmallSize}" />
+                </StackLayout>
+
+                <BoxView BackgroundColor="{StaticResource GreySmokeLightColor}"
+                         VerticalOptions="End"
+                         HorizontalOptions="FillAndExpand"
+                         HeightRequest="0.5" />
+            </StackLayout>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

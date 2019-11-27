@@ -11,35 +11,44 @@
                  CloseWhenBackgroundIsClicked="False">
 
     <pages:PopupPage.Animation>
-        <animations:ScaleAnimation
-            PositionIn="Center"
-            PositionOut="Center"
-            ScaleIn="1.2"
-            ScaleOut="0.8"
-            DurationIn="400"
-            DurationOut="300"
-            EasingIn="SinOut"
-            EasingOut="SinIn"
-            HasBackgroundAnimation="True" />
+        <animations:ScaleAnimation PositionIn="Center"
+                                   PositionOut="Center"
+                                   ScaleIn="1.2"
+                                   ScaleOut="0.8"
+                                   DurationIn="400"
+                                   DurationOut="300"
+                                   EasingIn="SinOut"
+                                   EasingOut="SinIn"
+                                   HasBackgroundAnimation="True" />
     </pages:PopupPage.Animation>
 
     <pages:PopupPage.Resources>
         <ResourceDictionary>
             <converters:InverseBooleanConverter x:Key="InverseBoolean" />
             <Color x:Key="RedLightColor">#ffebeb</Color>
-            <Style x:Key="H1Style" TargetType="Label">
-                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
-                <Setter Property="FontAttributes" Value="Bold" />
+            <Style x:Key="H1Style"
+                   TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="{StaticResource LargeSize}" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
             </Style>
-            <Style x:Key="H2Style" TargetType="Label">
-                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+            <Style x:Key="H2Style"
+                   TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="{StaticResource MediumSize}" />
             </Style>
-            <Style x:Key="H3Style" TargetType="Label">
-                <Setter Property="FontSize" Value="{StaticResource SmallSize}" />
+            <Style x:Key="H3Style"
+                   TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="{StaticResource SmallSize}" />
             </Style>
-            <Style x:Key="ButtonStyle" TargetType="Button">
-                <Setter Property="HeightRequest" Value="40" />
-                <Setter Property="WidthRequest" Value="85" />
+            <Style x:Key="ButtonStyle"
+                   TargetType="Button">
+                <Setter Property="HeightRequest"
+                        Value="40" />
+                <Setter Property="WidthRequest"
+                        Value="85" />
             </Style>
         </ResourceDictionary>
     </pages:PopupPage.Resources>
@@ -58,12 +67,12 @@
                 <Grid HorizontalOptions="FillAndExpand"
                       Padding="16,0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="35"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="35" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="35" />
                     </Grid.ColumnDefinitions>
 
                     <Label HorizontalOptions="CenterAndExpand"
@@ -81,20 +90,21 @@
                             <DataTrigger TargetType="Label"
                                          Binding="{Binding IsUnregisteredRequest}"
                                          Value="true">
-                                <Setter Property="IsVisible" Value="False" />
+                                <Setter Property="IsVisible"
+                                        Value="False" />
                             </DataTrigger>
                         </Label.Triggers>
                     </Label>
 
                     <Image Grid.Column="2"
-                                 Style="{StaticResource InfoButton}"
-                                 x:Name="InfoIcon"
-                                 HorizontalOptions="EndAndExpand"
-                                 VerticalOptions="Start"
-                                 IsVisible="{Binding IsUnregisteredRequest, Converter={StaticResource InverseBoolean}}" >
+                           Style="{StaticResource InfoButton}"
+                           x:Name="InfoIcon"
+                           HorizontalOptions="EndAndExpand"
+                           VerticalOptions="Start"
+                           IsVisible="{Binding IsUnregisteredRequest, Converter={StaticResource InverseBoolean}}">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1"
-                                              Command="{Binding InfoButtonCommand}" />
+                                                  Command="{Binding InfoButtonCommand}" />
                         </Image.GestureRecognizers>
                     </Image>
 
@@ -131,69 +141,74 @@
                              Padding="16,0">
                     <StackLayout.Triggers>
                         <DataTrigger TargetType="StackLayout"
-                                         Binding="{Binding PopupState}"
-                                         Value="None">
-                            <Setter Property="IsVisible" Value="True" />
+                                     Binding="{Binding PopupState}"
+                                     Value="None">
+                            <Setter Property="IsVisible"
+                                    Value="True" />
                         </DataTrigger>
                     </StackLayout.Triggers>
 
+                    <controls:TestSafeCoinPermissions IsVisible="{Binding ShowTestCoinPermissions}"
+                                                      PermissionsText="{Binding TestCoinPermissions}" />
+
                     <Label HorizontalTextAlignment="Center"
-                               IsVisible="{Binding IsUnregisteredRequest}"
-                               FontSize="{StaticResource LargeSize}"
-                               Text="An application is requesting access to read public content on the network" />
+                           IsVisible="{Binding IsUnregisteredRequest}"
+                           FontSize="{StaticResource LargeSize}"
+                           Text="An application is requesting access to read public content on the network" />
 
                     <StackLayout x:Name="NoContainerTextLabel"
-                             IsVisible="False">
-                        <Label
-                            HorizontalTextAlignment="Center"
-                            Style="{StaticResource H2Style}"
-                            Text="No permissions requested"
-                            TextColor="{StaticResource GreySmokeMediumColor}"
-                            FontAttributes="Bold">
+                                 IsVisible="False">
+                        <Label HorizontalTextAlignment="Center"
+                               Style="{StaticResource H2Style}"
+                               Text="No permissions requested"
+                               TextColor="{StaticResource GreySmokeMediumColor}"
+                               FontAttributes="Bold">
                             <Label.Triggers>
                                 <DataTrigger TargetType="Label"
-                                         Binding="{Binding IsContainerRequest}"
-                                         Value="true">
-                                    <Setter Property="Text" Value="No container permissions requested" />
+                                             Binding="{Binding IsContainerRequest}"
+                                             Value="true">
+                                    <Setter Property="Text"
+                                            Value="No container permissions requested" />
                                 </DataTrigger>
                             </Label.Triggers>
                         </Label>
 
                         <Frame HasShadow="False"
-                       CornerRadius="4"
-                       Padding="10"
-                       BackgroundColor="{StaticResource GreySnowMediumColor}">
+                               CornerRadius="4"
+                               Padding="10"
+                               BackgroundColor="{StaticResource GreySnowMediumColor}">
 
                             <Label HorizontalTextAlignment="Center"
-                               Style="{StaticResource H3Style}"
-                               Text="The application will be able to to read data on the network"/>
+                                   Style="{StaticResource H3Style}"
+                                   Text="The application will be able to to read data on the network" />
                         </Frame>
                         <StackLayout.Triggers>
                             <MultiTrigger TargetType="StackLayout">
                                 <MultiTrigger.Conditions>
                                     <BindingCondition
-                                    Binding="{Binding Containers.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
-                                    Value="true" />
+                                            Binding="{Binding Containers.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
+                                                      Value="true" />
                                     <BindingCondition
-                                    Binding="{Binding MData.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
-                                    Value="true" />
-                                    <BindingCondition
-                                    Binding="{Binding IsUnregisteredRequest}"
-                                    Value="false" />
-                                    <BindingCondition
-                                    Binding="{Binding IsMDataRequest}"
-                                    Value="false" />
+                                            Binding="{Binding MData.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
+                                                      Value="true" />
+                                    <BindingCondition Binding="{Binding IsUnregisteredRequest}"
+                                                      Value="false" />
+                                    <BindingCondition Binding="{Binding IsMDataRequest}"
+                                                      Value="false" />
+                                    <BindingCondition Binding="{Binding ShowTestCoinPermissions}"
+                                                      Value="false" />
                                 </MultiTrigger.Conditions>
-                                <Setter Property="IsVisible" Value="True"/>
+                                <Setter Property="IsVisible"
+                                        Value="True" />
                             </MultiTrigger>
                         </StackLayout.Triggers>
                     </StackLayout>
 
                     <ListView x:Name="ContainerPermissionListView"
-                          HasUnevenRows="True"
-                          SeparatorVisibility="None"
-                          ItemsSource="{Binding Containers}"
-                          IsVisible="False">
+                              HasUnevenRows="True"
+                              SeparatorVisibility="None"
+                              ItemsSource="{Binding Containers}"
+                              IsVisible="False">
 
                         <ListView.Behaviors>
                             <behaviour:ListViewNoSelectionBehavior />
@@ -209,19 +224,20 @@
                             <MultiTrigger TargetType="ListView">
                                 <MultiTrigger.Conditions>
                                     <BindingCondition
-                                Binding="{Binding Containers.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
-                                Value="false" />
+                                            Binding="{Binding Containers.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
+                                                      Value="false" />
                                 </MultiTrigger.Conditions>
-                                <Setter Property="IsVisible" Value="True" />
+                                <Setter Property="IsVisible"
+                                        Value="True" />
                             </MultiTrigger>
                         </ListView.Triggers>
                     </ListView>
 
                     <ListView x:Name="MDataPermissionListView"
-                          HasUnevenRows="True"
-                          SeparatorVisibility="None"
-                          ItemsSource="{Binding MData}"
-                          IsVisible="False">
+                              HasUnevenRows="True"
+                              SeparatorVisibility="None"
+                              ItemsSource="{Binding MData}"
+                              IsVisible="False">
 
                         <ListView.Behaviors>
                             <behaviour:ListViewNoSelectionBehavior />
@@ -237,10 +253,11 @@
                             <MultiTrigger TargetType="ListView">
                                 <MultiTrigger.Conditions>
                                     <BindingCondition
-                                Binding="{Binding MData.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
-                                Value="false" />
+                                            Binding="{Binding MData.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
+                                                      Value="false" />
                                 </MultiTrigger.Conditions>
-                                <Setter Property="IsVisible" Value="True" />
+                                <Setter Property="IsVisible"
+                                        Value="True" />
                             </MultiTrigger>
                         </ListView.Triggers>
                     </ListView>
@@ -253,17 +270,18 @@
                              Padding="16,0">
                     <StackLayout.Triggers>
                         <DataTrigger TargetType="StackLayout"
-                                         Binding="{Binding PopupState}"
-                                         Value="Loading">
-                            <Setter Property="IsVisible" Value="True" />
+                                     Binding="{Binding PopupState}"
+                                     Value="Loading">
+                            <Setter Property="IsVisible"
+                                    Value="True" />
                         </DataTrigger>
                     </StackLayout.Triggers>
 
-                    <ActivityIndicator IsRunning="True"/>
+                    <ActivityIndicator IsRunning="True" />
 
                     <Label Text="Please wait..."
                            FontSize="{StaticResource LargeSize}"
-                           VerticalTextAlignment="Center"/>
+                           VerticalTextAlignment="Center" />
                 </StackLayout>
 
                 <Frame HasShadow="False"
@@ -294,9 +312,10 @@
                              Padding="16,0">
                     <StackLayout.Triggers>
                         <DataTrigger TargetType="StackLayout"
-                                         Binding="{Binding PopupState}"
-                                         Value="None">
-                            <Setter Property="IsVisible" Value="True" />
+                                     Binding="{Binding PopupState}"
+                                     Value="None">
+                            <Setter Property="IsVisible"
+                                    Value="True" />
                         </DataTrigger>
                     </StackLayout.Triggers>
 
@@ -332,9 +351,10 @@
                         Margin="0,0,16,0">
                     <Button.Triggers>
                         <DataTrigger TargetType="Button"
-                                         Binding="{Binding PopupState}"
-                                         Value="Error">
-                            <Setter Property="IsVisible" Value="True" />
+                                     Binding="{Binding PopupState}"
+                                     Value="Error">
+                            <Setter Property="IsVisible"
+                                    Value="True" />
                         </DataTrigger>
                     </Button.Triggers>
                 </Button>
