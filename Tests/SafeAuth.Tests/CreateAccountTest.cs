@@ -35,16 +35,6 @@ namespace SafeAuth.Tests
         }
 
         [Test]
-        public void InvalidInvitation()
-        {
-            string secret = Utils.GetRandomString(10);
-            string password = Utils.GetRandomString(10);
-            Assert.That(
-                async () => await Utils.CreateTestApp(secret, password),
-                Throws.TypeOf<FfiException>());
-        }
-
-        [Test]
         public async Task SecretExists()
         {
             string secret = Utils.GetRandomString(10);
