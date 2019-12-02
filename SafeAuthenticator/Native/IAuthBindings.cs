@@ -10,11 +10,7 @@ namespace SafeAuthenticator.Native
 
         Task AuthReconnectAsync(IntPtr auth);
 
-        Task<string> AuthExeFileStemAsync();
-
         Task AuthSetConfigDirPathAsync(string newPath);
-
-        Task AuthSetAdditionalSearchPathAsync(string newPath);
 
         void AuthFree(IntPtr auth);
 
@@ -39,7 +35,5 @@ namespace SafeAuthenticator.Native
         Task<string> EncodeContainersRespAsync(IntPtr auth, ref ContainersReq req, uint reqId, bool isGranted);
 
         Task AuthInitLoggingAsync(string outputFileNameOverride);
-
-        Task<string> AuthOutputLogPathAsync(string outputFileName);
     }
 }
