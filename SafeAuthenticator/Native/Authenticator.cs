@@ -24,12 +24,6 @@ namespace SafeAuthenticator.Native
         public bool IsDisconnected { get; set; }
 
         [PublicAPI]
-        public static Task<string> AuthExeFileStemAsync()
-        {
-            return AuthBindings.AuthExeFileStemAsync();
-        }
-
-        [PublicAPI]
         public static async Task AuthInitLoggingAsync(string outputFileName)
         {
             var fileList = new List<(string, string)>
@@ -39,26 +33,14 @@ namespace SafeAuthenticator.Native
             await fileOps.TransferAssetsAsync(fileList);
 
             Debug.WriteLine($"Assets Transferred");
-            await AuthBindings.AuthSetAdditionalSearchPathAsync(fileOps.ConfigFilesPath);
+            await AuthBindings.AuthSetConfigDirPathAsync(fileOps.ConfigFilesPath);
             await AuthBindings.AuthInitLoggingAsync(outputFileName);
-        }
-
-        [PublicAPI]
-        public static Task AuthSetAdditionalSearchPathAsync(string newPath)
-        {
-            return AuthBindings.AuthSetAdditionalSearchPathAsync(newPath);
         }
 
         [PublicAPI]
         public static Task AuthSetConfigurationFilePathAsync(string configDirPath)
         {
             return AuthBindings.AuthSetConfigDirPathAsync(configDirPath);
-        }
-
-        [PublicAPI]
-        public static Task AuthOutputLogPathAsync(string outputFileName)
-        {
-            return AuthBindings.AuthOutputLogPathAsync(outputFileName);
         }
 
         [PublicAPI]

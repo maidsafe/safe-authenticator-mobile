@@ -58,16 +58,6 @@ namespace SafeAuthenticator.Native
         [DllImport(DllName, EntryPoint = "auth_reconnect")]
         private static extern void AuthReconnectNative(IntPtr auth, IntPtr userData, FfiResultCb oCb);
 
-        public Task<string> AuthExeFileStemAsync()
-        {
-            var (ret, userData) = BindingUtils.PrepareTask<string>();
-            AuthExeFileStemNative(userData, DelegateOnFfiResultStringCb);
-            return ret;
-        }
-
-        [DllImport(DllName, EntryPoint = "auth_exe_file_stem")]
-        private static extern void AuthExeFileStemNative(IntPtr userData, FfiResultStringCb oCb);
-
         public Task AuthSetConfigDirPathAsync(string newPath)
         {
             var (ret, userData) = BindingUtils.PrepareTask();
@@ -77,19 +67,6 @@ namespace SafeAuthenticator.Native
 
         [DllImport(DllName, EntryPoint = "auth_set_config_dir_path")]
         private static extern void AuthSetConfigDirPathNative(
-            [MarshalAs(UnmanagedType.LPStr)] string newPath,
-            IntPtr userData,
-            FfiResultCb oCb);
-
-        public Task AuthSetAdditionalSearchPathAsync(string newPath)
-        {
-            var (ret, userData) = BindingUtils.PrepareTask();
-            AuthSetAdditionalSearchPathNative(newPath, userData, DelegateOnFfiResultCb);
-            return ret;
-        }
-
-        [DllImport(DllName, EntryPoint = "auth_set_additional_search_path")]
-        private static extern void AuthSetAdditionalSearchPathNative(
             [MarshalAs(UnmanagedType.LPStr)] string newPath,
             IntPtr userData,
             FfiResultCb oCb);
@@ -274,19 +251,6 @@ namespace SafeAuthenticator.Native
             [MarshalAs(UnmanagedType.LPStr)] string outputFileNameOverride,
             IntPtr userData,
             FfiResultCb oCb);
-
-        public Task<string> AuthOutputLogPathAsync(string outputFileName)
-        {
-            var (ret, userData) = BindingUtils.PrepareTask<string>();
-            AuthOutputLogPathNative(outputFileName, userData, DelegateOnFfiResultStringCb);
-            return ret;
-        }
-
-        [DllImport(DllName, EntryPoint = "auth_output_log_path")]
-        private static extern void AuthOutputLogPathNative(
-            [MarshalAs(UnmanagedType.LPStr)] string outputFileName,
-            IntPtr userData,
-            FfiResultStringCb oCb);
 
         private delegate void FfiResultAppAccessListCb(IntPtr userData, IntPtr result, IntPtr appAccessPtr, UIntPtr appAccessLen);
 
