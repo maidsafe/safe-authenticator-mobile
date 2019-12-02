@@ -3,7 +3,7 @@ using System.Linq;
 var ANDROID_X86_64 = "x86_64-linux-android";
 var ANDROID_ARMEABI_V7A = "armv7-linux-androideabi";
 var LibTypes = new string[] {
-    "-mock",
+    "-dev",
     ""
 };
 
@@ -30,7 +30,7 @@ enum Environment
 // --------------------------------------------------------------------------------
 // Native lib directory
 // --------------------------------------------------------------------------------
-var TAG = "9d4ea0b";
+var TAG = "560f8b8";
 var nativeLibDirectory = Directory(string.Concat(System.IO.Path.GetTempPath(), "NativeAuthLibs"));
 var androidLibDirectory = Directory("../SafeAuthenticator.Android/lib/");
 var iosLibDirectory = Directory("../SafeAuthenticator.iOS/Native References/");
@@ -77,9 +77,9 @@ Task("Download-Libs")
             {
                 var targetDirectory = $"{nativeLibDirectory.Path}/{item}/{target}";
                 var zipFilename = $"safe_authenticator{type}-{TAG}-{target}.zip";
-                var zipDownloadUrl = $"https://s3.eu-west-2.amazonaws.com/safe-client-libs/{zipFilename}";
+                var zipDownloadUrl = $"https://safe-client-libs.s3.eu-west-2.amazonaws.com/{zipFilename}";
                 var zipSavePath = $"{nativeLibDirectory.Path}/{item}/{target}/{zipFilename}";
-
+                Information($"Download Url : {zipDownloadUrl}");
                 Information($"Downloading : {zipFilename}");
                 if (!DirectoryExists(targetDirectory))
                     CreateDirectory(targetDirectory);
