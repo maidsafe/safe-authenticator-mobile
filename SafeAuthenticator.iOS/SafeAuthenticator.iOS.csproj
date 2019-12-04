@@ -246,6 +246,9 @@
     <PackageReference Include="Xamarin.Forms">
       <Version>4.3.0.991211</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Forms.InputKit">
+      <Version>3.0.15</Version>
+    </PackageReference>
     <PackageReference Include="XamEffects">
       <Version>1.6.3</Version>
     </PackageReference>

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SafeAuthenticator.Views.VaultConnectionFilePage"
              xmlns:vm="clr-namespace:SafeAuthenticator.ViewModels"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              Title="Manage Vault Connection Files">
 
     <ContentPage.Resources>
@@ -53,11 +54,11 @@
                                     Text="{Binding FiendlyFileName}"
                                     HorizontalOptions="FillAndExpand"
                                     VerticalOptions="Center" />
-                            <Image Source="select"
-                                   IsVisible="{Binding IsActive}"
-                                   HorizontalOptions="End"
-                                   HeightRequest="25"
-                                   WidthRequest="25" />
+                            <input:CheckBox IsChecked="{Binding IsActive}"
+                                            Type="Material"
+                                            HeightRequest="25"
+                                            WidthRequest="25"
+                                            HorizontalOptions="End" />
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
