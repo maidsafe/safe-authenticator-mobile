@@ -70,7 +70,7 @@ namespace SafeAuthenticator.Views
             ConnectionSettingsMenuIcon.GestureRecognizers.Add(connectionMenuTapGestureRecogniser);
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
@@ -82,14 +82,20 @@ namespace SafeAuthenticator.Views
                 {
                     if (loginPageViewModel.VaultConnectionFileExists())
                     {
-                        Task.Run(async () => await loginPageViewModel.SetVaultConnectionConfigFileDirAsync());
+                        await loginPageViewModel.SetVaultConnectionConfigFileDirAsync();
                     }
                     else
                     {
-                        DisplayAlert(
-                            "Vault Connection File",
-                            "Please upload/set a default vault connection file from the settings menu.",
-                            "ok");
+                        var result = await DisplayAlert(
+                            "No Vault Connection File Found",
+                            "Please upload a vault connection file from the settings menu.",
+                            "Settings",
+                            "Cancel");
+
+                        if (result)
+                        {
+                            await Navigation.PushAsync(new VaultConnectionFilePage());
+                        }
                     }
                 }
             }
