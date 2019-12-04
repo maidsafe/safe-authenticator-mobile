@@ -77,8 +77,17 @@ namespace SafeAuthenticator.ViewModels
 
         private void RefreshVaultConnectionFilesList()
         {
-            VaultConnectionFiles = new ObservableCollection<VaultConnectionFile>(
+            if (Device.RuntimePlatform == Device.iOS && VaultConnectionFiles != null)
+            {
+                VaultConnectionFiles.Clear();
+                VaultConnectionFiles = new ObservableCollection<VaultConnectionFile>(
                 VaultConnectionFileManager.GetAllFileEntries());
+            }
+            else
+            {
+                VaultConnectionFiles = new ObservableCollection<VaultConnectionFile>(
+                VaultConnectionFileManager.GetAllFileEntries());
+            }
         }
 
         private async Task ShowFileSelectionOptionsAsync()
