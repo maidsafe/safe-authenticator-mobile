@@ -21,6 +21,7 @@ namespace SafeAuthenticator.iOS
 
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
+            Plugin.InputKit.Platforms.iOS.Config.Init();
             Rg.Plugins.Popup.Popup.Init();
             Forms.Init();
             XamEffects.iOS.Effects.Init();
