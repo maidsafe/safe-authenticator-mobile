@@ -27,14 +27,14 @@ namespace SafeAuthenticator.Services
             _ = GetAllFileEntries();
         }
 
-        internal VaultConnectionFile AddNewVaultConnectionConfigFile(string friendlyFileName, byte[] fileData)
+        internal VaultConnectionFile AddNewVaultConnectionConfigFile(string fileName, byte[] fileData)
         {
             var fileId = Convert.ToInt32(DateTime.Now.ToString("MMddmmssff"));
             File.WriteAllBytes(Path.Combine(ConfigFilePath, $"{fileId}.config"), fileData);
 
             var connecitonFile = new VaultConnectionFile
             {
-                FiendlyFileName = friendlyFileName,
+                FileName = fileName,
                 FileId = fileId,
                 AddedOn = DateTime.Now.ToUniversalTime()
             };

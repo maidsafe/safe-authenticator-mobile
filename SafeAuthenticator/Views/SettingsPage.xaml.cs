@@ -12,11 +12,6 @@ namespace SafeAuthenticator.Views
     {
         private readonly SettingsViewModel _settingsViewModel;
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-        }
-
         public SettingsPage()
         {
             InitializeComponent();

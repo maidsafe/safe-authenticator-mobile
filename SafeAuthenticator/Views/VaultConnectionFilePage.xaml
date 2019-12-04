@@ -51,14 +51,15 @@
                     <DataTemplate>
                         <StackLayout Padding="20, 10" HeightRequest="30" Orientation="Horizontal">
                             <Label FontSize="Medium"
-                                    Text="{Binding FiendlyFileName}"
+                                    Text="{Binding FileName}"
                                     HorizontalOptions="FillAndExpand"
                                     VerticalOptions="Center" />
-                            <input:CheckBox IsChecked="{Binding IsActive}"
-                                            Type="Material"
-                                            HeightRequest="25"
-                                            WidthRequest="25"
-                                            HorizontalOptions="End" />
+
+                            <input:RadioButton IsChecked="{Binding IsActive}"
+                                               BackgroundColor="Transparent"
+                                               CircleColor="#0074e4"
+                                               CommandParameter="{Binding FileId}"
+                                               ClickCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=SetActiveFileCommand}" />
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
