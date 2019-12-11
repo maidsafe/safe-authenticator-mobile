@@ -56,7 +56,7 @@
                                  XamEffects:Commands.Tap="{Binding VauleCommandManagerCommand}"
                                  Style="{StaticResource ExternalLinkStyle}">
 
-                        <Label Text="Vault connection file manager"
+                        <Label Text="Choose a vault"
                                Style="{StaticResource ItemStyle}"
                                VerticalOptions="CenterAndExpand" />
                     </StackLayout>
