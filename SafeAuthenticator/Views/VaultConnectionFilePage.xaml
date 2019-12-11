@@ -4,7 +4,7 @@
              x:Class="SafeAuthenticator.Views.VaultConnectionFilePage"
              xmlns:vm="clr-namespace:SafeAuthenticator.ViewModels"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
-             Title="Manage Vault Connection Files">
+             Title="Choose a Vault">
 
     <ContentPage.Resources>
         <Style TargetType="StackLayout">
@@ -43,7 +43,7 @@
                             SelectedItem="{Binding SelectedFile}"
                             SelectionChangedCommand="{Binding VaultConnectionFileSelectionCommand}">
                 <CollectionView.EmptyView>
-                    <Label Text="No vault connection info file exists."
+                    <Label Text="No vault connection file exists."
                            HorizontalTextAlignment="Center"
                            Padding="20" />
                 </CollectionView.EmptyView>

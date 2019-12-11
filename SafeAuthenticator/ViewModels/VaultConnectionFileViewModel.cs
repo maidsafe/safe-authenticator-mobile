@@ -92,7 +92,7 @@ namespace SafeAuthenticator.ViewModels
 
         private async Task ShowFileSelectionOptionsAsync()
         {
-            string action = await Application.Current.MainPage.DisplayActionSheet("Vault Connection File Options", "Cancel", "Delete");
+            string action = await Application.Current.MainPage.DisplayActionSheet("Vault Connection File", "Cancel", "Delete");
 
             switch (action)
             {
@@ -124,7 +124,7 @@ namespace SafeAuthenticator.ViewModels
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Delete Vault Connection Files",
+                    "Delete vault connection files",
                     "Failed to delete the valid files",
                     "ok");
                 Debug.WriteLine(ex.Message);
@@ -160,8 +160,8 @@ namespace SafeAuthenticator.ViewModels
             catch (Exception ex)
             {
                 Application.Current.MainPage.DisplayAlert(
-                    "Set new vault connection file",
-                    "Failed to set new vault connection file.",
+                    "Choose a vault",
+                    "Failed to choose a vault to connect.",
                     "Ok");
                 Debug.WriteLine(ex.Message);
             }

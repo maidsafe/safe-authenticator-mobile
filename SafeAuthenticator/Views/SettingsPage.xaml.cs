@@ -48,14 +48,18 @@ namespace SafeAuthenticator.Views
             MessagingCenter.Subscribe<SettingsViewModel>(
                 this,
                 MessengerConstants.NavVaultConnectionManagerPage,
-                async _ =>
+                _ =>
                 {
                     MessageCenterUnsubscribe();
                     if (!App.IsPageValid(this))
                     {
                         return;
                     }
-                    await Navigation.PushAsync(new VaultConnectionFilePage());
+
+                    DisplayAlert(
+                        "Choose a vault",
+                        "Please logout and choose a different vault to connect from the settings on the login page.",
+                        "ok");
                 });
         }
 
