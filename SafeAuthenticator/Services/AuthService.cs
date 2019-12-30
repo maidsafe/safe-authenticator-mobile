@@ -280,7 +280,7 @@ namespace SafeAuthenticator.Services
 
         private async Task InitLoggingAsync()
         {
-            await Authenticator.AuthInitLoggingAsync(null);
+            await Authenticator.AuthInitLoggingAsync($"{DateTime.Now.ToShortTimeString()}.log");
 
             Debug.WriteLine("Rust Logging Initialised.");
             IsLogInitialised = true;

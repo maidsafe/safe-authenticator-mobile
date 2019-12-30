@@ -252,6 +252,16 @@ namespace SafeAuthenticator.Native
             IntPtr userData,
             FfiResultCb oCb);
 
+        public Task<string> AuthConfigDirPathAsync()
+        {
+            var (ret, userData) = BindingUtils.PrepareTask<string>();
+            AuthConfigDirPathNative(userData, DelegateOnFfiResultStringCb);
+            return ret;
+        }
+
+        [DllImport(DllName, EntryPoint = "auth_config_dir_path")]
+        private static extern void AuthConfigDirPathNative(IntPtr userData, FfiResultStringCb oCb);
+
         private delegate void FfiResultAppAccessListCb(IntPtr userData, IntPtr result, IntPtr appAccessPtr, UIntPtr appAccessLen);
 
 #if __IOS__

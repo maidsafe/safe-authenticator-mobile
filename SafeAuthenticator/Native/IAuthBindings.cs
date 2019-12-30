@@ -35,5 +35,7 @@ namespace SafeAuthenticator.Native
         Task<string> EncodeContainersRespAsync(IntPtr auth, ref ContainersReq req, uint reqId, bool isGranted);
 
         Task AuthInitLoggingAsync(string outputFileNameOverride);
+
+        Task<string> AuthConfigDirPathAsync();
     }
 }

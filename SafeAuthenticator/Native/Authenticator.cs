@@ -30,9 +30,12 @@ namespace SafeAuthenticator.Native
                 { ("log.toml", "log.toml") };
 
             var fileOps = DependencyService.Get<IFileOps>();
+            var configDirPath = await AuthBindings.AuthConfigDirPathAsync();
+            Debug.WriteLine($"Assets Should be available at: {configDirPath}");
+
             await fileOps.TransferAssetsAsync(fileList);
 
-            Debug.WriteLine($"Assets Transferred");
+            Debug.WriteLine($"Assets Transferred: {fileOps.ConfigFilesPath}");
             await AuthBindings.AuthSetConfigDirPathAsync(fileOps.ConfigFilesPath);
             await AuthBindings.AuthInitLoggingAsync(outputFileName);
         }
@@ -41,6 +44,12 @@ namespace SafeAuthenticator.Native
         public static Task AuthSetConfigurationFilePathAsync(string configDirPath)
         {
             return AuthBindings.AuthSetConfigDirPathAsync(configDirPath);
+        }
+
+        [PublicAPI]
+        public static Task<string> AuthGetConfigFilePathAsync()
+        {
+            return AuthBindings.AuthConfigDirPathAsync();
         }
 
         [PublicAPI]
