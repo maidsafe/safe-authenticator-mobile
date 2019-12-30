@@ -7,6 +7,8 @@ namespace SafeAuthenticator.Helpers
     {
         public const ulong AsymNonceLen = 24;
         public const ulong AsymPublicKeyLen = 32;
+        public const ulong SymEncKeyLen = 32;
+        public const ulong BlsPublicKeyLen = 48;
         public const ulong AsymSecretKeyLen = 32;
         public const ulong DirTag = 15000;
         public const ulong MaidsafeTag = 5483000;

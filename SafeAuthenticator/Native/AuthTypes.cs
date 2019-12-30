@@ -82,8 +82,7 @@ namespace SafeAuthenticator.Native
                 AppPermissionPerformMutations = AppPermissionPerformMutations,
                 AppPermissionGetBalance = AppPermissionGetBalance,
                 ContainersPtr = BindingUtils.CopyFromObjectList(Containers),
-                ContainersLen = (UIntPtr)(Containers?.Count ?? 0),
-                ContainersCap = UIntPtr.Zero
+                ContainersLen = (UIntPtr)(Containers?.Count ?? 0)
             };
         }
     }
@@ -101,9 +100,6 @@ namespace SafeAuthenticator.Native
         public bool AppPermissionGetBalance;
         internal IntPtr ContainersPtr;
         internal UIntPtr ContainersLen;
-
-        // ReSharper disable once NotAccessedField.Compiler
-        internal UIntPtr ContainersCap;
 
         public void Free()
         {
@@ -130,8 +126,7 @@ namespace SafeAuthenticator.Native
             {
                 App = App,
                 ContainersPtr = BindingUtils.CopyFromObjectList(Containers),
-                ContainersLen = (UIntPtr)(Containers?.Count ?? 0),
-                ContainersCap = UIntPtr.Zero
+                ContainersLen = (UIntPtr)(Containers?.Count ?? 0)
             };
         }
     }
@@ -141,9 +136,6 @@ namespace SafeAuthenticator.Native
         internal AppExchangeInfo App;
         internal IntPtr ContainersPtr;
         internal UIntPtr ContainersLen;
-
-        // ReSharper disable once NotAccessedField.Compiler
-        internal UIntPtr ContainersCap;
 
         public void Free()
         {
@@ -190,8 +182,7 @@ namespace SafeAuthenticator.Native
             {
                 App = App,
                 MDataPtr = BindingUtils.CopyFromObjectList(MData),
-                MDataLen = (UIntPtr)(MData?.Count ?? 0),
-                MDataCap = UIntPtr.Zero
+                MDataLen = (UIntPtr)(MData?.Count ?? 0)
             };
         }
     }
@@ -201,9 +192,6 @@ namespace SafeAuthenticator.Native
         internal AppExchangeInfo App;
         internal IntPtr MDataPtr;
         internal UIntPtr MDataLen;
-
-        // ReSharper disable once NotAccessedField.Compiler
-        internal UIntPtr MDataCap;
 
         public void Free()
         {
@@ -230,42 +218,39 @@ namespace SafeAuthenticator.Native
         public AccessContainerEntry AccessContainerEntry;
         public List<byte> BootstrapConfig;
 
-        public AuthGranted(AuthGrantedNative native)
+        internal AuthGranted(AuthGrantedNative native)
         {
-            AppKeys = native.AppKeys;
+            AppKeys = new AppKeys(native.AppKeys);
             AccessContainerInfo = native.AccessContainerInfo;
             AccessContainerEntry = new AccessContainerEntry(native.AccessContainerEntry);
             BootstrapConfig = BindingUtils.CopyToByteList(native.BootstrapConfigPtr, (int)native.BootstrapConfigLen);
         }
 
-        public AuthGrantedNative ToNative()
+        internal AuthGrantedNative ToNative()
         {
             return new AuthGrantedNative()
             {
-                AppKeys = AppKeys,
+                AppKeys = AppKeys.ToNative(),
                 AccessContainerInfo = AccessContainerInfo,
                 AccessContainerEntry = AccessContainerEntry.ToNative(),
                 BootstrapConfigPtr = BindingUtils.CopyFromByteList(BootstrapConfig),
-                BootstrapConfigLen = (UIntPtr)(BootstrapConfig?.Count ?? 0),
-                BootstrapConfigCap = UIntPtr.Zero
+                BootstrapConfigLen = (UIntPtr)(BootstrapConfig?.Count ?? 0)
             };
         }
     }
 
-    public struct AuthGrantedNative
+    internal struct AuthGrantedNative
     {
-        internal AppKeys AppKeys;
-        internal AccessContInfo AccessContainerInfo;
-        internal AccessContainerEntryNative AccessContainerEntry;
-        internal IntPtr BootstrapConfigPtr;
-        internal UIntPtr BootstrapConfigLen;
-
-        // ReSharper disable once NotAccessedField.Compiler
-        internal UIntPtr BootstrapConfigCap;
+        public AppKeysNative AppKeys;
+        public AccessContInfo AccessContainerInfo;
+        public AccessContainerEntryNative AccessContainerEntry;
+        public IntPtr BootstrapConfigPtr;
+        public UIntPtr BootstrapConfigLen;
 
         // ReSharper disable once UnusedMember.Global
         public void Free()
         {
+            AppKeys.Free();
             AccessContainerEntry.Free();
             BindingUtils.FreeList(ref BootstrapConfigPtr, ref BootstrapConfigLen);
         }
@@ -274,23 +259,49 @@ namespace SafeAuthenticator.Native
     [PublicAPI]
     public struct AppKeys
     {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SignPublicKeyLen)]
-        public byte[] OwnerKey;
-
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SymKeyLen)]
+        public List<byte> FullId;
         public byte[] EncKey;
+        public byte[] EncPublicKey;
+        public List<byte> EncSecretKey;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SignPublicKeyLen)]
-        public byte[] SignPk;
+        internal AppKeys(AppKeysNative native)
+        {
+            FullId = BindingUtils.CopyToByteList(native.FullIdPtr, (int)native.FullIdLen);
+            EncKey = native.EncKey;
+            EncPublicKey = native.EncPublicKey;
+            EncSecretKey = BindingUtils.CopyToByteList(native.EncSecretKeyPtr, (int)native.EncSecretKeyLen);
+        }
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SignSecretKeyLen)]
-        public byte[] SignSk;
+        internal AppKeysNative ToNative()
+        {
+            return new AppKeysNative
+            {
+                FullIdPtr = BindingUtils.CopyFromByteList(FullId),
+                FullIdLen = (UIntPtr)(FullId?.Count ?? 0),
+                EncKey = EncKey,
+                EncPublicKey = EncPublicKey,
+                EncSecretKeyPtr = BindingUtils.CopyFromByteList(EncSecretKey),
+                EncSecretKeyLen = (UIntPtr)(EncSecretKey?.Count ?? 0)
+            };
+        }
+    }
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.AsymPublicKeyLen)]
-        public byte[] EncPk;
+    internal struct AppKeysNative
+    {
+        public IntPtr FullIdPtr;
+        public UIntPtr FullIdLen;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.SymEncKeyLen)]
+        public byte[] EncKey;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.BlsPublicKeyLen)]
+        public byte[] EncPublicKey;
+        public IntPtr EncSecretKeyPtr;
+        public UIntPtr EncSecretKeyLen;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)AppConstants.AsymSecretKeyLen)]
-        public byte[] EncSk;
+        internal void Free()
+        {
+            BindingUtils.FreeList(ref FullIdPtr, ref FullIdLen);
+            BindingUtils.FreeList(ref EncSecretKeyPtr, ref EncSecretKeyLen);
+        }
     }
 
     [PublicAPI]
@@ -320,8 +331,7 @@ namespace SafeAuthenticator.Native
             return new AccessContainerEntryNative()
             {
                 ContainersPtr = BindingUtils.CopyFromObjectList(Containers),
-                ContainersLen = (UIntPtr)(Containers?.Count ?? 0),
-                ContainersCap = UIntPtr.Zero
+                ContainersLen = (UIntPtr)(Containers?.Count ?? 0)
             };
         }
     }
@@ -330,9 +340,6 @@ namespace SafeAuthenticator.Native
     {
         internal IntPtr ContainersPtr;
         internal UIntPtr ContainersLen;
-
-        // ReSharper disable once NotAccessedField.Compiler
-        internal UIntPtr ContainersCap;
 
         internal void Free()
         {
@@ -538,8 +545,7 @@ namespace SafeAuthenticator.Native
             {
                 AppInfo = AppInfo,
                 ContainersPtr = BindingUtils.CopyFromObjectList(Containers),
-                ContainersLen = (UIntPtr)(Containers?.Count ?? 0),
-                ContainersCap = IntPtr.Zero
+                ContainersLen = (UIntPtr)(Containers?.Count ?? 0)
             };
         }
     }
@@ -549,9 +555,6 @@ namespace SafeAuthenticator.Native
         internal AppExchangeInfo AppInfo;
         internal IntPtr ContainersPtr;
         internal UIntPtr ContainersLen;
-
-        // ReSharper disable once NotAccessedField.Compiler
-        internal IntPtr ContainersCap;
 
         // ReSharper disable once UnusedMember.Global
         public void Free()
