@@ -85,6 +85,9 @@
                 </Label.Triggers>
             </Label>
 
+            <controls:TestSafeCoinPermissions IsVisible="{Binding ShowTestCoinPermissions}"
+                                              PermissionsText="{Binding TestCoinPermissions}" />
+
             <ListView HasUnevenRows="True"
                       SeparatorVisibility="None"
                       ItemsSource="{Binding AppModelInfo.Containers}">

@@ -175,7 +175,9 @@ namespace SafeAuthenticator.Services
             {
                 Utilities.UpdateAppContainerNameList(app.AppInfo.Id, app.AppInfo.Name);
             }
-            return appList.Select(app => new RegisteredAppModel(app.AppInfo, app.Containers)).ToList();
+            return appList
+                   .Select(app => new RegisteredAppModel(app.AppInfo, app.Containers, app.AppPermissions))
+                   .ToList();
         }
 
         public async Task HandleUrlActivationAsync(string encodedUri)

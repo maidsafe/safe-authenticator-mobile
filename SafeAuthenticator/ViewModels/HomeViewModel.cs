@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -24,7 +23,7 @@ namespace SafeAuthenticator.ViewModels
         public bool IsRefreshing
         {
             get => _isRefreshing;
-            private set => SetProperty(ref _isRefreshing, value);
+            set => SetProperty(ref _isRefreshing, value);
         }
 
         private RegisteredAppModel _selectedRegisteredAccount;
@@ -47,9 +46,8 @@ namespace SafeAuthenticator.ViewModels
 
         public HomeViewModel()
         {
-            IsRefreshing = false;
             Apps = new ObservableRangeCollection<RegisteredAppModel>();
-            RefreshAccountsCommand = new Command(async () => await OnRefreshAccounts());
+            RefreshAccountsCommand = new Command(async () => await OnRefreshAccounts(), () => !IsRefreshing);
             SettingsCommand = new Command(OnSettings);
             Device.BeginInvokeOnMainThread(async () => await OnRefreshAccounts());
 
@@ -62,7 +60,15 @@ namespace SafeAuthenticator.ViewModels
                 if (decodedType == typeof(AuthIpcReq))
                 {
                     var ipcReq = (AuthIpcReq)decodeResult;
-                    var app = new RegisteredAppModel(ipcReq.AuthReq.App, ipcReq.AuthReq.Containers);
+                    var app = new RegisteredAppModel(
+                        ipcReq.AuthReq.App,
+                        ipcReq.AuthReq.Containers,
+                        new AppPermissions
+                        {
+                            PerformMutations = ipcReq.AuthReq.AppPermissionPerformMutations,
+                            TransferCoins = ipcReq.AuthReq.AppPermissionTransferCoins,
+                            GetBalance = ipcReq.AuthReq.AppPermissionGetBalance,
+                        });
                     var isAppContainerRequested = ipcReq.AuthReq.AppContainer;
                     var appOwnContainer = new ContainerPermissionsModel()
                     {
@@ -110,7 +116,10 @@ namespace SafeAuthenticator.ViewModels
                 {
                     // Container Request
                     var ipcReq = (ContainersIpcReq)decodeResult;
-                    var app = new RegisteredAppModel(ipcReq.ContainersReq.App, ipcReq.ContainersReq.Containers);
+                    var app = new RegisteredAppModel(
+                                            ipcReq.ContainersReq.App,
+                                            ipcReq.ContainersReq.Containers,
+                                            null);
 
                     var registeredAppsItem = Apps.FirstOrDefault(a => a.AppId == app.AppId);
                     foreach (var container in app.Containers)
@@ -148,7 +157,10 @@ namespace SafeAuthenticator.ViewModels
         {
             try
             {
-                IsRefreshing = true;
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    IsRefreshing = true;
+                });
                 if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
                     throw new Exception(Constants.NoInternetMessage);
@@ -167,7 +179,13 @@ namespace SafeAuthenticator.ViewModels
             {
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
-            IsRefreshing = false;
+            finally
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    IsRefreshing = false;
+                });
+            }
         }
 
         public async void HandleAuthenticationReq()
