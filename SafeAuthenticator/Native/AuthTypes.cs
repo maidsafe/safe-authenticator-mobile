@@ -531,12 +531,14 @@ namespace SafeAuthenticator.Native
     {
         public AppExchangeInfo AppInfo;
         public List<ContainerPermissions> Containers;
+        public AppPermissions AppPermissions;
 
         public RegisteredApp(RegisteredAppNative native)
         {
             AppInfo = native.AppInfo;
             Containers =
                 BindingUtils.CopyToObjectList<ContainerPermissions>(native.ContainersPtr, (int)native.ContainersLen);
+            AppPermissions = native.AppPermissions;
         }
 
         public RegisteredAppNative ToNative()
@@ -545,7 +547,8 @@ namespace SafeAuthenticator.Native
             {
                 AppInfo = AppInfo,
                 ContainersPtr = BindingUtils.CopyFromObjectList(Containers),
-                ContainersLen = (UIntPtr)(Containers?.Count ?? 0)
+                ContainersLen = (UIntPtr)(Containers?.Count ?? 0),
+                AppPermissions = AppPermissions
             };
         }
     }
@@ -555,11 +558,23 @@ namespace SafeAuthenticator.Native
         internal AppExchangeInfo AppInfo;
         internal IntPtr ContainersPtr;
         internal UIntPtr ContainersLen;
+        public AppPermissions AppPermissions;
 
         // ReSharper disable once UnusedMember.Global
         public void Free()
         {
             BindingUtils.FreeList(ref ContainersPtr, ref ContainersLen);
         }
+    }
+
+    [PublicAPI]
+    public struct AppPermissions
+    {
+        [MarshalAs(UnmanagedType.U1)]
+        public bool TransferCoins;
+        [MarshalAs(UnmanagedType.U1)]
+        public bool PerformMutations;
+        [MarshalAs(UnmanagedType.U1)]
+        public bool GetBalance;
     }
 }

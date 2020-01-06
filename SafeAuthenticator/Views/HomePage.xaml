@@ -8,7 +8,7 @@
              Title="SAFE Authenticator">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="settingsIcon"
+        <ToolbarItem IconImageSource="settingsIcon"
                      Command="{Binding SettingsCommand}"
                      Text="Settings" />
     </ContentPage.ToolbarItems>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using JetBrains.Annotations;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Native;
@@ -20,12 +21,19 @@ namespace SafeAuthenticator.Models
 
         public string CircleColor { get; set; }
 
+        public AppPermissions AppPermissions { get; }
+
         [PublicAPI]
         public ObservableRangeCollection<ContainerPermissionsModel> Containers { get; }
 
-        public RegisteredAppModel(AppExchangeInfo appInfo, IEnumerable<ContainerPermissions> containers)
+        public RegisteredAppModel(
+            AppExchangeInfo appInfo,
+            IEnumerable<ContainerPermissions> containers,
+            AppPermissions? appPermissions)
         {
             AppInfo = appInfo;
+            if (appPermissions.HasValue)
+                AppPermissions = appPermissions.Value;
             Containers = containers.Select(
                 x => new ContainerPermissionsModel
                 {

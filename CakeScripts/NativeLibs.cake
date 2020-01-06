@@ -30,7 +30,7 @@ enum Environment
 // --------------------------------------------------------------------------------
 // Native lib directory
 // --------------------------------------------------------------------------------
-var TAG = "1ab3fb3";
+var TAG = "82cbf40";
 var nativeLibDirectory = Directory(string.Concat(System.IO.Path.GetTempPath(), "NativeAuthLibs"));
 var androidLibDirectory = Directory("../SafeAuthenticator.Android/lib/");
 var iosLibDirectory = Directory("../SafeAuthenticator.iOS/Native References/");

@@ -20,12 +20,43 @@ namespace SafeAuthenticator.ViewModels
             set => SetProperty(ref _appModelInfo, value);
         }
 
+        private bool _showTestCoinPermissions;
+
+        public bool ShowTestCoinPermissions
+        {
+            get => _showTestCoinPermissions;
+            set => SetProperty(ref _showTestCoinPermissions, value);
+        }
+
+        private string _testCoinPermissions;
+
+        public string TestCoinPermissions
+        {
+            get => _testCoinPermissions;
+            set => SetProperty(ref _testCoinPermissions, value);
+        }
+
         [PublicAPI]
         public ICommand RevokeAppCommand { get; }
 
         public AppInfoViewModel(RegisteredAppModel appModelInfo)
         {
             AppModelInfo = appModelInfo;
+
+            if (AppModelInfo.AppPermissions.GetBalance)
+                TestCoinPermissions += "Check balance ,";
+
+            if (AppModelInfo.AppPermissions.TransferCoins)
+                TestCoinPermissions += "Transfer coins";
+
+            if (!string.IsNullOrEmpty(TestCoinPermissions))
+                ShowTestCoinPermissions = true;
+            else
+                return;
+
+            if (TestCoinPermissions.EndsWith(",", StringComparison.OrdinalIgnoreCase))
+                TestCoinPermissions = TestCoinPermissions.TrimEnd(',');
+
             RevokeAppCommand = new Command(OnRevokeAppCommand);
         }
 
