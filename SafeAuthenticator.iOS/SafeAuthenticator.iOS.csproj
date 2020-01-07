@@ -150,6 +150,8 @@
     <BundleResource Include="Resources\deleteAll%403x.png" />
     <BundleResource Include="Resources\select.png" />
     <BundleResource Include="Resources\gearIcon.png" />
+    <BundleResource Include="Resources\emptycheck.png" />
+    <BundleResource Include="Resources\filledcheck.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.cs">
@@ -245,9 +247,6 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
       <Version>4.3.0.991211</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.Forms.InputKit">
-      <Version>3.0.15</Version>
     </PackageReference>
     <PackageReference Include="XamEffects">
       <Version>1.6.3</Version>

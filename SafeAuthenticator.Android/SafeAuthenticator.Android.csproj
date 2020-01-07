@@ -162,6 +162,14 @@
       <Generator>
       </Generator>
     </AndroidResource>
+    <AndroidResource Include="Resources\drawable\emptycheck.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\filledcheck.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\strings.xml" />
@@ -262,9 +270,6 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
       <Version>4.3.0.991211</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.Forms.InputKit">
-      <Version>3.0.15</Version>
     </PackageReference>
     <PackageReference Include="XamEffects">
       <Version>1.6.3</Version>
