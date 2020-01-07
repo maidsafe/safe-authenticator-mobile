@@ -2,7 +2,6 @@
 
 #addin nuget:?package=Cake.AppleSimulator&Version=0.1.0
 #addin nuget:?package=Cake.FileHelpers
-#addin "Cake.Powershell"
 
 var IOS_SIM_NAME = EnvironmentVariable("IOS_SIM_NAME") ?? "iPhone X";
 var IOS_SIM_RUNTIME = EnvironmentVariable("IOS_SIM_RUNTIME") ?? "iOS 12.1";
