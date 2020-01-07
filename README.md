@@ -66,8 +66,8 @@ The app contains .NET wrapper for [safe_authenticator](https://github.com/maidsa
 
 ## Supported platforms
 
-* Android 4.2+ (armeabi-v7a, x86_64)
-* iOS 8+ (ARM64, x64)
+* Android 5.0+ (armeabi-v7a, x86_64)
+* iOS 11+ (ARM64, x64)
 
 ## Development
 
