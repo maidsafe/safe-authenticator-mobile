@@ -49,7 +49,6 @@ namespace SafeAuthenticator.ViewModels
             Apps = new ObservableRangeCollection<RegisteredAppModel>();
             RefreshAccountsCommand = new Command(async () => await OnRefreshAccounts(), () => !IsRefreshing);
             SettingsCommand = new Command(OnSettings);
-            Device.BeginInvokeOnMainThread(async () => await OnRefreshAccounts());
 
             MessagingCenter.Subscribe<AppInfoViewModel>(this, MessengerConstants.RefreshHomePage, async (sender) => { await OnRefreshAccounts(); });
             MessagingCenter.Subscribe<RequestDetailViewModel, IpcReq>(this, MessengerConstants.RefreshHomePage, (sender, decodeResult) =>
@@ -135,6 +134,8 @@ namespace SafeAuthenticator.ViewModels
                     registeredAppsItem.Containers.ReplaceRange(registeredAppsItem.Containers.OrderBy(a => a.ContainerName).ToObservableRangeCollection());
                 }
             });
+
+            Device.InvokeOnMainThreadAsync(OnRefreshAccounts);
         }
 
         ~HomeViewModel()
@@ -157,10 +158,7 @@ namespace SafeAuthenticator.ViewModels
         {
             try
             {
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    IsRefreshing = true;
-                });
+                IsRefreshing = true;
                 if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
                     throw new Exception(Constants.NoInternetMessage);
