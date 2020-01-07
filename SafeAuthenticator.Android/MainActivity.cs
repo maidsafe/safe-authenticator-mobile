@@ -93,7 +93,6 @@ namespace SafeAuthenticator.Droid
             AndroidEnvironment.UnhandledExceptionRaiser += AndroidEnvOnUnhandledExceptionRaiser;
 
             base.OnCreate(bundle);
-            Plugin.InputKit.Platforms.Droid.Config.Init(this, bundle);
             Rg.Plugins.Popup.Popup.Init(this, bundle);
             XamEffects.Droid.Effects.Init();
             Forms.Init(this, bundle);

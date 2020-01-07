@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SafeAuthenticator.Views.VaultConnectionFilePage"
              xmlns:vm="clr-namespace:SafeAuthenticator.ViewModels"
-             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              Title="Choose a Vault">
 
     <ContentPage.Resources>
@@ -55,11 +54,24 @@
                                     HorizontalOptions="FillAndExpand"
                                     VerticalOptions="Center" />
 
-                            <input:RadioButton IsChecked="{Binding IsActive}"
-                                               BackgroundColor="Transparent"
-                                               CircleColor="#0074e4"
-                                               CommandParameter="{Binding FileId}"
-                                               ClickCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=SetActiveFileCommand}" />
+                            <Image Source="emptycheck"
+                                   WidthRequest="40"
+                                   HeightRequest="40">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding FileId}"
+                                                          Command="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=SetActiveFileCommand}"
+                                                          NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image"
+                                                 Binding="{Binding IsActive}"
+                                                 Value="True">
+                                        <Setter Property="Source"
+                                                Value="filledcheck" />
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+                                               
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
