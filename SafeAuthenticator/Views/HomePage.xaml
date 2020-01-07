@@ -23,8 +23,8 @@
                       RefreshCommand="{Binding RefreshAccountsCommand}"
                       IsPullToRefreshEnabled="True"
                       IsRefreshing="{Binding IsRefreshing}"
-                      SelectedItem="{Binding SelectedRegisteredAccount}"
-                      CachingStrategy="RecycleElement">
+                      SelectionMode="Single"
+                      SelectedItem="{Binding SelectedRegisteredAccount}">
 
                 <ListView.Behaviors>
                     <behaviour:ListViewNoSelectionBehavior />
