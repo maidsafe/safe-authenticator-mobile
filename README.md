@@ -44,7 +44,7 @@ The app contains .NET wrapper for [safe_authenticator](https://github.com/maidsa
 
 * **Handle Access Requests from Apps:**
   The SAFE application authorizes through the Authenticator with the required access permissions. The application can create its own container and request access to default containers of the SAFE Network i.e. documents, downloads, music, pictures, videos, public and public names, or other application's containers through the authorization request.
-  
+
   * **Auth Request:**
     Allow apps to request default container access & also to create an app's own private container.
   * **Container Request:**
@@ -188,4 +188,4 @@ Get your developer related questions clarified on [SAFE Dev Forum](https://forum
 
 ## License
 
-Licensed under the General Public License (GPL), version 3 [LICENSE](http://www.gnu.org/licenses/gpl-3.0.en.html).
+This SAFE Network library is dual-licensed under the Modified BSD ([LICENSE-BSD](LICENSE-BSD) https://opensource.org/licenses/BSD-3-Clause) or the MIT license ([LICENSE-MIT](LICENSE-MIT) https://opensource.org/licenses/MIT) at your option.
