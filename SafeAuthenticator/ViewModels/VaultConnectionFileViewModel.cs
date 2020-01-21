@@ -51,7 +51,9 @@ namespace SafeAuthenticator.ViewModels
         {
             AddNewVaultConnectionFileCommand = new Command(async () => await PickFileFromTheDeviceAsync());
             DeleteAllVaultConnectionFilesCommand = new Command(async () => await DeleteAllVaultFilesAsync());
-            VaultConnectionFileSelectionCommand = new Command(async () => await ShowFileSelectionOptionsAsync());
+            VaultConnectionFileSelectionCommand = new Command(
+                async () => await ShowFileSelectionOptionsAsync(),
+                () => SelectedFile != null);
             SetActiveFileCommand = new Command(async (object fileId) => await SetActiveVaultFileAsync(fileId));
             RefreshVaultConnectionFilesList();
         }
@@ -101,14 +103,16 @@ namespace SafeAuthenticator.ViewModels
 
         private async Task ShowFileSelectionOptionsAsync()
         {
-            string action = await Application.Current.MainPage.DisplayActionSheet("Vault Connection File", "Cancel", "Delete");
+            var deletedSelected = await Application.Current.MainPage.DisplayAlert(
+                "Choose a vault",
+                "Do you want to delete selected vault connection file.",
+                "Delete",
+                "Cancel");
 
-            switch (action)
-            {
-                case "Delete":
-                    DeleteVaultFileAsync(SelectedFile.FileId);
-                    break;
-            }
+            if (deletedSelected)
+                DeleteVaultFileAsync(SelectedFile.FileId);
+
+            SelectedFile = null;
         }
 
         private async Task DeleteAllVaultFilesAsync()
@@ -196,9 +200,9 @@ namespace SafeAuthenticator.ViewModels
                 if (string.IsNullOrEmpty(friendlyFileName))
                 {
                     await Application.Current.MainPage.DisplayAlert(
-                    "Add vault connection file",
-                    "Failed to save the connection file. Filename required.",
-                    "Ok");
+                        "Add vault connection file",
+                        "Failed to save the connection file. Filename required.",
+                        "Ok");
                     return;
                 }
 

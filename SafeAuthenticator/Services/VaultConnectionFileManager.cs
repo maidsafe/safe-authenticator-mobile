@@ -60,6 +60,9 @@ namespace SafeAuthenticator.Services
             if (fileEntry == null)
                 return;
 
+            if (fileEntry.IsActive)
+                File.Delete(Path.Combine(ConfigFilePath, _defaultVaultConnectionFileName));
+
             _vaultConnectionFileList.Remove(fileEntry);
             File.Delete(Path.Combine(ConfigFilePath, $"{fileId}.config"));
             UpdateListInDevicePreferenceStore();
