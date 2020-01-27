@@ -36,10 +36,10 @@ namespace SafeAuthenticator.Services
             _ = GetAllFileEntries();
         }
 
-        internal VaultConnectionFile AddNewVaultConnectionConfigFile(string fileName, byte[] fileData)
+        internal VaultConnectionFile AddNewVaultConnectionConfigFile(string fileName, string fileData)
         {
             var fileId = Convert.ToInt32(DateTime.Now.ToString("MMddmmssff"));
-            File.WriteAllBytes(Path.Combine(ConfigFilePath, $"{fileId}.config"), fileData);
+            File.WriteAllText(Path.Combine(ConfigFilePath, $"{fileId}.config"), fileData);
 
             var connecitonFile = new VaultConnectionFile
             {
@@ -85,8 +85,8 @@ namespace SafeAuthenticator.Services
 
             fileEntry.IsActive = true;
             File.Delete(Path.Combine(ConfigFilePath, _defaultVaultConnectionFileName));
-            var fileData = File.ReadAllBytes(Path.Combine(ConfigFilePath, $"{fileId}.config"));
-            File.WriteAllBytes(Path.Combine(ConfigFilePath, _defaultVaultConnectionFileName), fileData);
+            var fileData = File.ReadAllText(Path.Combine(ConfigFilePath, $"{fileId}.config"));
+            File.WriteAllText(Path.Combine(ConfigFilePath, _defaultVaultConnectionFileName), fileData);
             UpdateListInDevicePreferenceStore();
         }
 

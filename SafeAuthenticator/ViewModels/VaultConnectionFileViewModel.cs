@@ -206,7 +206,7 @@ namespace SafeAuthenticator.ViewModels
                     return;
                 }
 
-                _ = VaultConnectionFileManager.AddNewVaultConnectionConfigFile(friendlyFileName, fileData.DataArray);
+                _ = VaultConnectionFileManager.AddNewVaultConnectionConfigFile(friendlyFileName, contents);
 
                 RefreshVaultConnectionFilesList();
             }
