@@ -11,13 +11,13 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Plugin.FilePicker;
 using Plugin.FilePicker.Abstractions;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace SafeAuthenticator.ViewModels
@@ -185,43 +185,12 @@ namespace SafeAuthenticator.ViewModels
         {
             try
             {
-                await Device.InvokeOnMainThreadAsync(async () =>
-                {
-                    var status = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
-                    switch (status)
-                    {
-                        case PermissionStatus.Unknown:
-                        case PermissionStatus.Denied:
-                            {
-                                var result = await Permissions.RequestAsync<Permissions.StorageRead>();
-
-                                if (result != PermissionStatus.Granted)
-                                {
-                                    await Application.Current.MainPage.DisplayAlert(
-                                    "File Storage Permissions",
-                                    "Please enable the file storage read/write permissions from the app settings",
-                                    "ok");
-                                    return;
-                                }
-                                break;
-                            }
-                        case PermissionStatus.Disabled:
-                            {
-                                await Application.Current.MainPage.DisplayAlert(
-                                    "File Storage Permissions",
-                                    "Please enable the file storage read/write permissions from the app settings",
-                                    "ok");
-                                return;
-                            }
-                    }
-                });
-
                 FileData fileData = await CrossFilePicker.Current.PickFile();
                 if (fileData == null)
                     return;
 
                 string fileName = fileData.FileName;
-                string contents = System.Text.Encoding.UTF8.GetString(fileData.DataArray);
+                string contents = Encoding.UTF8.GetString(fileData.DataArray);
 
                 var friendlyFileName = await Application.Current.MainPage.DisplayPromptAsync(
                     "Add vault connection file",

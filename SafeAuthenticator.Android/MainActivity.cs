@@ -10,11 +10,14 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Android;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V4.App;
+using Android.Support.V4.Content;
 using Android.Widget;
 using CarouselView.FormsPlugin.Android;
 using Plugin.CurrentActivity;
@@ -106,6 +109,7 @@ namespace SafeAuthenticator.Droid
             XamEffects.Droid.Effects.Init();
             Forms.Init(this, bundle);
 
+            CheckAppPermissions();
             DisplayCrashReport();
             CarouselViewRenderer.Init();
             LoadApplication(new App());
@@ -114,6 +118,23 @@ namespace SafeAuthenticator.Droid
             if (Intent?.Data != null)
             {
                 HandleAppLaunch(Intent.Data.ToString());
+            }
+        }
+
+        private void CheckAppPermissions()
+        {
+            if ((int)Build.VERSION.SdkInt < 23)
+            {
+                return;
+            }
+            else
+            {
+                if (PackageManager.CheckPermission(Manifest.Permission.ReadExternalStorage, PackageName) != Permission.Granted
+                    && PackageManager.CheckPermission(Manifest.Permission.WriteExternalStorage, PackageName) != Permission.Granted)
+                {
+                    var permissions = new string[] { Manifest.Permission.ReadExternalStorage, Manifest.Permission.WriteExternalStorage };
+                    RequestPermissions(permissions, 1);
+                }
             }
         }
 

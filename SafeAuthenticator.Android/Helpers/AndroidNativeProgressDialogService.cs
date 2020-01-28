@@ -18,15 +18,15 @@ using Xamarin.Forms;
 
 namespace SafeAuthenticator.Droid.Helpers
 {
+#pragma warning disable CS0618 // Type or member is obsolete
     public class AndroidNativeProgressDialogService : INativeProgressDialogService
     {
         public IDisposable ShowNativeDialog(string message, string title)
         {
-#pragma warning disable CS0618 // Type or member is obsolete
-            ProgressDialog progress = new ProgressDialog((Activity)Forms.Context);
-#pragma warning restore CS0618 // Type or member is obsolete
-
-            progress.Indeterminate = true;
+            ProgressDialog progress = new ProgressDialog((Activity)Forms.Context)
+            {
+                Indeterminate = true,
+            };
             progress.SetProgressStyle(ProgressDialogStyle.Spinner);
             progress.SetTitle(title);
             progress.SetMessage(message);
@@ -39,4 +39,5 @@ namespace SafeAuthenticator.Droid.Helpers
             });
         }
     }
+#pragma warning restore CS0618 // Type or member is obsolete
 }
