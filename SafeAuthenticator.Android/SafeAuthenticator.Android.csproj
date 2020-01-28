@@ -269,7 +269,7 @@
       <Version>1.4.0-pre2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.3.0.991211</Version>
+      <Version>4.4.0.991537</Version>
     </PackageReference>
     <PackageReference Include="XamEffects">
       <Version>1.6.3</Version>
