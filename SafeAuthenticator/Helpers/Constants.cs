@@ -11,17 +11,6 @@ namespace SafeAuthenticator.Helpers
 {
     internal static class Constants
     {
-        // StringStrength
-        internal const string StrengthVeryWeak = "VERY_WEAK";
-        internal const string StrengthWeak = "WEAK";
-        internal const string StrengthSomewhatSecure = "SOMEWHAT_SECURE";
-        internal const string StrengthSecure = "SECURE";
-
-        // StringStrengthScore
-        internal const int StrengthScoreVeryWeak = 4;
-        internal const int StrengthScoreWeak = 8;
-        internal const int StrengthScoreSomeWhatSecure = 10;
-
         // ErrorCode
         internal const int UnexpectedError = -2000;
         internal const int RoutingInterfaceError = -11;

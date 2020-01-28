@@ -1,15 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
-             xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
-             xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels"
-             x:Class="SafeAuthenticator.Views.CreateAcctPage"
-             Title="Create Account">
+<ContentPage
+    x:Class="SafeAuthenticator.Views.CreateAcctPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
+    xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+    xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels"
+    Title="Create Account">
 
     <ContentPage.BindingContext>
-        <viewModels:CreateAcctViewModel/>
+        <viewModels:CreateAcctViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Resources>
@@ -22,44 +23,38 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout >
-                <cv:CarouselViewControl
-                    ShowArrows="False"
-                    ShowIndicators="False"
-                    IsSwipeEnabled="False"
-                    HeightRequest="350"
-                    PositionSelectedCommand="{Binding CarouselPageChangeCommand}"
-                    Position="{Binding CarouselPagePosition}"
-                    Margin="0,40,0,0">
-                    <cv:CarouselViewControl.ItemsSource>
-                        <x:Array Type="{x:Type View}">
+        <StackLayout>
+            <cv:CarouselViewControl
+                Margin="0,40,0,0"
+                HeightRequest="350"
+                IsSwipeEnabled="False"
+                Position="{Binding CarouselPagePosition}"
+                PositionSelectedCommand="{Binding CarouselPageChangeCommand}"
+                ShowArrows="False"
+                ShowIndicators="False">
+                <cv:CarouselViewControl.ItemsSource>
+                    <x:Array Type="{x:Type View}">
+                        <!--  Account Secret  -->
+                        <controls:CreateAcctStep2 />
+                        <!--  Account Password  -->
+                        <controls:CreateAcctStep3 />
+                    </x:Array>
+                </cv:CarouselViewControl.ItemsSource>
+            </cv:CarouselViewControl>
 
-                            <!-- Invitation -->
-                            <!--<controls:CreateAcctStep1/>-->
+            <Button
+                Margin="25,0,25,10"
+                Command="{Binding CarouselContinueCommand}"
+                Text="CONTINUE" />
 
-                            <!-- Account Secret -->
-                            <controls:CreateAcctStep2/>
-
-                            <!-- Account Password -->
-                            <controls:CreateAcctStep3/>
-
-                        </x:Array>
-                    </cv:CarouselViewControl.ItemsSource>
-                </cv:CarouselViewControl>
-
-                <Button Text="CONTINUE"
-                    Command="{Binding CarouselContinueCommand}"
-                    Margin="25,0,25,10"/>
-
-                <Button Text="BACK"
-                    HorizontalOptions="Center"
-                    Command="{Binding CarouselBackCommand}"
-                    IsVisible="{Binding IsBackButtonVisible}"
-                    BackgroundColor="Transparent"
-                    TextColor="{StaticResource PrimaryColor}"
-                    Margin="25,0"/>
-            </StackLayout>
-        </ScrollView>
+            <Button
+                Margin="25,0"
+                BackgroundColor="Transparent"
+                Command="{Binding CarouselBackCommand}"
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsBackButtonVisible}"
+                Text="BACK"
+                TextColor="{StaticResource PrimaryColor}" />
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

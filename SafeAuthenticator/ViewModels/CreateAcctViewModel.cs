@@ -13,7 +13,6 @@ using System.Windows.Input;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace SafeAuthenticator.ViewModels
@@ -25,8 +24,6 @@ namespace SafeAuthenticator.ViewModels
         private string _confirmAcctSecret;
         private string _confirmAcctPassword;
         private bool _isUiEnabled;
-        private StrengthIndicator _locationStrength;
-        private StrengthIndicator _passwordStrength;
 
         public string AcctSecret
         {
@@ -196,20 +193,6 @@ namespace SafeAuthenticator.ViewModels
                         ((Command)CarouselContinueCommand).ChangeCanExecute();
                         return;
                     }
-
-                    using (NativeProgressDialog.ShowNativeDialog("Checking secret strength"))
-                    {
-                        await Task.Run(() =>
-                        {
-                            _locationStrength = Utilities.StrengthChecker(AcctSecret);
-                            if (_locationStrength.Guesses < Constants.StrengthScoreWeak)
-                            {
-                                AcctSecretStrengthErrorMsg = "Secret needs to be stronger";
-                                throw new InvalidOperationException();
-                            }
-                            AcctSecretStrengthErrorMsg = string.Empty;
-                        });
-                    }
                 }
 
                 if (CarouselPagePosition < 1)
@@ -248,17 +231,6 @@ namespace SafeAuthenticator.ViewModels
         {
             using (NativeProgressDialog.ShowNativeDialog("Creating account"))
             {
-                await Task.Run(() =>
-                {
-                    _passwordStrength = Utilities.StrengthChecker(AcctPassword);
-                    if (_passwordStrength.Guesses < Constants.StrengthScoreSomeWhatSecure)
-                    {
-                        AcctPasswordStrengthErrorMsg = "Password needs to be stronger";
-                        throw new InvalidOperationException();
-                    }
-                    AcctPasswordStrengthErrorMsg = string.Empty;
-                });
-
                 await Authenticator.CreateAccountAsync(AcctSecret, AcctPassword);
                 MessagingCenter.Send(this, MessengerConstants.NavHomePage);
             }

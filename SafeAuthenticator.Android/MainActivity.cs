@@ -16,10 +16,7 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.V4.App;
-using Android.Support.V4.Content;
 using Android.Widget;
-using CarouselView.FormsPlugin.Android;
 using Plugin.CurrentActivity;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Services;
@@ -109,9 +106,9 @@ namespace SafeAuthenticator.Droid
             XamEffects.Droid.Effects.Init();
             Forms.Init(this, bundle);
 
-            CheckAppPermissions();
             DisplayCrashReport();
             CarouselViewRenderer.Init();
+            CheckAppPermissions();
             LoadApplication(new App());
             Window.SetSoftInputMode(Android.Views.SoftInput.AdjustResize);
 
