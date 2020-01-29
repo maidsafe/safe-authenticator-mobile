@@ -8,10 +8,10 @@
 // Software.
 
 using System.Drawing;
-using SafeAuthenticator.Controls;
 using SafeAuthenticator.iOS.Helpers;
 using UIKit;
 using Xamarin.Forms;
+using Xamarin.Forms.Material.iOS;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportEffect(typeof(ShowHidePasswordEffect), "ShowHidePasswordEffect")]
@@ -33,9 +33,10 @@ namespace SafeAuthenticator.iOS.Helpers
         {
             if (Control != null)
             {
-                UITextField vUpdatedEntry = (UITextField)Control;
+                MaterialTextField vUpdatedEntry = (MaterialTextField)Control;
                 var buttonRect = UIButton.FromType(UIButtonType.Custom);
                 buttonRect.SetImage(new UIImage("ShowPasswordIcon"), UIControlState.Normal);
+                buttonRect.ImageEdgeInsets = new UIEdgeInsets(10.0f, 10.0f, 10.0f, 10.0f);
                 buttonRect.TouchUpInside += (sender, e1) =>
                 {
                     if (vUpdatedEntry.SecureTextEntry)
@@ -50,24 +51,20 @@ namespace SafeAuthenticator.iOS.Helpers
                     }
                 };
 
-                buttonRect.Frame = ((MaterialEntry)Element).ErrorDisplay !=
-                                   ErrorDisplay.None
-                    ? new CoreGraphics.CGRect(5.0f, -4.0f, 25.0f, 25.0f)
-                    : new CoreGraphics.CGRect(5.0f, 5.0f, 25.0f, 25.0f);
-                buttonRect.ContentMode = UIViewContentMode.Right;
-
-                var paddingViewRight = new UIView(new RectangleF(5.0f, -5.0f, 30.0f, 30.0f))
+                vUpdatedEntry.ShouldChangeCharacters += (textField, range, replacementString) =>
                 {
-                    buttonRect
+                    string text = vUpdatedEntry.Text;
+                    var result = text.Substring(0, (int)range.Location) +
+                     replacementString + text.Substring((int)range.Location + (int)range.Length);
+                    vUpdatedEntry.Text = result;
+                    return false;
                 };
-                paddingViewRight.ContentMode = UIViewContentMode.BottomRight;
 
-                vUpdatedEntry.RightView = paddingViewRight;
-                vUpdatedEntry.RightViewMode = UITextFieldViewMode.Always;
+                buttonRect.Frame = new CoreGraphics.CGRect(10.0f, 0.0f, 5.0f, 5.0f);
+                buttonRect.ContentMode = UIViewContentMode.BottomRight;
 
-                Control.Layer.CornerRadius = 4;
-                Control.Layer.BorderColor = new CoreGraphics.CGColor(255, 255, 255);
-                Control.Layer.MasksToBounds = true;
+                vUpdatedEntry.TrailingView = buttonRect;
+                vUpdatedEntry.TrailingViewMode = UITextFieldViewMode.Always;
                 vUpdatedEntry.TextAlignment = UITextAlignment.Left;
             }
         }

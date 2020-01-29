@@ -7,15 +7,22 @@
 // specific language governing permissions and limitations relating to use of the SAFE Network
 // Software.
 
+using System.Runtime.CompilerServices;
+using SafeAuthenticator.Controls.Effects;
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.Controls.Effects
+namespace SafeAuthenticator.Controls
 {
-    class EntryMoveNextEffect : RoutingEffect
+    public class CustomMaterialEntry : Entry
     {
-        public EntryMoveNextEffect()
-            : base("Xamarin.EntryMoveNextEffect")
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
+            base.OnPropertyChanged(propertyName);
+
+            if (propertyName == IsPasswordProperty.PropertyName && Device.RuntimePlatform == Device.iOS)
+            {
+                Effects.Add(new ShowHidePasswordEffect());
+            }
         }
     }
 }

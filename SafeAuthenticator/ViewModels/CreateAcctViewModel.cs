@@ -93,28 +93,12 @@ namespace SafeAuthenticator.ViewModels
             set => SetProperty(ref _acctSecretErrorMsg, value);
         }
 
-        private string _acctSecretStrengthErrorMsg;
-
-        public string AcctSecretStrengthErrorMsg
-        {
-            get => _acctSecretStrengthErrorMsg;
-            set => SetProperty(ref _acctSecretStrengthErrorMsg, value);
-        }
-
         private string _acctPasswordErrorMsg;
 
         public string AcctPasswordErrorMsg
         {
             get => _acctPasswordErrorMsg;
             set => SetProperty(ref _acctPasswordErrorMsg, value);
-        }
-
-        private string _acctPasswordStrengthErrorMsg;
-
-        public string AcctPasswordStrengthErrorMsg
-        {
-            get => _acctPasswordStrengthErrorMsg;
-            set => SetProperty(ref _acctPasswordStrengthErrorMsg, value);
         }
 
         public ICommand CarouselPageChangeCommand { get; }
@@ -163,7 +147,6 @@ namespace SafeAuthenticator.ViewModels
                         if (AcctSecret == ConfirmAcctSecret)
                         {
                             AcctSecretErrorMsg = string.Empty;
-                            AcctSecretStrengthErrorMsg = string.Empty;
                         }
                         return !string.IsNullOrWhiteSpace(AcctSecret) && !string.IsNullOrWhiteSpace(ConfirmAcctSecret);
                     }
@@ -172,7 +155,6 @@ namespace SafeAuthenticator.ViewModels
                         if (AcctPassword == ConfirmAcctPassword)
                         {
                             AcctPasswordErrorMsg = string.Empty;
-                            AcctPasswordStrengthErrorMsg = string.Empty;
                         }
                         return !string.IsNullOrWhiteSpace(AcctPassword) && !string.IsNullOrWhiteSpace(ConfirmAcctPassword);
                     }

@@ -7,8 +7,6 @@
 // specific language governing permissions and limitations relating to use of the SAFE Network
 // Software.
 
-using System.Diagnostics;
-using System.Threading.Tasks;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Services;
 using SafeAuthenticator.ViewModels;
@@ -115,16 +113,6 @@ namespace SafeAuthenticator.Views
             MessagingCenter.Unsubscribe<AuthService>(this, MessengerConstants.NavHomePage);
             MessagingCenter.Unsubscribe<LoginViewModel>(this, MessengerConstants.NavHomePage);
             MessagingCenter.Unsubscribe<LoginViewModel>(this, MessengerConstants.NavCreateAcctPage);
-        }
-
-        private void CustomEntryFocused(object sender, FocusEventArgs e)
-        {
-            ScrollLayout.IsScrollEnabled = true;
-        }
-
-        private void CustomEntryUnfocused(object sender, FocusEventArgs e)
-        {
-            ScrollLayout.IsScrollEnabled = false;
         }
     }
 }

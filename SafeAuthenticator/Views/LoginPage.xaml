@@ -1,12 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage x:Class="SafeAuthenticator.Views.LoginPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels;assembly=SafeAuthenticator"
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
-             x:Class="SafeAuthenticator.Views.LoginPage"
+             xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels;assembly=SafeAuthenticator"
+             NavigationPage.BackButtonTitle="Login"
              NavigationPage.HasNavigationBar="False"
-             NavigationPage.BackButtonTitle="Login">
+             Visual="Material">
 
     <ContentPage.BindingContext>
         <viewModels:LoginViewModel />
@@ -31,71 +32,64 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <controls:CustomScrollView  x:Name="ScrollLayout"
-                                    Padding="25"
-                                    IsScrollEnabled="False">
-            <StackLayout>
-                <Image Source="gearIcon"
-                       HorizontalOptions="EndAndExpand"
-                       HeightRequest="25"
-                       WidthRequest="25"
-                       Margin="10, 30"
-                       VerticalOptions="Start"
-                       x:Name="ConnectionSettingsMenuIcon" />
+        <StackLayout Padding="25">
+            <Image x:Name="ConnectionSettingsMenuIcon"
+                   Margin="10,30"
+                   HeightRequest="25"
+                   HorizontalOptions="EndAndExpand"
+                   Source="gearIcon"
+                   VerticalOptions="Start"
+                   WidthRequest="25" />
 
-                <StackLayout VerticalOptions="CenterAndExpand">
+            <StackLayout VerticalOptions="CenterAndExpand">
 
-                    <Image Source="authLogo"
-                           Style="{StaticResource ImageStyle}"
-                           HorizontalOptions="Center" />
+                <Image HorizontalOptions="Center"
+                       Source="authLogo"
+                       Style="{StaticResource ImageStyle}" />
 
-                    <Label Text="SAFE Authenticator"
-                           Style="{StaticResource TitleStyle}"
-                           HorizontalOptions="Center"
-                           Margin="0,20,0,10" />
-
-                    <controls:MaterialEntry x:Name="SecretEntry"
-                                            Placeholder="Account Secret"
-                                            IsPassword="True"
-                                            Margin="0,30,0,10"
-                                            Text="{Binding AccountSecret}"
-                                            NextEntry="{Reference PasswordEntry}"
-                                            ErrorDisplay="None"
-                                            ReturnType="Next"
-                                            Focused="CustomEntryFocused"
-                                            Unfocused="CustomEntryUnfocused"/>
-
-                    <controls:MaterialEntry x:Name="PasswordEntry"
-                                            Placeholder="Account Password" 
-                                            IsPassword="True"
-                                            Text="{Binding AccountPassword}"
-                                            ReturnType="Done"
-                                            ReturnCommand="{Binding LoginCommand}"
-                                            Focused="CustomEntryFocused"
-                                            Unfocused="CustomEntryUnfocused"/>
-
-                    <Button Text="LOGIN"
-                            Command="{Binding LoginCommand}"
-                            Margin="0,20,0,0" />
-
-                    <Button Text="CREATE ACCOUNT"
-                            HorizontalOptions="Center"
-                            BackgroundColor="Transparent"
-                            TextColor="{StaticResource PrimaryColor}"
-                            Command="{Binding CreateAccountCommand}"
-                            Margin="0,10,0,0" />
-                </StackLayout>
-
-                <Label Text="Need any help?"
+                <Label Margin="0,20,0,10"
                        HorizontalOptions="Center"
-                       Style="{StaticResource NeedHelpStyle}"
-                       VerticalOptions="End">
+                       Style="{StaticResource TitleStyle}"
+                       Text="SAFE Authenticator" />
+
+                <controls:CustomMaterialEntry x:Name="SecretEntry"
+                                              Margin="0,30,0,10"
+                                              HeightRequest="60"
+                                              IsPassword="True"
+                                              Placeholder="Account Secret"
+                                              ReturnType="Next"
+                                              Text="{Binding AccountSecret}" />
+
+                <controls:CustomMaterialEntry x:Name="PasswordEntry"
+                                              HeightRequest="60"
+                                              IsPassword="True"
+                                              Placeholder="Account Password"
+                                              ReturnCommand="{Binding LoginCommand}"
+                                              ReturnType="Done"
+                                              Text="{Binding AccountPassword}" />
+
+                <Button Margin="0,20,0,0"
+                        Command="{Binding LoginCommand}"
+                        Text="LOGIN" />
+
+                <Label Margin="0,10,0,0"
+                       HorizontalOptions="Center"
+                       Text="CREATE ACCOUNT"
+                       TextColor="{StaticResource PrimaryColor}">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer NumberOfTapsRequired="1"
-                                              Command="{Binding NeedHelpCommand}" />
+                        <TapGestureRecognizer Command="{Binding CreateAccountCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
             </StackLayout>
-        </controls:CustomScrollView>
+
+            <Label HorizontalOptions="Center"
+                   Style="{StaticResource NeedHelpStyle}"
+                   Text="Need any help?"
+                   VerticalOptions="End">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NeedHelpCommand}" NumberOfTapsRequired="1" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

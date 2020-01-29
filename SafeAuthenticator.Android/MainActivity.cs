@@ -105,6 +105,7 @@ namespace SafeAuthenticator.Droid
             Rg.Plugins.Popup.Popup.Init(this, bundle);
             XamEffects.Droid.Effects.Init();
             Forms.Init(this, bundle);
+            FormsMaterial.Init(this, bundle);
 
             DisplayCrashReport();
             CarouselViewRenderer.Init();
