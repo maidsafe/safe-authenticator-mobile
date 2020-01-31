@@ -6,20 +6,20 @@
              Padding="25,0"
              Spacing="20">
 
-    <Label Style="{DynamicResource TitleStyle}" Text="Account Secret" />
+    <Label Style="{DynamicResource TitleStyle}" Text="Passphrase" />
 
-    <Label Margin="0,0,0,20" Text="Your 'Account Secret' is private and should not be shared with anyone." />
+    <Label Margin="0,0,0,20" Text="Your 'Passphrase' is private and should not be shared with anyone." />
 
     <controls:CustomMaterialEntry x:Name="SecretEntry"
                                   Margin="0,30,0,0"
                                   IsPassword="True"
-                                  Placeholder="Account secret"
+                                  Placeholder="Passphrase"
                                   ReturnType="Next"
                                   Text="{Binding AcctSecret}" />
 
     <controls:CustomMaterialEntry x:Name="ConfirmSecretEntry"
                                   IsPassword="True"
-                                  Placeholder="Confirm account secret"
+                                  Placeholder="Confirm passphrase"
                                   ReturnCommand="{Binding CarouselContinueCommand}"
                                   ReturnType="Done"
                                   Text="{Binding ConfirmAcctSecret}" />

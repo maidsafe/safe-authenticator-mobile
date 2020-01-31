@@ -171,7 +171,7 @@ namespace SafeAuthenticator.ViewModels
                 {
                     if (AcctSecret != ConfirmAcctSecret)
                     {
-                        AcctSecretErrorMsg = "Secret doesn't match";
+                        AcctSecretErrorMsg = "Passphrase doesn't match";
                         ((Command)CarouselContinueCommand).ChangeCanExecute();
                         return;
                     }

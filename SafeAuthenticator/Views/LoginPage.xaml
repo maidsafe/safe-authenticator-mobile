@@ -56,14 +56,14 @@
                                               Margin="0,30,0,10"
                                               HeightRequest="60"
                                               IsPassword="True"
-                                              Placeholder="Account Secret"
+                                              Placeholder="Passphrase"
                                               ReturnType="Next"
                                               Text="{Binding AccountSecret}" />
 
                 <controls:CustomMaterialEntry x:Name="PasswordEntry"
                                               HeightRequest="60"
                                               IsPassword="True"
-                                              Placeholder="Account Password"
+                                              Placeholder="Password"
                                               ReturnCommand="{Binding LoginCommand}"
                                               ReturnType="Done"
                                               Text="{Binding AccountPassword}" />

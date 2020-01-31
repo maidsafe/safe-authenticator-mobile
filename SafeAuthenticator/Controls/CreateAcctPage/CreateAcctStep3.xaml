@@ -6,20 +6,20 @@
              Padding="25,0"
              Spacing="20">
 
-    <Label Style="{DynamicResource TitleStyle}" Text="Account Password" />
+    <Label Style="{DynamicResource TitleStyle}" Text="Password" />
 
-    <Label Margin="0,0,0,20" Text="Your 'Account Password' is never sent to the network, it will not leave your device." />
+    <Label Margin="0,0,0,20" Text="Your 'Password' is never sent to the network, it will not leave your device." />
 
     <controls:CustomMaterialEntry x:Name="PasswordEntry"
                                   Margin="0,30,0,0"
                                   IsPassword="True"
-                                  Placeholder="Account password"
+                                  Placeholder="Password"
                                   ReturnType="Next"
                                   Text="{Binding AcctPassword}" />
 
     <controls:CustomMaterialEntry x:Name="ConfirmPasswordEntry"
                                   IsPassword="True"
-                                  Placeholder="Confirm account password"
+                                  Placeholder="Confirm password"
                                   ReturnCommand="{Binding CarouselContinueCommand}"
                                   ReturnType="Done"
                                   Text="{Binding ConfirmAcctPassword}" />
