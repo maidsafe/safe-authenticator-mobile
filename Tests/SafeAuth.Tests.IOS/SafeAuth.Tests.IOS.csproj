@@ -175,7 +175,7 @@
       <Version>3.6.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.4.0.991537</Version>
+      <Version>4.5.0.187-pre2</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="..\SafeAuth.Tests\SafeAuth.Tests.projitems" Label="Shared" />

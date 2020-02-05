@@ -191,12 +191,13 @@ namespace SafeAuthenticator.ViewModels
 
                 string fileName = fileData.FileName;
                 string contents = Encoding.UTF8.GetString(fileData.DataArray);
-
                 var friendlyFileName = await Application.Current.MainPage.DisplayPromptAsync(
                     "Add vault connection file",
                     "Provide a file name to identify between different vault connection files.",
+                    placeholder: "file name",
                     maxLength: 25,
-                    keyboard: Keyboard.Text);
+                    keyboard: Keyboard.Text,
+                    initialValue: string.Empty);
 
                 if (string.IsNullOrEmpty(friendlyFileName))
                 {
