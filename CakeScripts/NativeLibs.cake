@@ -30,7 +30,7 @@ enum Environment
 // --------------------------------------------------------------------------------
 // Native lib directory
 // --------------------------------------------------------------------------------
-var TAG = "0.13.0";
+var TAG = "09043cb";
 var nativeLibDirectory = Directory(string.Concat(System.IO.Path.GetTempPath(), "NativeAuthLibs"));
 var androidLibDirectory = Directory("../SafeAuthenticator.Android/lib/");
 var iosLibDirectory = Directory("../SafeAuthenticator.iOS/Native References/");
@@ -151,7 +151,7 @@ Task("UnZip-Libs")
                         if(FileExists(aFilePath))
                         {
                             DeleteFile(aFilePath);
-                        }                    
+                        }
                     }
                 }
             }
