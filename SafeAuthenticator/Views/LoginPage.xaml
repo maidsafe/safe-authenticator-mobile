@@ -32,64 +32,78 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Padding="25">
-            <Image x:Name="ConnectionSettingsMenuIcon"
-                   Margin="10,30"
-                   HeightRequest="25"
-                   HorizontalOptions="EndAndExpand"
-                   Source="gearIcon"
-                   VerticalOptions="Start"
-                   WidthRequest="25" />
+        <controls:CustomScrollView x:Name="ScrollLayout" IsScrollEnabled="False">
+            <StackLayout Padding="25">
+                <Image x:Name="ConnectionSettingsMenuIcon"
+                       Margin="10,30"
+                       HeightRequest="25"
+                       HorizontalOptions="EndAndExpand"
+                       Source="gearIcon"
+                       VerticalOptions="Start"
+                       WidthRequest="25" />
 
-            <StackLayout VerticalOptions="CenterAndExpand">
+                <StackLayout VerticalOptions="CenterAndExpand">
 
-                <Image HorizontalOptions="Center"
-                       Source="authLogo"
-                       Style="{StaticResource ImageStyle}" />
+                    <Image HorizontalOptions="Center"
+                           Source="authLogo"
+                           Style="{StaticResource ImageStyle}" />
 
-                <Label Margin="0,20,0,10"
-                       HorizontalOptions="Center"
-                       Style="{StaticResource TitleStyle}"
-                       Text="SAFE Authenticator" />
+                    <Label Margin="0,20,0,10"
+                           HorizontalOptions="Center"
+                           Style="{StaticResource TitleStyle}"
+                           Text="SAFE Authenticator" />
 
-                <controls:CustomMaterialEntry x:Name="SecretEntry"
-                                              Margin="0,30,0,10"
-                                              HeightRequest="60"
-                                              IsPassword="True"
-                                              Placeholder="Passphrase"
-                                              ReturnType="Next"
-                                              Text="{Binding AccountSecret}" />
+                    <controls:CustomMaterialEntry x:Name="SecretEntry"
+                                                  Margin="0,30,0,10"
+                                                  HeightRequest="60"
+                                                  IsPassword="True"
+                                                  Placeholder="Passphrase"
+                                                  ReturnType="Next"
+                                                  Text="{Binding AccountSecret}" />
 
-                <controls:CustomMaterialEntry x:Name="PasswordEntry"
-                                              HeightRequest="60"
-                                              IsPassword="True"
-                                              Placeholder="Password"
-                                              ReturnCommand="{Binding LoginCommand}"
-                                              ReturnType="Done"
-                                              Text="{Binding AccountPassword}" />
+                    <controls:CustomMaterialEntry x:Name="PasswordEntry"
+                                                  HeightRequest="60"
+                                                  IsPassword="True"
+                                                  Placeholder="Password"
+                                                  ReturnCommand="{Binding LoginCommand}"
+                                                  ReturnType="Done"
+                                                  Text="{Binding AccountPassword}" />
 
-                <Button Margin="0,20,0,0"
-                        Command="{Binding LoginCommand}"
-                        Text="LOGIN" />
+                    <Button Margin="0,20,0,0"
+                            Command="{Binding LoginCommand}"
+                            Text="LOGIN" />
 
-                <Label Margin="0,10,0,0"
-                       HorizontalOptions="Center"
-                       Text="CREATE ACCOUNT"
-                       TextColor="{StaticResource PrimaryColor}">
+                    <Label Margin="0,10,0,0"
+                           HorizontalOptions="Center"
+                           Text="CREATE ACCOUNT"
+                           TextColor="{StaticResource PrimaryColor}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CreateAccountCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+
+                <Label HorizontalOptions="Center"
+                       Style="{StaticResource NeedHelpStyle}"
+                       Text="Need any help?"
+                       VerticalOptions="End">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding CreateAccountCommand}" />
+                        <TapGestureRecognizer Command="{Binding NeedHelpCommand}" NumberOfTapsRequired="1" />
                     </Label.GestureRecognizers>
                 </Label>
             </StackLayout>
-
-            <Label HorizontalOptions="Center"
-                   Style="{StaticResource NeedHelpStyle}"
-                   Text="Need any help?"
-                   VerticalOptions="End">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NeedHelpCommand}" NumberOfTapsRequired="1" />
-                </Label.GestureRecognizers>
-            </Label>
-        </StackLayout>
+            <controls:CustomScrollView.Triggers>
+                <DataTrigger Binding="{Binding Source={x:Reference SecretEntry}, Path=IsFocused}"
+                             TargetType="controls:CustomScrollView"
+                             Value="True">
+                    <Setter Property="IsScrollEnabled" Value="True" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Source={x:Reference PasswordEntry}, Path=IsFocused}"
+                             TargetType="controls:CustomScrollView"
+                             Value="True">
+                    <Setter Property="IsScrollEnabled" Value="True" />
+                </DataTrigger>
+            </controls:CustomScrollView.Triggers>
+        </controls:CustomScrollView>
     </ContentPage.Content>
 </ContentPage>
