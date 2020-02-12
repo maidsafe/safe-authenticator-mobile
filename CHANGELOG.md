@@ -1,5 +1,23 @@
 # safe-authenticator-mobile Change Log
 
+## [0.2.0]
+
+* Add new choose a vault page to choose different vaults to connect to.
+* Add test coin permissions in request details dialog and app info page.
+* Update create account and login page to use material design controls.
+* Update UI to use passphrase/password instead of secret/password.
+* Update minimum supported platform versions.
+* Add better runtime permission check logic for Android devices.
+* Update README file to reflect the project related changes.
+* Remove invitation token related logic and text.
+* Remove multiple custom controls and platform renderers for better UI and performance.
+* Update Android to use AndroidX packages.
+* Remove deprecated API tests
+* Refactor to use solution level code analysis
+* Update CI to create GitHub releases on version change PR.
+* Update bindings and wrapper API to support the latest native libs.
+* Update native libs to latest scl master [#09043cb](https://github.com/maidsafe/safe_client_libs/commit/09043cbfd1911e73e70875cb7501e5a2b7b3a146)
+
 ## [0.1.5]
 
 * Fix the app crash caused by null reference exception in the material entry renderer in iOS  (#155) ([f55cd5c])(https://github.com/maidsafe/safe-authenticator-mobile/commit/f55cd5c47044d6332fc179550ca2646272683298)
