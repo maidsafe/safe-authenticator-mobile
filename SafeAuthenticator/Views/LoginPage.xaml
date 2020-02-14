@@ -32,7 +32,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <controls:CustomScrollView x:Name="ScrollLayout" IsScrollEnabled="False">
+        <ScrollView>
             <StackLayout Padding="25">
                 <Image x:Name="ConnectionSettingsMenuIcon"
                        Margin="10,30"
@@ -92,18 +92,6 @@
                     </Label.GestureRecognizers>
                 </Label>
             </StackLayout>
-            <controls:CustomScrollView.Triggers>
-                <DataTrigger Binding="{Binding Source={x:Reference SecretEntry}, Path=IsFocused}"
-                             TargetType="controls:CustomScrollView"
-                             Value="True">
-                    <Setter Property="IsScrollEnabled" Value="True" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Source={x:Reference PasswordEntry}, Path=IsFocused}"
-                             TargetType="controls:CustomScrollView"
-                             Value="True">
-                    <Setter Property="IsScrollEnabled" Value="True" />
-                </DataTrigger>
-            </controls:CustomScrollView.Triggers>
-        </controls:CustomScrollView>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
