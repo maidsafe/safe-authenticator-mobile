@@ -160,11 +160,7 @@
     <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.Manual.cs">
       <Link>Helpers\AuthBindings.Manual.cs</Link>
     </Compile>
-    <Compile Include="Extensions\FontExtensions.cs" />
-    <Compile Include="Extensions\KeyboardExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Extensions\ColorExtension.cs" />
     <Compile Include="Helpers\AppHandler.cs" />
     <Compile Include="Helpers\AppleNativeBrowserService.cs" />
     <Compile Include="Helpers\AppleNativeProgressDialogService.cs" />
@@ -240,7 +236,7 @@
       <Version>1.4.0-pre2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.5.0.187-pre2</Version>
+      <Version>4.5.0.282-pre4</Version>
     </PackageReference>
     <PackageReference Include="XamEffects">
       <Version>1.6.3</Version>
@@ -249,7 +245,7 @@
       <Version>2.1.36-beta</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.Visual.Material">
-      <Version>4.5.0.187-pre2</Version>
+      <Version>4.5.0.282-pre4</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
