@@ -52,9 +52,7 @@ namespace SafeAuthenticator.ViewModels
         {
             AddNewVaultConnectionFileCommand = new Command(async () => await PickFileFromTheDeviceAsync());
             DeleteAllVaultConnectionFilesCommand = new Command(async () => await DeleteAllVaultFilesAsync());
-            VaultConnectionFileSelectionCommand = new Command(
-                async () => await ShowFileSelectionOptionsAsync(),
-                () => SelectedFile != null);
+            VaultConnectionFileSelectionCommand = new Command(async (object fileId) => await ShowFileSelectionOptionsAsync(fileId));
             SetActiveFileCommand = new Command(async (object fileId) => await SetActiveVaultFileAsync(fileId));
             RefreshVaultConnectionFilesList();
         }
@@ -92,17 +90,15 @@ namespace SafeAuthenticator.ViewModels
             if (Device.RuntimePlatform == Device.iOS && VaultConnectionFiles != null)
             {
                 VaultConnectionFiles.Clear();
-                VaultConnectionFiles = new ObservableCollection<VaultConnectionFile>(
-                VaultConnectionFileManager.GetAllFileEntries());
             }
-            else
-            {
-                VaultConnectionFiles = new ObservableCollection<VaultConnectionFile>(
-                VaultConnectionFileManager.GetAllFileEntries());
-            }
+
+            VaultConnectionFiles = new ObservableCollection<VaultConnectionFile>(
+            VaultConnectionFileManager.GetAllFileEntries());
+            if (VaultConnectionFiles != null)
+                SelectedFile = VaultConnectionFiles.FirstOrDefault(f => f.IsActive);
         }
 
-        private async Task ShowFileSelectionOptionsAsync()
+        private async Task ShowFileSelectionOptionsAsync(object fileId)
         {
             var deletedSelected = await Application.Current.MainPage.DisplayAlert(
                 "Choose a vault",
@@ -111,7 +107,7 @@ namespace SafeAuthenticator.ViewModels
                 "Cancel");
 
             if (deletedSelected)
-                DeleteVaultFileAsync(SelectedFile.FileId);
+                DeleteVaultFileAsync((int)fileId);
 
             SelectedFile = null;
         }

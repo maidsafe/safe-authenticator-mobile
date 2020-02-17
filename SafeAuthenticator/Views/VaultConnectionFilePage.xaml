@@ -1,7 +1,7 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage x:Class="SafeAuthenticator.Views.VaultConnectionFilePage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SafeAuthenticator.Views.VaultConnectionFilePage"
              xmlns:vm="clr-namespace:SafeAuthenticator.ViewModels"
              Title="Choose a Vault">
 
@@ -13,8 +13,7 @@
                         <VisualState x:Name="Normal" />
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
-                                <Setter Property="BackgroundColor"
-                                        Value="LightGray" />
+                                <Setter Property="BackgroundColor" Value="LightGray" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -24,58 +23,60 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="addNew"
-                     Text="Add new file"
-                     Command="{Binding AddNewVaultConnectionFileCommand}"
-                     Order="Primary">
-        </ToolbarItem>
-        <ToolbarItem IconImageSource="deleteAll"
-                     Text="Delete all files"
-                     Command="{Binding DeleteAllVaultConnectionFilesCommand}"
-                     Order="Primary">
-        </ToolbarItem>
+        <ToolbarItem Command="{Binding AddNewVaultConnectionFileCommand}"
+                     IconImageSource="addNew"
+                     Order="Primary"
+                     Text="Add new file" />
+        <ToolbarItem Command="{Binding DeleteAllVaultConnectionFilesCommand}"
+                     IconImageSource="deleteAll"
+                     Order="Primary"
+                     Text="Delete all files" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout Padding="0, 10">
-            <CollectionView ItemsSource="{Binding VaultConnectionFiles}"
-                            SelectionMode="Single"
-                            SelectedItem="{Binding SelectedFile}"
-                            SelectionChangedCommand="{Binding VaultConnectionFileSelectionCommand}">
-                <CollectionView.EmptyView>
-                    <Label Text="No vault connection file exists."
-                           HorizontalTextAlignment="Center"
-                           Padding="20" />
-                </CollectionView.EmptyView>
-                <CollectionView.ItemTemplate>
+        <StackLayout Padding="0,10">
+            <ListView HasUnevenRows="True"
+                      ItemTapped="ListView_ItemTapped"
+                      ItemsSource="{Binding VaultConnectionFiles}"
+                      SelectionMode="Single"
+                      SeparatorVisibility="None">
+                <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Padding="20, 10" HeightRequest="30" Orientation="Horizontal">
-                            <Label FontSize="Medium"
-                                    Text="{Binding FileName}"
-                                    HorizontalOptions="FillAndExpand"
-                                    VerticalOptions="Center" />
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Clicked="DeleteFileContextClicked"
+                                          CommandParameter="{Binding FileId}"
+                                          IconImageSource="deleteAll"
+                                          Text="Delete" />
+                            </ViewCell.ContextActions>
+                            <StackLayout Padding="20,10"
+                                         HeightRequest="30"
+                                         Orientation="Horizontal">
+                                <Label FontSize="Medium"
+                                       HorizontalOptions="FillAndExpand"
+                                       Text="{Binding FileName}"
+                                       VerticalOptions="Center" />
 
-                            <Image Source="emptycheck"
-                                   WidthRequest="40"
-                                   HeightRequest="40">
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer CommandParameter="{Binding FileId}"
-                                                          Command="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=SetActiveFileCommand}"
-                                                          NumberOfTapsRequired="1" />
-                                </Image.GestureRecognizers>
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image"
-                                                 Binding="{Binding IsActive}"
-                                                 Value="True">
-                                        <Setter Property="Source"
-                                                Value="filledcheck" />
-                                    </DataTrigger>
-                                </Image.Triggers>
-                            </Image>
-                                               
-                        </StackLayout>
+                                <Image HeightRequest="40"
+                                       Source="emptycheck"
+                                       WidthRequest="40">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=SetActiveFileCommand}"
+                                                              CommandParameter="{Binding FileId}"
+                                                              NumberOfTapsRequired="1" />
+                                    </Image.GestureRecognizers>
+                                    <Image.Triggers>
+                                        <DataTrigger Binding="{Binding IsActive}"
+                                                     TargetType="Image"
+                                                     Value="True">
+                                            <Setter Property="Source" Value="filledcheck" />
+                                        </DataTrigger>
+                                    </Image.Triggers>
+                                </Image>
+                            </StackLayout>
+                        </ViewCell>
                     </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
