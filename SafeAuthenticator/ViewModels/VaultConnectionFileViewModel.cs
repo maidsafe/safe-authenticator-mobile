@@ -116,7 +116,17 @@ namespace SafeAuthenticator.ViewModels
                         await SetActiveVaultFileAsync((int)fileId);
                         break;
                     case "Delete":
+                        var activeFile = VaultConnectionFiles.FirstOrDefault(f => f.IsActive);
+                        var deletingActiveFile = false;
+
+                        if (activeFile.FileId == (int)fileId)
+                            deletingActiveFile = true;
+
                         DeleteVaultFileAsync((int)fileId);
+
+                        if (deletingActiveFile && VaultConnectionFiles.Count > 0)
+                            await SetActiveVaultFileAsync(VaultConnectionFiles[0].FileId);
+
                         break;
                 }
 

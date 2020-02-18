@@ -7,8 +7,7 @@
 // specific language governing permissions and limitations relating to use of the SAFE Network
 // Software.
 
-using System;
-using System.Diagnostics;
+using System.Threading.Tasks;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.ViewModels;
 using Xamarin.Forms;
@@ -53,27 +52,6 @@ namespace SafeAuthenticator.Views
             {
                 _viewModel = new VaultConnectionFileViewModel();
                 BindingContext = _viewModel;
-            }
-        }
-
-        void DeleteFileContextClicked(object sender, System.EventArgs e)
-        {
-            if (_viewModel != null)
-            {
-                _viewModel.VaultConnectionFileSelectionCommand.Execute((sender as MenuItem).CommandParameter);
-            }
-        }
-
-        void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            try
-            {
-                if (sender is ListView listView && listView.SelectedItem != null)
-                    listView.SelectedItem = null;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
             }
         }
     }
