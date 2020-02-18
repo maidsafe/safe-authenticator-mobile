@@ -152,6 +152,7 @@
     <BundleResource Include="Resources\gearIcon.png" />
     <BundleResource Include="Resources\emptycheck.png" />
     <BundleResource Include="Resources\filledcheck.png" />
+    <BundleResource Include="Resources\selected.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.cs">

@@ -16,6 +16,11 @@
                                 <Setter Property="BackgroundColor" Value="LightGray" />
                             </VisualState.Setters>
                         </VisualState>
+                        <VisualState x:Name="Focused">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="LightGray" />
+                            </VisualState.Setters>
+                        </VisualState>
                     </VisualStateGroup>
                 </VisualStateGroupList>
             </Setter>
@@ -34,49 +39,34 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="0,10">
-            <ListView HasUnevenRows="True"
-                      ItemTapped="ListView_ItemTapped"
-                      ItemsSource="{Binding VaultConnectionFiles}"
-                      SelectionMode="Single"
-                      SeparatorVisibility="None">
-                <ListView.ItemTemplate>
+            <CollectionView ItemsSource="{Binding VaultConnectionFiles}" SelectionMode="Single">
+                <CollectionView.EmptyView>
+                    <Label Padding="20"
+                           HorizontalTextAlignment="Center"
+                           Text="No vault connection file exists." />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.ContextActions>
-                                <MenuItem Clicked="DeleteFileContextClicked"
-                                          CommandParameter="{Binding FileId}"
-                                          IconImageSource="deleteAll"
-                                          Text="Delete" />
-                            </ViewCell.ContextActions>
-                            <StackLayout Padding="20,10"
-                                         HeightRequest="30"
-                                         Orientation="Horizontal">
-                                <Label FontSize="Medium"
-                                       HorizontalOptions="FillAndExpand"
-                                       Text="{Binding FileName}"
-                                       VerticalOptions="Center" />
-
-                                <Image HeightRequest="40"
-                                       Source="emptycheck"
-                                       WidthRequest="40">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=SetActiveFileCommand}"
-                                                              CommandParameter="{Binding FileId}"
-                                                              NumberOfTapsRequired="1" />
-                                    </Image.GestureRecognizers>
-                                    <Image.Triggers>
-                                        <DataTrigger Binding="{Binding IsActive}"
-                                                     TargetType="Image"
-                                                     Value="True">
-                                            <Setter Property="Source" Value="filledcheck" />
-                                        </DataTrigger>
-                                    </Image.Triggers>
-                                </Image>
-                            </StackLayout>
-                        </ViewCell>
+                        <StackLayout Padding="20,10"
+                                     HeightRequest="30"
+                                     Orientation="Horizontal">
+                            <Label FontSize="Medium"
+                                   HorizontalOptions="FillAndExpand"
+                                   Text="{Binding FileName}"
+                                   VerticalOptions="Center" />
+                            <Image HeightRequest="40"
+                                   IsVisible="{Binding IsActive}"
+                                   Source="selected"
+                                   WidthRequest="40" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=VaultConnectionFileSelectionCommand}"
+                                                      CommandParameter="{Binding FileId}"
+                                                      NumberOfTapsRequired="1" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

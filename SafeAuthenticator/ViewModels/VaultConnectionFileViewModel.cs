@@ -100,16 +100,28 @@ namespace SafeAuthenticator.ViewModels
 
         private async Task ShowFileSelectionOptionsAsync(object fileId)
         {
-            var deletedSelected = await Application.Current.MainPage.DisplayAlert(
-                "Choose a vault",
-                "Do you want to delete selected vault connection file.",
-                "Delete",
-                "Cancel");
+            var vaultFile = VaultConnectionFiles.FirstOrDefault(f => f.FileId == (int)fileId);
 
-            if (deletedSelected)
-                DeleteVaultFileAsync((int)fileId);
+            if (vaultFile != null)
+            {
+                var selectedOption = await Application.Current.MainPage.DisplayActionSheet(
+                    vaultFile?.FileName,
+                    "Cancel",
+                    null,
+                    new string[] { "Use this vault", "Delete" });
 
-            SelectedFile = null;
+                switch (selectedOption)
+                {
+                    case "Use this vault":
+                        await SetActiveVaultFileAsync((int)fileId);
+                        break;
+                    case "Delete":
+                        DeleteVaultFileAsync((int)fileId);
+                        break;
+                }
+
+                SelectedFile = null;
+            }
         }
 
         private async Task DeleteAllVaultFilesAsync()
