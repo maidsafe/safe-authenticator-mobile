@@ -2,6 +2,7 @@
 <ContentPage x:Class="SafeAuthenticator.Views.VaultConnectionFilePage"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              xmlns:vm="clr-namespace:SafeAuthenticator.ViewModels"
              Title="Choose a Vault">
 
@@ -49,17 +50,27 @@
                     <DataTemplate>
                         <StackLayout Padding="20,10"
                                      HeightRequest="30"
-                                     Orientation="Horizontal">
+                                     Orientation="Horizontal"
+                                     Spacing="20">
+                            <input:RadioButton ClickCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=SetActiveFileCommand}"
+                                               CommandParameter="{Binding FileId}"
+                                               IsChecked="{Binding IsActive}"
+                                               IsEnabled="False" />
                             <Label FontSize="Medium"
                                    HorizontalOptions="FillAndExpand"
                                    Text="{Binding FileName}"
                                    VerticalOptions="Center" />
-                            <Image HeightRequest="40"
-                                   IsVisible="{Binding IsActive}"
-                                   Source="selected"
-                                   WidthRequest="40" />
+                            <Image HeightRequest="25"
+                                   Source="delete"
+                                   WidthRequest="25">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=VaultConnectionFileSelectionCommand}"
+                                                          CommandParameter="{Binding FileId}"
+                                                          NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                            </Image>
                             <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=VaultConnectionFileSelectionCommand}"
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=SetActiveFileCommand}"
                                                       CommandParameter="{Binding FileId}"
                                                       NumberOfTapsRequired="1" />
                             </StackLayout.GestureRecognizers>

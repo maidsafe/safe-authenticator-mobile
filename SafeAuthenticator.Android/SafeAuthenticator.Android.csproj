@@ -161,15 +161,11 @@
       <Generator>
       </Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\emptycheck.png">
-      <SubType></SubType>
-      <Generator></Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\filledcheck.png">
-      <SubType></SubType>
-      <Generator></Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\drawable\selected.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\delete.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
@@ -281,6 +277,9 @@
       <Version>4.5.0.282-pre4</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.1.0-rc1" />
+    <PackageReference Include="Xamarin.Forms.InputKit">
+      <Version>3.1.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\MData.png" />

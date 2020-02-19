@@ -100,38 +100,30 @@ namespace SafeAuthenticator.ViewModels
 
         private async Task ShowFileSelectionOptionsAsync(object fileId)
         {
-            var vaultFile = VaultConnectionFiles.FirstOrDefault(f => f.FileId == (int)fileId);
+            var deletedSelected = await Application.Current.MainPage.DisplayAlert(
+                "Choose a vault",
+                "Do you want to delete vault connection file.",
+                "Delete",
+                "Cancel");
 
-            if (vaultFile != null)
+            if (deletedSelected)
             {
-                var selectedOption = await Application.Current.MainPage.DisplayActionSheet(
-                    vaultFile?.FileName,
-                    "Cancel",
-                    null,
-                    new string[] { "Use this vault", "Delete" });
+                var vaultFile = VaultConnectionFiles.FirstOrDefault(f => f.FileId == (int)fileId);
+                var activeFile = VaultConnectionFiles.FirstOrDefault(f => f.IsActive);
+                var deletingActiveFile = false;
 
-                switch (selectedOption)
-                {
-                    case "Use this vault":
-                        await SetActiveVaultFileAsync((int)fileId);
-                        break;
-                    case "Delete":
-                        var activeFile = VaultConnectionFiles.FirstOrDefault(f => f.IsActive);
-                        var deletingActiveFile = false;
+                if (activeFile.FileId == (int)fileId)
+                    deletingActiveFile = true;
 
-                        if (activeFile.FileId == (int)fileId)
-                            deletingActiveFile = true;
+                if (vaultFile != null)
+                    DeleteVaultFileAsync((int)fileId);
 
-                        DeleteVaultFileAsync((int)fileId);
+                DeleteVaultFileAsync((int)fileId);
 
-                        if (deletingActiveFile && VaultConnectionFiles.Count > 0)
-                            await SetActiveVaultFileAsync(VaultConnectionFiles[0].FileId);
-
-                        break;
-                }
-
-                SelectedFile = null;
+                if (deletingActiveFile && VaultConnectionFiles.Count > 0)
+                    await SetActiveVaultFileAsync(VaultConnectionFiles[0].FileId);
             }
+            SelectedFile = null;
         }
 
         private async Task DeleteAllVaultFilesAsync()

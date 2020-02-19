@@ -150,9 +150,8 @@
     <BundleResource Include="Resources\deleteAll%403x.png" />
     <BundleResource Include="Resources\select.png" />
     <BundleResource Include="Resources\gearIcon.png" />
-    <BundleResource Include="Resources\emptycheck.png" />
-    <BundleResource Include="Resources\filledcheck.png" />
     <BundleResource Include="Resources\selected.png" />
+    <BundleResource Include="Resources\delete.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.cs">
@@ -246,6 +245,9 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.Visual.Material">
       <Version>4.5.0.282-pre4</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms.InputKit">
+      <Version>3.1.1</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
