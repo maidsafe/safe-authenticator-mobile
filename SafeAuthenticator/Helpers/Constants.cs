@@ -13,8 +13,7 @@ namespace SafeAuthenticator.Helpers
     {
         // ErrorCode
         internal const int UnexpectedError = -2000;
-        internal const int RoutingInterfaceError = -11;
-        internal const int NoSuchAccountError = -101;
+        internal const int NoSuchAccountError = -5002;
         internal const int SymmetricDecipherFailureError = -3;
         internal const int AccountExistsError = -102;
         internal const int SharedMDataDeniedError = -206;
@@ -23,9 +22,7 @@ namespace SafeAuthenticator.Helpers
 
         // ErrorCodeMessage
         internal const string CouldNotConnect = "Could not connect to the SAFE Network";
-        internal const string UpdateIp = "Try updating your IP on invite.maidsafe.net";
-        internal const string AccountNotPresent = "Account does not exist";
-        internal const string IncorrectPassword = "Incorrect password";
+        internal const string InvalidCredentials = "Login details not found";
         internal const string AccountAlreadyExists = "Account already exists";
         internal const string SharedMDataRequestDenied = "SharedMData request denied";
         internal const string InsufficientAccountBalance = "Insufficient account balance";

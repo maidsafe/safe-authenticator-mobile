@@ -44,12 +44,10 @@ namespace SafeAuthenticator.Helpers
             {
                 case Constants.UnexpectedError:
                     return Constants.CouldNotConnect;
-                case Constants.RoutingInterfaceError:
-                    return Constants.UpdateIp;
                 case Constants.NoSuchAccountError:
-                    return Constants.AccountNotPresent;
+                    return Constants.InvalidCredentials;
                 case Constants.SymmetricDecipherFailureError:
-                    return Constants.IncorrectPassword;
+                    return Constants.InvalidCredentials;
                 case Constants.AccountExistsError:
                     return Constants.AccountAlreadyExists;
                 case Constants.SharedMDataDeniedError:
