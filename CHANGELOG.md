@@ -1,5 +1,13 @@
 # safe-authenticator-mobile Change Log
 
+## [0.2.1]
+
+* Updated `choose a vault` page for better user experience.
+* Updated login page to allow scroll on small screen devices.
+* Updated login page to show the same message for invalid credentials.
+* Updated app interface to prevent iOS system theme overloading.
+* Updated packages and removed older custom control extension files.
+
 ## [0.2.0]
 
 * Add new choose a vault page to choose different vaults to connect to.

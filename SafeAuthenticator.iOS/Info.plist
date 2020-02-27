@@ -55,7 +55,7 @@
 	<key>UIMainStoryboardFile</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.2.0</string>
+	<string>0.2.1</string>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 </dict>
