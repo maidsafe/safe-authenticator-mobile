@@ -21,11 +21,10 @@ The SAFE Authenticator acts as a gateway to the [SAFE Network](https://safenetwo
     * [Platform Invoke](#Interoperability-between-C-managed-and-unmanaged-code)
     * [Tests](#Tests)
     * [Tools required](#Tools-required)
-5. [Contributing](#Contributing)
-6. [Useful resources](#Useful-resources)
-7. [Copyrights](#Copyrights)
-8. [Further Help](#Further-Help)
-9. [License](#License)
+5. [Useful resources](#Useful-resources)
+6. [Further Help](#Further-Help)
+7. [License](#License)
+8. [Contributing](#Contributing)
 
 ## Overview
 
@@ -43,7 +42,7 @@ The app contains .NET wrapper for [safe_authenticator](https://github.com/maidsa
   * Auto-reconnect: Turn on auto-reconnect to automatically log into the app when resuming from background mode.
 
 * **Handle Access Requests from Apps:**
-  The SAFE application authorizes through the Authenticator with the required access permissions. The application can create its own container and request access to default containers of the SAFE Network i.e. documents, downloads, music, pictures, videos, public and public names, or other application's containers through the authorization request.
+  The SAFE application authorises through the Authenticator with the required access permissions. The application can create its own container and request access to default containers of the SAFE Network i.e. documents, downloads, music, pictures, videos, public and public names, or other application's containers through the authorisation request.
 
   * **Auth Request:**
     Allow apps to request default container access & also to create an app's own private container.
@@ -54,7 +53,7 @@ The app contains .NET wrapper for [safe_authenticator](https://github.com/maidsa
   * **Unregistered Access:**
     Allow an app to read public unencrypted content.
 
-* **User Grants Access:** When the user approves the request, application specific encryption keys are generated. The application will be identified in the network using its keys. When the user grants or denies authorization, the application will receive a URI. The user has the option to grant permission to an application to access user data.
+* **User Grants Access:** When the user approves the request, application specific encryption keys are generated. The application will be identified in the network using its keys. When the user grants or denies authorisation, the application will receive a URI. The user has the option to grant permission to an application to access user data.
 
 * **User can revoke app access:** User has the option to revoke access for an app that they have granted access to previously.
 
@@ -66,7 +65,7 @@ The app contains .NET wrapper for [safe_authenticator](https://github.com/maidsa
 
 The latest version of the Authenticator app can be downloaded using following links and QR code for Android and iOS devices.
 
-|Platform|OS & Architecture |Downlaod Link| QR Code|
+|Platform|OS & Architecture |Download Link| QR Code|
 |-|-|-|-|
 |Android| 5.0+ (armeabi-v7a, x86_64) | [AppCenter](https://appcenter.ms/orgs/MaidSafe-Apps/apps/Safe-Authenticator-Mobile/distribute/distribution-groups/Community%20Release/releases), [GitHub](https://github.com/maidsafe/safe-authenticator-mobile/releases/latest) | <img src="docs/AppCenter-QR/android.png"  width="100" alt="Android-QR" /> |
 |iOS    | iOS 11+ (ARM64, x64)       | [AppCenter](https://appcenter.ms/orgs/MaidSafe-Apps/apps/Safe-Mobile-Authenticator/distribute/distribution-groups/Authenticator%20iOS/releases) | <img src="docs/AppCenter-QR/ios.png"  width="100" alt="iOS-QR" /> |
@@ -126,60 +125,6 @@ We use shared unit tests for `safe_authenticator` API which can be run on Androi
   * [Mobile development with .NET (Xamarin)](https://visualstudio.microsoft.com/vs/visual-studio-workloads/)
 * [Cake](https://cakebuild.net/) - Cross-platform build script tool used to build the projects and run the tests.
 
-## Contributing
-
-As an open source project, we're excited to accept contributions to the code from outside of MaidSafe and are striving to make that as easy and clean as possible.
-
-With enforced linting and commit style clearly laid out, as well as a list of more accessible issues for any project labelled with Help Wanted.
-
-### Project board
-
-GitHub project boards are used by the maintainers of this repository to keep track and organise development priorities.
-
-There could be one or more active project boards for a repository. One main project will be used to manage all tasks corresponding to the main development stream (master branch). A separate project may be used to manage each PoC and/or prototyping development, and each of them will track a dedicated development branch.
-
-New features which imply a big number of changes will be developed in a separate branch but tracked in the same main project board, re-basing it with master branch regularly and fully testing the feature on its branch before it's merged into the master branch after it was fully approved.
-
-The main project contains the following Kanban columns to track the status of each development task:
-
-* `Triage`: New issues which need to be reviewed and evaluated before taking the decision to implement it.
-* `Low Priority`: Issues that will be picked up in the current milestone.
-* `In Progress`: Task is assigned to a person and it's in progress.
-* `Needs Review`: A Pull Request which completes the task has been sent and it needs to be reviewed.
-* `Reviewer approved`: The PR sent was approved by reviewer/s and it's ready for merge.
-* `Ready for QA`: The fix for the issue has been merged into master and is ready for final QA testing.
-* `Done`: QA has verified that the fix is complete and does not affect anything else.
-
-### Issues
-
-Issues should clearly lay out the problem, platforms experienced on, as well as steps to reproduce the issue.
-
-This aids in fixing the issues but also quality assurance, to check that the issue has indeed been fixed.
-
-Issues are labelled in the following way depending on its type:
-
-* `bug`: The issue is a bug in the product.
-* `feature`: The issue is a new and inexistent feature to be implemented.
-* `enhancement`: The issue is an enhancement to either an existing feature in the product or to the infrastructure around the development process.
-* `blocked`: The issue cannot be resolved as it is blocked by another task. In this case, the task that it is blocked by should be referenced.
-* `documentation`: A documentation-related task.
-* `e/__`: Specifies the effort required for the task.
-* `p/__`: Specifies the priority of the task.
-
-### Commits and Pull Requests
-
-Commit message should follow [these guidelines](https://github.com/autumnai/leaf/blob/master/CONTRIBUTING.md#git-commit-guidelines) and should therefore strive to tackle one issue/feature, and code should be pre-linted before commit.
-
-PRs should clearly link to an issue to be tracked on the project board. A PR that implements/fixes an issue is linked using one of the [GitHub keywords](https://help.github.com/articles/closing-issues-using-keywords). Although these type of PRs will not be added themselves to a project board (just to avoid redundancy with the linked issue). However, PRs which were sent spontaneously and not linked to any existing issue will be added to the project and should go through the same process as any other tasks/issues.
-
-Where appropriate, commits should _always_ contain tests for the code in question.
-
-### Changelog and releases
-
-The changelog is currently maintained manually, each PR sent is expected to have the corresponding modification in the CHANGELOG file, under the 'Not released' section.
-
-The release process is triggered by the maintainers of the package once it is merged to master.
-
 ## Useful resources
 
 * [Using High-Performance C++ Libraries in Cross-Platform Xamarin.Forms Applications](https://devblogs.microsoft.com/xamarin/using-c-libraries-xamarin-forms-apps/)
@@ -188,10 +133,6 @@ The release process is triggered by the maintainers of the package once it is me
 * [Using Native Libraries in Xamarin.Android](https://docs.microsoft.com/en-us/xamarin/android/platform/native-libraries)
 * [Referencing Native Libraries in Xamarin.iOS](https://docs.microsoft.com/en-us/xamarin/ios/platform/native-interop)
 
-## Copyrights
-
-Copyrights in the SAFE Network are retained by their contributors. No copyright assignment is required to contribute to this project.
-
 ## Further help
 
 Get your developer related questions clarified on [SAFE Dev Forum](https://forum.safedev.org/). If you're looking to share any ideas or thoughts on the SAFE Network you can reach out on [SAFE Network Forum](https://safenetforum.org/)
@@ -199,3 +140,11 @@ Get your developer related questions clarified on [SAFE Dev Forum](https://forum
 ## License
 
 This SAFE Network library is dual-licensed under the Modified BSD ([LICENSE-BSD](LICENSE-BSD) https://opensource.org/licenses/BSD-3-Clause) or the MIT license ([LICENSE-MIT](LICENSE-MIT) https://opensource.org/licenses/MIT) at your option.
+
+## Contributing
+
+Want to contribute? Great :tada:
+
+There are many ways to give back to the project, whether it be writing new code, fixing bugs, or just reporting errors. All forms of contributions are encouraged!
+
+For instructions on how to contribute, see our [Guide to contributing](https://github.com/maidsafe/QA/blob/master/CONTRIBUTING.md).
