@@ -30,7 +30,7 @@ enum Environment
 // --------------------------------------------------------------------------------
 // Native lib directory
 // --------------------------------------------------------------------------------
-var TAG = "62969a6";
+var TAG = "827f479";
 var nativeLibDirectory = Directory(string.Concat(System.IO.Path.GetTempPath(), "NativeAuthLibs"));
 var androidLibDirectory = Directory("../SafeAuthenticator.Android/lib/");
 var iosLibDirectory = Directory("../SafeAuthenticator.iOS/Native References/");
@@ -76,11 +76,11 @@ Task("Download-Libs")
             foreach (var target in targets)
             {
                 var targetDirectory = $"{nativeLibDirectory.Path}/{item}/{target}";
-                var zipFilename = $"safe_authenticator{type}-{TAG}-{target}.zip";
+                var zipFilename = $"safe_authenticator_ffi{type}-{TAG}-{target}.zip";
                 var zipDownloadUrl = $"https://safe-client-libs.s3.eu-west-2.amazonaws.com/{zipFilename}";
                 var zipSavePath = $"{nativeLibDirectory.Path}/{item}/{target}/{zipFilename}";
-                Information($"Download Url : {zipDownloadUrl}");
                 Information($"Downloading : {zipFilename}");
+                Information($"Url : {zipDownloadUrl}");
                 if (!DirectoryExists(targetDirectory))
                     CreateDirectory(targetDirectory);
 
@@ -128,14 +128,14 @@ Task("UnZip-Libs")
             foreach (var target in targets)
             {
 
-                var zipFilename = $"safe_authenticator{type.Item2}-{TAG}-{target}.zip";
+                var zipFilename = $"safe_authenticator_ffi{type.Item2}-{TAG}-{target}.zip";
                 var zipSavePath = $"{nativeLibDirectory.Path}/{item}/{target}/{zipFilename}";
                 var zipFiles = GetFiles(string.Format(zipSavePath));
 
                 foreach (var zip in zipFiles)
                 {
                     var filename = zip.GetFilename();
-                    Information(" Unzipping : " + filename);
+                    Information("Unzipping : " + filename);
                     var platformOutputDirectory = new StringBuilder();
                     platformOutputDirectory.Append(outputDirectory);
 
@@ -145,13 +145,11 @@ Task("UnZip-Libs")
                         platformOutputDirectory.Append("/armeabi-v7a");
 
                     Unzip(zip, platformOutputDirectory.ToString());
-                    if (target.Equals(ANDROID_X86_64) || target.Equals(ANDROID_ARMEABI_V7A))
+
+                    var unZippedFiles = GetFiles($"{platformOutputDirectory.ToString()}/*.*");
+                    foreach (var file in unZippedFiles)
                     {
-                        var aFilePath = File(platformOutputDirectory.ToString() + "/libsafe_authenticator.a");
-                        if(FileExists(aFilePath))
-                        {
-                            DeleteFile(aFilePath);
-                        }
+                    MoveFile(file.FullPath, file.FullPath.Replace("safe_authenticator_ffi", "safe_authenticator"));
                     }
                 }
             }
