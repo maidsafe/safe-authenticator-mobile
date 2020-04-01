@@ -11,6 +11,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -24,11 +25,17 @@ namespace SafeAuthenticator.ViewModels
 {
     internal class VaultConnectionFileViewModel : BaseViewModel
     {
+        private string _vaultS3DownloadLink = "https://safe-vault-config.s3.eu-west-2.amazonaws.com/shared-section/vault_connection_info.config";
+
+        private string _defaultVaultFileName = "MaidSafe hosted vault";
+
         public ICommand AddNewVaultConnectionFileCommand { get; }
 
         public ICommand DeleteAllVaultConnectionFilesCommand { get;  }
 
         public ICommand VaultConnectionFileSelectionCommand { get;  }
+
+        public ICommand DownloadMaidSafeVaultCommand { get; }
 
         public ICommand SetActiveFileCommand { get; }
 
@@ -54,7 +61,52 @@ namespace SafeAuthenticator.ViewModels
             DeleteAllVaultConnectionFilesCommand = new Command(async () => await DeleteAllVaultFilesAsync());
             VaultConnectionFileSelectionCommand = new Command(async (object fileId) => await ShowFileSelectionOptionsAsync(fileId));
             SetActiveFileCommand = new Command(async (object fileId) => await SetActiveVaultFileAsync(fileId));
+            DownloadMaidSafeVaultCommand = new Command(async () => await DownloadAndUseMaidSafeVaultConnectionFileAsync());
             RefreshVaultConnectionFilesList();
+        }
+
+        private async Task DownloadAndUseMaidSafeVaultConnectionFileAsync()
+        {
+            try
+            {
+                using (NativeProgressDialog.ShowNativeDialog("Download vault connection file"))
+                {
+                    using (var client = new HttpClient())
+                    {
+                        using (var response = await client.GetAsync(_vaultS3DownloadLink))
+                        {
+                            if (response.IsSuccessStatusCode)
+                            {
+                                var fileContent = await response.Content.ReadAsStringAsync();
+                                if (fileContent.Length > 0)
+                                {
+                                    var (newlyAddedVaultFile, isFirst) =
+                                        VaultConnectionFileManager.AddNewVaultConnectionConfigFile(
+                                            _defaultVaultFileName,
+                                            fileContent);
+
+                                    if (newlyAddedVaultFile != null)
+                                        await SetActiveVaultFileAsync(newlyAddedVaultFile.FileId);
+
+                                    RefreshVaultConnectionFilesList();
+                                }
+                            }
+                            else
+                            {
+                                throw new Exception("Failed to download file from S3.");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Download vault connection file",
+                    "Failed to download the vault connection file.",
+                    "ok");
+                Debug.WriteLine(ex.Message);
+            }
         }
 
         private async Task SetActiveVaultFileAsync(object fileId)
