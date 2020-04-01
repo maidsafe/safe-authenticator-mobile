@@ -49,7 +49,7 @@
                                      Spacing="20"
                                      VerticalOptions="Center">
                             <Label HorizontalTextAlignment="Center"
-                                   Text="You haven't added any vault connection file to connect to. You can starting using MaidSafe's shared section by pressing download button." />
+                                   Text="No connection file found. Either add your local section's connection file, or you can automatically add connection details for MaidSafe's latest shared section by clicking the download button below. " />
                             <Button Command="{Binding DownloadMaidSafeVaultCommand}"
                                     HorizontalOptions="Center"
                                     Text="Download"

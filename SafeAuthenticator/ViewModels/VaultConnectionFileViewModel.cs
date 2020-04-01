@@ -27,7 +27,7 @@ namespace SafeAuthenticator.ViewModels
     {
         private string _vaultS3DownloadLink = "https://safe-vault-config.s3.eu-west-2.amazonaws.com/shared-section/vault_connection_info.config";
 
-        private string _defaultVaultFileName = "MaidSafe hosted vault";
+        private string _defaultVaultFileName = "MaidSafe hosted section";
 
         public ICommand AddNewVaultConnectionFileCommand { get; }
 
