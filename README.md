@@ -57,7 +57,7 @@ The app contains .NET wrapper for [safe_authenticator](https://github.com/maidsa
 
 * **User can revoke app access:** User has the option to revoke access for an app that they have granted access to previously.
 
-* **Select vault for the connection:** User can connect to the different vaults by choosing different vault connection info file from the settings.
+* **Select network:** User can connect to the different networks using different network connection files from the settings page.
 
 ## User Guide
 

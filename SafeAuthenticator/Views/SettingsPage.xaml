@@ -1,28 +1,33 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage x:Class="SafeAuthenticator.Views.SettingsPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SafeAuthenticator.Views.SettingsPage"
              xmlns:XamEffects="clr-namespace:XamEffects;assembly=XamEffects"
              Title="Settings">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style x:Key="TitleStyle" TargetType="Label">
+            <Style x:Key="TitleStyle"
+                   TargetType="Label">
                 <Setter Property="FontSize" Value="{StaticResource ExtraLargeSize}" />
                 <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
             </Style>
-            <Style x:Key="ItemStyle" TargetType="Label">
+            <Style x:Key="ItemStyle"
+                   TargetType="Label">
                 <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
             </Style>
-            <Style x:Key="LogoutStyle" TargetType="Label">
+            <Style x:Key="LogoutStyle"
+                   TargetType="Label">
                 <Setter Property="FontSize" Value="{StaticResource ExtraLargeSize}" />
             </Style>
-            <Style x:Key="BoxViewStyle" TargetType="BoxView">
+            <Style x:Key="BoxViewStyle"
+                   TargetType="BoxView">
                 <Setter Property="HeightRequest" Value="0.5" />
                 <Setter Property="Color" Value="{StaticResource GreySmokeMediumColor}" />
             </Style>
-            <Style x:Key="ExternalLinkStyle" TargetType="StackLayout">
+            <Style x:Key="ExternalLinkStyle"
+                   TargetType="StackLayout">
                 <Setter Property="HeightRequest" Value="40" />
             </Style>
         </ResourceDictionary>
@@ -31,10 +36,10 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Spacing="15">
-                <StackLayout Padding="16, 10"
+                <StackLayout Padding="16,10"
                              Spacing="15">
-                    <Label Text="Account"
-                           Style="{StaticResource TitleStyle}" />
+                    <Label Style="{StaticResource TitleStyle}"
+                           Text="Account" />
 
                     <Grid x:Name="AutoReconnectLayout">
                         <Grid.RowDefinitions>
@@ -44,20 +49,20 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Label Text="Auto reconnect"
-                               Style="{StaticResource ItemStyle}"
+                        <Label Style="{StaticResource ItemStyle}"
+                               Text="Auto reconnect"
                                VerticalOptions="Center" />
                         <Switch Grid.Column="1"
                                 HorizontalOptions="End"
-                                VerticalOptions="Center"
-                                IsToggled="{Binding AuthReconnect}" />
+                                IsToggled="{Binding AuthReconnect}"
+                                VerticalOptions="Center" />
                     </Grid>
-                    <StackLayout XamEffects:TouchEffect.Color="{StaticResource GreySmokeMediumColor}"
-                                 XamEffects:Commands.Tap="{Binding VauleCommandManagerCommand}"
+                    <StackLayout XamEffects:Commands.Tap="{Binding VauleCommandManagerCommand}"
+                                 XamEffects:TouchEffect.Color="{StaticResource GreySmokeMediumColor}"
                                  Style="{StaticResource ExternalLinkStyle}">
 
-                        <Label Text="Choose a vault"
-                               Style="{StaticResource ItemStyle}"
+                        <Label Style="{StaticResource ItemStyle}"
+                               Text="Choose a network"
                                VerticalOptions="CenterAndExpand" />
                     </StackLayout>
                 </StackLayout>
@@ -66,50 +71,51 @@
 
                 <StackLayout Spacing="0">
 
-                    <Label Text="Help"
-                           Margin="16,0,16,10"
-                           Style="{StaticResource TitleStyle}" />
+                    <Label Margin="16,0,16,10"
+                           Style="{StaticResource TitleStyle}"
+                           Text="Help" />
 
-                    <StackLayout XamEffects:TouchEffect.Color="{StaticResource GreySmokeMediumColor}"
-                                 XamEffects:Commands.Tap="{Binding FaqCommand}"
+                    <StackLayout XamEffects:Commands.Tap="{Binding FaqCommand}"
+                                 XamEffects:TouchEffect.Color="{StaticResource GreySmokeMediumColor}"
                                  Style="{StaticResource ExternalLinkStyle}">
 
-                        <Label Text="FAQs"
-                               Margin="16,0"
+                        <Label Margin="16,0"
                                Style="{StaticResource ItemStyle}"
+                               Text="FAQs"
                                VerticalOptions="CenterAndExpand" />
                     </StackLayout>
 
-                    <StackLayout XamEffects:TouchEffect.Color="{StaticResource GreySmokeMediumColor}"
-                                 XamEffects:Commands.Tap="{Binding PrivacyInfoCommand}"
+                    <StackLayout XamEffects:Commands.Tap="{Binding PrivacyInfoCommand}"
+                                 XamEffects:TouchEffect.Color="{StaticResource GreySmokeMediumColor}"
                                  Style="{StaticResource ExternalLinkStyle}">
 
-                        <Label Text="Privacy statement"
-                               Margin="16,0"
+                        <Label Margin="16,0"
                                Style="{StaticResource ItemStyle}"
+                               Text="Privacy statement"
                                VerticalOptions="CenterAndExpand" />
                     </StackLayout>
 
                     <StackLayout Margin="16,10">
-                        <Label Text="Application version"
-                               Style="{StaticResource ItemStyle}" />
-                        <Label Text="{Binding ApplicationVersion}"
-                               Margin="0,5,0,0"
+                        <Label Style="{StaticResource ItemStyle}"
+                               Text="Application version" />
+                        <Label Margin="0,5,0,0"
+                               HorizontalOptions="Start"
                                Style="{StaticResource ItemStyle}"
-                               TextColor="{StaticResource GreySmokeMediumColor}"
-                               HorizontalOptions="Start" />
+                               Text="{Binding ApplicationVersion}"
+                               TextColor="{StaticResource GreySmokeMediumColor}" />
                     </StackLayout>
                 </StackLayout>
 
-                <BoxView Style="{StaticResource BoxViewStyle}"/>
+                <BoxView Style="{StaticResource BoxViewStyle}" />
 
-                <StackLayout Padding="16, 0" Spacing="20">
-                    <Label Text="Logout"
-                           TextColor="{StaticResource RedColor}"
-                           Style="{StaticResource LogoutStyle}">
+                <StackLayout Padding="16,0"
+                             Spacing="20">
+                    <Label Style="{StaticResource LogoutStyle}"
+                           Text="Logout"
+                           TextColor="{StaticResource RedColor}">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1"
-                                                  Command="{Binding LogoutCommand}" />
+                            <TapGestureRecognizer Command="{Binding LogoutCommand}"
+                                                  NumberOfTapsRequired="1" />
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>

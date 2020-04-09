@@ -94,8 +94,8 @@ namespace SafeAuthenticator.Views
                     else
                     {
                         var result = await DisplayAlert(
-                            "No vault connection file found",
-                            "Please choose a vault for connection from the settings menu.",
+                            "Choose a network",
+                            "Please choose a network to connect to from the settings menu.",
                             "Settings",
                             "Cancel");
 

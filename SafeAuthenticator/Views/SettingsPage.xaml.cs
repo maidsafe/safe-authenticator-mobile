@@ -37,7 +37,10 @@ namespace SafeAuthenticator.Views
 
             tap.Tapped += (s, e) =>
             {
-                DisplayAlert("Account Status", "The number of store and modify operations completed on this account.", "OK");
+                DisplayAlert(
+                    "Account Status",
+                    "The number of store and modify operations completed on this account.",
+                    "OK");
             };
 
             MessagingCenter.Subscribe<SettingsViewModel>(
@@ -66,8 +69,8 @@ namespace SafeAuthenticator.Views
                     }
 
                     DisplayAlert(
-                        "Choose a vault",
-                        "Please logout and choose a different vault to connect from the settings on the login page.",
+                        "Choose a network",
+                        "Please logout and choose a different network to connect from the settings on the login page.",
                         "ok");
                 });
         }

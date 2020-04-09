@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.props = Directory.Build.props
 		stylecop.json = stylecop.json
 		SafeAuthenticator.ruleset = SafeAuthenticator.ruleset
+        README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeAuthenticator", "SafeAuthenticator\SafeAuthenticator.csproj", "{2477DBAF-96EE-4EA4-8DDC-0150DA13991F}"
