@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              xmlns:vm="clr-namespace:SafeAuthenticator.ViewModels"
-             Title="Choose a Vault">
+             Title="Choose a Network">
 
     <ContentPage.Resources>
         <Style TargetType="StackLayout">
@@ -49,7 +49,7 @@
                                      Spacing="20"
                                      VerticalOptions="Center">
                             <Label HorizontalTextAlignment="Center"
-                                   Text="No connection file found. Either add your local section's connection file, or you can automatically add connection details for MaidSafe's latest shared section by clicking the download button below. " />
+                                   Text="No connection file found. Either add your local network's connection file, or you can automatically add connection details for MaidSafe's latest shared network by clicking the download button below. " />
                             <Button Command="{Binding DownloadMaidSafeVaultCommand}"
                                     HorizontalOptions="Center"
                                     Text="Download"

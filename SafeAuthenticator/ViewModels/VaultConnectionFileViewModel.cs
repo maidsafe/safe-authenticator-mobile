@@ -27,7 +27,7 @@ namespace SafeAuthenticator.ViewModels
     {
         private string _vaultS3DownloadLink = "https://safe-vault-config.s3.eu-west-2.amazonaws.com/shared-section/vault_connection_info.config";
 
-        private string _defaultVaultFileName = "MaidSafe hosted section";
+        private string _defaultVaultFileName = "MaidSafe hosted network";
 
         public ICommand AddNewVaultConnectionFileCommand { get; }
 
@@ -69,7 +69,7 @@ namespace SafeAuthenticator.ViewModels
         {
             try
             {
-                using (NativeProgressDialog.ShowNativeDialog("Download vault connection file"))
+                using (NativeProgressDialog.ShowNativeDialog("Download network connection file"))
                 {
                     using (var client = new HttpClient())
                     {
@@ -102,8 +102,8 @@ namespace SafeAuthenticator.ViewModels
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Download vault connection file",
-                    "Failed to download the vault connection file.",
+                    "Download network connection file",
+                    "Failed to download the network connection file.",
                     "ok");
                 Debug.WriteLine(ex.Message);
             }
@@ -114,7 +114,7 @@ namespace SafeAuthenticator.ViewModels
             if (Authenticator.IsLoggedIn)
             {
                 var result = await Application.Current.MainPage.DisplayAlert(
-                    "Vault connection file",
+                    "Network connection file",
                     "You'll be logged out of the app.",
                     "Continue",
                     "Cancel");
@@ -153,8 +153,8 @@ namespace SafeAuthenticator.ViewModels
         private async Task ShowFileSelectionOptionsAsync(object fileId)
         {
             var deletedSelected = await Application.Current.MainPage.DisplayAlert(
-                "Choose a vault",
-                "Do you want to delete vault connection file.",
+                "Choose a network",
+                "Do you want to delete network connection file.",
                 "Delete",
                 "Cancel");
 
@@ -186,8 +186,8 @@ namespace SafeAuthenticator.ViewModels
                     return;
 
                 var result = await Application.Current.MainPage.DisplayAlert(
-                    "Delete vault connection files",
-                    "Do you want to delete all available vault connection files?",
+                    "Delete network connection files",
+                    "Do you want to delete all available network connection files?",
                     "Delete all",
                     "Cancel");
 
@@ -200,7 +200,7 @@ namespace SafeAuthenticator.ViewModels
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Delete vault connection files",
+                    "Delete network connection files",
                     "Failed to delete the valid files",
                     "ok");
                 Debug.WriteLine(ex.Message);
@@ -219,8 +219,8 @@ namespace SafeAuthenticator.ViewModels
             catch (Exception ex)
             {
                 Application.Current.MainPage.DisplayAlert(
-                    "Delete vault connection file",
-                    "Failed to delete selected vault connection file.",
+                    "Delete network connection file",
+                    "Failed to delete selected network connection file.",
                     "Ok");
                 Debug.WriteLine(ex.Message);
             }
@@ -236,8 +236,8 @@ namespace SafeAuthenticator.ViewModels
             catch (Exception ex)
             {
                 Application.Current.MainPage.DisplayAlert(
-                    "Choose a vault",
-                    "Failed to choose a vault to connect.",
+                    "Choose a network",
+                    "Failed to choose a network to connect.",
                     "Ok");
                 Debug.WriteLine(ex.Message);
             }
@@ -254,8 +254,8 @@ namespace SafeAuthenticator.ViewModels
                 string fileName = fileData.FileName;
                 string contents = Encoding.UTF8.GetString(fileData.DataArray);
                 var friendlyFileName = await Application.Current.MainPage.DisplayPromptAsync(
-                    "Add vault connection file",
-                    "Provide a file name to identify between different vault connection files.",
+                    "Add network connection file",
+                    "Provide a file name to identify between different networks.",
                     placeholder: "file name",
                     maxLength: 25,
                     keyboard: Keyboard.Text,
@@ -264,7 +264,7 @@ namespace SafeAuthenticator.ViewModels
                 if (string.IsNullOrEmpty(friendlyFileName))
                 {
                     await Application.Current.MainPage.DisplayAlert(
-                        "Add vault connection file",
+                        "Add network connection file",
                         "Failed to save the connection file. Filename required.",
                         "Ok");
                     return;
@@ -281,7 +281,7 @@ namespace SafeAuthenticator.ViewModels
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Add vault connection file",
+                    "Add network connection file",
                     "Failed to save a new connection file.",
                     "Ok");
                 Debug.WriteLine(ex.Message);
