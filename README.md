@@ -8,7 +8,7 @@ The SAFE Authenticator acts as a gateway to the [SAFE Network](https://safenetwo
 
 |CI service|Platform|Status|
 |---|---|---|
-|Azure DevOps|MacOS| [![Build status](https://dev.azure.com/maidsafe/SafeApp/_apis/build/status/SafeApp-Mobile-CI)](https://dev.azure.com/maidsafe/SafeApp/_build/latest?definitionId=7) |
+|Azure DevOps|MacOS| [![Build Status](https://dev.azure.com/maidsafe/SafeAuthenticator/_apis/build/status/SafeAuthenticator-CI?branchName=master)](https://dev.azure.com/maidsafe/SafeAuthenticator/_build/latest?definitionId=17&branchName=master) |
 
 ## Table of Contents
 
@@ -121,8 +121,8 @@ We use shared unit tests for `safe_authenticator` API which can be run on Androi
 
 ### Tools required
 
-* [Visual Studio](https://visualstudio.microsoft.com/) 2017 or later editions with the following workloads:
-  * [Mobile development with .NET (Xamarin)](https://visualstudio.microsoft.com/vs/visual-studio-workloads/)
+* [Visual Studio](https://visualstudio.microsoft.com/) 2017 or later editions:
+  * [Mobile development with .NET (Xamarin)](https://docs.microsoft.com/en-us/xamarin/get-started/installation/?pivots=windows)
 * [Cake](https://cakebuild.net/) - Cross-platform build script tool used to build the projects and run the tests.
 
 ## Useful resources
