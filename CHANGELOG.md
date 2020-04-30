@@ -1,5 +1,11 @@
 # safe-authenticator-mobile Change Log
 
+## [0.3.1]
+
+* Update text to use `network` instead of `vault`.
+* Update Rust log configuration.
+* Update text on login and settings pages.
+
 ## [0.3.0]
 
 * Added option to download and use MaidSafe hosted shared section connection info file.
@@ -55,7 +61,7 @@
 ## [0.1.2]
 
 * Add fallback option when opening hyperlinks using ChromeCustomTabs (PR [#123](https://github.com/maidsafe/safe-authenticator-mobile/pull/123)).
-* Hide auto-reconnect option if API level < 19 (PR [#123](https://github.com/maidsafe/safe-authenticator-mobile/pull/123)). 
+* Hide auto-reconnect option if API level < 19 (PR [#123](https://github.com/maidsafe/safe-authenticator-mobile/pull/123)).
 * Use an Image a with tap gesture instead of ImageButton (PR [#123](https://github.com/maidsafe/safe-authenticator-mobile/pull/123)).
 
 ## [0.1.1]
@@ -67,7 +73,7 @@
 * Use SafariViewController and Chrome Custom tabs to open the links (PR [#49](https://github.com/maidsafe/safe-authenticator-mobile/pull/49)).
 * Auto resize authorisation popup for different requests (PR [#49](https://github.com/maidsafe/safe-authenticator-mobile/pull/49)).
 * Show first 6 digits of the hash in shared MData request if MData's meta name is empty (PR [#49](https://github.com/maidsafe/safe-authenticator-mobile/pull/49)).
-* Update registered applist manually before sending authentication response (PR [#64](https://github.com/maidsafe/safe-authenticator-mobile/pull/64)). 
+* Update registered applist manually before sending authentication response (PR [#64](https://github.com/maidsafe/safe-authenticator-mobile/pull/64)).
 * Handle delay after authentication request popup (PR [#66](https://github.com/maidsafe/safe-authenticator-mobile/pull/66)).
 * Update keyboard return key to move to next entry (PR [#71](https://github.com/maidsafe/safe-authenticator-mobile/pull/71)).
 * Add tap animation for external links in SettingsPage (PR [#77](https://github.com/maidsafe/safe-authenticator-mobile/pull/77)).
