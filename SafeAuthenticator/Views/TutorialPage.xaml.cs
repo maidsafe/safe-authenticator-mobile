@@ -7,12 +7,12 @@
 // specific language governing permissions and limitations relating to use of the SAFE Network
 // Software.
 
-using SafeAuthenticator.Helpers;
-using SafeAuthenticator.ViewModels;
+using SafeAuthenticatorApp.Helpers;
+using SafeAuthenticatorApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace SafeAuthenticator.Views
+namespace SafeAuthenticatorApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TutorialPage : ContentPage

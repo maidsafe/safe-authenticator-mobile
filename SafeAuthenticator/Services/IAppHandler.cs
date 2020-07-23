@@ -9,7 +9,7 @@
 
 using System.Threading.Tasks;
 
-namespace SafeAuthenticator.Services
+namespace SafeAuthenticatorApp.Services
 {
     public interface IAppHandler
     {

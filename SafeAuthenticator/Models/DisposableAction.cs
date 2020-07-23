@@ -9,7 +9,7 @@
 
 using System;
 
-namespace SafeAuthenticator.Models
+namespace SafeAuthenticatorApp.Models
 {
     public class DisposableAction : IDisposable
     {

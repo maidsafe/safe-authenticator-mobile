@@ -11,7 +11,7 @@ using System;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
-namespace SafeAuthenticator.Services
+namespace SafeAuthenticatorApp.Services
 {
     internal class CredentialCacheService
     {

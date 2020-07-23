@@ -8,9 +8,9 @@
 // Software.
 
 using JetBrains.Annotations;
-using SafeAuthenticator.Helpers;
+using SafeAuthenticatorApp.Helpers;
 
-namespace SafeAuthenticator.Models
+namespace SafeAuthenticatorApp.Models
 {
     public class ContainerPermissionsModel
     {

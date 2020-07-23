@@ -9,7 +9,7 @@
 
 using JetBrains.Annotations;
 
-namespace SafeAuthenticator.Helpers
+namespace SafeAuthenticatorApp.Helpers
 {
     [PublicAPI]
     public static class AppConstants

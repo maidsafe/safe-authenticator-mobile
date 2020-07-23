@@ -9,7 +9,7 @@
 
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.Controls.Effects
+namespace SafeAuthenticatorApp.Controls.Effects
 {
     public class ShowHidePasswordEffect : RoutingEffect
     {

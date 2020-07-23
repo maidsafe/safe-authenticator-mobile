@@ -7,12 +7,12 @@
 // specific language governing permissions and limitations relating to use of the SAFE Network
 // Software.
 
-using SafeAuthenticator.Controls;
-using SafeAuthenticator.Models;
-using SafeAuthenticator.Services;
+using SafeAuthenticatorApp.Controls;
+using SafeAuthenticatorApp.Models;
+using SafeAuthenticatorApp.Services;
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.ViewModels
+namespace SafeAuthenticatorApp.ViewModels
 {
     internal class BaseViewModel : ObservableObject
     {

@@ -8,10 +8,10 @@
 // Software.
 
 using System.Windows.Input;
-using SafeAuthenticator.Helpers;
+using SafeAuthenticatorApp.Helpers;
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.ViewModels
+namespace SafeAuthenticatorApp.ViewModels
 {
     class TutorialViewModel : BaseViewModel
     {

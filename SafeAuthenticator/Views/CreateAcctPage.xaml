@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage x:Class="SafeAuthenticator.Views.CreateAcctPage"
-             xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
-             xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
-             xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels"
-             Title="Create Account"
-             Visual="Material">
+<ContentPage
+    x:Class="SafeAuthenticatorApp.Views.CreateAcctPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SafeAuthenticatorApp.Controls"
+    xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+    xmlns:viewModels="clr-namespace:SafeAuthenticatorApp.ViewModels"
+    Title="Create Account"
+    Visual="Material">
 
     <ContentPage.BindingContext>
         <viewModels:CreateAcctViewModel />
@@ -24,13 +25,14 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <cv:CarouselViewControl Margin="0,40,0,0"
-                                    HeightRequest="350"
-                                    IsSwipeEnabled="False"
-                                    Position="{Binding CarouselPagePosition}"
-                                    PositionSelectedCommand="{Binding CarouselPageChangeCommand}"
-                                    ShowArrows="False"
-                                    ShowIndicators="False">
+            <cv:CarouselViewControl
+                Margin="0,40,0,0"
+                HeightRequest="350"
+                IsSwipeEnabled="False"
+                Position="{Binding CarouselPagePosition}"
+                PositionSelectedCommand="{Binding CarouselPageChangeCommand}"
+                ShowArrows="False"
+                ShowIndicators="False">
                 <cv:CarouselViewControl.ItemsSource>
                     <x:Array Type="{x:Type View}">
                         <!--  Account Secret  -->
@@ -41,15 +43,17 @@
                 </cv:CarouselViewControl.ItemsSource>
             </cv:CarouselViewControl>
 
-            <Button Margin="25,0,25,10"
-                    Command="{Binding CarouselContinueCommand}"
-                    Text="CONTINUE" />
+            <Button
+                Margin="25,0,25,10"
+                Command="{Binding CarouselContinueCommand}"
+                Text="CONTINUE" />
 
-            <Label Margin="25,0"
-                   HorizontalOptions="Center"
-                   IsVisible="{Binding IsBackButtonVisible}"
-                   Text="BACK"
-                   TextColor="{StaticResource PrimaryColor}">
+            <Label
+                Margin="25,0"
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsBackButtonVisible}"
+                Text="BACK"
+                TextColor="{StaticResource PrimaryColor}">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding CarouselBackCommand}" />
                 </Label.GestureRecognizers>

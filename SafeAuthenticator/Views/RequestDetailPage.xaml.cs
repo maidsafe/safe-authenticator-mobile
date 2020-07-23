@@ -8,11 +8,11 @@
 // Software.
 
 using Rg.Plugins.Popup.Pages;
-using SafeAuthenticator.Native;
-using SafeAuthenticator.ViewModels;
+using SafeAuthenticator;
+using SafeAuthenticatorApp.ViewModels;
 using Xamarin.Forms.Xaml;
 
-namespace SafeAuthenticator.Views
+namespace SafeAuthenticatorApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RequestDetailPage : PopupPage

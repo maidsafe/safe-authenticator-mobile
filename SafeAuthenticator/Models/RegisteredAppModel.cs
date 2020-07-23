@@ -11,10 +11,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
-using SafeAuthenticator.Helpers;
-using SafeAuthenticator.Native;
+using SafeApp.Core;
+using SafeAuthenticator;
+using SafeAuthenticatorApp.Helpers;
 
-namespace SafeAuthenticator.Models
+namespace SafeAuthenticatorApp.Models
 {
     public class RegisteredAppModel : ObservableObject, IComparable, IEquatable<RegisteredAppModel>
     {

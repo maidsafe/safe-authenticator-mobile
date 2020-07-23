@@ -9,15 +9,15 @@
 
 using System.Linq;
 using System.Threading.Tasks;
-using SafeAuthenticator.Helpers;
-using SafeAuthenticator.Services;
-using SafeAuthenticator.Views;
+using SafeAuthenticatorApp.Helpers;
+using SafeAuthenticatorApp.Services;
+using SafeAuthenticatorApp.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
-namespace SafeAuthenticator
+namespace SafeAuthenticatorApp
 {
     public partial class App : Application
     {

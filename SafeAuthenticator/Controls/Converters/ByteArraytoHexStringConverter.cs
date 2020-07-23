@@ -11,7 +11,7 @@ using System;
 using System.Globalization;
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.Controls.Converters
+namespace SafeAuthenticatorApp.Controls.Converters
 {
     public class ByteArraytoHexStringConverter : IValueConverter
     {

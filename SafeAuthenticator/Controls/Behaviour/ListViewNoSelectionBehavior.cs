@@ -9,7 +9,7 @@
 
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.Controls.Behaviour
+namespace SafeAuthenticatorApp.Controls.Behaviour
 {
     public class ListViewNoSelectionBehavior : Behavior<ListView>
     {

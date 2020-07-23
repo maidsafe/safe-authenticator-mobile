@@ -12,14 +12,15 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
 using Rg.Plugins.Popup.Services;
-using SafeAuthenticator.Helpers;
-using SafeAuthenticator.Models;
-using SafeAuthenticator.Native;
-using SafeAuthenticator.Services;
+using SafeApp.Core;
+using SafeAuthenticator;
+using SafeAuthenticatorApp.Helpers;
+using SafeAuthenticatorApp.Models;
+using SafeAuthenticatorApp.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.ViewModels
+namespace SafeAuthenticatorApp.ViewModels
 {
     internal class RequestDetailViewModel : BaseViewModel
     {

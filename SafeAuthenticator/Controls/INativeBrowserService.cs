@@ -7,7 +7,7 @@
 // specific language governing permissions and limitations relating to use of the SAFE Network
 // Software.
 
-namespace SafeAuthenticator.Controls
+namespace SafeAuthenticatorApp.Controls
 {
     public interface INativeBrowserService
     {

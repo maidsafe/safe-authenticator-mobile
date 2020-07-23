@@ -11,13 +11,13 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using JetBrains.Annotations;
-using SafeAuthenticator.Helpers;
-using SafeAuthenticator.Models;
-using SafeAuthenticator.Native;
+using SafeApp.Core;
+using SafeAuthenticatorApp.Helpers;
+using SafeAuthenticatorApp.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.ViewModels
+namespace SafeAuthenticatorApp.ViewModels
 {
     internal class AppInfoViewModel : BaseViewModel
     {

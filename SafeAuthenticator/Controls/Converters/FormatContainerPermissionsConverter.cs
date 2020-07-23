@@ -10,10 +10,10 @@
 using System;
 using System.Globalization;
 using System.Text;
-using SafeAuthenticator.Models;
+using SafeAuthenticatorApp.Models;
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.Controls.Converters
+namespace SafeAuthenticatorApp.Controls.Converters
 {
     class FormatContainerPermissionsConverter : IValueConverter
     {

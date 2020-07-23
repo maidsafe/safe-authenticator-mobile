@@ -1,47 +1,51 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 
-<ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
-          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-          x:Class="SafeAuthenticator.Controls.MDataPermissionViewCell"
-          IsEnabled="False">
+<ViewCell
+    x:Class="SafeAuthenticatorApp.Controls.MDataPermissionViewCell"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    IsEnabled="False">
 
-    <StackLayout Padding="5, 0"
-                 Orientation="Horizontal"
-                 Spacing="20"
-                 Margin="0, 5, 0, 0">
+    <StackLayout
+        Margin="0,5,0,0"
+        Padding="5,0"
+        Orientation="Horizontal"
+        Spacing="20">
 
-        <Image Source="MData"
-               HeightRequest="25"
-               WidthRequest="25"
-               VerticalOptions="Center"
-               HorizontalOptions="Center" />
+        <Image
+            HeightRequest="25"
+            HorizontalOptions="Center"
+            Source="MData"
+            VerticalOptions="Center"
+            WidthRequest="25" />
 
-        <StackLayout VerticalOptions="CenterAndExpand"
-                     HorizontalOptions="FillAndExpand"
-                     Spacing="3">
-            <StackLayout VerticalOptions="CenterAndExpand"
-                         Padding="0, 10">
-                <Label Text="{Binding MetaName}"
-                       FontSize="{StaticResource MediumSize}">
+        <StackLayout
+            HorizontalOptions="FillAndExpand"
+            Spacing="3"
+            VerticalOptions="CenterAndExpand">
+            <StackLayout Padding="0,10" VerticalOptions="CenterAndExpand">
+                <Label FontSize="{StaticResource MediumSize}" Text="{Binding MetaName}">
                     <Label.Triggers>
-                        <DataTrigger TargetType="Label"
-                                     Binding="{Binding MetaName.Length}"
-                                     Value="0">
-                            <Setter Property="Text"
-                                    Value="{Binding Name, Converter={StaticResource ByteArraytoHexStringConverter}}" />
+                        <DataTrigger
+                            Binding="{Binding MetaName.Length}"
+                            TargetType="Label"
+                            Value="0">
+                            <Setter Property="Text" Value="{Binding Name, Converter={StaticResource ByteArraytoHexStringConverter}}" />
                         </DataTrigger>
                     </Label.Triggers>
                 </Label>
 
-                <Label Text="{Binding Access, Converter={StaticResource FormatContainerPermissionsConverter}}"
-                       TextColor="{StaticResource GreySmokeMediumColor}"
-                       FontSize="{StaticResource SmallSize}" />
+                <Label
+                    FontSize="{StaticResource SmallSize}"
+                    Text="{Binding Access, Converter={StaticResource FormatContainerPermissionsConverter}}"
+                    TextColor="{StaticResource GreySmokeMediumColor}" />
             </StackLayout>
 
-            <BoxView BackgroundColor="{StaticResource GreySmokeLightColor}"
-                     Margin="0,5,0,0"
-                     VerticalOptions="End"
-                     HeightRequest="0.5" />
+            <BoxView
+                Margin="0,5,0,0"
+                BackgroundColor="{StaticResource GreySmokeLightColor}"
+                HeightRequest="0.5"
+                VerticalOptions="End" />
         </StackLayout>
     </StackLayout>
 </ViewCell>

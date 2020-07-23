@@ -9,11 +9,11 @@
 
 using System;
 using System.Windows.Input;
-using SafeAuthenticator.Helpers;
+using SafeAuthenticatorApp.Helpers;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.ViewModels
+namespace SafeAuthenticatorApp.ViewModels
 {
     internal class SettingsViewModel : BaseViewModel
     {

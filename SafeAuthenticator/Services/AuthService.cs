@@ -14,18 +14,19 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Rg.Plugins.Popup.Extensions;
-using SafeAuthenticator.Controls;
-using SafeAuthenticator.Helpers;
-using SafeAuthenticator.Models;
-using SafeAuthenticator.Native;
-using SafeAuthenticator.Services;
-using SafeAuthenticator.Views;
+using SafeApp.Core;
+using SafeAuthenticator;
+using SafeAuthenticatorApp.Controls;
+using SafeAuthenticatorApp.Helpers;
+using SafeAuthenticatorApp.Models;
+using SafeAuthenticatorApp.Services;
+using SafeAuthenticatorApp.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(AuthService))]
 
-namespace SafeAuthenticator.Services
+namespace SafeAuthenticatorApp.Services
 {
     public class AuthService : ObservableObject, IDisposable
     {
@@ -153,14 +154,14 @@ namespace SafeAuthenticator.Services
 
         internal async Task CreateAccountAsync(string location, string password)
         {
-            _authenticator = await Authenticator.CreateAccountAsync(location, password);
+            _authenticator = await Authenticator.CreateAccountAsync(null, location, password);
             _secret = location;
             _password = password;
         }
 
-        internal async Task<string> RevokeAppAsync(string appId)
+        internal Task RevokeAppAsync(string appId)
         {
-            return await _authenticator.AuthRevokeAppAsync(appId);
+            return _authenticator.AuthRevokeAppAsync(appId);
         }
 
         ~AuthService()
@@ -252,7 +253,7 @@ namespace SafeAuthenticator.Services
             if (requestType == typeof(UnregisteredIpcReq))
             {
                 var uauthReq = req as UnregisteredIpcReq;
-                encodedRsp = await Authenticator.EncodeUnregisteredRespAsync(uauthReq.ReqId, isGranted);
+                encodedRsp = await Authenticator.AutheriseUnregisteredAppAsync(uauthReq.ReqId, isGranted);
             }
             else if (requestType == typeof(AuthIpcReq))
             {

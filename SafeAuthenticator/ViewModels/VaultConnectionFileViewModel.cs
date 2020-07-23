@@ -17,11 +17,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Plugin.FilePicker;
 using Plugin.FilePicker.Abstractions;
-using SafeAuthenticator.Helpers;
-using SafeAuthenticator.Models;
+using SafeAuthenticatorApp.Helpers;
+using SafeAuthenticatorApp.Models;
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.ViewModels
+namespace SafeAuthenticatorApp.ViewModels
 {
     internal class VaultConnectionFileViewModel : BaseViewModel
     {

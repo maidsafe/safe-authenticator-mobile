@@ -10,11 +10,10 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using SafeAuthenticator.Helpers;
-using SafeAuthenticator.Native;
+using SafeAuthenticatorApp.Helpers;
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.ViewModels
+namespace SafeAuthenticatorApp.ViewModels
 {
     internal class LoginViewModel : BaseViewModel
     {

@@ -8,10 +8,10 @@
 // Software.
 
 using System.Runtime.CompilerServices;
-using SafeAuthenticator.Controls.Effects;
+using SafeAuthenticatorApp.Controls.Effects;
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.Controls
+namespace SafeAuthenticatorApp.Controls
 {
     public class CustomMaterialEntry : Entry
     {

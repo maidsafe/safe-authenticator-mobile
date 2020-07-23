@@ -12,15 +12,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
-using SafeAuthenticator.Helpers;
-using SafeAuthenticator.Models;
-using SafeAuthenticator.Services;
+using SafeAuthenticatorApp.Helpers;
+using SafeAuthenticatorApp.Models;
+using SafeAuthenticatorApp.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(VaultConnectionFileManager))]
 
-namespace SafeAuthenticator.Services
+namespace SafeAuthenticatorApp.Services
 {
     public class VaultConnectionFileManager
     {

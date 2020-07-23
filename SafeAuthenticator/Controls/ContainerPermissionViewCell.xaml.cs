@@ -10,7 +10,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace SafeAuthenticator.Controls
+namespace SafeAuthenticatorApp.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ContainerPermissionViewCell : ViewCell

@@ -1,29 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<StackLayout x:Class="SafeAuthenticator.Controls.CreateAcctStep3"
-             xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
-             Padding="25,0"
-             Spacing="20">
+<StackLayout
+    x:Class="SafeAuthenticatorApp.Controls.CreateAcctStep3"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SafeAuthenticatorApp.Controls"
+    Padding="25,0"
+    Spacing="20">
 
     <Label Style="{DynamicResource TitleStyle}" Text="Password" />
 
     <Label Margin="0,0,0,20" Text="Your 'Password' is never sent to the network, it will not leave your device." />
 
-    <controls:CustomMaterialEntry x:Name="PasswordEntry"
-                                  Margin="0,30,0,0"
-                                  IsPassword="True"
-                                  Placeholder="Password"
-                                  ReturnType="Next"
-                                  Text="{Binding AcctPassword}" />
+    <controls:CustomMaterialEntry
+        x:Name="PasswordEntry"
+        Margin="0,30,0,0"
+        IsPassword="True"
+        Placeholder="Password"
+        ReturnType="Next"
+        Text="{Binding AcctPassword}" />
 
-    <controls:CustomMaterialEntry x:Name="ConfirmPasswordEntry"
-                                  IsPassword="True"
-                                  Placeholder="Confirm password"
-                                  ReturnCommand="{Binding CarouselContinueCommand}"
-                                  ReturnType="Done"
-                                  Text="{Binding ConfirmAcctPassword}" />
-    <Label FontSize="Micro"
-           Text="{Binding AcctPasswordErrorMsg}"
-           TextColor="Red" />
+    <controls:CustomMaterialEntry
+        x:Name="ConfirmPasswordEntry"
+        IsPassword="True"
+        Placeholder="Confirm password"
+        ReturnCommand="{Binding CarouselContinueCommand}"
+        ReturnType="Done"
+        Text="{Binding ConfirmAcctPassword}" />
+    <Label
+        FontSize="Micro"
+        Text="{Binding AcctPasswordErrorMsg}"
+        TextColor="Red" />
 </StackLayout>

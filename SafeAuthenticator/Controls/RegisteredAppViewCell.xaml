@@ -1,52 +1,59 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
-          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-          x:Class="SafeAuthenticator.Controls.RegisteredAppViewCell">
-    <StackLayout Padding="15, 0"
-                 Orientation="Horizontal"
-                 Spacing="20"
-                 Margin="0, 5, 0, 0">
-        <Frame CornerRadius="22.5"
-               HeightRequest="45"
-               WidthRequest="45"
-               BackgroundColor="{Binding CircleColor}"
-               HasShadow="False"
-               VerticalOptions="Center"
-               HorizontalOptions="Center"
-               Margin="0"
-               Padding="0">
+<ViewCell
+    x:Class="SafeAuthenticatorApp.Controls.RegisteredAppViewCell"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <StackLayout
+        Margin="0,5,0,0"
+        Padding="15,0"
+        Orientation="Horizontal"
+        Spacing="20">
+        <Frame
+            Margin="0"
+            Padding="0"
+            BackgroundColor="{Binding CircleColor}"
+            CornerRadius="22.5"
+            HasShadow="False"
+            HeightRequest="45"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            WidthRequest="45">
 
-            <Label Text="{Binding AppName, Converter={StaticResource FormatTitleConverter}}"
-                   FontSize="{StaticResource ExtraLargeSize}"
-                   Margin="0"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"
-                   HorizontalTextAlignment="Center"
-                   VerticalTextAlignment="Center"
-                   TextColor="{StaticResource WhiteColor}" />
+            <Label
+                Margin="0"
+                FontSize="{StaticResource ExtraLargeSize}"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Text="{Binding AppName, Converter={StaticResource FormatTitleConverter}}"
+                TextColor="{StaticResource WhiteColor}"
+                VerticalOptions="Center"
+                VerticalTextAlignment="Center" />
         </Frame>
-        <StackLayout VerticalOptions="CenterAndExpand"
-                     HorizontalOptions="FillAndExpand"
-                     Spacing="5">
+        <StackLayout
+            HorizontalOptions="FillAndExpand"
+            Spacing="5"
+            VerticalOptions="CenterAndExpand">
 
-            <StackLayout VerticalOptions="CenterAndExpand"
-                         Padding="0, 10">
-                <Label Text="{Binding AppName}"
-                       TextColor="{StaticResource BlackColor}"
-                       FontSize="{StaticResource MediumSize}"
-                       LineBreakMode="TailTruncation" />
+            <StackLayout Padding="0,10" VerticalOptions="CenterAndExpand">
+                <Label
+                    FontSize="{StaticResource MediumSize}"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding AppName}"
+                    TextColor="{StaticResource BlackColor}" />
 
-                <Label Text="{Binding AppVendor}"
-                       TextColor="{StaticResource GreySmokeMediumColor}"
-                       FontSize="{StaticResource SmallSize}"
-                       LineBreakMode="TailTruncation" />
+                <Label
+                    FontSize="{StaticResource SmallSize}"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding AppVendor}"
+                    TextColor="{StaticResource GreySmokeMediumColor}" />
             </StackLayout>
 
-            <BoxView BackgroundColor="{StaticResource GreySmokeLightColor}"
-                     VerticalOptions="End"
-                     HorizontalOptions="FillAndExpand"
-                     HeightRequest="0.5" />
+            <BoxView
+                BackgroundColor="{StaticResource GreySmokeLightColor}"
+                HeightRequest="0.5"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="End" />
         </StackLayout>
     </StackLayout>
 

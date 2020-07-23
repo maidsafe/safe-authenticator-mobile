@@ -7,11 +7,9 @@
 // specific language governing permissions and limitations relating to use of the SAFE Network
 // Software.
 
-using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
-namespace SafeAuthenticator.Controls
+namespace SafeAuthenticatorApp.Controls
 {
     public partial class TestSafeCoinPermissions : ContentView
     {

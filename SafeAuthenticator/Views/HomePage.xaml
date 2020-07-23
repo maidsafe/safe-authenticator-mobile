@@ -1,30 +1,33 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
-             xmlns:behaviour="clr-namespace:SafeAuthenticator.Controls.Behaviour"
-             x:Class="SafeAuthenticator.Views.HomePage"
-             Title="SAFE Authenticator">
+<ContentPage
+    x:Class="SafeAuthenticatorApp.Views.HomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviour="clr-namespace:SafeAuthenticatorApp.Controls.Behaviour"
+    xmlns:controls="clr-namespace:SafeAuthenticatorApp.Controls"
+    Title="SAFE Authenticator">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="settingsIcon"
-                     Command="{Binding SettingsCommand}"
-                     Text="Settings" />
+        <ToolbarItem
+            Command="{Binding SettingsCommand}"
+            IconImageSource="settingsIcon"
+            Text="Settings" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <StackLayout Spacing="10">
 
-            <ListView x:Name="AccountsListView"
-                      HasUnevenRows="True"
-                      SeparatorVisibility="None"
-                      ItemsSource="{Binding Apps}"
-                      RefreshCommand="{Binding RefreshAccountsCommand}"
-                      IsPullToRefreshEnabled="True"
-                      IsRefreshing="{Binding IsRefreshing}"
-                      SelectionMode="Single"
-                      SelectedItem="{Binding SelectedRegisteredAccount}">
+            <ListView
+                x:Name="AccountsListView"
+                HasUnevenRows="True"
+                IsPullToRefreshEnabled="True"
+                IsRefreshing="{Binding IsRefreshing}"
+                ItemsSource="{Binding Apps}"
+                RefreshCommand="{Binding RefreshAccountsCommand}"
+                SelectedItem="{Binding SelectedRegisteredAccount}"
+                SelectionMode="Single"
+                SeparatorVisibility="None">
 
                 <ListView.Behaviors>
                     <behaviour:ListViewNoSelectionBehavior />
@@ -38,22 +41,19 @@
 
                 <ListView.Footer>
                     <StackLayout Orientation="Horizontal">
-                        <Label Margin="20"
-                               VerticalOptions="CenterAndExpand"
-                               HorizontalOptions="CenterAndExpand"
-                               IsVisible="False">
+                        <Label
+                            Margin="20"
+                            HorizontalOptions="CenterAndExpand"
+                            IsVisible="False"
+                            VerticalOptions="CenterAndExpand">
                             <Label.Triggers>
                                 <MultiTrigger TargetType="Label">
                                     <MultiTrigger.Conditions>
-                                        <BindingCondition Binding="{Binding Apps.Count}"
-                                                          Value="0" />
-                                        <BindingCondition Binding="{Binding IsRefreshing}"
-                                                          Value="False" />
+                                        <BindingCondition Binding="{Binding Apps.Count}" Value="0" />
+                                        <BindingCondition Binding="{Binding IsRefreshing}" Value="False" />
                                     </MultiTrigger.Conditions>
-                                    <Setter Property="IsVisible"
-                                            Value="True" />
-                                    <Setter Property="Text"
-                                            Value="No apps have been authorised yet." />
+                                    <Setter Property="IsVisible" Value="True" />
+                                    <Setter Property="Text" Value="No apps have been authorised yet." />
                                 </MultiTrigger>
                             </Label.Triggers>
                         </Label>

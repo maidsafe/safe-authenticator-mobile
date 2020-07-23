@@ -10,7 +10,7 @@
 using System.Reflection;
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.Controls
+namespace SafeAuthenticatorApp.Controls
 {
     public static class XamarinFormsExtensions
     {

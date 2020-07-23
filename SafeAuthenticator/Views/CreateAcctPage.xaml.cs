@@ -8,12 +8,12 @@
 // Software.
 
 using System.Linq;
-using SafeAuthenticator.Helpers;
-using SafeAuthenticator.ViewModels;
+using SafeAuthenticatorApp.Helpers;
+using SafeAuthenticatorApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace SafeAuthenticator.Views
+namespace SafeAuthenticatorApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreateAcctPage : ContentPage, ICleanup

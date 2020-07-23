@@ -17,7 +17,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
-    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;SAFE_AUTH</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
@@ -84,7 +84,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhone\Debug</OutputPath>
-    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;SAFE_AUTH</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
@@ -154,12 +154,6 @@
     <BundleResource Include="Resources\delete.png" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.cs">
-      <Link>Helpers\AuthBindings.cs</Link>
-    </Compile>
-    <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.Manual.cs">
-      <Link>Helpers\AuthBindings.Manual.cs</Link>
-    </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\AppHandler.cs" />
     <Compile Include="Helpers\AppleNativeBrowserService.cs" />
@@ -175,7 +169,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SafeAuthenticator\SafeAuthenticator.csproj">
       <Project>{2477dbaf-96ee-4ea4-8ddc-0150da13991f}</Project>
-      <Name>SafeAuthenticator</Name>
+      <Name>SafeAuthenticatorApp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -200,14 +194,6 @@
     <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-  </ItemGroup>
-  <ItemGroup>
-    <NativeReference Include="Native References/libsafe_authenticator.a">
-      <Kind>Static</Kind>
-      <ForceLoad>True</ForceLoad>
-      <LinkerFlags>-lresolv</LinkerFlags>
-      <Frameworks>Security</Frameworks>
-    </NativeReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BTProgressHUD">
@@ -248,6 +234,9 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.InputKit">
       <Version>3.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="MaidSafe.SafeApp">
+      <Version>0.4.0</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

@@ -14,7 +14,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.Controls.Converters
+namespace SafeAuthenticatorApp.Controls.Converters
 {
     public class HtmlLabelConverter : IValueConverter
     {

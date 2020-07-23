@@ -28,7 +28,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;SAFE_AUTH</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
@@ -42,6 +42,7 @@
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <EnableProguard>true</EnableProguard>
+<AndroidLinkMode></AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Java.Interop" />
@@ -59,12 +60,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.cs">
-      <Link>Helpers\AuthBindings.cs</Link>
-    </Compile>
-    <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.Manual.cs">
-      <Link>Helpers\AuthBindings.Manual.cs</Link>
-    </Compile>
     <Compile Include="Helpers\AndroidNativeBrowserService.cs" />
     <Compile Include="Helpers\AndroidNativeProgressDialogService.cs" />
     <Compile Include="Helpers\AppHandler.cs" />
@@ -78,11 +73,9 @@
     <Compile Include="Helpers\CustomMaterialEntryRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidNativeLibrary Include="lib\armeabi-v7a\libsafe_authenticator.so" />
     <AndroidAsset Include="..\SafeAuthenticator\log.toml">
       <Link>Assets\log.toml</Link>
     </AndroidAsset>
-    <AndroidNativeLibrary Include="lib\x86_64\libsafe_authenticator.so" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -191,7 +184,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SafeAuthenticator\SafeAuthenticator.csproj">
       <Project>{2477dbaf-96ee-4ea4-8ddc-0150da13991f}</Project>
-      <Name>SafeAuthenticator</Name>
+      <Name>SafeAuthenticatorApp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -279,6 +272,9 @@
     <PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.1.0-rc1" />
     <PackageReference Include="Xamarin.Forms.InputKit">
       <Version>3.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="MaidSafe.SafeApp">
+      <Version>0.4.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

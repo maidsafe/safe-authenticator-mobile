@@ -11,11 +11,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SafeAuthenticator.Models;
-using SafeAuthenticator.Native;
+using SafeApp.Core;
+using SafeAuthenticatorApp.Models;
 using Xamarin.Essentials;
 
-namespace SafeAuthenticator.Helpers
+namespace SafeAuthenticatorApp.Helpers
 {
     internal static class Utilities
     {

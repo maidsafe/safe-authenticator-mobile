@@ -1,29 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<StackLayout x:Class="SafeAuthenticator.Controls.CreateAcctStep2"
-             xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
-             Padding="25,0"
-             Spacing="20">
+<StackLayout
+    x:Class="SafeAuthenticatorApp.Controls.CreateAcctStep2"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SafeAuthenticatorApp.Controls"
+    Padding="25,0"
+    Spacing="20">
 
     <Label Style="{DynamicResource TitleStyle}" Text="Passphrase" />
 
     <Label Margin="0,0,0,20" Text="Your 'Passphrase' is private and should not be shared with anyone." />
 
-    <controls:CustomMaterialEntry x:Name="SecretEntry"
-                                  Margin="0,30,0,0"
-                                  IsPassword="True"
-                                  Placeholder="Passphrase"
-                                  ReturnType="Next"
-                                  Text="{Binding AcctSecret}" />
+    <controls:CustomMaterialEntry
+        x:Name="SecretEntry"
+        Margin="0,30,0,0"
+        IsPassword="True"
+        Placeholder="Passphrase"
+        ReturnType="Next"
+        Text="{Binding AcctSecret}" />
 
-    <controls:CustomMaterialEntry x:Name="ConfirmSecretEntry"
-                                  IsPassword="True"
-                                  Placeholder="Confirm passphrase"
-                                  ReturnCommand="{Binding CarouselContinueCommand}"
-                                  ReturnType="Done"
-                                  Text="{Binding ConfirmAcctSecret}" />
-    <Label FontSize="Micro"
-           Text="{Binding AcctSecretErrorMsg}"
-           TextColor="Red" />
+    <controls:CustomMaterialEntry
+        x:Name="ConfirmSecretEntry"
+        IsPassword="True"
+        Placeholder="Confirm passphrase"
+        ReturnCommand="{Binding CarouselContinueCommand}"
+        ReturnType="Done"
+        Text="{Binding ConfirmAcctSecret}" />
+    <Label
+        FontSize="Micro"
+        Text="{Binding AcctSecretErrorMsg}"
+        TextColor="Red" />
 </StackLayout>

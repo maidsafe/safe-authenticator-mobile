@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentPage x:Class="SafeAuthenticator.Views.VaultConnectionFilePage"
-             xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
-             xmlns:vm="clr-namespace:SafeAuthenticator.ViewModels"
-             Title="Choose a Network">
+<ContentPage
+    x:Class="SafeAuthenticatorApp.Views.VaultConnectionFilePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+    xmlns:vm="clr-namespace:SafeAuthenticatorApp.ViewModels"
+    Title="Choose a Network">
 
     <ContentPage.Resources>
         <Style TargetType="StackLayout">
@@ -29,62 +30,70 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding AddNewVaultConnectionFileCommand}"
-                     IconImageSource="addNew"
-                     Order="Primary"
-                     Text="Add new file" />
-        <ToolbarItem Command="{Binding DeleteAllVaultConnectionFilesCommand}"
-                     IconImageSource="deleteAll"
-                     Order="Primary"
-                     Text="Delete all files" />
+        <ToolbarItem
+            Command="{Binding AddNewVaultConnectionFileCommand}"
+            IconImageSource="addNew"
+            Order="Primary"
+            Text="Add new file" />
+        <ToolbarItem
+            Command="{Binding DeleteAllVaultConnectionFilesCommand}"
+            IconImageSource="deleteAll"
+            Order="Primary"
+            Text="Delete all files" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="0,10">
-            <CollectionView ItemsSource="{Binding VaultConnectionFiles}"
-                            SelectionMode="Single">
+            <CollectionView ItemsSource="{Binding VaultConnectionFiles}" SelectionMode="Single">
                 <CollectionView.EmptyView>
                     <ContentView>
-                        <StackLayout Padding="30"
-                                     Orientation="Vertical"
-                                     Spacing="20"
-                                     VerticalOptions="Center">
-                            <Label HorizontalTextAlignment="Center"
-                                   Text="No connection file found. Either add your local network's connection file, or you can automatically add connection details for MaidSafe's latest shared network by clicking the download button below. " />
-                            <Button Command="{Binding DownloadMaidSafeVaultCommand}"
-                                    HorizontalOptions="Center"
-                                    Text="Download"
-                                    Visual="Material"
-                                    WidthRequest="200" />
+                        <StackLayout
+                            Padding="30"
+                            Orientation="Vertical"
+                            Spacing="20"
+                            VerticalOptions="Center">
+                            <Label HorizontalTextAlignment="Center" Text="No connection file found. Either add your local network's connection file, or you can automatically add connection details for MaidSafe's latest shared network by clicking the download button below. " />
+                            <Button
+                                Command="{Binding DownloadMaidSafeVaultCommand}"
+                                HorizontalOptions="Center"
+                                Text="Download"
+                                Visual="Material"
+                                WidthRequest="200" />
                         </StackLayout>
                     </ContentView>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Padding="20,10"
-                                     HeightRequest="30"
-                                     Orientation="Horizontal"
-                                     Spacing="20">
-                            <input:RadioButton ClickCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=SetActiveFileCommand}"
-                                               CommandParameter="{Binding FileId}"
-                                               IsChecked="{Binding IsActive}"
-                                               IsEnabled="False" />
-                            <Label FontSize="Medium"
-                                   HorizontalOptions="FillAndExpand"
-                                   Text="{Binding FileName}"
-                                   VerticalOptions="Center" />
-                            <Image HeightRequest="25"
-                                   Source="delete"
-                                   WidthRequest="25">
+                        <StackLayout
+                            Padding="20,10"
+                            HeightRequest="30"
+                            Orientation="Horizontal"
+                            Spacing="20">
+                            <input:RadioButton
+                                ClickCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=SetActiveFileCommand}"
+                                CommandParameter="{Binding FileId}"
+                                IsChecked="{Binding IsActive}"
+                                IsEnabled="False" />
+                            <Label
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Text="{Binding FileName}"
+                                VerticalOptions="Center" />
+                            <Image
+                                HeightRequest="25"
+                                Source="delete"
+                                WidthRequest="25">
                                 <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=VaultConnectionFileSelectionCommand}"
-                                                          CommandParameter="{Binding FileId}"
-                                                          NumberOfTapsRequired="1" />
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=VaultConnectionFileSelectionCommand}"
+                                        CommandParameter="{Binding FileId}"
+                                        NumberOfTapsRequired="1" />
                                 </Image.GestureRecognizers>
                             </Image>
                             <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=SetActiveFileCommand}"
-                                                      CommandParameter="{Binding FileId}"
-                                                      NumberOfTapsRequired="1" />
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=SetActiveFileCommand}"
+                                    CommandParameter="{Binding FileId}"
+                                    NumberOfTapsRequired="1" />
                             </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </DataTemplate>

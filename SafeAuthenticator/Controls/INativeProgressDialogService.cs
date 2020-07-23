@@ -9,7 +9,7 @@
 
 using System;
 
-namespace SafeAuthenticator.Controls
+namespace SafeAuthenticatorApp.Controls
 {
     public interface INativeProgressDialogService
     {

@@ -1,41 +1,47 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="SafeAuthenticator.Controls.TestSafeCoinPermissions">
-  <ContentView.Content>
-        <StackLayout Padding="5, 0"
-                     Orientation="Horizontal"
-                     Spacing="20"
-                     Margin="0, 5, 0, 0">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="SafeAuthenticatorApp.Controls.TestSafeCoinPermissions"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ContentView.Content>
+        <StackLayout
+            Margin="0,5,0,0"
+            Padding="5,0"
+            Orientation="Horizontal"
+            Spacing="20">
 
-            <Image Source="AppContainer"
-                   HeightRequest="25"
-                   WidthRequest="25"
-                   VerticalOptions="Center"
-                   HorizontalOptions="Start" />
+            <Image
+                HeightRequest="25"
+                HorizontalOptions="Start"
+                Source="AppContainer"
+                VerticalOptions="Center"
+                WidthRequest="25" />
 
-            <StackLayout VerticalOptions="CenterAndExpand"
-                         HorizontalOptions="FillAndExpand"
-                         Spacing="3">
+            <StackLayout
+                HorizontalOptions="FillAndExpand"
+                Spacing="3"
+                VerticalOptions="CenterAndExpand">
 
-                <StackLayout VerticalOptions="CenterAndExpand"
-                             Padding="0, 10">
-                    <Label Text="Test Coin Permissions"
-                           TextColor="{StaticResource BlackColor}"
-                           FontSize="{StaticResource MediumSize}" />
+                <StackLayout Padding="0,10" VerticalOptions="CenterAndExpand">
+                    <Label
+                        FontSize="{StaticResource MediumSize}"
+                        Text="Test Coin Permissions"
+                        TextColor="{StaticResource BlackColor}" />
 
-                    <Label x:Name="TestCoinsPermissionText"
-                           TextColor="{StaticResource GreySmokeMediumColor}"
-                           FontSize="{StaticResource SmallSize}" />
+                    <Label
+                        x:Name="TestCoinsPermissionText"
+                        FontSize="{StaticResource SmallSize}"
+                        TextColor="{StaticResource GreySmokeMediumColor}" />
                 </StackLayout>
 
-                <BoxView BackgroundColor="{StaticResource GreySmokeLightColor}"
-                         VerticalOptions="End"
-                         HorizontalOptions="FillAndExpand"
-                         HeightRequest="0.5" />
+                <BoxView
+                    BackgroundColor="{StaticResource GreySmokeLightColor}"
+                    HeightRequest="0.5"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="End" />
             </StackLayout>
         </StackLayout>
     </ContentView.Content>

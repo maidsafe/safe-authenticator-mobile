@@ -9,7 +9,7 @@
 
 using System;
 
-namespace SafeAuthenticator.Helpers
+namespace SafeAuthenticatorApp.Helpers
 {
     public static class UrlFormat
     {

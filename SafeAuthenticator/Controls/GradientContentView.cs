@@ -9,7 +9,7 @@
 
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.Controls
+namespace SafeAuthenticatorApp.Controls
 {
     public enum GradientOrientation
     {

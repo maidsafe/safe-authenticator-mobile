@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<Application x:Class="SafeAuthenticator.App"
-             xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:converters="clr-namespace:SafeAuthenticator.Controls.Converters">
+<Application
+    x:Class="SafeAuthenticatorApp.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:SafeAuthenticatorApp.Controls.Converters">
     <Application.Resources>
         <ResourceDictionary>
 
@@ -29,40 +30,47 @@
             <converters:HtmlLabelConverter x:Key="HtmlLabelConverter" />
 
             <!--  SIZES  -->
-            <OnPlatform x:Key="ButtonHeightRequest"
-                        x:TypeArguments="x:Double"
-                        Android="40"
-                        iOS="45" />
+            <OnPlatform
+                x:Key="ButtonHeightRequest"
+                x:TypeArguments="x:Double"
+                Android="40"
+                iOS="45" />
 
-            <OnPlatform x:Key="EntryHeightRequest"
-                        x:TypeArguments="x:Double"
-                        Android="40"
-                        iOS="40" />
+            <OnPlatform
+                x:Key="EntryHeightRequest"
+                x:TypeArguments="x:Double"
+                Android="40"
+                iOS="40" />
 
-            <OnPlatform x:Key="SmallSize"
-                        x:TypeArguments="x:Double"
-                        Android="12"
-                        iOS="14" />
+            <OnPlatform
+                x:Key="SmallSize"
+                x:TypeArguments="x:Double"
+                Android="12"
+                iOS="14" />
 
-            <OnPlatform x:Key="MediumSize"
-                        x:TypeArguments="x:Double"
-                        Android="14"
-                        iOS="16" />
+            <OnPlatform
+                x:Key="MediumSize"
+                x:TypeArguments="x:Double"
+                Android="14"
+                iOS="16" />
 
-            <OnPlatform x:Key="LargeSize"
-                        x:TypeArguments="x:Double"
-                        Android="16"
-                        iOS="18" />
+            <OnPlatform
+                x:Key="LargeSize"
+                x:TypeArguments="x:Double"
+                Android="16"
+                iOS="18" />
 
-            <OnPlatform x:Key="ExtraLargeSize"
-                        x:TypeArguments="x:Double"
-                        Android="18"
-                        iOS="20" />
+            <OnPlatform
+                x:Key="ExtraLargeSize"
+                x:TypeArguments="x:Double"
+                Android="18"
+                iOS="20" />
 
-            <OnPlatform x:Key="DefaultPlaceholderColor"
-                        x:TypeArguments="Color"
-                        Android="{StaticResource DefaultAndroidPlaceholderColor}"
-                        iOS="{StaticResource DefaultiOSPlaceholderColor}" />
+            <OnPlatform
+                x:Key="DefaultPlaceholderColor"
+                x:TypeArguments="Color"
+                Android="{StaticResource DefaultAndroidPlaceholderColor}"
+                iOS="{StaticResource DefaultiOSPlaceholderColor}" />
 
             <!--  STYLES  -->
             <Style x:Key="InfoButton" TargetType="ImageButton">

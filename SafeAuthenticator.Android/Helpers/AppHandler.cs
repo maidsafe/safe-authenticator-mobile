@@ -21,8 +21,7 @@ namespace SafeAuthenticator.Droid.Helpers
     {
         public Task<bool> LaunchApp(string uri)
         {
-            bool result = false;
-
+            bool result;
             try
             {
                 var parsedUri = Android.Net.Uri.Parse(uri);

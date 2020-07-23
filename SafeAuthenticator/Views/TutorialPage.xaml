@@ -1,13 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
-             xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels"
-             xmlns:controls="clr-namespace:SafeAuthenticator.Controls;assembly=SafeAuthenticator"
-             x:Class="SafeAuthenticator.Views.TutorialPage"
-             NavigationPage.BackButtonTitle="Login"
-             NavigationPage.HasNavigationBar="False">
+<ContentPage
+    x:Class="SafeAuthenticatorApp.Views.TutorialPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SafeAuthenticatorApp.Controls;assembly=SafeAuthenticatorApp"
+    xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+    xmlns:viewModels="clr-namespace:SafeAuthenticatorApp.ViewModels"
+    NavigationPage.BackButtonTitle="Login"
+    NavigationPage.HasNavigationBar="False">
 
     <ContentPage.BindingContext>
         <viewModels:TutorialViewModel />
@@ -29,74 +30,77 @@
     <ContentPage.Content>
         <StackLayout>
             <cv:CarouselViewControl
+                HorizontalOptions="FillAndExpand"
+                IsSwipeEnabled="False"
+                Position="{Binding CarouselPagePosition}"
+                PositionSelectedCommand="{Binding CarouselPageChangeCommand}"
                 ShowArrows="False"
                 ShowIndicators="False"
-                IsSwipeEnabled="False"
-                PositionSelectedCommand="{Binding CarouselPageChangeCommand}"
-                Position="{Binding CarouselPagePosition}"
-                HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
                 <cv:CarouselViewControl.ItemsSource>
                     <x:Array Type="{x:Type View}">
 
-                        <!-- Tutorial Page1 -->
+                        <!--  Tutorial Page1  -->
                         <StackLayout>
-                            <StackLayout Padding="25, 25, 25, 0"
-                                         VerticalOptions="CenterAndExpand">
+                            <StackLayout Padding="25,25,25,0" VerticalOptions="CenterAndExpand">
 
-                                <Image Source="tutorial0" 
-                                       Aspect="AspectFit"
-                                       HorizontalOptions="CenterAndExpand"
-                                       VerticalOptions="EndAndExpand"/>
+                                <Image
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Source="tutorial0"
+                                    VerticalOptions="EndAndExpand" />
 
-                                <Label Style="{DynamicResource TitleStyle}"
-                                       HorizontalTextAlignment="Center"
-                                       Text="Securely connect to the SAFE Network"
-                                       Margin="0, 40, 0, 0"
-                                       VerticalOptions="End"/>
+                                <Label
+                                    Margin="0,40,0,0"
+                                    HorizontalTextAlignment="Center"
+                                    Style="{DynamicResource TitleStyle}"
+                                    Text="Securely connect to the SAFE Network"
+                                    VerticalOptions="End" />
 
                             </StackLayout>
 
-                            <StackLayout Padding="0,40,0,25"
-                                         VerticalOptions="End">
-                                <Button Text="LOGIN"
-                                        Command="{Binding  SecondaryButtonCommand}"
-                                        BackgroundColor="Transparent"
-                                        TextColor="{StaticResource PrimaryColor}"
-                                        Margin="25, 0"
-                                        HorizontalOptions="Center"
-                                        VerticalOptions="EndAndExpand" />
+                            <StackLayout Padding="0,40,0,25" VerticalOptions="End">
+                                <Button
+                                    Margin="25,0"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding SecondaryButtonCommand}"
+                                    HorizontalOptions="Center"
+                                    Text="LOGIN"
+                                    TextColor="{StaticResource PrimaryColor}"
+                                    VerticalOptions="EndAndExpand" />
 
-                                <Button Text="GET STARTED"
-                                        Command="{Binding  PrimaryButtonCommand}"
-                                        Margin="25, 0"
-                                        VerticalOptions="End" />
+                                <Button
+                                    Margin="25,0"
+                                    Command="{Binding PrimaryButtonCommand}"
+                                    Text="GET STARTED"
+                                    VerticalOptions="End" />
                             </StackLayout>
                         </StackLayout>
 
-                        <!-- Tutorial Page2 -->
+                        <!--  Tutorial Page2  -->
                         <Grid RowSpacing="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="3*" />
                                 <RowDefinition Height="1*" />
                             </Grid.RowDefinitions>
 
-                            <StackLayout Padding="30, 0, 30, 0">
-                                <Label VerticalOptions="EndAndExpand"
-                                       HorizontalOptions="CenterAndExpand" 
-                                       Style="{DynamicResource TitleStyle}"
-                                       Text=" Authorise your SAFE apps"
-                                       HorizontalTextAlignment="Center"/>
+                            <StackLayout Padding="30,0,30,0">
+                                <Label
+                                    HorizontalOptions="CenterAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Style="{DynamicResource TitleStyle}"
+                                    Text=" Authorise your SAFE apps"
+                                    VerticalOptions="EndAndExpand" />
 
-                                <Image Source="tutorial1" 
-                                       HorizontalOptions="Center"
-                                       Margin="20, 0"
-                                       VerticalOptions="EndAndExpand"
-                                       Aspect="AspectFit" />
+                                <Image
+                                    Margin="20,0"
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="Center"
+                                    Source="tutorial1"
+                                    VerticalOptions="EndAndExpand" />
                             </StackLayout>
 
-                            <StackLayout Grid.Row="1"
-                                         Padding="0,0,0,25">
+                            <StackLayout Grid.Row="1" Padding="0,0,0,25">
 
                                 <StackLayout.BackgroundColor>
                                     <OnPlatform x:TypeArguments="Color">
@@ -105,61 +109,64 @@
                                     </OnPlatform>
                                 </StackLayout.BackgroundColor>
 
-                                <controls:GradientContentView StartColor="{DynamicResource LightbackgroundColor}"
-                                                              EndColor="{DynamicResource WhiteColor}">
-                                    <StackLayout BackgroundColor="Transparent"
-                                                 HeightRequest="20"
-                                                 HorizontalOptions="FillAndExpand" />
+                                <controls:GradientContentView EndColor="{DynamicResource WhiteColor}" StartColor="{DynamicResource LightbackgroundColor}">
+                                    <StackLayout
+                                        BackgroundColor="Transparent"
+                                        HeightRequest="20"
+                                        HorizontalOptions="FillAndExpand" />
 
                                     <controls:GradientContentView.Triggers>
-                                        <DataTrigger TargetType="controls:GradientContentView"
-                                                     Binding="{Binding CarouselPagePosition}"
-                                                     Value="0">
-                                            <Setter Property="Opacity"
-                                                    Value="0" />
+                                        <DataTrigger
+                                            Binding="{Binding CarouselPagePosition}"
+                                            TargetType="controls:GradientContentView"
+                                            Value="0">
+                                            <Setter Property="Opacity" Value="0" />
                                         </DataTrigger>
                                     </controls:GradientContentView.Triggers>
                                 </controls:GradientContentView>
 
-                                <Button Text="SKIP"
-                                        Command="{Binding  SecondaryButtonCommand}"
-                                        BackgroundColor="Transparent"
-                                        TextColor="{StaticResource PrimaryColor}"
-                                        Margin="25, 0"
-                                        HorizontalOptions="Center"
-                                        VerticalOptions="EndAndExpand" />
+                                <Button
+                                    Margin="25,0"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding SecondaryButtonCommand}"
+                                    HorizontalOptions="Center"
+                                    Text="SKIP"
+                                    TextColor="{StaticResource PrimaryColor}"
+                                    VerticalOptions="EndAndExpand" />
 
-                                <Button Text="CONTINUE"
-                                        Command="{Binding  PrimaryButtonCommand}"
-                                        Margin="25, 0"
-                                        VerticalOptions="End" />
+                                <Button
+                                    Margin="25,0"
+                                    Command="{Binding PrimaryButtonCommand}"
+                                    Text="CONTINUE"
+                                    VerticalOptions="End" />
                             </StackLayout>
                         </Grid>
 
 
-                        <!-- Tutorial Page3 -->
+                        <!--  Tutorial Page3  -->
                         <Grid RowSpacing="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="3*" />
                                 <RowDefinition Height="1*" />
                             </Grid.RowDefinitions>
 
-                            <StackLayout Padding="30, 0, 30, 0">
-                                <Label VerticalOptions="EndAndExpand"
-                                       HorizontalOptions="CenterAndExpand" 
-                                       Style="{DynamicResource TitleStyle}"
-                                       Text="Manage access to your data"
-                                       HorizontalTextAlignment="Center" />
+                            <StackLayout Padding="30,0,30,0">
+                                <Label
+                                    HorizontalOptions="CenterAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Style="{DynamicResource TitleStyle}"
+                                    Text="Manage access to your data"
+                                    VerticalOptions="EndAndExpand" />
 
-                                <Image Source="tutorial2"
-                                       HorizontalOptions="Center"
-                                       Margin="20, 0"
-                                       VerticalOptions="EndAndExpand"
-                                       Aspect="AspectFit" />
+                                <Image
+                                    Margin="20,0"
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="Center"
+                                    Source="tutorial2"
+                                    VerticalOptions="EndAndExpand" />
                             </StackLayout>
 
-                            <StackLayout Grid.Row="1"
-                                         Padding="0,0,0,25">
+                            <StackLayout Grid.Row="1" Padding="0,0,0,25">
 
                                 <StackLayout.BackgroundColor>
                                     <OnPlatform x:TypeArguments="Color">
@@ -168,34 +175,36 @@
                                     </OnPlatform>
                                 </StackLayout.BackgroundColor>
 
-                                <controls:GradientContentView StartColor="{DynamicResource LightbackgroundColor}"
-                                                              EndColor="{DynamicResource WhiteColor}">
-                                    <StackLayout BackgroundColor="Transparent"
-                                                 HeightRequest="20"
-                                                 HorizontalOptions="FillAndExpand" />
+                                <controls:GradientContentView EndColor="{DynamicResource WhiteColor}" StartColor="{DynamicResource LightbackgroundColor}">
+                                    <StackLayout
+                                        BackgroundColor="Transparent"
+                                        HeightRequest="20"
+                                        HorizontalOptions="FillAndExpand" />
 
                                     <controls:GradientContentView.Triggers>
-                                        <DataTrigger TargetType="controls:GradientContentView"
-                                                     Binding="{Binding CarouselPagePosition}"
-                                                     Value="0">
-                                            <Setter Property="Opacity"
-                                                    Value="0" />
+                                        <DataTrigger
+                                            Binding="{Binding CarouselPagePosition}"
+                                            TargetType="controls:GradientContentView"
+                                            Value="0">
+                                            <Setter Property="Opacity" Value="0" />
                                         </DataTrigger>
                                     </controls:GradientContentView.Triggers>
                                 </controls:GradientContentView>
 
-                                <Button Text="CREATE ACCOUNT"
-                                        Command="{Binding  SecondaryButtonCommand}"
-                                        BackgroundColor="Transparent"
-                                        TextColor="{StaticResource PrimaryColor}"
-                                        Margin="25, 0"
-                                        HorizontalOptions="Center"
-                                        VerticalOptions="EndAndExpand" />
+                                <Button
+                                    Margin="25,0"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding SecondaryButtonCommand}"
+                                    HorizontalOptions="Center"
+                                    Text="CREATE ACCOUNT"
+                                    TextColor="{StaticResource PrimaryColor}"
+                                    VerticalOptions="EndAndExpand" />
 
-                                <Button Text="LOGIN"
-                                        Command="{Binding PrimaryButtonCommand}"
-                                        Margin="25, 0"
-                                        VerticalOptions="End" />
+                                <Button
+                                    Margin="25,0"
+                                    Command="{Binding PrimaryButtonCommand}"
+                                    Text="LOGIN"
+                                    VerticalOptions="End" />
                             </StackLayout>
                         </Grid>
 

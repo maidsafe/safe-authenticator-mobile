@@ -7,7 +7,7 @@
 // specific language governing permissions and limitations relating to use of the SAFE Network
 // Software.
 
-namespace SafeAuthenticator.Models
+namespace SafeAuthenticatorApp.Models
 {
     public class StrengthIndicator
     {

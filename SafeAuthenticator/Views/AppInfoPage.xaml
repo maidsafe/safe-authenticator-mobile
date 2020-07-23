@@ -1,17 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:behaviour="clr-namespace:SafeAuthenticator.Controls.Behaviour"
-             xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
-             xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels;assembly=SafeAuthenticator"
-             d:DataContext="{d:DesignInstance Type=viewModels:AppInfoViewModel, IsDesignTimeCreatable=False}"
-             x:Class="SafeAuthenticator.Views.AppInfoPage"
-             Title="App Info"
-             Padding="16">
+<ContentPage
+    x:Class="SafeAuthenticatorApp.Views.AppInfoPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviour="clr-namespace:SafeAuthenticatorApp.Controls.Behaviour"
+    xmlns:controls="clr-namespace:SafeAuthenticatorApp.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:SafeAuthenticatorApp.ViewModels;assembly=SafeAuthenticatorApp"
+    Title="App Info"
+    Padding="16"
+    d:DataContext="{d:DesignInstance Type=viewModels:AppInfoViewModel,
+                                     IsDesignTimeCreatable=False}"
+    mc:Ignorable="d">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -40,9 +42,10 @@
     <ContentPage.Content>
         <StackLayout>
 
-            <Grid RowSpacing="10"
-                  VerticalOptions="CenterAndExpand"
-                  ColumnSpacing="15">
+            <Grid
+                ColumnSpacing="15"
+                RowSpacing="10"
+                VerticalOptions="CenterAndExpand">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -53,44 +56,45 @@
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
 
-                <StackLayout VerticalOptions="FillAndExpand"
-                             HorizontalOptions="FillAndExpand">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-                    <Label Text="{Binding AppModelInfo.AppName}"
-                           Style="{StaticResource PrimaryTitleStyle}" />
+                    <Label Style="{StaticResource PrimaryTitleStyle}" Text="{Binding AppModelInfo.AppName}" />
 
-                    <Label Text="{Binding AppModelInfo.AppVendor}"
-                           TextColor="{StaticResource GreySmokeMediumColor}"
-                           Style="{StaticResource DescriptionStyle}" />
+                    <Label
+                        Style="{StaticResource DescriptionStyle}"
+                        Text="{Binding AppModelInfo.AppVendor}"
+                        TextColor="{StaticResource GreySmokeMediumColor}" />
                 </StackLayout>
 
-                <Button Grid.Column="1"
-                        Style="{StaticResource RevokeButtonStyle}"
-                        Text="REVOKE"
-                        HorizontalOptions="End"
-                        VerticalOptions="StartAndExpand"
-                        Command="{Binding RevokeAppCommand}" />
+                <Button
+                    Grid.Column="1"
+                    Command="{Binding RevokeAppCommand}"
+                    HorizontalOptions="End"
+                    Style="{StaticResource RevokeButtonStyle}"
+                    Text="REVOKE"
+                    VerticalOptions="StartAndExpand" />
             </Grid>
 
-            <Label Text="Permissions granted"
-                   Style="{StaticResource SecondaryTitleStyle}"
-                   Margin="0,20,0,0">
+            <Label
+                Margin="0,20,0,0"
+                Style="{StaticResource SecondaryTitleStyle}"
+                Text="Permissions granted">
                 <Label.Triggers>
-                    <DataTrigger TargetType="Label"
-                                 Binding="{Binding AppModelInfo.Containers.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
-                                 Value="true">
-                        <Setter Property="IsVisible" 
-                                Value="False"/>
+                    <DataTrigger
+                        Binding="{Binding AppModelInfo.Containers.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
+                        TargetType="Label"
+                        Value="true">
+                        <Setter Property="IsVisible" Value="False" />
                     </DataTrigger>
                 </Label.Triggers>
             </Label>
 
-            <controls:TestSafeCoinPermissions IsVisible="{Binding ShowTestCoinPermissions}"
-                                              PermissionsText="{Binding TestCoinPermissions}" />
+            <controls:TestSafeCoinPermissions IsVisible="{Binding ShowTestCoinPermissions}" PermissionsText="{Binding TestCoinPermissions}" />
 
-            <ListView HasUnevenRows="True"
-                      SeparatorVisibility="None"
-                      ItemsSource="{Binding AppModelInfo.Containers}">
+            <ListView
+                HasUnevenRows="True"
+                ItemsSource="{Binding AppModelInfo.Containers}"
+                SeparatorVisibility="None">
 
                 <ListView.Behaviors>
                     <behaviour:ListViewNoSelectionBehavior />
@@ -104,11 +108,12 @@
 
                 <ListView.Footer>
                     <StackLayout Orientation="Horizontal">
-                        <Label Margin="20"
-                               VerticalOptions="CenterAndExpand"
-                               HorizontalOptions="CenterAndExpand"
-                               Text="No container permissions granted"
-                               IsVisible="{Binding AppModelInfo.Containers.Count, Converter={StaticResource IsCollectionEmptyConverter}}" />
+                        <Label
+                            Margin="20"
+                            HorizontalOptions="CenterAndExpand"
+                            IsVisible="{Binding AppModelInfo.Containers.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
+                            Text="No container permissions granted"
+                            VerticalOptions="CenterAndExpand" />
                     </StackLayout>
                 </ListView.Footer>
             </ListView>

@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage x:Class="SafeAuthenticator.Views.LoginPage"
-             xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
-             xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels;assembly=SafeAuthenticator"
-             NavigationPage.BackButtonTitle="Login"
-             NavigationPage.HasNavigationBar="False"
-             Visual="Material">
+<ContentPage
+    x:Class="SafeAuthenticatorApp.Views.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SafeAuthenticatorApp.Controls"
+    xmlns:viewModels="clr-namespace:SafeAuthenticatorApp.ViewModels;assembly=SafeAuthenticatorApp"
+    NavigationPage.BackButtonTitle="Login"
+    NavigationPage.HasNavigationBar="False"
+    Visual="Material">
 
     <ContentPage.BindingContext>
         <viewModels:LoginViewModel />
@@ -34,59 +35,67 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="25">
-                <Image x:Name="ConnectionSettingsMenuIcon"
-                       Margin="10,30"
-                       HeightRequest="25"
-                       HorizontalOptions="EndAndExpand"
-                       Source="gearIcon"
-                       VerticalOptions="Start"
-                       WidthRequest="25" />
+                <Image
+                    x:Name="ConnectionSettingsMenuIcon"
+                    Margin="10,30"
+                    HeightRequest="25"
+                    HorizontalOptions="EndAndExpand"
+                    Source="gearIcon"
+                    VerticalOptions="Start"
+                    WidthRequest="25" />
 
                 <StackLayout VerticalOptions="CenterAndExpand">
 
-                    <Image HorizontalOptions="Center"
-                           Source="authLogo"
-                           Style="{StaticResource ImageStyle}" />
+                    <Image
+                        HorizontalOptions="Center"
+                        Source="authLogo"
+                        Style="{StaticResource ImageStyle}" />
 
-                    <Label Margin="0,20,0,10"
-                           HorizontalOptions="Center"
-                           Style="{StaticResource TitleStyle}"
-                           Text="SAFE Authenticator" />
+                    <Label
+                        Margin="0,20,0,10"
+                        HorizontalOptions="Center"
+                        Style="{StaticResource TitleStyle}"
+                        Text="SAFE Authenticator" />
 
-                    <controls:CustomMaterialEntry x:Name="SecretEntry"
-                                                  Margin="0,30,0,10"
-                                                  HeightRequest="60"
-                                                  IsPassword="True"
-                                                  Placeholder="Passphrase"
-                                                  ReturnType="Next"
-                                                  Text="{Binding AccountSecret}" />
+                    <controls:CustomMaterialEntry
+                        x:Name="SecretEntry"
+                        Margin="0,30,0,10"
+                        HeightRequest="60"
+                        IsPassword="True"
+                        Placeholder="Passphrase"
+                        ReturnType="Next"
+                        Text="{Binding AccountSecret}" />
 
-                    <controls:CustomMaterialEntry x:Name="PasswordEntry"
-                                                  HeightRequest="60"
-                                                  IsPassword="True"
-                                                  Placeholder="Password"
-                                                  ReturnCommand="{Binding LoginCommand}"
-                                                  ReturnType="Done"
-                                                  Text="{Binding AccountPassword}" />
+                    <controls:CustomMaterialEntry
+                        x:Name="PasswordEntry"
+                        HeightRequest="60"
+                        IsPassword="True"
+                        Placeholder="Password"
+                        ReturnCommand="{Binding LoginCommand}"
+                        ReturnType="Done"
+                        Text="{Binding AccountPassword}" />
 
-                    <Button Margin="0,20,0,0"
-                            Command="{Binding LoginCommand}"
-                            Text="LOGIN" />
+                    <Button
+                        Margin="0,20,0,0"
+                        Command="{Binding LoginCommand}"
+                        Text="LOGIN" />
 
-                    <Label Margin="0,10,0,0"
-                           HorizontalOptions="Center"
-                           Text="CREATE ACCOUNT"
-                           TextColor="{StaticResource PrimaryColor}">
+                    <Label
+                        Margin="0,10,0,0"
+                        HorizontalOptions="Center"
+                        Text="CREATE ACCOUNT"
+                        TextColor="{StaticResource PrimaryColor}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding CreateAccountCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
 
-                <Label HorizontalOptions="Center"
-                       Style="{StaticResource NeedHelpStyle}"
-                       Text="Need any help?"
-                       VerticalOptions="End">
+                <Label
+                    HorizontalOptions="Center"
+                    Style="{StaticResource NeedHelpStyle}"
+                    Text="Need any help?"
+                    VerticalOptions="End">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding NeedHelpCommand}" NumberOfTapsRequired="1" />
                     </Label.GestureRecognizers>

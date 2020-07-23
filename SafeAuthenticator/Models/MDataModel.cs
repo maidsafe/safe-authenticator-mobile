@@ -9,7 +9,7 @@
 
 using JetBrains.Annotations;
 
-namespace SafeAuthenticator.Models
+namespace SafeAuthenticatorApp.Models
 {
     public class MDataModel
     {

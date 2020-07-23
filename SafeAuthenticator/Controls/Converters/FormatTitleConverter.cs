@@ -12,7 +12,7 @@ using System.Globalization;
 using System.Linq;
 using Xamarin.Forms;
 
-namespace SafeAuthenticator.Controls.Converters
+namespace SafeAuthenticatorApp.Controls.Converters
 {
     class FormatTitleConverter : IValueConverter
     {

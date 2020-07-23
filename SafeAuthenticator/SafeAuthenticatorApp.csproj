@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;NETSTANDARD2_0</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD;NETSTANDARD2_0;SAFE_AUTH</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +25,7 @@
     <PackageReference Include="Xamarin.Plugin.FilePicker" Version="2.1.36-beta" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Xamarin.Forms.InputKit" Version="3.1.1" />
+    <PackageReference Include="MaidSafe.SafeApp" Version="0.4.0" />
   </ItemGroup>
 
   <ItemGroup>
