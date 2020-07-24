@@ -182,12 +182,6 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\app_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SafeAuthenticator\SafeAuthenticator.csproj">
-      <Project>{2477dbaf-96ee-4ea4-8ddc-0150da13991f}</Project>
-      <Name>SafeAuthenticatorApp</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="CarouselView.FormsPlugin">
       <Version>5.2.0</Version>
     </PackageReference>
@@ -303,6 +297,12 @@
     <AndroidResource Include="Resources\drawable\Downloads.png" />
     <AndroidResource Include="Resources\drawable\Music.png" />
     <AndroidResource Include="Resources\drawable\Pictures.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SafeAuthenticator\SafeAuthenticatorApp.csproj">
+      <Project>{2477DBAF-96EE-4EA4-8DDC-0150DA13991F}</Project>
+      <Name>SafeAuthenticatorApp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="CheckNativeLibs" BeforeTargets="PrepareForBuild">

@@ -89,15 +89,11 @@ namespace SafeAuthenticatorApp.Services
             _isLogInitialised = false;
             CredentialCache = new CredentialCacheService();
             Connectivity.ConnectivityChanged += InternetConnectivityChanged;
-
-            Authenticator.Disconnected += OnNetworkDisconnected;
             Task.Run(async () => await InitLoggingAsync());
         }
 
         public void Dispose()
         {
-            // ReSharper disable once DelegateSubtraction
-            Authenticator.Disconnected -= OnNetworkDisconnected;
             FreeState();
             GC.SuppressFinalize(this);
         }
@@ -117,14 +113,6 @@ namespace SafeAuthenticatorApp.Services
                             await LoginAsync(location, password);
                             MessagingCenter.Send(this, MessengerConstants.NavHomePage);
                         }
-                    }
-                }
-                else if (_authenticator.IsDisconnected)
-                {
-                    using (NativeProgressDialog.ShowNativeDialog("Reconnecting to Network"))
-                    {
-                        await _authenticator.AuthReconnectAsync();
-                        _authenticator.IsDisconnected = false;
                     }
                 }
             }
@@ -183,10 +171,19 @@ namespace SafeAuthenticatorApp.Services
             var appList = await _authenticator.AuthRegisteredAppsAsync();
             foreach (var app in appList)
             {
-                Utilities.UpdateAppContainerNameList(app.AppInfo.Id, app.AppInfo.Name);
+                Utilities.UpdateAppContainerNameList(app.Id, app.Name);
             }
             return appList
-                   .Select(app => new RegisteredAppModel(app.AppInfo, app.Containers, app.AppPermissions))
+                   .Select(app => new RegisteredAppModel(
+                       new AppExchangeInfo()
+                       {
+                           Id = app.Id,
+                           Name = app.Name,
+                           Scope = string.Empty,
+                           Vendor = app.Vendor,
+                       },
+                       app.Containers,
+                       app.AppPermissions))
                    .ToList();
         }
 
@@ -303,11 +300,6 @@ namespace SafeAuthenticatorApp.Services
             _authenticator = await Authenticator.LoginAsync(location, password);
             _secret = location;
             _password = password;
-        }
-
-        internal async Task FlushAppRevocationQueueAsync()
-        {
-            await _authenticator.AuthFlushAppRevocationQueueAsync();
         }
 
         internal async Task LogoutAsync()

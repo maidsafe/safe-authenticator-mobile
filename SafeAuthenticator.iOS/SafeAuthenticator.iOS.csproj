@@ -167,12 +167,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SafeAuthenticator\SafeAuthenticator.csproj">
-      <Project>{2477dbaf-96ee-4ea4-8ddc-0150da13991f}</Project>
-      <Name>SafeAuthenticatorApp</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\app_icon_ios_29@2x .png">
       <Visible>false</Visible>
     </ImageAsset>
@@ -238,6 +232,12 @@
     <PackageReference Include="MaidSafe.SafeApp">
       <Version>0.4.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SafeAuthenticator\SafeAuthenticatorApp.csproj">
+      <Project>{2477DBAF-96EE-4EA4-8DDC-0150DA13991F}</Project>
+      <Name>SafeAuthenticatorApp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="CheckNativeLibs" BeforeTargets="PrepareForBuild">

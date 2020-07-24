@@ -173,7 +173,6 @@ namespace SafeAuthenticatorApp.ViewModels
                 {
                     throw new Exception(Constants.NoInternetMessage);
                 }
-                await FlushAppRevocationQueueAsync();
                 var registeredApps = await Authenticator.GetRegisteredAppsAsync();
                 registeredApps = registeredApps.OrderBy(a => a.AppName).ToList();
                 Apps.ReplaceRange(registeredApps);
@@ -205,30 +204,6 @@ namespace SafeAuthenticatorApp.ViewModels
 
             await Authenticator.HandleUrlActivationAsync(Authenticator.AuthenticationReq);
             Authenticator.AuthenticationReq = null;
-        }
-
-        public async Task FlushAppRevocationQueueAsync()
-        {
-            try
-            {
-                if (Authenticator.IsRevocationComplete)
-                    return;
-
-                await Task.Run(async () =>
-                {
-                    await Authenticator.FlushAppRevocationQueueAsync();
-                    Authenticator.IsRevocationComplete = true;
-                });
-            }
-            catch (FfiException ex)
-            {
-                var errorMessage = Utilities.GetErrorMessage(ex);
-                await Application.Current.MainPage.DisplayAlert("Revocation Error", errorMessage, "OK");
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Revocation Error", ex.Message, "OK");
-            }
         }
     }
 }
