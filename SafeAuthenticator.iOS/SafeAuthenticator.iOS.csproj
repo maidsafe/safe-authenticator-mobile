@@ -240,15 +240,4 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <Target Name="CheckNativeLibs" BeforeTargets="PrepareForBuild">
-    <ItemGroup>
-      <NativeSafeAuthLibs Include="Native References\*.a" />
-    </ItemGroup>
-    <Exec ConsoleToMSBuild="true" Condition="'@(NativeSafeAuthLibs-&gt;Count())' &lt; '1' AND '$(OS)' == 'Windows_NT'" Command="cd..\CakeScripts\ &amp; powershell -ExecutionPolicy ByPass -File .\build.ps1 --settings_skipverification=true -Configuration Release -target UnZip-Libs">
-      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
-    </Exec>
-    <Exec ConsoleToMSBuild="true" Condition="'@(NativeSafeAuthLibs-&gt;Count())' &lt; '1' AND '$(OS)' == 'UNIX'" Command="cd ..\CakeScripts\ &amp;&amp; bash build.sh --settings_skipverification=true --Configuration=Release --target=Unzip-Libs">
-      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
-    </Exec>
-  </Target>
 </Project>
