@@ -5,7 +5,15 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;NETSTANDARD;NETSTANDARD2_0;SAFE_AUTH</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD;NETSTANDARD2_0;</DefineConstants>
+  </PropertyGroup>
+    
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug' ">
+    <DefineConstants>$(DefineConstants);SAFE_AUTH</DefineConstants>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)' == 'Release' ">
+    <DefineConstants>SAFE_AUTH</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
