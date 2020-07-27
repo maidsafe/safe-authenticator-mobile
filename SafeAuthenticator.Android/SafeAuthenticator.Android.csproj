@@ -42,8 +42,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
-    <EnableProguard>true</EnableProguard>
-<AndroidLinkMode></AndroidLinkMode>
+    <AndroidLinkMode></AndroidLinkMode>
+    <AndroidLinkTool>r8</AndroidLinkTool>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Java.Interop" />
