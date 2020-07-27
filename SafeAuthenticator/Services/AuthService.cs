@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Rg.Plugins.Popup.Extensions;
+using SafeApp;
 using SafeApp.Core;
 using SafeAuthenticator;
 using SafeAuthenticatorApp.Controls;
@@ -136,7 +137,7 @@ namespace SafeAuthenticatorApp.Services
         internal async Task SetConfigFileDirectoryPathAsync()
         {
             var fileOps = DependencyService.Get<IFileOps>();
-            await Authenticator.AuthSetConfigurationFilePathAsync(fileOps.ConfigFilesPath);
+            await Session.SetAppConfigurationDirectoryPathAsync(fileOps.ConfigFilesPath);
             Debug.WriteLine($"Set config dir path to : {fileOps.ConfigFilesPath}");
         }
 
@@ -223,7 +224,7 @@ namespace SafeAuthenticatorApp.Services
                 if (decodedType == typeof(IpcReqError))
                 {
                     var error = decodeResult as IpcReqError;
-                    throw new FfiException(error.Code, error.Description);
+                    throw new Exception($"Error Code: {error.Code}. Description: {error.Description}");
                 }
                 else
                 {
@@ -243,7 +244,7 @@ namespace SafeAuthenticatorApp.Services
             }
         }
 
-        internal async Task<string> GetEncodedResponseAsync(IpcReq req, bool isGranted)
+        internal async Task<string> GetEncodedResponseAsync(IpcReq req, string encodedReq, bool isGranted)
         {
             string encodedRsp = string.Empty;
             var requestType = req.GetType();
@@ -254,22 +255,19 @@ namespace SafeAuthenticatorApp.Services
             }
             else if (requestType == typeof(AuthIpcReq))
             {
-                var authReq = req as AuthIpcReq;
-                encodedRsp = await _authenticator.EncodeAuthRespAsync(authReq, isGranted);
+                encodedRsp = await _authenticator.AutheriseAppAsync(encodedReq, isGranted);
             }
             else if (requestType == typeof(ContainersIpcReq))
             {
-                var containerReq = req as ContainersIpcReq;
-                encodedRsp = await _authenticator.EncodeContainersRespAsync(containerReq, isGranted);
+                encodedRsp = await _authenticator.AutheriseAppAsync(encodedReq, isGranted);
             }
             else if (requestType == typeof(ShareMDataIpcReq))
             {
-                var mDataShareReq = req as ShareMDataIpcReq;
                 if (!isGranted)
                 {
                     throw new Exception("SharedMData request denied");
                 }
-                encodedRsp = await _authenticator.EncodeShareMdataRespAsync(mDataShareReq, isGranted);
+                encodedRsp = await _authenticator.AutheriseAppAsync(encodedReq, isGranted);
             }
             return encodedRsp;
         }
@@ -289,8 +287,7 @@ namespace SafeAuthenticatorApp.Services
 
         private async Task InitLoggingAsync()
         {
-            await Authenticator.AuthInitLoggingAsync($"{DateTime.Now.ToShortTimeString()}.log");
-
+            await Session.InitLoggingAsync($"{DateTime.Now.ToShortTimeString()}.log");
             Debug.WriteLine("Rust Logging Initialised.");
             IsLogInitialised = true;
         }

@@ -9,8 +9,8 @@
 
 using Foundation;
 using SafariServices;
-using SafeAuthenticator.Controls;
 using SafeAuthenticator.iOS.Helpers;
+using SafeAuthenticatorApp.Controls;
 using UIKit;
 using Xamarin.Forms;
 

@@ -10,7 +10,7 @@
 using System.Threading.Tasks;
 using Foundation;
 using SafeAuthenticator.iOS.Helpers;
-using SafeAuthenticator.Services;
+using SafeAuthenticatorApp.Services;
 using UIKit;
 
 [assembly: Xamarin.Forms.Dependency(typeof(AppHandler))]

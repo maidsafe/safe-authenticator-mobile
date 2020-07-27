@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using SafeAuthenticator.Droid.Helpers;
-using SafeAuthenticator.Helpers;
+using SafeAuthenticatorApp.Helpers;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(FileOps))]

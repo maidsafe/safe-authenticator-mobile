@@ -10,7 +10,7 @@
 using System.Threading.Tasks;
 using Android.Content;
 using SafeAuthenticator.Droid.Helpers;
-using SafeAuthenticator.Services;
+using SafeAuthenticatorApp.Services;
 using Activity = Plugin.CurrentActivity.CrossCurrentActivity;
 
 [assembly: Xamarin.Forms.Dependency(typeof(AppHandler))]

@@ -11,8 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using SafeAuthenticator.Helpers;
 using SafeAuthenticator.iOS.Helpers;
+using SafeAuthenticatorApp.Helpers;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(FileOps))]

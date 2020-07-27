@@ -9,8 +9,8 @@
 
 using CoreAnimation;
 using CoreGraphics;
-using SafeAuthenticator.Controls;
 using SafeAuthenticator.iOS.Helpers;
+using SafeAuthenticatorApp.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 

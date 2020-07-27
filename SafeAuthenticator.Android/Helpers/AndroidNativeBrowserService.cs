@@ -10,8 +10,8 @@
 using Android.App;
 using Android.Content;
 using Android.Support.CustomTabs;
-using SafeAuthenticator.Controls;
 using SafeAuthenticator.Droid.Helpers;
+using SafeAuthenticatorApp.Controls;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(AndroidNativeBrowserService))]

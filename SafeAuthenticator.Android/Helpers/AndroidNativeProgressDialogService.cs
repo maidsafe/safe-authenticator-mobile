@@ -9,9 +9,9 @@
 
 using System;
 using Android.App;
-using SafeAuthenticator.Controls;
 using SafeAuthenticator.Droid.Helpers;
-using SafeAuthenticator.Models;
+using SafeAuthenticatorApp.Controls;
+using SafeAuthenticatorApp.Models;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(AndroidNativeProgressDialogService))]

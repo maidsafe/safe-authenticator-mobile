@@ -9,9 +9,9 @@
 
 using System;
 using BigTed;
-using SafeAuthenticator.Controls;
 using SafeAuthenticator.iOS.Helpers;
-using SafeAuthenticator.Models;
+using SafeAuthenticatorApp.Controls;
+using SafeAuthenticatorApp.Models;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(AppleNativeProgressDialogService))]

@@ -10,6 +10,7 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using SafeApp.Core;
 using SafeAuthenticatorApp.Helpers;
 using SafeAuthenticatorApp.Models;
 using Xamarin.Forms;

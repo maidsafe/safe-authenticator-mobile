@@ -10,8 +10,8 @@
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
-using SafeAuthenticator.Controls;
 using SafeAuthenticator.Droid.Helpers;
+using SafeAuthenticatorApp.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 

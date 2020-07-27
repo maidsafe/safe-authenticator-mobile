@@ -273,7 +273,7 @@ namespace SafeAuthenticatorApp.ViewModels
                 {
                     throw new Exception(Constants.NoInternetMessage);
                 }
-                var encodedRsp = await Authenticator.GetEncodedResponseAsync(decodedRequest, response);
+                var encodedRsp = await Authenticator.GetEncodedResponseAsync(decodedRequest, encodedRequest, response);
 
                 if (response)
                     MessagingCenter.Send(this, MessengerConstants.RefreshHomePage, decodedRequest);
