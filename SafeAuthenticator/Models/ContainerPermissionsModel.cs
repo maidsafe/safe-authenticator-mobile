@@ -7,7 +7,6 @@
 // specific language governing permissions and limitations relating to use of the SAFE Network
 // Software.
 
-using JetBrains.Annotations;
 using SafeAuthenticatorApp.Helpers;
 
 namespace SafeAuthenticatorApp.Models
@@ -16,10 +15,8 @@ namespace SafeAuthenticatorApp.Models
     {
         public string ContainerImage => Utilities.FormatContainerNameToImage(ContainerName);
 
-        [PublicAPI]
         public string ContainerName { get; set; }
 
-        [PublicAPI]
         public PermissionSetModel Access { get; set; }
     }
 }

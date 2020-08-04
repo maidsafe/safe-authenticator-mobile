@@ -10,7 +10,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
 using SafeApp.Core;
 using SafeAuthenticator;
 using SafeAuthenticatorApp.Helpers;
@@ -19,7 +18,6 @@ namespace SafeAuthenticatorApp.Models
 {
     public class RegisteredAppModel : ObservableObject, IComparable, IEquatable<RegisteredAppModel>
     {
-        [PublicAPI]
         public AppExchangeInfo AppInfo { get; }
 
         public string AppName => AppInfo.Name;
@@ -32,7 +30,6 @@ namespace SafeAuthenticatorApp.Models
 
         public AppPermissions AppPermissions { get; }
 
-        [PublicAPI]
         public ObservableRangeCollection<ContainerPermissionsModel> Containers { get; }
 
         public RegisteredAppModel(

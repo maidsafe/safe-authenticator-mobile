@@ -7,11 +7,8 @@
 // specific language governing permissions and limitations relating to use of the SAFE Network
 // Software.
 
-using JetBrains.Annotations;
-
 namespace SafeAuthenticatorApp.Models
 {
-    [PublicAPI]
     public class PermissionSetModel
     {
         public bool Delete { get; set; }

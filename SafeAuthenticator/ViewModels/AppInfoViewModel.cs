@@ -10,7 +10,6 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using JetBrains.Annotations;
 using SafeApp.Core;
 using SafeAuthenticatorApp.Helpers;
 using SafeAuthenticatorApp.Models;
@@ -23,7 +22,6 @@ namespace SafeAuthenticatorApp.ViewModels
     {
         private RegisteredAppModel _appModelInfo;
 
-        [PublicAPI]
         public RegisteredAppModel AppModelInfo
         {
             get => _appModelInfo;
@@ -46,7 +44,6 @@ namespace SafeAuthenticatorApp.ViewModels
             set => SetProperty(ref _testCoinPermissions, value);
         }
 
-        [PublicAPI]
         public ICommand RevokeAppCommand { get; private set; }
 
         public AppInfoViewModel(RegisteredAppModel appModelInfo)
