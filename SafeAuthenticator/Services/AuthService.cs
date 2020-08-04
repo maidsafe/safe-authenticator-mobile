@@ -32,6 +32,7 @@ namespace SafeAuthenticatorApp.Services
     public class AuthService : ObservableObject, IDisposable
     {
         private const string AutoReconnectPropKey = "AutoReconnect";
+        private const string PreloadedTestCoins = "100";
         private readonly SemaphoreSlim _reconnectSemaphore = new SemaphoreSlim(1, 1);
         private Authenticator _authenticator;
         private bool _isLogInitialised;
@@ -143,7 +144,9 @@ namespace SafeAuthenticatorApp.Services
 
         internal async Task CreateAccountAsync(string location, string password)
         {
-            _authenticator = await Authenticator.CreateAccountAsync(null, location, password);
+            // Creating a test coins with preload amount.
+            var (_, keyPair) = await Authenticator.AllocateTestCoinsAsync(PreloadedTestCoins);
+            _authenticator = await Authenticator.CreateAccountAsync(keyPair.SK, location, password);
             _secret = location;
             _password = password;
         }

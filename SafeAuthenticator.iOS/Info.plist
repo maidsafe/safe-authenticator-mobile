@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>Safe Authenticator</string>
+	<string>Safe Authenticator</string>
 	<key>CFBundleName</key>
 	<string>SafeAuthenticator</string>
 	<key>CFBundleIdentifier</key>

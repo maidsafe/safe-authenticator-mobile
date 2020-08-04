@@ -7,7 +7,6 @@
 // specific language governing permissions and limitations relating to use of the SAFE Network
 // Software.
 
-using System.Threading.Tasks;
 using SafeAuthenticatorApp.Helpers;
 using SafeAuthenticatorApp.ViewModels;
 using Xamarin.Forms;
