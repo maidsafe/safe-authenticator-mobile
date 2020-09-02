@@ -26,5 +26,5 @@ level = "trace"
 [loggers."safe_authenticator"]
 level = "trace"
 
-[loggers."ffi_utils"]
+[loggers."sn_ffi_utils"]
 level = "trace"
