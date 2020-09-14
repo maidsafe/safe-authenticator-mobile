@@ -1,6 +1,6 @@
 # Safe Authenticator Mobile
 
-The SAFE Authenticator acts as a gateway to the [SAFE Network](https://safenetwork.tech/) by enabling users to create an account & authenticate themselves onto the SAFE Network. It helps users ensure they have full control over the permissions they grant to SAFE apps.
+The Safe Authenticator acts as a gateway to the [Safe Network](https://safenetwork.tech/) by enabling users to create an account & authenticate themselves onto the Safe Network. It helps users ensure they have full control over the permissions they grant to Safe apps.
 
 **Maintainer:** Ravinder Jangra (ravinder.jangra@maidsafe.net)
 
@@ -12,23 +12,28 @@ The SAFE Authenticator acts as a gateway to the [SAFE Network](https://safenetwo
 
 ## Table of Contents
 
-1. [Overview](#Overview)
-2. [Features](#Features)
-3. [User Guide](#User-Guide)
-4. [Development](#Development)
-    * [Project Structure](#Project-structure)
-    * [Interfacing with SCL](#Interfacing-with-Safe-Client-Libs)
-    * [Platform Invoke](#Interoperability-between-C-managed-and-unmanaged-code)
-    * [Tests](#Tests)
-    * [Tools required](#Tools-required)
-5. [Useful resources](#Useful-resources)
-6. [Further Help](#Further-Help)
-7. [License](#License)
-8. [Contributing](#Contributing)
+- [Safe Authenticator Mobile](#safe-authenticator-mobile)
+  - [Build Status](#build-status)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Features](#features)
+  - [User Guide](#user-guide)
+    - [Installation](#installation)
+    - [Screenshots](#screenshots)
+  - [Development](#development)
+    - [Project structure](#project-structure)
+    - [Interfacing with Safe Client Libs](#interfacing-with-safe-client-libs)
+    - [Interoperability between C# managed and unmanaged code](#interoperability-between-c-managed-and-unmanaged-code)
+    - [Tests](#tests)
+    - [Tools required](#tools-required)
+  - [Useful resources](#useful-resources)
+  - [Further help](#further-help)
+  - [License](#license)
+  - [Contributing](#contributing)
 
 ## Overview
 
-SAFE Authenticator mobile is a cross platform mobile (Android, iOS) application that can be used to create an account and login into the SAFE Network. The app also helps the user to authenticate other SAFE apps and manage access permissions for the already registered applications.
+Safe Authenticator mobile is a cross platform mobile (Android, iOS) application that can be used to create an account and login into the Safe Network. The app also helps the user to authenticate other Safe apps and manage access permissions for the already registered applications.
 
 The app is developed using [Xamarin.Forms](https://github.com/xamarin/Xamarin.Forms). Xamarin.Forms is a cross-platform UI toolkit that allows developers to efficiently create native user interface layouts that can be shared across iOS, Android.
 
@@ -36,13 +41,13 @@ The app contains .NET wrapper for [safe_authenticator](https://github.com/maidsa
 
 ## Features
 
-* **Create your account & login to the SAFE network:**
-  * Start by providing a secret & password that serves as your digital fingerprint on the SAFE Network to create an account.
-  * Login to the SAFE Network
+* **Create your account & login to the Safe network:**
+  * Start by providing a secret & password that serves as your digital fingerprint on the Safe Network to create an account.
+  * Login to the Safe Network
   * Auto-reconnect: Turn on auto-reconnect to automatically log into the app when resuming from background mode.
 
 * **Handle Access Requests from Apps:**
-  The SAFE application authorises through the Authenticator with the required access permissions. The application can create its own container and request access to default containers of the SAFE Network i.e. documents, downloads, music, pictures, videos, public and public names, or other application's containers through the authorisation request.
+  The Safe application authorises through the Authenticator with the required access permissions. The application can create its own container and request access to default containers of the Safe Network i.e. documents, downloads, music, pictures, videos, public and public names, or other application's containers through the authorisation request.
 
   * **Auth Request:**
     Allow apps to request default container access & also to create an app's own private container.
@@ -86,7 +91,7 @@ _**Note:** We use Azure App Center to distribute iOS builds. Please register [he
   * C# API wrapper for the `safe_authenticator` bindings
   * C# safe_authenticator bindings generated from `safe_client_libs`
   * Binding utilities and helper functions
-  * Common UI code and SAFE logic for mobile app
+  * Common UI code and Safe logic for mobile app
 * **SafeAuthenticator.Platform:**
   * Platform: Android, iOS
   * Contains native libraries for the platform
@@ -101,7 +106,7 @@ _**Note:** We use Azure App Center to distribute iOS builds. Please register [he
 
 ### Interfacing with Safe Client Libs
 
-The package uses native code written in Rust and compiled into the platform specific code. Learn more about the `safe_client_libs` in [the SAFE client libraries wiki](https://github.com/maidsafe/safe_client_libs/wiki).
+The package uses native code written in Rust and compiled into the platform specific code. Learn more about the `safe_client_libs` in [the Safe client libraries wiki](https://github.com/maidsafe/safe_client_libs/wiki).
 
 Instructions to update the `safe_authnenticator` bindings in the Safe Authenticator App:
 
@@ -109,7 +114,7 @@ Instructions to update the `safe_authnenticator` bindings in the Safe Authentica
 * Update `AuthTypes`, `BindingUtils` and `IAuthBindings` file in `SafeAuthenticator` project.
 * Update binding classes `AuthBindings.cs` and`AuthBindings.Manual.cs` in platform specific code with newly generated bindings.
 
-***Note:** Please make sure the changes made in the manual files in SAFE Authenticator are synced with safe_client_libs and vice versa.*
+***Note:** Please make sure the changes made in the manual files in Safe Authenticator are synced with safe_client_libs and vice versa.*
 
 ### Interoperability between C# managed and unmanaged code
 
@@ -135,11 +140,11 @@ We use shared unit tests for `safe_authenticator` API which can be run on Androi
 
 ## Further help
 
-Get your developer related questions clarified on [SAFE Dev Forum](https://forum.safedev.org/). If you're looking to share any ideas or thoughts on the SAFE Network you can reach out on [SAFE Network Forum](https://safenetforum.org/)
+Get your developer related questions clarified on [Safe Dev Forum](https://forum.safedev.org/). If you're looking to share any ideas or thoughts on the Safe Network you can reach out on [Safe Network Forum](https://safenetforum.org/)
 
 ## License
 
-This SAFE Network library is dual-licensed under the Modified BSD ([LICENSE-BSD](LICENSE-BSD) https://opensource.org/licenses/BSD-3-Clause) or the MIT license ([LICENSE-MIT](LICENSE-MIT) https://opensource.org/licenses/MIT) at your option.
+This Safe Network library is dual-licensed under the Modified BSD ([LICENSE-BSD](LICENSE-BSD) https://opensource.org/licenses/BSD-3-Clause) or the MIT license ([LICENSE-MIT](LICENSE-MIT) https://opensource.org/licenses/MIT) at your option.
 
 ## Contributing
 

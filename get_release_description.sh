@@ -16,7 +16,7 @@ IPA_CHECKSUM
 
 ## Related Links
 * SAFE Browser - [Desktop](https://github.com/maidsafe/safe_browser/releases/) | [Mobile](https://github.com/maidsafe/safe-mobile-browser/)
-* [SAFE CLI](https://github.com/maidsafe/safe-api/tree/master/safe-cli)
+* [SAFE CLI](https://github.com/maidsafe/sn_api/tree/master/sn_cli)
 * [SAFE Vault](https://github.com/maidsafe/safe_vault/releases/latest/)
 * [safe_app_csharp](https://github.com/maidsafe/safe_app_csharp/)
 EOF
