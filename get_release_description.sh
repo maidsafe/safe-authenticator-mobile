@@ -1,6 +1,6 @@
 read -r -d '' release_description << 'EOF'
-The SAFE Authenticator acts as a gateway to the [SAFE Network](https://safenetwork.tech/) by enabling users to create an account & authenticate themselves onto the SAFE Network.
-It helps users ensure they have full control over the permissions they grant to SAFE apps.
+The Safe Authenticator acts as a gateway to the [Safe Network](https://safenetwork.tech/) by enabling users to create an account & authenticate themselves onto the Safe Network.
+It helps users ensure they have full control over the permissions they grant to Safe apps.
 
 ## Changelog
 CHANGELOG_CONTENT
@@ -15,9 +15,9 @@ IPA_CHECKSUM
 ```
 
 ## Related Links
-* SAFE Browser - [Desktop](https://github.com/maidsafe/safe_browser/releases/) | [Mobile](https://github.com/maidsafe/safe-mobile-browser/)
-* [SAFE CLI](https://github.com/maidsafe/sn_api/tree/master/sn_cli)
-* [SAFE Vault](https://github.com/maidsafe/safe_vault/releases/latest/)
+* Safe Browser - [Desktop](https://github.com/maidsafe/sn_browser/releases/) | [Mobile](https://github.com/maidsafe/safe-mobile-browser/)
+* [Safe CLI](https://github.com/maidsafe/sn_api/tree/master/sn_cli)
+* [Safe Vault](https://github.com/maidsafe/safe_vault/releases/latest/)
 * [safe_app_csharp](https://github.com/maidsafe/safe_app_csharp/)
 EOF
 
