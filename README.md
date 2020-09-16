@@ -72,7 +72,7 @@ The latest version of the Authenticator app can be downloaded using following li
 
 |Platform|OS & Architecture |Download Link| QR Code|
 |-|-|-|-|
-|Android| 5.0+ (armeabi-v7a, x86_64) | [AppCenter](https://appcenter.ms/orgs/MaidSafe-Apps/apps/Safe-Authenticator-Mobile/distribute/distribution-groups/Community%20Release/releases), [GitHub](https://github.com/maidsafe/safe-authenticator-mobile/releases/latest) | <img src="docs/AppCenter-QR/android.png"  width="100" alt="Android-QR" /> |
+|Android| 5.0+ (armeabi-v7a, x86_64) | [AppCenter](https://appcenter.ms/orgs/MaidSafe-Apps/apps/Safe-Authenticator-Mobile/distribute/distribution-groups/Community%20Release/releases), [GitHub](https://github.com/maidsafe/sn_authenticator_mobile/releases/latest) | <img src="docs/AppCenter-QR/android.png"  width="100" alt="Android-QR" /> |
 |iOS    | iOS 11+ (ARM64, x64)       | [AppCenter](https://appcenter.ms/orgs/MaidSafe-Apps/apps/Safe-Mobile-Authenticator/distribute/distribution-groups/Authenticator%20iOS/releases) | <img src="docs/AppCenter-QR/ios.png"  width="100" alt="iOS-QR" /> |
 
 _**Note:** We use Azure App Center to distribute iOS builds. Please register [here](https://forms.gle/Svp7PU6dcf4ywmu19) so we can add you in our testing group so you can download and install the app._

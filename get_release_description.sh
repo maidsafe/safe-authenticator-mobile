@@ -15,10 +15,10 @@ IPA_CHECKSUM
 ```
 
 ## Related Links
-* Safe Browser - [Desktop](https://github.com/maidsafe/sn_browser/releases/) | [Mobile](https://github.com/maidsafe/safe-mobile-browser/)
+* Safe Browser - [Desktop](https://github.com/maidsafe/sn_browser/releases/) | [Mobile](https://github.com/maidsafe/sn_mobile_browser/)
 * [Safe CLI](https://github.com/maidsafe/sn_api/tree/master/sn_cli)
 * [Safe Vault](https://github.com/maidsafe/safe_vault/releases/latest/)
-* [safe_app_csharp](https://github.com/maidsafe/safe_app_csharp/)
+* [sn_csharp](https://github.com/maidsafe/sn_csharp/)
 EOF
 
 apk_checksum=$(sha256sum "../net.maidsafe.SafeAuthenticator.apk" | awk '{ print $1 }')
