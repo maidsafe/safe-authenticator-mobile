@@ -1,4 +1,4 @@
-# safe-authenticator-mobile Change Log
+# sn_authenticator_mobile Change Log
 
 ## [0.3.1]
 
