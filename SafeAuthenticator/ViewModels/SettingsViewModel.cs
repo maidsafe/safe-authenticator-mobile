@@ -68,7 +68,7 @@ namespace SafeAuthenticatorApp.ViewModels
 
             VauleCommandManagerCommand = new Command(() =>
             {
-                MessagingCenter.Send(this, MessengerConstants.NavVaultConnectionManagerPage);
+                MessagingCenter.Send(this, MessengerConstants.NavNodeConnectionManagerPage);
             });
 
             FaqCommand = new Command(() =>

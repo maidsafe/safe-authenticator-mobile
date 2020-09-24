@@ -72,7 +72,7 @@ namespace SafeAuthenticatorApp.Views
             };
             connectionMenuTapGestureRecogniser.Tapped += (s, e) =>
             {
-                Navigation.PushAsync(new VaultConnectionFilePage());
+                Navigation.PushAsync(new NodeConnectionFilePage());
             };
             ConnectionSettingsMenuIcon.GestureRecognizers.Add(connectionMenuTapGestureRecogniser);
         }
@@ -87,9 +87,9 @@ namespace SafeAuthenticatorApp.Views
 
                 if (loginPageViewModel != null)
                 {
-                    if (loginPageViewModel.VaultConnectionFileExists())
+                    if (loginPageViewModel.NodeConnectionFileExists())
                     {
-                        await loginPageViewModel.SetVaultConnectionConfigFileDirAsync();
+                        await loginPageViewModel.SetNodeConnectionConfigFileDirAsync();
                     }
                     else
                     {
@@ -101,7 +101,7 @@ namespace SafeAuthenticatorApp.Views
 
                         if (result)
                         {
-                            await Navigation.PushAsync(new VaultConnectionFilePage());
+                            await Navigation.PushAsync(new NodeConnectionFilePage());
                         }
                     }
                 }

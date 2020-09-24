@@ -59,7 +59,7 @@ namespace SafeAuthenticatorApp.Views
 
             MessagingCenter.Subscribe<SettingsViewModel>(
                 this,
-                MessengerConstants.NavVaultConnectionManagerPage,
+                MessengerConstants.NavNodeConnectionManagerPage,
                 _ =>
                 {
                     MessageCenterUnsubscribe();
@@ -78,7 +78,7 @@ namespace SafeAuthenticatorApp.Views
         private void MessageCenterUnsubscribe()
         {
             MessagingCenter.Unsubscribe<HomeViewModel>(this, MessengerConstants.NavLoginPage);
-            MessagingCenter.Unsubscribe<HomeViewModel>(this, MessengerConstants.NavVaultConnectionManagerPage);
+            MessagingCenter.Unsubscribe<HomeViewModel>(this, MessengerConstants.NavNodeConnectionManagerPage);
         }
     }
 }
