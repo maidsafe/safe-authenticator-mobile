@@ -11,7 +11,7 @@ using System;
 
 namespace SafeAuthenticatorApp.Models
 {
-    public class VaultConnectionFile
+    public class NodeConnectionFile
     {
         public string FileName { get; set; }
 

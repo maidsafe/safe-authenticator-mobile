@@ -23,49 +23,49 @@ using Xamarin.Forms;
 
 namespace SafeAuthenticatorApp.ViewModels
 {
-    internal class VaultConnectionFileViewModel : BaseViewModel
+    internal class NodeConnectionFileViewModel : BaseViewModel
     {
-        private string _vaultS3DownloadLink = "https://safe-vault-config.s3.eu-west-2.amazonaws.com/shared-section/vault_connection_info.config";
+        private string _nodeS3DownloadLink = "https://sn-node-config.s3.eu-west-2.amazonaws.com/shared-section/node_connection_info.config";
 
-        private string _defaultVaultFileName = "MaidSafe hosted network";
+        private string _defaultNodeFileName = "MaidSafe hosted network";
 
-        public ICommand AddNewVaultConnectionFileCommand { get; }
+        public ICommand AddNewNodeConnectionFileCommand { get; }
 
-        public ICommand DeleteAllVaultConnectionFilesCommand { get;  }
+        public ICommand DeleteAllNodeConnectionFilesCommand { get;  }
 
-        public ICommand VaultConnectionFileSelectionCommand { get;  }
+        public ICommand NodeConnectionFileSelectionCommand { get;  }
 
-        public ICommand DownloadMaidSafeVaultCommand { get; }
+        public ICommand DownloadMaidSafeNodeCommand { get; }
 
         public ICommand SetActiveFileCommand { get; }
 
-        private VaultConnectionFile _selectedFile;
+        private NodeConnectionFile _selectedFile;
 
-        public VaultConnectionFile SelectedFile
+        public NodeConnectionFile SelectedFile
         {
             get => _selectedFile;
             set => SetProperty(ref _selectedFile, value);
         }
 
-        private ObservableCollection<VaultConnectionFile> _vaultConnectionFiles;
+        private ObservableCollection<NodeConnectionFile> _nodeConnectionFiles;
 
-        public ObservableCollection<VaultConnectionFile> VaultConnectionFiles
+        public ObservableCollection<NodeConnectionFile> NodeConnectionFiles
         {
-            get => _vaultConnectionFiles;
-            set => SetProperty(ref _vaultConnectionFiles, value);
+            get => _nodeConnectionFiles;
+            set => SetProperty(ref _nodeConnectionFiles, value);
         }
 
-        public VaultConnectionFileViewModel()
+        public NodeConnectionFileViewModel()
         {
-            AddNewVaultConnectionFileCommand = new Command(async () => await PickFileFromTheDeviceAsync());
-            DeleteAllVaultConnectionFilesCommand = new Command(async () => await DeleteAllVaultFilesAsync());
-            VaultConnectionFileSelectionCommand = new Command(async (object fileId) => await ShowFileSelectionOptionsAsync(fileId));
-            SetActiveFileCommand = new Command(async (object fileId) => await SetActiveVaultFileAsync(fileId));
-            DownloadMaidSafeVaultCommand = new Command(async () => await DownloadAndUseMaidSafeVaultConnectionFileAsync());
-            RefreshVaultConnectionFilesList();
+            AddNewNodeConnectionFileCommand = new Command(async () => await PickFileFromTheDeviceAsync());
+            DeleteAllNodeConnectionFilesCommand = new Command(async () => await DeleteAllNodeFilesAsync());
+            NodeConnectionFileSelectionCommand = new Command(async (object fileId) => await ShowFileSelectionOptionsAsync(fileId));
+            SetActiveFileCommand = new Command(async (object fileId) => await SetActiveNodeFileAsync(fileId));
+            DownloadMaidSafeNodeCommand = new Command(async () => await DownloadAndUseMaidSafeNodeConnectionFileAsync());
+            RefreshNodeConnectionFilesList();
         }
 
-        private async Task DownloadAndUseMaidSafeVaultConnectionFileAsync()
+        private async Task DownloadAndUseMaidSafeNodeConnectionFileAsync()
         {
             try
             {
@@ -73,22 +73,22 @@ namespace SafeAuthenticatorApp.ViewModels
                 {
                     using (var client = new HttpClient())
                     {
-                        using (var response = await client.GetAsync(_vaultS3DownloadLink))
+                        using (var response = await client.GetAsync(_nodeS3DownloadLink))
                         {
                             if (response.IsSuccessStatusCode)
                             {
                                 var fileContent = await response.Content.ReadAsStringAsync();
                                 if (fileContent.Length > 0)
                                 {
-                                    var (newlyAddedVaultFile, isFirst) =
-                                        VaultConnectionFileManager.AddNewVaultConnectionConfigFile(
-                                            _defaultVaultFileName,
+                                    var (newlyAddedNodeFile, isFirst) =
+                                        NodeConnectionFileManager.AddNewNodeConnectionConfigFile(
+                                            _defaultNodeFileName,
                                             fileContent);
 
-                                    if (newlyAddedVaultFile != null)
-                                        await SetActiveVaultFileAsync(newlyAddedVaultFile.FileId);
+                                    if (newlyAddedNodeFile != null)
+                                        await SetActiveNodeFileAsync(newlyAddedNodeFile.FileId);
 
-                                    RefreshVaultConnectionFilesList();
+                                    RefreshNodeConnectionFilesList();
                                 }
                             }
                             else
@@ -109,7 +109,7 @@ namespace SafeAuthenticatorApp.ViewModels
             }
         }
 
-        private async Task SetActiveVaultFileAsync(object fileId)
+        private async Task SetActiveNodeFileAsync(object fileId)
         {
             if (Authenticator.IsLoggedIn)
             {
@@ -121,8 +121,8 @@ namespace SafeAuthenticatorApp.ViewModels
 
                 if (result)
                 {
-                    SetNewDefaultVaultFile((int)fileId);
-                    RefreshVaultConnectionFilesList();
+                    SetNewDefaultNodeFile((int)fileId);
+                    RefreshNodeConnectionFilesList();
                     using (NativeProgressDialog.ShowNativeDialog("Logging out"))
                     {
                         await Authenticator.LogoutAsync();
@@ -132,22 +132,22 @@ namespace SafeAuthenticatorApp.ViewModels
             }
             else
             {
-                SetNewDefaultVaultFile((int)fileId);
-                RefreshVaultConnectionFilesList();
+                SetNewDefaultNodeFile((int)fileId);
+                RefreshNodeConnectionFilesList();
             }
         }
 
-        private void RefreshVaultConnectionFilesList()
+        private void RefreshNodeConnectionFilesList()
         {
-            if (Device.RuntimePlatform == Device.iOS && VaultConnectionFiles != null)
+            if (Device.RuntimePlatform == Device.iOS && NodeConnectionFiles != null)
             {
-                VaultConnectionFiles.Clear();
+                NodeConnectionFiles.Clear();
             }
 
-            VaultConnectionFiles = new ObservableCollection<VaultConnectionFile>(
-            VaultConnectionFileManager.GetAllFileEntries());
-            if (VaultConnectionFiles != null)
-                SelectedFile = VaultConnectionFiles.FirstOrDefault(f => f.IsActive);
+            NodeConnectionFiles = new ObservableCollection<NodeConnectionFile>(
+            NodeConnectionFileManager.GetAllFileEntries());
+            if (NodeConnectionFiles != null)
+                SelectedFile = NodeConnectionFiles.FirstOrDefault(f => f.IsActive);
         }
 
         private async Task ShowFileSelectionOptionsAsync(object fileId)
@@ -160,29 +160,29 @@ namespace SafeAuthenticatorApp.ViewModels
 
             if (deletedSelected)
             {
-                var vaultFile = VaultConnectionFiles.FirstOrDefault(f => f.FileId == (int)fileId);
-                var activeFile = VaultConnectionFiles.FirstOrDefault(f => f.IsActive);
+                var nodeFile = NodeConnectionFiles.FirstOrDefault(f => f.FileId == (int)fileId);
+                var activeFile = NodeConnectionFiles.FirstOrDefault(f => f.IsActive);
                 var deletingActiveFile = false;
 
                 if (activeFile.FileId == (int)fileId)
                     deletingActiveFile = true;
 
-                if (vaultFile != null)
-                    DeleteVaultFileAsync((int)fileId);
+                if (nodeFile != null)
+                    DeleteNodeFileAsync((int)fileId);
 
-                DeleteVaultFileAsync((int)fileId);
+                DeleteNodeFileAsync((int)fileId);
 
-                if (deletingActiveFile && VaultConnectionFiles.Count > 0)
-                    await SetActiveVaultFileAsync(VaultConnectionFiles[0].FileId);
+                if (deletingActiveFile && NodeConnectionFiles.Count > 0)
+                    await SetActiveNodeFileAsync(NodeConnectionFiles[0].FileId);
             }
             SelectedFile = null;
         }
 
-        private async Task DeleteAllVaultFilesAsync()
+        private async Task DeleteAllNodeFilesAsync()
         {
             try
             {
-                if (VaultConnectionFiles.Count == 0)
+                if (NodeConnectionFiles.Count == 0)
                     return;
 
                 var result = await Application.Current.MainPage.DisplayAlert(
@@ -193,8 +193,8 @@ namespace SafeAuthenticatorApp.ViewModels
 
                 if (result)
                 {
-                    VaultConnectionFileManager.DeleteAllFiles();
-                    VaultConnectionFiles.Clear();
+                    NodeConnectionFileManager.DeleteAllFiles();
+                    NodeConnectionFiles.Clear();
                 }
             }
             catch (Exception ex)
@@ -207,14 +207,14 @@ namespace SafeAuthenticatorApp.ViewModels
             }
         }
 
-        private void DeleteVaultFileAsync(int fileId)
+        private void DeleteNodeFileAsync(int fileId)
         {
             try
             {
-                VaultConnectionFileManager.DeleteVaultConnectionConfigFile(fileId);
-                var fileEntry = VaultConnectionFiles.FirstOrDefault(f => f.FileId == fileId);
+                NodeConnectionFileManager.DeleteNodeConnectionConfigFile(fileId);
+                var fileEntry = NodeConnectionFiles.FirstOrDefault(f => f.FileId == fileId);
                 if (fileEntry != null)
-                    RefreshVaultConnectionFilesList();
+                    RefreshNodeConnectionFilesList();
             }
             catch (Exception ex)
             {
@@ -226,11 +226,11 @@ namespace SafeAuthenticatorApp.ViewModels
             }
         }
 
-        private void SetNewDefaultVaultFile(int fileId)
+        private void SetNewDefaultNodeFile(int fileId)
         {
             try
             {
-                VaultConnectionFileManager.SetAsActiveConnectionConfigFile(fileId);
+                NodeConnectionFileManager.SetAsActiveConnectionConfigFile(fileId);
                 Task.Run(async () => await Authenticator.SetConfigFileDirectoryPathAsync());
             }
             catch (Exception ex)
@@ -270,13 +270,13 @@ namespace SafeAuthenticatorApp.ViewModels
                     return;
                 }
 
-                var (newlyAddedVaultFile, isFirst) =
-                    VaultConnectionFileManager.AddNewVaultConnectionConfigFile(friendlyFileName, contents);
+                var (newlyAddedNodeFile, isFirst) =
+                    NodeConnectionFileManager.AddNewNodeConnectionConfigFile(friendlyFileName, contents);
 
-                if (newlyAddedVaultFile != null)
-                    await SetActiveVaultFileAsync(newlyAddedVaultFile.FileId);
+                if (newlyAddedNodeFile != null)
+                    await SetActiveNodeFileAsync(newlyAddedNodeFile.FileId);
 
-                RefreshVaultConnectionFilesList();
+                RefreshNodeConnectionFilesList();
             }
             catch (Exception ex)
             {

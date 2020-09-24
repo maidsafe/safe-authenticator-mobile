@@ -75,14 +75,14 @@ namespace SafeAuthenticatorApp.ViewModels
             });
         }
 
-        public async Task SetVaultConnectionConfigFileDirAsync()
+        public async Task SetNodeConnectionConfigFileDirAsync()
         {
             await Authenticator.SetConfigFileDirectoryPathAsync();
         }
 
-        public bool VaultConnectionFileExists()
+        public bool NodeConnectionFileExists()
         {
-            return VaultConnectionFileManager.ActiveConnectionConfigFileExists();
+            return NodeConnectionFileManager.ActiveConnectionConfigFileExists();
         }
 
         private bool CanExecute()

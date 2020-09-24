@@ -15,15 +15,15 @@ using Xamarin.Forms.Xaml;
 namespace SafeAuthenticatorApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class VaultConnectionFilePage : ContentPage
+    public partial class NodeConnectionFilePage : ContentPage
     {
-        private VaultConnectionFileViewModel _viewModel;
+        private NodeConnectionFileViewModel _viewModel;
 
-        public VaultConnectionFilePage()
+        public NodeConnectionFilePage()
         {
             InitializeComponent();
 
-            MessagingCenter.Subscribe<VaultConnectionFileViewModel>(
+            MessagingCenter.Subscribe<NodeConnectionFileViewModel>(
                 this,
                 MessengerConstants.NavLoginPage,
                 async _ =>
@@ -40,7 +40,7 @@ namespace SafeAuthenticatorApp.Views
 
         private void MessageCenterUnsubscribe()
         {
-            MessagingCenter.Unsubscribe<VaultConnectionFileViewModel>(this, MessengerConstants.NavLoginPage);
+            MessagingCenter.Unsubscribe<NodeConnectionFileViewModel>(this, MessengerConstants.NavLoginPage);
         }
 
         protected override void OnAppearing()
@@ -49,7 +49,7 @@ namespace SafeAuthenticatorApp.Views
 
             if (_viewModel == null)
             {
-                _viewModel = new VaultConnectionFileViewModel();
+                _viewModel = new NodeConnectionFileViewModel();
                 BindingContext = _viewModel;
             }
         }

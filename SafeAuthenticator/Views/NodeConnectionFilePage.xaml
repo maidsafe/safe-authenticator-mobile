@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
-    x:Class="SafeAuthenticatorApp.Views.VaultConnectionFilePage"
+    x:Class="SafeAuthenticatorApp.Views.NodeConnectionFilePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
@@ -31,19 +31,19 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem
-            Command="{Binding AddNewVaultConnectionFileCommand}"
+            Command="{Binding AddNewNodeConnectionFileCommand}"
             IconImageSource="addNew"
             Order="Primary"
             Text="Add new file" />
         <ToolbarItem
-            Command="{Binding DeleteAllVaultConnectionFilesCommand}"
+            Command="{Binding DeleteAllNodeConnectionFilesCommand}"
             IconImageSource="deleteAll"
             Order="Primary"
             Text="Delete all files" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="0,10">
-            <CollectionView ItemsSource="{Binding VaultConnectionFiles}" SelectionMode="Single">
+            <CollectionView ItemsSource="{Binding NodeConnectionFiles}" SelectionMode="Single">
                 <CollectionView.EmptyView>
                     <ContentView>
                         <StackLayout
@@ -53,7 +53,7 @@
                             VerticalOptions="Center">
                             <Label HorizontalTextAlignment="Center" Text="No connection file found. Either add your local network's connection file, or you can automatically add connection details for MaidSafe's latest shared network by clicking the download button below. " />
                             <Button
-                                Command="{Binding DownloadMaidSafeVaultCommand}"
+                                Command="{Binding DownloadMaidSafeNodeCommand}"
                                 HorizontalOptions="Center"
                                 Text="Download"
                                 Visual="Material"
@@ -69,7 +69,7 @@
                             Orientation="Horizontal"
                             Spacing="20">
                             <input:RadioButton
-                                ClickCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=SetActiveFileCommand}"
+                                ClickCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:NodeConnectionFileViewModel}}, Path=SetActiveFileCommand}"
                                 CommandParameter="{Binding FileId}"
                                 IsChecked="{Binding IsActive}"
                                 IsEnabled="False" />
@@ -84,14 +84,14 @@
                                 WidthRequest="25">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=VaultConnectionFileSelectionCommand}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:NodeConnectionFileViewModel}}, Path=ConnectionFileSelectionCommand}"
                                         CommandParameter="{Binding FileId}"
                                         NumberOfTapsRequired="1" />
                                 </Image.GestureRecognizers>
                             </Image>
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:VaultConnectionFileViewModel}}, Path=SetActiveFileCommand}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:NodeConnectionFileViewModel}}, Path=SetActiveFileCommand}"
                                     CommandParameter="{Binding FileId}"
                                     NumberOfTapsRequired="1" />
                             </StackLayout.GestureRecognizers>
