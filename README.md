@@ -22,7 +22,7 @@ The Safe Authenticator acts as a gateway to the [Safe Network](https://safenetwo
     - [Screenshots](#screenshots)
   - [Development](#development)
     - [Project structure](#project-structure)
-    - [Interfacing with Safe Client Libs](#interfacing-with-safe-client-libs)
+    - [Interfacing with Safe Network Client](#interfacing-with-safe-network-client)
     - [Interoperability between C# managed and unmanaged code](#interoperability-between-c-managed-and-unmanaged-code)
     - [Tests](#tests)
     - [Tools required](#tools-required)
@@ -37,7 +37,7 @@ Safe Authenticator mobile is a cross platform mobile (Android, iOS) application 
 
 The app is developed using [Xamarin.Forms](https://github.com/xamarin/Xamarin.Forms). Xamarin.Forms is a cross-platform UI toolkit that allows developers to efficiently create native user interface layouts that can be shared across iOS, Android.
 
-The app contains .NET wrapper for [safe_authenticator](https://github.com/maidsafe/safe_client_libs/tree/master/safe_authenticator), C# bindings and `safe_authenticator` native libraries. `safe_authenticator` provides authenticator functions, which include users account registration, login, apps authentication, apps revocation, and communication with apps through the IPC mechanism.
+The app contains .NET wrapper for [safe_authenticator](https://github.com/maidsafe/sn_client/tree/master/safe_authenticator), C# bindings and `safe_authenticator` native libraries. `safe_authenticator` provides authenticator functions, which include users account registration, login, apps authentication, apps revocation, and communication with apps through the IPC mechanism.
 
 ## Features
 
@@ -89,7 +89,7 @@ _**Note:** We use Azure App Center to distribute iOS builds. Please register [he
 
 * **SafeAuthenticator:**
   * C# API wrapper for the `safe_authenticator` bindings
-  * C# safe_authenticator bindings generated from `safe_client_libs`
+  * C# safe_authenticator bindings generated from `sn_client`
   * Binding utilities and helper functions
   * Common UI code and Safe logic for mobile app
 * **SafeAuthenticator.Platform:**
@@ -104,17 +104,17 @@ _**Note:** We use Azure App Center to distribute iOS builds. Please register [he
   * Contains shared unit test project for Safe Authenticator API.
   * Platform specific projects containing setup required to run shared tests on Android and iOS.
 
-### Interfacing with Safe Client Libs
+### Interfacing with Safe Network Client
 
-The package uses native code written in Rust and compiled into the platform specific code. Learn more about the `safe_client_libs` in [the Safe client libraries wiki](https://github.com/maidsafe/safe_client_libs/wiki).
+The package uses native code written in Rust and compiled into the platform specific code. Learn more about the `sn_client` in [the Safe Network client libraries wiki](https://github.com/maidsafe/sn_client/wiki).
 
 Instructions to update the `safe_authnenticator` bindings in the Safe Authenticator App:
 
-* [Generate bindings](https://github.com/maidsafe/safe_client_libs/wiki/Building-Client-Libs) for `safe_authenticator`.
+* [Generate bindings](https://github.com/maidsafe/sn_client/wiki/Building-Client-Libs) for `safe_authenticator`.
 * Update `AuthTypes`, `BindingUtils` and `IAuthBindings` file in `SafeAuthenticator` project.
 * Update binding classes `AuthBindings.cs` and`AuthBindings.Manual.cs` in platform specific code with newly generated bindings.
 
-***Note:** Please make sure the changes made in the manual files in Safe Authenticator are synced with safe_client_libs and vice versa.*
+***Note:** Please make sure the changes made in the manual files in Safe Authenticator are synced with sn_client and vice versa.*
 
 ### Interoperability between C# managed and unmanaged code
 

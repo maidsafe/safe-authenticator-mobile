@@ -20,7 +20,7 @@ appenders = ["async_console", "async_file"]
 [loggers."quic_p2p"]
 level = "trace"
 
-[loggers."safe_core"]
+[loggers."sn_client"]
 level = "trace"
 
 [loggers."safe_authenticator"]
